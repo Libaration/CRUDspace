@@ -13,12 +13,10 @@
     #hSub { all: unset; font-family: Arial;font-size: 15px;background: #6699cc;font-size: small;margin: 0px;padding: 5px; padding-top: 5px; padding-left: 5px;padding-left: 10px;padding-top: 4px;position: fixed;left: 0;top: 34px;width: calc(100% - 15px );color: #000;height: 15px;z-index: 300;}
     @media only screen and (max-width:768px){#header{height:51px}#hSub{top:63px}#hUp{float:left;left:0;font-size:small;position:fixed;top:35px}.sep{display:none}.topLeft{margin-top:30px}}
   </style>
-  <div id="header">
-    <a class="logo" href="/" style=""><b><span style="padding-top: 2px; position: absolute;">CRUDSpace</span></b></a>
-    <span id="hUp" style="float:right;margin-right: 5px;margin-top: 3px;font-size: small;"><a href="/signup">SignUp</a><a href="login.php">Login</a></span>	</div>
-  <div id="hSub">
-    <a href="/">Home</a>  | <a href="/friends">All <span class="sep">Friends</span></a>
-  </div>	<div class="topLeft">
+
+  <%= erb :'partials/header' %>
+
+  <div class="topLeft">
   <div><h2 class="uName" id="name"><%= @user.name %></h2></div>
 
   <%= erb :'/partials/bio' %>
