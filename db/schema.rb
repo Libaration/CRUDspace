@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200920033453) do
+ActiveRecord::Schema.define(version: 20200920043138) do
 
   create_table "images", force: :cascade do |t|
     t.string  "image"
@@ -25,6 +25,11 @@ ActiveRecord::Schema.define(version: 20200920033453) do
     t.integer "age"
     t.string  "bio"
     t.string  "password_digest"
+    t.string  "gender"
+    t.string  "city"
+    t.string  "state"
+    t.string  "country"
+    t.string  "motto"
   end
 
 end

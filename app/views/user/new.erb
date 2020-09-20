@@ -2,8 +2,31 @@
   (Sign in) Username:  <input type="text" name="username">
   Full Name (First/Last) <input type="text" name="name">
   Password: <input type="password" name="password">
-  Age: <input type="text" name="age">
+  Age: <input type="number" name="age">
   Bio: <input type="text" name="bio">
+  Motto: <input type="text" name="motto">
+
+  <label for="gender">Gender</label>
+
+  <select name="gender" id="gender">
+    <option value="male">Male</option>
+    <option value="female">Female</option>
+    <option value="non-binary">Non-Binary</option>
+  </select>
+
+  <select name="country" class="countries" id="countryId" name="country">
+    <option value="">Select Country</option>
+  </select>
+  <select name="state" class="states" id="stateId" name="state">
+    <option value="">Select State</option>
+  </select>
+  <select name="city" class="cities" id="cityId" name="city">
+    <option value="">Select City</option>
+  </select>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <script src="//geodata.solutions/includes/countrystatecity.js"></script>
+
+
   Profile Picture:  <input type='file' name='file' class='form-control'>
   <button type='submit'> Submit </button>
 </form>
