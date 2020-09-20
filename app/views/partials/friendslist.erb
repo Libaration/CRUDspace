@@ -1,6 +1,3 @@
 <% @user.friends.each do |friend| %>
-<div id="top">
-  <a href="/user/<%= friend.id %>"><div class="fwiendFace"><b><%= friend.name %></b><img src="/images<%= friend.images.first.image %>"></div></a></div>
-<div id="viewFriends"><b>View <a href="#">All</a> <span class="uName"><%= @user.name %></span>'s Friends</b></div>
-</div>
+  <a href="/user/<%= friend.id %>"><div class="fwiendFace"><b><%= friend.name %></b><img src="/images<%= friend.images.first.image %>"></div></a>
 <% end %>
