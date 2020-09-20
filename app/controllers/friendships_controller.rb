@@ -1,6 +1,7 @@
 class FriendshipsController < ApplicationController
 
   get '/user/:id/add' do
+    redirect '/login' if !logged_in?
     if current_user == User.find(params[:id])
       "You can't add yourself..."
     elsif current_user != User.find(params[:id]) && logged_in? && !current_user.friends.include?(User.find(params[:id]))

@@ -8,11 +8,9 @@ class UsersController < ApplicationController
 
   get '/user/:id' do
     #binding.pry
-    if logged_in?
       @user = User.find(params[:id])
       @profilepic = @user.images.first
       erb :'user/show'
-    end
   end
 
   post '/user' do
@@ -29,6 +27,16 @@ class UsersController < ApplicationController
     end
 
     redirect to("/user/#{@user.id}")
+  end
+
+  get '/login' do
+    redirect "/user/#{current_user.id}" if logged_in?
+    erb :'/user/login'
+  end
+
+  get '/logout' do
+    session.clear if logged_in?
+    redirect '/login'
   end
 
 end

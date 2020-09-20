@@ -1,6 +1,14 @@
 <div id="header">
   <a class="logo" href="/" style=""><b><span style="padding-top: 2px; position: absolute;">CRUDSpace</span></b></a>
-  <span id="hUp" style="float:right;margin-right: 5px;margin-top: 3px;font-size: small;"><a href="/signup">SignUp</a><a href="login.php">Login</a></span>	</div>
+
+  <% if !logged_in? %>
+  <span id="hUp" style="float:right;margin-right: 5px;margin-top: 3px;font-size: small;"><a href="/user/new">SignUp</a><a href="/login">Login</a></span>
+    <% else %>
+    <span id="hUp" style="float:right;margin-right: 5px;margin-top: 3px;font-size: small;"><a href="/logout">Logout</a></span>
+  <% end %>
+
+
+</div>
 <div id="hSub">
   <a href="/">Home</a>  | <a href="/friends">All <span class="sep">Friends</span></a>
 </div>
