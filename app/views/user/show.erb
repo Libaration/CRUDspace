@@ -29,11 +29,15 @@
     <div class="boxHead"><b>Contacting <span class="uName"><%= @user.name %></span></b></div>
     <a href="send.php?id=1"><div class="boxButton" id="sMsg">Send Message</div></a>
     <a href="report.php?id=1"><div class="boxButton" id="report">Report</div></a>
+    <% if current_user.friends.include?(@user) %>
       <a href="/user/<%= @user.id %>/add"><div class="boxButton" id="add">Remove Friend</div></a>
-
-
-
+      <% else %>
       <a href="/user/<%= @user.id %>/add"><div class="boxButton" id="add">Add to friends</div></a>
+      <% end %>
+
+
+
+
 
     <a href="blokc.php?id=1"><div class="boxButton" id="block">Block</div></a>
   </div>
@@ -80,7 +84,25 @@
 
     </div>
     <div class="box comments">
-    <div style='margin-bot<%= @user.name %>:20px;'>Please <a href='login.php'>login</a> to leave a comment. </div><div class="boxHead"><b>Comments</b></div>
+
+
+
+      <% if !logged_in? %>
+    <div style='margin-bot<%= @user.name %>:20px;'>Please <a href='/login'>login</a> to leave a comment. </div>
+        <% elsif logged_in? %>
+        <div id="form">
+          <div class="boxHead"><b>Leave a comment</b></div>
+          <form action="/posts/new" method="post">
+            <textarea name="comment" id="commentInput"></textarea>
+            <input type="submit" value="Send">
+          </form>
+        </div>
+      <% end %>
+
+
+
+
+      <div class="boxHead"><b>Comments</b></div>
       <table id="userWall">
         <tr><td class="tableLeft"><a href="https://myspace.windows93.net/?id=15233"><div><b>@user.username</b></div><img src="https://www.famefocus.com/wp-content/uploads/2017/05/tom-anderson-myspace.jpg"></a></td><td class="tableRight"><div><b class="date">maybe timestamp for comment here?</b></div><div>
           <p>@post.comments (this will need a jointable ): )</p></div></td></tr></table>
