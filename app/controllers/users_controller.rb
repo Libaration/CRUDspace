@@ -16,7 +16,6 @@ class UsersController < ApplicationController
   end
 
   post '/user' do
-    binding.pry
     if !params[:username].empty? && User.find_by(username: params[:username]).nil?
       @user = User.create(params.except(:file))
       @tom = User.find(3)
