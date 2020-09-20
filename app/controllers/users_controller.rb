@@ -9,7 +9,7 @@ class UsersController < ApplicationController
   get '/user/:id' do
     if logged_in?
       @user = User.find(params[:id])
-      @profilepic = Images.find_by(user: @user)
+      @profilepic = @user.images.first
       erb :'user/show'
     end
   end

@@ -14,10 +14,10 @@
     @media only screen and (max-width:768px){#header{height:51px}#hSub{top:63px}#hUp{float:left;left:0;font-size:small;position:fixed;top:35px}.sep{display:none}.topLeft{margin-top:30px}}
   </style>
   <div id="header">
-    <a class="logo" href="/?id=1" style=""><b><span style="padding-top: 2px; position: absolute;">CRUDSpace</span></b></a>
-    <span id="hUp" style="float:right;margin-right: 5px;margin-top: 3px;font-size: small;"><a href="signup.php">SignUp</a><a href="login.php">Login</a></span>	</div>
+    <a class="logo" href="/" style=""><b><span style="padding-top: 2px; position: absolute;">CRUDSpace</span></b></a>
+    <span id="hUp" style="float:right;margin-right: 5px;margin-top: 3px;font-size: small;"><a href="/signup">SignUp</a><a href="login.php">Login</a></span>	</div>
   <div id="hSub">
-    <a href="/?id=1">Home</a>  | <a href="/list.php">All <span class="sep">Friends</span></a>
+    <a href="/">Home</a>  | <a href="/friends">All <span class="sep">Friends</span></a>
   </div>	<div class="topLeft">
   <div><h2 class="uName" id="name"><%= @user.name %></h2></div>
 
@@ -29,7 +29,7 @@
     <div class="boxHead"><b>Contacting <span class="uName"><%= @user.name %></span></b></div>
     <a href="send.php?id=1"><div class="boxButton" id="sMsg">Send Message</div></a>
     <a href="report.php?id=1"><div class="boxButton" id="report">Report</div></a>
-    <a href="invitation.php?id=1"><div class="boxButton" id="add">Add to friends</div></a>
+    <a href="/user/<%= @user.id %>/add"><div class="boxButton" id="add">Add to friends</div></a>
     <a href="blokc.php?id=1"><div class="boxButton" id="block">Block</div></a>
   </div>
   <div class="url box">
