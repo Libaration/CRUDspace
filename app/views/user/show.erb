@@ -49,11 +49,8 @@
     </div>
     <div class="box fwiends">
       <div class="rightHead"><b><span class="uName"><%= @user.name %></span>'s Friends</b></div>
-      <div class="fwiendCounter"><b><span class="uName"><%= @user.name %></span> has <span class="fwiendCount"># Count of </span> friends</b></div>
-      <div id="top">
-        <a href="https://myspace.windows93.net/?id=5"><div class="fwiendFace"><b>Each loop for friends</b><img src="https://www.famefocus.com/wp-content/uploads/2017/05/tom-anderson-myspace.jpg"></div></a></div>
-      <div id="viewFriends"><b>View <a href="all.php?id=1">All</a> <span class="uName"><%= @user.name %></span>'s Friends</b></div>
-    </div>
+      <div class="fwiendCounter"><b><span class="uName"><%= @user.name %></span> has <span class="fwiendCount"><%= @user.friends.count %> </span> friends</b></div>
+      <%= erb :'/partials/friendslist' %>
     <div class="box comments">
       <div style='margin-bot<%= @user.name %>:20px;'>Please <a href='login.php'>login</a> to leave a comment. </div><div class="boxHead"><b>Comments</b></div>
       <table id="userWall">

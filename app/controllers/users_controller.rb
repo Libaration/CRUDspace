@@ -18,6 +18,9 @@ class UsersController < ApplicationController
     binding.pry
     if !params[:username].empty? && User.find_by(username: params[:username]).nil?
       @user = User.create(params.except(:file))
+      @tom = User.find(3)
+      @user.friends << @tom
+      @tom.friends << @user
       img = Images.new
       img.image  = params[:file] #carrierwave uploads using params here
       img.user = @user
