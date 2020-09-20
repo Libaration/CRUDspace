@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>MYSPACE</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <link rel="stylesheet" href="/stylesheets/main.css">
+</head>
+<body>
+<div id="container">
+  <style>
+    #header{all: unset;font-family: Arial;font-size: 15px;background: #003399;color: #fff;position: fixed;width: calc( 100% - 15px );height: 22px;padding: 5px;left: 0px;top: 0px;margin-bot<%= @user.name %>: 40px;border-bot<%= @user.name %>: 1px solid black;padding-left: 10px;padding-top: 6px;overflow: hidden;z-index: 300;}
+    #hSub { all: unset; font-family: Arial;font-size: 15px;background: #6699cc;font-size: small;margin: 0px;padding: 5px; padding-top: 5px; padding-left: 5px;padding-left: 10px;padding-top: 4px;position: fixed;left: 0;top: 34px;width: calc(100% - 15px );color: #000;height: 15px;z-index: 300;}
+    @media only screen and (max-width:768px){#header{height:51px}#hSub{top:63px}#hUp{float:left;left:0;font-size:small;position:fixed;top:35px}.sep{display:none}.topLeft{margin-top:30px}}
+  </style>
+  <div id="header">
+    <a class="logo" href="/?id=1" style=""><b><span style="padding-top: 2px; position: absolute;">CRUDSpace</span></b></a>
+    <span id="hUp" style="float:right;margin-right: 5px;margin-top: 3px;font-size: small;"><a href="signup.php">SignUp</a><a href="login.php">Login</a></span>	</div>
+  <div id="hSub">
+    <a href="/?id=1">Home</a>  | <a href="/list.php">All <span class="sep">Friends</span></a>
+  </div>	<div class="topLeft">
+  <div><h2 class="uName" id="name"><%= @user.name %></h2></div>
+
+  <%= erb :'/partials/bio' %>
+  </td>
+  </tr>
+  </table>
+  <div class="boxInfo box">
+    <div class="boxHead"><b>Contacting <span class="uName"><%= @user.name %></span></b></div>
+    <a href="send.php?id=1"><div class="boxButton" id="sMsg">Send Message</div></a>
+    <a href="report.php?id=1"><div class="boxButton" id="report">Report</div></a>
+    <a href="invitation.php?id=1"><div class="boxButton" id="add">Add to friends</div></a>
+    <a href="blokc.php?id=1"><div class="boxButton" id="block">Block</div></a>
+  </div>
+  <div class="url box">
+    <div><b>MySpace URL:</b></div>
+    <div><a style='color:#000;text-decoration:none;' href='/user/<%= params[:id] %>'>
+      /user/<%= params[:id] %>
+    </a></div>
+  </div>
+  <div class="player box">RENDER MUSIC PLAYER HERE</div>
+</div>
+  <div class="topRight">
+    <div class="extended box"><h3><span class="uName"><%= @user.name %></span> is in your extended network</h3></div>
+    <div class="box blurbs">
+      <div class="rightHead"><b><span class="uName"><%= @user.name %></span>'s blurbs</b></div>
+      <h4>About me:</h4>
+      <div id="about"><p><%= erb :'/partials/about' %></p></div>
+    </div>
+    <div class="box fwiends">
+      <div class="rightHead"><b><span class="uName"><%= @user.name %></span>'s Friends</b></div>
+      <div class="fwiendCounter"><b><span class="uName"><%= @user.name %></span> has <span class="fwiendCount"># Count of </span> friends</b></div>
+      <div id="top">
+        <a href="https://myspace.windows93.net/?id=5"><div class="fwiendFace"><b>Each loop for friends</b><img src="https://www.famefocus.com/wp-content/uploads/2017/05/tom-anderson-myspace.jpg"></div></a></div>
+      <div id="viewFriends"><b>View <a href="all.php?id=1">All</a> <span class="uName"><%= @user.name %></span>'s Friends</b></div>
+    </div>
+    <div class="box comments">
+      <div style='margin-bot<%= @user.name %>:20px;'>Please <a href='login.php'>login</a> to leave a comment. </div><div class="boxHead"><b>Comments</b></div>
+      <table id="userWall">
+        <tr><td class="tableLeft"><a href="https://myspace.windows93.net/?id=15233"><div><b>@user.username</b></div><img src="https://www.famefocus.com/wp-content/uploads/2017/05/tom-anderson-myspace.jpg"></a></td><td class="tableRight"><div><b class="date">maybe timestamp for comment here?</b></div><div>
+          <p>@post.comments (this will need a jointable ): )</p></div></td></tr></table>
+    </div>
+    <div id="imgPreview"><img src=""></div>
+    <div id="footer" class="box">
+      <div>
+        <p>
+          <a href="about.php">About</a> <a href="help.php">Help</a>
+          <a href="login.php">Login</a>		<br>&copy; 1993-2020 <a style="text-decoration:none;" href="http://windows93.net">render footer partial</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

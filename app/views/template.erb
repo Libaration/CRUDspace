@@ -1,0 +1,36 @@
+<html lang = "en">
+<head>
+  <title>MYSPACE</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <link rel="stylesheet" href="/stylesheets/main.css">
+  <style type="text/css">
+    @media only screen and (max-width:768px){#container{padding-top: 20px;}}
+  </style>
+</head>
+<body><div id="container">
+
+  <div id="header">
+    <a class="logo" href="/?id=1" style=""><b><span style="padding-top: 2px; position: absolute;">CRUDSpace</span></b></a>
+    <span id="hUp" style="float:right;margin-right: 5px;margin-top: 3px;font-size: small;"><a href="signup.php">SignUp</a><a href="login.php">Login</a></span>	</div>
+  <div id="hSub">
+    <a href="/?id=1">Home</a>  | <a href="/list.php">All <span class="sep">Friends</span></a>
+  </div>
+
+  <div style="padding:20px;">
+
+    <h2>Signup</h2>
+
+    <div class = "container">
+
+
+<%= yield %>
+
+
+    </div>
+
+
+  </div>
+
+
+</div></body>
+</html>
