@@ -31,7 +31,7 @@ class UsersController < ApplicationController
 
   get '/login' do
     redirect "/user/#{current_user.id}" if logged_in?
-    erb :'/user/login'
+    erb :'/user/login' , :layout => :template
   end
 
   get '/logout' do
