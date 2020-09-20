@@ -34,6 +34,18 @@ class UsersController < ApplicationController
     erb :'/user/login' , :layout => :template
   end
 
+  post'/login' do
+    if (@user = User.find_by(username: params[:username])) && @user.authenticate(params[:password])
+      session[:user_id] = @user.id
+      redirect "/user/#{@user.id}"
+    else
+      @error = 'One of the fields was incorrect'
+      erb :'/user/login', :layout => :template
+
+    end
+
+  end
+
   get '/logout' do
     session.clear if logged_in?
     redirect '/login'
