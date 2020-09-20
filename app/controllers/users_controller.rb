@@ -7,6 +7,7 @@ class UsersController < ApplicationController
   end
 
   get '/user/:id' do
+    #binding.pry
     if logged_in?
       @user = User.find(params[:id])
       @profilepic = @user.images.first

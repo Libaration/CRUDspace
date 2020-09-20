@@ -4,7 +4,6 @@ class FriendshipsController < ApplicationController
     if current_user == User.find(params[:id])
       "You can't add yourself..."
     elsif current_user != User.find(params[:id]) && logged_in?
-      binding.pry
       @newfriend = User.find(params[:id])
       current_user.friends << @newfriend
       @newfriend.friends << current_user

@@ -29,7 +29,13 @@
     <div class="boxHead"><b>Contacting <span class="uName"><%= @user.name %></span></b></div>
     <a href="send.php?id=1"><div class="boxButton" id="sMsg">Send Message</div></a>
     <a href="report.php?id=1"><div class="boxButton" id="report">Report</div></a>
-    <a href="/user/<%= @user.id %>/add"><div class="boxButton" id="add">Add to friends</div></a>
+    <% if current_user.friends.include?(User.find(params[:id])) %>
+      <a href="/user/<%= @user.id %>/add"><div class="boxButton" id="add">Remove Friend</div></a>
+      <% elsif current_user == User.find(params[:id]) %>
+
+    <% else %>
+      <a href="/user/<%= @user.id %>/add"><div class="boxButton" id="add">Add to friends</div></a>
+      <% end %>
     <a href="blokc.php?id=1"><div class="boxButton" id="block">Block</div></a>
   </div>
   <div class="url box">
@@ -38,7 +44,19 @@
       /user/<%= params[:id] %>
     </a></div>
   </div>
-  <div class="player box">RENDER MUSIC PLAYER HERE</div>
+
+  <div class="player box">
+
+<% if params[:id] == '2' %>
+      <div class="songName"><b>Playing: </b> <span class="songTitle">My Chemical Romance - The Black Parade
+      </span></div>
+    <audio controls autoplay="autoplay">
+      <source src="/profile_songs/blackparade.mp3" type="audio/mpeg" muted>
+      Your browser does not support the audio element.
+    </audio>
+<% end %>
+
+  </div>
 </div>
   <div class="topRight">
     <div class="extended box"><h3><span class="uName"><%= @user.name %></span> is in your extended network</h3></div>
