@@ -18,7 +18,7 @@ class ApplicationController < Sinatra::Base
     if logged_in?
       redirect "/user/#{current_user.id}"
     else
-      redirect "/signup"
+      redirect "/login"
     end
     erb :index
   end
