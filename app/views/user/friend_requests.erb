@@ -1,21 +1,64 @@
 <style>
-  div#form {
+  table#requests {
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
     align-items: flex-start;
+    text-align: left;
+    font: normal 8pt/normal Verdana, Arial, Helvetica, sans-serif;
   }
-</style>
-<div class="boxHead"><b>Friend Requests</b></div>
-<div id="form">
-  <form action="/posts/new" method="post">
 
-    <table class="requests">
+  table {
+    border: 1px solid #689aca;
+    border-spacing: 3px;
+    border-collapse: separate;
+    width: 800px;
+      }
+  th, td {
+    padding: 5px;
+    background-color: #e9f1fa;
+
+  }
+
+    th#topbar {
+      background-color: #689aca;
+      padding: 6px;
+      font-size: 12px;
+      font-weight: bold;
+      color: white;
+    }
+    table img {
+      height: 150px;
+    }
+  table td:last-child {
+    width: 1000px;
+  }
+  td.center {
+      text-align: center;
+  }
+
+</style>
+
+
+
+    <table id="requests">
+      <tr>
+        <th id=topbar>From:</th><th id="topbar">Confirmation:</th>
+      </tr>
       <% @user.pending_friends.each do |friend| %>
-        <tr><a href="/user/<%= friend.id %>"><div class="fwiendFace"><b><%= friend.name %></b><img src="/images<%= friend.images.first.image %>" width="125"></div></a><br>
-          <form><input type="submit" value="Accept"></form> | <form><input type="submit" value="Decline"></form></tr>
+        <form action="/user/<%= current_user.id %>/approve?friend_id=<%= friend.id %>" method="post">
+        <tr>
+          <td><a href="/user/<%= friend.id %>"><img src="/images<%= friend.images.first.image %>"></a>
+            <br>
+          </td>
+          <td class="center">
+            <span style="font-weight: bold"><a href="/user/<%= friend.id %>"><%= friend.name %></a></span> wants to be your friend!<br>
+            <input type="submit" value="Approve">
+        </form>
+          </td>
+        </tr>
       <% end %>
     </table>
 
-  </form>
-</div>
+
+
