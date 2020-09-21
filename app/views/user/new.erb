@@ -1,11 +1,25 @@
-<h2>Signup</h2>
-<form method='POST' action='/user' enctype="multipart/form-data" class="centerform">
-  (Sign in) Username:  <input type="text" name="username">
-  Full Name (First/Last) <input type="text" name="name">
-  Password: <input type="password" name="password">
-  Age: <input type="number" name="age">
-  Bio: <input type="text" name="bio">
-  Motto: <input type="text" name="motto">
+<style>
+  div#login {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+    form#spacefix {
+      /*background-color: red;*/
+      text-align: center;
+    }
+</style>
+<h2>Signup</h2><br>
+<div id="login">
+<form method='POST' action='/user' enctype="multipart/form-data" id="spacefix">
+  (Sign in) Username:  <input type="text" name="username"><br>
+  Full Name (First/Last) <input type="text" name="name"><br>
+  Password: <input type="password" name="password"><br>
+  Age: <input type="number" name="age"><br>
+  Bio: <input type="text" name="bio"><br>
+  Motto: <input type="text" name="motto"><br>
 
   <label for="gender">Gender</label>
 
@@ -13,11 +27,10 @@
     <option value="male">Male</option>
     <option value="female">Female</option>
     <option value="non-binary">Non-Binary</option>
-  </select>
+  </select><br>
 
-  <select name="country" class="countries" id="countryId" name="country">
-    <option value="">Select Country</option>
-  </select>
+  <input type="hidden" name="country" id="countryId" value="US"/>
+  <input type="hidden" value="United States" name="country">
   <select name="state" class="states" id="stateId" name="state">
     <option value="">Select State</option>
   </select>
@@ -25,9 +38,10 @@
     <option value="">Select City</option>
   </select>
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-  <script src="//geodata.solutions/includes/countrystatecity.js"></script>
+  <script src="//geodata.solutions/includes/statecity.js"></script><br>
 
 
-  Profile Picture:  <input type='file' name='file' class='form-control'>
+  Profile Picture:  <input type='file' name='file' class='form-control'><br>
   <button type='submit'> Submit </button>
 </form>
+</div>
