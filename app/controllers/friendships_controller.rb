@@ -6,7 +6,6 @@ class FriendshipsController < ApplicationController
       "You can't add yourself..."
     elsif current_user != User.find(params[:id]) && logged_in? && !current_user.friends.include?(User.find(params[:id]))
       @newfriend = User.find(params[:id])
-      current_user.pending_friends << @newfriend
       @newfriend.pending_friends << current_user
       redirect "/user/#{@newfriend.id}"
     end
