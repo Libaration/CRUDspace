@@ -28,6 +28,13 @@
     a:active {
       text-decoration: underline;
     }
+
+    .avatar{
+      width:200px;
+      margin-right: 20px;
+      cursor: pointer;
+      image-orientation: from-image;
+    }
   </style>
 </head>
 <body>
@@ -94,7 +101,7 @@
 </div>
   <div class="topRight">
 
-    <% if current_user == @user %>
+    <% if logged_in? && current_user == @user %>
       <div class="extended box"><h3><span class="uName">Your Profile</span></h3></div>
     <% else %>
       <div class="extended box"><h3><span class="uName"><%= @user.name %></span> is in your extended network</h3></div>
