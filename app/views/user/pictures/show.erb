@@ -1,7 +1,15 @@
 <div id="login">
   <table>
     <tr>
-      <img src="/images<%= @image.image %>" width="600px">
+      <img src="/images<%= @image.image %>" width="500px">
     </tr>
   </table>
 </div>
+
+<% if @user == current_user %>
+  <form method='POST' action='/user/<%= current_user.id %>/pictures/<%= @image.id %>'>
+    <input type="hidden" name="_method" value="DELETE">
+    <h1>Options</h1>
+    <input type="submit" value="Delete Photo">
+  </form>
+<% end %>
