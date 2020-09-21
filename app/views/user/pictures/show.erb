@@ -1,9 +1,11 @@
+
 <div id="login">
   <table>
     <tr>
       <img src="/images<%= @image.image %>" width="500px">
     </tr>
   </table>
+  <a href="/user/<%= @user.id %>/pictures" class="left">Go Back</a>
 </div>
 
 <% if logged_in? && @user == current_user %>
