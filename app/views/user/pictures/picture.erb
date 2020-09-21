@@ -1,12 +1,18 @@
 <style>
+
   .form-control {
     font: normal 8pt/normal Verdana, Arial, Helvetica, sans-serif;
     text-transform: none;
     text-decoration: none;
   }
  table.pictures {
+   font: normal 8pt/normal Verdana, Arial, Helvetica, sans-serif;
+   text-transform: none;
+   text-decoration: none;
    display: flex;
    flex-wrap: wrap;
+   justify-content: center;
+   text-align: center;
   }
 </style>
 
@@ -14,7 +20,8 @@
   <table class="pictures">
     <tr>
   <% @user.images.each do |image| %>
-        <td><a href="/user/<%= @user.id %>/pictures/<%= image.id %>"><img src="/images<%= image.image %>" width="200px"></a></td>
+        <td><a href="/user/<%= @user.id %>/pictures/<%= image.id %>"><img src="/images<%= image.image %>" width="200px"></a><br>
+        <%= image.caption unless nil %></td>
 
 
 
@@ -24,9 +31,11 @@
 </div>
 
 
-<% if @user == current_user %>
+<% if logged_in? && @user == current_user %>
 <form method='POST' action='/user/<%= current_user.id %>/pictures' enctype="multipart/form-data" class="centerform">
-  <h1>Upload new photo</h1><input type='file' name='file' class='form-control'><br>
+  <h1>Upload new photo</h1>
+  <input type="text" value="Add a caption for your photo" name="caption"><br>
+  <input type='file' name='file' class='form-control'><br>
   <input type="submit" value="Upload">
 </form>
 <% end %>
