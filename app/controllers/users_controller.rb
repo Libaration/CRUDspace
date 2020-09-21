@@ -55,5 +55,10 @@ class UsersController < ApplicationController
     redirect '/login'
   end
 
+  get '/friends' do
+    @users = User.all
+    erb :'/user/all_users', :layout => :template
+  end
+
 
 end
