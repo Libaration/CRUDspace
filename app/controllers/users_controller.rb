@@ -61,6 +61,25 @@ class UsersController < ApplicationController
 
   end
 
+  get '/user/:id/edit' do
+    @user = User.find(params[:id])
+    if logged_in? && @user == current_user
+      erb :'/user/edit', layout: :template
+    else
+      'You do not have permission to view this page'
+    end
+  end
+
+  post '/user/:id/edit' do
+    @user = User.find(params[:id])
+    if logged_in? && @user == current_user
+      @user.update(params)
+      redirect "/user/#{@user.id}"
+    else
+      'You do not have permission to view this page'
+    end
+  end
+
   get '/logout' do
     session.clear if logged_in?
     redirect '/login'

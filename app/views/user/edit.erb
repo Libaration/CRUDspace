@@ -1,0 +1,36 @@
+<% if logged_in? && @user == current_user %>
+
+<style>
+
+  .form-control {
+    font: normal 8pt/normal Verdana, Arial, Helvetica, sans-serif;
+    text-transform: none;
+    text-decoration: none;
+  }
+  table.pictures {
+    font: normal 8pt/normal Verdana, Arial, Helvetica, sans-serif;
+    text-transform: none;
+    text-decoration: none;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    text-align: center;
+  }
+</style>
+
+<div id="login">
+
+  <%= @error %></h2><br>
+  <form method='POST' action='/user/<%= @user.id %>/edit' enctype="multipart/form-data" id="spacefix">
+    Full Name (First/Last) <input type="text" name="name" value="<%= @user.name %>"><br>
+    Age: <input type="number" name="age" value="<%= @user.age %>"><br>
+    Bio: <input type="text" name="bio" value="<%= @user.bio %>"><br>
+    Motto: <input type="text" name="motto" value="<%= @user.motto %>"><br>
+
+
+    <button type='submit'> Submit </button>
+  </form>
+
+</div>
+
+<% end %>

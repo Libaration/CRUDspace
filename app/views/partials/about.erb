@@ -1,1 +1,6 @@
-<%= @user.bio %>
+<style>
+  h4.edit {
+    text-align: right;
+  }
+</style>
+<%= @user.bio %> <% if logged_in? && @user == current_user %> <br> <a href="/user/<%= @user.id %>/edit"><h4 class="edit">edit</h4></a> <% end %>
