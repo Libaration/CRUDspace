@@ -3,7 +3,11 @@ require './app/controllers/images_uploader'
 class UsersController < ApplicationController
 
   get '/user/new' do
-    erb :'/user/new' , :layout => :template
+    if !logged_in?
+      erb :'/user/new' , :layout => :template
+    else
+      redirect "/user/#{current_user.id}"
+    end
   end
 
   get '/user/:id' do
@@ -16,7 +20,7 @@ class UsersController < ApplicationController
   post '/user' do
     if !params[:username].empty? && User.find_by(username: params[:username]).nil?
       @user = User.create(params.except(:file))
-      @tom = User.find(3)
+      @tom = User.find(1)
       @user.friends << @tom
       @tom.friends << @user
       img = Images.new
@@ -49,6 +53,15 @@ class UsersController < ApplicationController
   get '/logout' do
     session.clear if logged_in?
     redirect '/login'
+  end
+
+  get '/user/:id/picture/edit' do
+    if logged_in? && User.find(params[:id]) == current_user
+      @user = current_user
+      erb :'/user/picture', :layout => :template
+    else
+      'either not logged in or current user'
+    end
   end
 
 end

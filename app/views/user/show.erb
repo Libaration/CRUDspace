@@ -56,7 +56,7 @@
         <source src="/profile_songs/blackparade.mp3" type="audio/mpeg" muted>
         Your browser does not support the audio element.
       </audio>
-      <% elsif params[:id] == '4' %>
+      <% elsif params[:id] == '3' %>
       <div class="songName"><b>Playing: </b> <span class="songTitle">Ariana Grande - Thank U Next
       </span></div>
       <audio controls autoplay="autoplay">
@@ -69,7 +69,14 @@
   </div>
 </div>
   <div class="topRight">
-    <div class="extended box"><h3><span class="uName"><%= @user.name %></span> is in your extended network</h3></div>
+
+    <% if current_user == @user %>
+      <div class="extended box"><h3><span class="uName">Your Profile</span></h3></div>
+    <% else %>
+      <div class="extended box"><h3><span class="uName"><%= @user.name %></span> is in your extended network</h3></div>
+    <% end %>
+
+
     <div class="box blurbs">
       <div class="rightHead"><b><span class="uName"><%= @user.name %></span>'s blurbs</b></div>
       <h4>About me:</h4>
