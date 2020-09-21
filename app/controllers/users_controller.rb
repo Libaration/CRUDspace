@@ -18,19 +18,30 @@ class UsersController < ApplicationController
   end
 
   post '/user' do
-    if !params[:username].empty? && User.find_by(username: params[:username]).nil?
-      @user = User.create(params.except(:file))
-      @tom = User.find(1)
-      @user.friends << @tom
-      @tom.friends << @user
-      img = Images.new
-      img.image  = params[:file] #carrierwave uploads using params here
-      img.user = @user
-      img.save!
-      session[:user_id] = @user.id
+    params.except(:bio, :motto).values.each do |value|
+      if value.blank?
+        @error = 'All values except bio and motto are required'
+      end
     end
-
-    redirect to("/user/#{@user.id}")
+    if params[:file].nil?
+      @error = 'Profile picture is required!'
+    elsif !User.find_by(username: params[:username]).nil?
+      @error = 'Username already exists'
+    else
+      if !params[:username].empty? && User.find_by(username: params[:username]).nil?
+        @user = User.create(params.except(:file))
+        @tom = User.find(1)
+        @user.friends << @tom
+        @tom.friends << @user
+        img = Images.new
+        img.image  = params[:file] #carrierwave uploads using params here
+        img.user = @user
+        img.save!
+        session[:user_id] = @user.id
+        redirect to("/user/#{@user.id}")
+      end
+    end
+    erb :'/user/new', :layout => :template
   end
 
   get '/login' do

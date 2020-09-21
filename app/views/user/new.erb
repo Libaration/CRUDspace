@@ -10,9 +10,11 @@
       /*background-color: red;*/
       text-align: center;
     }
+
 </style>
 <h2>Signup</h2><br>
 <div id="login">
+  <h2 style="color:red"><%= @error %></h2><br>
 <form method='POST' action='/user' enctype="multipart/form-data" id="spacefix">
   (Sign in) Username:  <input type="text" name="username"><br>
   Full Name (First/Last) <input type="text" name="name"><br>
