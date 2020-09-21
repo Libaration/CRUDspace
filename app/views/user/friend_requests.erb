@@ -1,6 +1,21 @@
-<table>
-<% @user.pending_friends.each do |friend| %>
-  <tr><a href="/user/<%= friend.id %>"><div class="fwiendFace"><b><%= friend.name %></b><img src="/images<%= friend.images.first.image %>" width="125"></div></a><br>
-    <form><input type="submit" value="Accept"></form> | <form><input type="submit" value="Decline"></form></tr>
-<% end %>
-</table>
+<style>
+  div#form {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+</style>
+<div class="boxHead"><b>Friend Requests</b></div>
+<div id="form">
+  <form action="/posts/new" method="post">
+
+    <table class="requests">
+      <% @user.pending_friends.each do |friend| %>
+        <tr><a href="/user/<%= friend.id %>"><div class="fwiendFace"><b><%= friend.name %></b><img src="/images<%= friend.images.first.image %>" width="125"></div></a><br>
+          <form><input type="submit" value="Accept"></form> | <form><input type="submit" value="Decline"></form></tr>
+      <% end %>
+    </table>
+
+  </form>
+</div>
