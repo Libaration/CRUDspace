@@ -1,0 +1,25 @@
+<div id="login">
+  <table>
+    <tr>
+  <% @user.images.each do |image| %>
+        <td><a href="/user/<%= @user.id %>/pictures/<%= image.id %>"><img src="/images<%= image.image %>" width="300px"></a></td>
+
+
+
+<% end %>
+      </tr>
+  </table>
+</div>
+
+<style>
+  .form-control {
+    font: normal 8pt/normal Verdana, Arial, Helvetica, sans-serif;
+    text-transform: none;
+    text-decoration: none;
+  }
+</style>
+<% if @user == current_user %>
+<form method='POST' action='/user' enctype="multipart/form-data" class="centerform">
+  <h1>Upload new photo</h1><input type='file' name='file' class='form-control'>
+</form>
+<% end %>
