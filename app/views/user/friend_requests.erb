@@ -1,3 +1,6 @@
+<table>
 <% @user.pending_friends.each do |friend| %>
-  <a href="/user/<%= friend.id %>"><div class="fwiendFace"><b><%= friend.name %></b><img src="/images<%= friend.images.first.image %>" width="125" height="125"></div></a>
+  <tr><a href="/user/<%= friend.id %>"><div class="fwiendFace"><b><%= friend.name %></b><img src="/images<%= friend.images.first.image %>" width="125"></div></a><br>
+    <form><input type="submit" value="Accept"></form> | <form><input type="submit" value="Decline"></form></tr>
 <% end %>
+</table>
