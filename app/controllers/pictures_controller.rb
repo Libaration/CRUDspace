@@ -4,6 +4,15 @@ class PicturesController < ApplicationController
       erb :'/user/pictures/picture', :layout => :template
   end
 
+  get '/user/:id/picture/edit' do
+    if logged_in? && User.find(params[:id]) == current_user
+      @user = current_user
+      erb :'/user/picture', :layout => :template
+    else
+      'either not logged in or current user'
+    end
+  end
+
   get '/user/:id/pictures/:picture_id' do
     @user = User.find(params[:id])
     @image = Images.find(params[:picture_id])
@@ -41,4 +50,6 @@ class PicturesController < ApplicationController
     redirect "/user/#{current_user.id}/pictures"
     end
   end
+
+
 end

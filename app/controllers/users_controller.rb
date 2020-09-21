@@ -55,13 +55,5 @@ class UsersController < ApplicationController
     redirect '/login'
   end
 
-  get '/user/:id/picture/edit' do
-    if logged_in? && User.find(params[:id]) == current_user
-      @user = current_user
-      erb :'/user/picture', :layout => :template
-    else
-      'either not logged in or current user'
-    end
-  end
 
 end
