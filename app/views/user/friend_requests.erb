@@ -1,0 +1,3 @@
+<% @user.pending_friends.each do |friend| %>
+  <a href="/user/<%= friend.id %>"><div class="fwiendFace"><b><%= friend.name %></b><img src="/images<%= friend.images.first.image %>" width="125" height="125"></div></a>
+<% end %>

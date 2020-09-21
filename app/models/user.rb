@@ -4,5 +4,5 @@ class User < ActiveRecord::Base
   has_many :friendships, -> { where(accepted: true)}
   has_many :pending_friendships, -> { where(accepted: false)}, class_name: Friendship
   has_many :friends, through: :friendships
-  has_many :pending_friends, through: :pending_friendships, :source => :user
+  has_many :pending_friends, through: :pending_friendships, :source => :friend
 end
