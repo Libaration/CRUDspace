@@ -87,6 +87,8 @@
 
     <% if logged_in? && current_user.friends.include?(@user) %>
       <a href="/user/<%= @user.id %>/remove"><div class="boxButton" id="add">Remove Friend</div></a>
+        <% elsif @user.pending_friends.include?(current_user) %>
+      <a href="/user/<%= @user.id %>"><div class="boxButton" id="add">Pending Friend Request</div></a>
       <% else %>
       <a href="/user/<%= @user.id %>/add"><div class="boxButton" id="add">Add to friends</div></a>
       </span>
