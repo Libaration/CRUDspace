@@ -9,4 +9,12 @@ class MessagesController < ApplicationController
       redirect '/login'
     end
   end
+
+  get '/user/:id/messages' do
+    @user = User.find(params[:id])
+    if logged_in? && @user == current_user
+      erb :'/user/messages/home', layout: :template
+    end
+  end
+
 end

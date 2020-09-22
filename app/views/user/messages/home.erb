@@ -1,0 +1,9 @@
+<table>
+   <% @user.messages.each do |message| %>
+    <% if message.read == true %>
+    <%= message.id %> <br> <%= message.content %> <br>
+      <% else %>
+      <span style="color: red"> <%= message.id %> <br> <%= message.content %> </span> <br>
+    <% end %>
+  <% end %>
+</table>
