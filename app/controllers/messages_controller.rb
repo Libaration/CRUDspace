@@ -3,6 +3,7 @@ class MessagesController < ApplicationController
     @user = User.find(params[:id])
     @message = Message.find(params[:message_id])
     if logged_in? && @user == current_user && @message.receiver == current_user
+      @message.update(read: true)
       # @message = User.find(params[:id]).messages.where(id: params[:message_id]).first
       erb :'/user/messages/show', layout: :template
     else
@@ -12,6 +13,7 @@ class MessagesController < ApplicationController
 
   get '/user/:id/messages' do
     @user = User.find(params[:id])
+    @messages = @user.messages
     if logged_in? && @user == current_user
       erb :'/user/messages/home', layout: :template
     end

@@ -1,9 +1,55 @@
+<style>
+  table {
+    border: 1px solid #689aca;
+    border-spacing: 3px;
+    width: 1000px;
+    text-align: left;
+    font: normal 9pt/normal Verdana, Arial, Helvetica, sans-serif;
+  }
+  table, th, td {
+    border-collapse: separate;
+  }
+  th {
+    padding-right: 10px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    padding-left: 5px;
+    background-color: #6a9cc7;
+    color: white;
+
+  }
+  td {
+    padding: 5px;
+    background-color: #e9f1fb;
+  }
+
+  td img {
+    height: 125px;
+  }
+  span.udelete {
+    position: relative;
+    left: 500px;
+    bottom: 20px;
+    padding: 0;
+    margin: 0;
+  }
+  span.relative {
+    position: relative;
+    bottom: 50px;
+  }
+</style>
+
 <table>
-   <% @user.messages.each do |message| %>
-    <% if message.read == true %>
-    <%= message.id %> <br> <%= message.content %> <br>
-      <% else %>
-      <span style="color: red"> <%= message.id %> <br> <%= message.content %> </span> <br>
-    <% end %>
+  <tr><th>Date:</th> <th>From:</th><th>Status:</th><th>Subject:</th>
+    <% @messages.reverse.each do |message| %>
+      <% message.read == true ? @td = '<td>' : @td = '<td style="background-color: #cce1fc">' %>
+    <tr>
+    <%= @td %><%= message.created_at.strftime("%b %e, %Y<Br> %l:%M %p") %></>
+    <%= @td %><img src="/images<%= message.sender.images.first.image %>"> </td>
+    <%= @td %><%= message.read == true ? 'Read' : 'Unread' %>  </td>
+    <%= @td %><a href="/user/<%= @user.id %>/messages/<%= message.id %>"><%= message.subject %> </a> </td>
+  </tr>
   <% end %>
+
+
 </table>
