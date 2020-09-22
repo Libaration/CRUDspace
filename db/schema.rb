@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200922033235) do
+ActiveRecord::Schema.define(version: 20200922033539) do
 
   create_table "friendships", force: :cascade do |t|
     t.integer "user_id"
@@ -27,7 +27,7 @@ ActiveRecord::Schema.define(version: 20200922033235) do
 
   create_table "messages", force: :cascade do |t|
     t.string   "content"
-    t.integer  "reciever_id"
+    t.integer  "receiver_id"
     t.integer  "sender_id"
     t.datetime "created_at"
     t.datetime "updated_at"
