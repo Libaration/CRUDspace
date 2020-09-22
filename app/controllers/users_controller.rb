@@ -30,9 +30,7 @@ class UsersController < ApplicationController
     else
       if !params[:username].empty? && User.find_by(username: params[:username]).nil?
         @user = User.create(params.except(:file))
-        @tom = User.find(1)
-        @user.friends << @tom
-        @tom.friends << @user
+        tomswelcome(@user)
         img = Images.new
         img.image  = params[:file] #carrierwave uploads using params here
         img.user = @user
@@ -90,5 +88,14 @@ class UsersController < ApplicationController
     erb :'/user/all_users', :layout => :template
   end
 
+  helpers do
+    def tomswelcome(user)
+      @tom = User.find(1)
+      user.friends << @tom
+      @tom.friends << @user
+      @message = Message.create(subject: "Welcome!", content: "Welcome to CRUDSpace! Message me if you run into any issues!", sender: @tom)
+      @message.update(receiver: user)
+    end
+  end
 
 end
