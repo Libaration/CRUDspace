@@ -77,6 +77,23 @@
         font: normal 9pt/normal Verdana, Arial, Helvetica, sans-serif;
         color: navy;
       }
+      .txt_label4 {
+        background-color: #cce1fc;
+      }
+    table.userNav td {
+      width: 45%;
+      text-align: -webkit-center;
+      vertical-align: middle;
+      height: 33px;
+      display: table-cell;
+    }
+      table.userNav {
+        font: normal 9pt/normal Verdana, Arial, Helvetica, sans-serif;
+        border-collapse: separate;
+        white-space: normal;
+        text-align: start;
+        border-spacing: 2px;
+      }
   </style>
 </head>
 <body>
@@ -116,6 +133,30 @@
     <% if logged_in? && current_user == @user %>
     <div class="mailInfo box">
       <div class="boxHead"><b>My Mail</b></div>
+
+
+      <table class="userNav">
+        <tr>
+          <td colspan="5">
+            <table cellspacing="3" cellpadding="3" width="100%">
+              </td></tr>
+              <tr>
+                <td width="45%" align="center" valign="middle" class='txt_label4' height="33">
+                  <a href='/user/<%= current_user.id %>/messages'>Messages</a>
+                </td>
+                </td>
+
+                <td width="45%" align="center" valign="middle" class='txt_label4' height="33">
+                  <a href='/user/<%= current_user.id %>/friend_requests' class='style11'>Friend Requests</a></a>
+                </td>
+              </tr>
+
+              </tr>
+              </td></tr>
+            </table>
+            </table>
+
+
       <% if logged_in? && !current_user.pending_friends.empty? %>
         <a href="/user/<%= current_user.id %>/friend_requests"><div class="boxButton" id="sFriend"><span class="notifcation2">New Friend Requests!</span></div></a><br>
       <% end %>
@@ -213,15 +254,15 @@
 
       <div class="boxHead"><b>Comments</b></div>
       <table id="userWall">
-        <tr><td class="tableLeft"><a href="https://myspace.windows93.net/?id=15233"><div><b>@user.username</b></div><img src="https://www.famefocus.com/wp-content/uploads/2017/05/tom-anderson-myspace.jpg"></a></td><td class="tableRight"><div><b class="date">maybe timestamp for comment here?</b></div><div>
+        <tr><td class="tableLeft"><a href="/user/1"><div><b>@user.username</b></div><img src="https://www.famefocus.com/wp-content/uploads/2017/05/tom-anderson-myspace.jpg"></a></td><td class="tableRight"><div><b class="date">maybe timestamp for comment here?</b></div><div>
           <p>@post.comments (this will need a jointable ): )</p></div></td></tr></table>
     </div>
     <div id="imgPreview"><img src=""></div>
     <div id="footer" class="box">
       <div>
         <p>
-          <a href="about.php">About</a> <a href="help.php">Help</a>
-          <a href="login.php">Login</a>		<br>&copy; 1993-2020 <a style="text-decoration:none;" href="http://windows93.net">render footer partial</a>
+          <a href="about.php">About</a> <a href="/help">Help</a>
+          <a href="login.php">Login</a>		<br>&copy; 1993-2020 <a style="text-decoration:none;" href="/">render footer partial</a>
         </p>
       </div>
     </div>
