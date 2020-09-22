@@ -38,7 +38,7 @@
 </style>
 
 <table>
-  <tr><th>From:</th><td> <img src="/images/<%= @message.sender.images.first.image %>"><b> <span class="relative"> <%= @message.sender.name %> </span> </b> <span class="uDelete">Delete User</span> </td></tr>
+  <tr><th>From:</th><td><a href="/user/<%= @message.sender.id %>"> <img src="/images/<%= @message.sender.images.first.image %>"> </a><b> <span class="relative"> <%= @message.sender.name %> </span> </b> <span class="uDelete">Delete User</span> </td></tr>
   <tr><th>Date:</th><td><%= @message.created_at.strftime("%A, %d %b %Y %l:%M %p %Z") %></td></tr>
   <tr><th>Subject:</th><td> <%= @message.subject %></td></tr>
   <tr><th>Body:</th> <td><%= @message.content %></td></tr>

@@ -2,7 +2,7 @@
   table {
     border: 1px solid #689aca;
     border-spacing: 3px;
-    width: 1000px;
+    width: 100%;
     text-align: left;
     font: normal 9pt/normal Verdana, Arial, Helvetica, sans-serif;
   }
@@ -37,6 +37,18 @@
     position: relative;
     bottom: 50px;
   }
+
+  table td:nth-child(3) {
+    width: 80px;
+  }
+
+  table td:nth-child(2) {
+    width: 150px;
+  }
+  table td:nth-child(1) {
+    width: 150px;
+    max-width: 200px;
+  }
 </style>
 
 <table>
@@ -45,7 +57,7 @@
       <% message.read == true ? @td = '<td>' : @td = '<td style="background-color: #cce1fc">' %>
     <tr>
     <%= @td %><%= message.created_at.strftime("%b %e, %Y<Br> %l:%M %p") %></>
-    <%= @td %><img src="/images<%= message.sender.images.first.image %>"> </td>
+    <%= @td %><a href="/user/<%= message.sender.id %>"><img src="/images<%= message.sender.images.first.image %>"></a></td>
     <%= @td %><%= message.read == true ? 'Read' : 'Unread' %>  </td>
     <%= @td %><a href="/user/<%= @user.id %>/messages/<%= message.id %>"><%= message.subject %> </a> </td>
   </tr>
