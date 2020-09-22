@@ -37,6 +37,12 @@
       background-image: url('/images/friendrequest.gif');
 
     }
+
+    #sMsg {
+      background-repeat: no-repeat;
+      background-image: url('/images/newmessage.gif');
+
+    }
     .mailInfo{
       border: 1px solid #000;
       margin-bottom: 20px;
@@ -54,9 +60,16 @@
     }
       span.notifcation {
         font: normal 9pt/normal Verdana, Arial, Helvetica, sans-serif;
-        color: navy;
+        color: #cf002e;
         font-weight: bold;
       }
+
+    span.notifcation2 {
+      font: normal 9pt/normal Verdana, Arial, Helvetica, sans-serif;
+      color: navy;
+      font-weight: bold;
+    }
+
       span.contact {
         font: normal 9pt/normal Verdana, Arial, Helvetica, sans-serif;
       }
@@ -104,7 +117,10 @@
     <div class="mailInfo box">
       <div class="boxHead"><b>My Mail</b></div>
       <% if logged_in? && !current_user.pending_friends.empty? %>
-        <a href="/user/<%= current_user.id %>/friend_requests"><div class="boxButton" id="sFriend"><span class="notifcation">New Friend Requests</span></div></a><br>
+        <a href="/user/<%= current_user.id %>/friend_requests"><div class="boxButton" id="sFriend"><span class="notifcation2">New Friend Requests!</span></div></a><br>
+      <% end %>
+      <% if logged_in? && !current_user.unread_messages.empty? %>
+        <a href="/user/<%= current_user.id %>/messages"><div class="boxButton" id="sMsg"><span class="notifcation">New Messages!</span></div></a><br>
       <% end %>
 
     </div>
