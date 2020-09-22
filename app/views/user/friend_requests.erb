@@ -1,17 +1,18 @@
 <style>
-  table#requests {
+  table#requestsempty {
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
     align-items: flex-start;
-    text-align: left;
+    text-align: center;
+    width: 100%;
     font: normal 8pt/normal Verdana, Arial, Helvetica, sans-serif;
   }
 
   table {
     border: 1px solid #689aca;
     border-spacing: 3px;
-    border-collapse: separate;
+    border-collapse: collapse;
     width: 800px;
       }
   th, td {
@@ -40,7 +41,7 @@
 </style>
 
 
-
+<% if !@user.pending_friends.empty? %>
     <table id="requests">
       <tr>
         <th id=topbar>From:</th><th id="topbar">Confirmation:</th>
@@ -59,6 +60,15 @@
         </tr>
       <% end %>
     </table>
+  <% else %>
+  <table id="requestsempty">
+    <tr>
+      <div class="boxHead"><b>Friend Requests</b></div>
+    </tr>
+    <td><h2>You don't have any new Friend Requests at this time.</h2></td>
+    <tr><td><span style="font-size: 12px">View <a href="/friends">Members</a> to find new friends.</span></td></tr>
+  </table>
+<% end %>
 
 
 
