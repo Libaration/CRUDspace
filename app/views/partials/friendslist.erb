@@ -1,3 +1,9 @@
+<style>
+  div.fwiendFace img {
+    /*border: #5383c5 solid 2px;*/
+    border: #09379b solid 2px;
+  }
+</style>
 <% @user.friends.each do |friend| %>
-  <a href="/user/<%= friend.id %>"><div class="fwiendFace"><b><%= friend.name %></b><img src="/images<%= friend.images.first.image %>" width="125" height="125"></div></a>
+  <a href="/user/<%= friend.id %>"><div class="fwiendFace"><b><%= friend.name %></b><img src="/images<%= friend.images.first.image %>" width="125"></div></a>
 <% end %>
