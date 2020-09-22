@@ -1,4 +1,12 @@
 <style>
+  div.container {
+    width: 100%;
+    text-align: right;
+    font-size: 13px;
+    padding-top: 5px;
+    color: #152e71;
+    font-weight: bold;
+  }
   table {
     border: 1px solid #689aca;
     border-spacing: 3px;
@@ -47,5 +55,8 @@
   <tr><th>Subject:</th><td> <%= @message.subject %></td></tr>
   <tr><th>Body:</th> <td><%= @message.content %></td></tr>
 
-
 </table>
+<div class="container">
+  <% unless previous_message.nil? %> <a href="/user/<%=  @user.id  %>/messages/<%=  previous_message.id  %>"> << Previous </a><%  end %>
+ <% unless next_message.nil? %> <a href="/user/<%=  @user.id  %>/messages/<%=  next_message.id  %>"> Next >></a><%  end %>
+</div>

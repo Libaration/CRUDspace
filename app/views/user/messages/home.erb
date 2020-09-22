@@ -63,7 +63,7 @@
     <%= @td %><%= message.created_at.strftime("%b %e, %Y<Br> %l:%M %p") %></>
     <%= @td %><a href="/user/<%= message.sender.id %>"><img src="/images<%= message.sender.images.first.image %>"></a></td>
     <%= @td %><%= message.read == true ? 'Read' : 'Unread' %>  </td>
-    <%= @td %><a href="/user/<%= @user.id %>/messages/<%= message.id %>"><%= message.subject %> </a> </td>
+    <%= @td %><b><a href="/user/<%= @user.id %>/messages/<%= message.id %>"><%= message.subject %> </a></b> </td>
   </tr>
   <% end %>
 
