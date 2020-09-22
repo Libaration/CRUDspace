@@ -7,3 +7,4 @@ run ApplicationController
 use UsersController
 use FriendshipsController
 use PicturesController
+use MessagesController
