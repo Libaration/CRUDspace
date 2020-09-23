@@ -114,13 +114,13 @@
 
       <input type="hidden" name="_method" value="PATCH">
       <input type="submit" value="Mark As Read">
-    </form>
   </div>
     <div class="messagereply">
-    <form method="post" action="/user/<% @user.id %>/messages">
+    <form method="post" action="/user/<%= @user.id %>/messages">
       <input type="hidden" name="_method" value="DELETE">
       <input type="submit" value="Delete Checked">
-    </form>
+        </form>
+      </form>
     </div>
   <div class="messagereply">
     <% unless params[:start].to_i - 5 < 0 %>
