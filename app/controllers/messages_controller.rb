@@ -81,7 +81,17 @@ class MessagesController < ApplicationController
   patch'/user/:id/messages' do
     @user = User.find(params[:id])
     if logged_in? && @user == current_user
-      @user.messages.where("?", params[:id]).update_all(read: true)
+      @user.messages.where(params[:message_id]).update_all(read: true)
+      redirect "/user/#{@user.id}/messages"
+    else
+      redirect '/login'
+    end
+  end
+
+  delete'/user/:id/messages' do
+    @user = User.find(params[:id])
+    if logged_in? && @user == current_user
+      @user.messages.where(params[:message_id]).destroy_all
       redirect "/user/#{@user.id}/messages"
     else
       redirect '/login'
