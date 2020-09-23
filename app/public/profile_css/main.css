@@ -1,0 +1,730 @@
+body{
+    background: #fff;
+    font-family: Arial;
+    padding-top: 45px;
+    font-size: 15px;
+}
+
+p{
+    margin: 0;
+}
+
+img{
+    image-rendering: auto;
+    image-rendering: crisp-edges;
+    image-rendering: pixelated;
+    image-orientation: from-image;
+}
+
+#container{
+    max-width: 1024px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.box{
+    border: none;
+    overflow: hidden;
+}
+
+button{
+    width: max-content;
+}
+.containerone {
+    display: flex;
+    flex-wrap: wrap;
+    padding-top: 100px;
+    margin: 100px;
+    justify-content: center;
+}
+.avatar{
+    width:200px;
+    margin-right: 20px;
+    cursor: zoom-in;
+    image-orientation: from-image;
+}
+
+.boxInfo{
+    border: 1px solid #000;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+.boxHead{
+    background: #6699cc;
+    color: white;
+    padding: 3px;
+    padding-bottom: 4px;
+    padding-left: 6px;
+}
+
+.boxInfo table {
+    width: 100%;
+}
+
+.boxInfo td:nth-child(1) {
+    background-color: #b1d0ef;
+    width: 25%;
+    color: #69c;
+    font-weight: bold;
+    padding: 2px;
+}
+
+.boxInfo td:nth-child(2) {
+    background-color: #d2e7fb;
+    color: #000;
+    padding: 2px;
+}
+
+.rightHead{
+    background: #fc9;
+    color: #cc6633;
+    padding-left: 4px;
+}
+
+.topLeft{
+    float: left;
+    width: calc( 40% - 20px );
+    padding:10px;
+}
+
+.topRight{
+    float: right;
+    width: calc( 60% - 20px );
+    padding:10px;
+}
+
+.extended{
+    border: 1px solid #000;
+    text-align: center;
+    margin-bottom: 20px;
+    margin-top: 15px;
+}
+
+.extended a{
+    text-decoration: none;
+}
+
+.blurbs{
+    margin-bottom: 20px;
+}
+
+h4{
+    color: #cc6633;
+    margin-bottom: 0px;
+}
+
+.fwiendCount{
+    color: #f93;
+}
+
+.fwiendCounter{
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+.boxButton{
+    display: inline-block;
+    width: calc( 49% - 60px );
+    padding-left: 30px;
+    height: 24px;
+    font-size: small;
+    color: blue;
+    padding-top: 7px;
+}
+
+.fwiendFace {
+    max-width: 25%;
+    display: inline-grid;
+    width: calc( 24% - 6px );
+    padding: 3px;
+    text-align: center;
+}
+
+.fwiendFace b{
+    overflow: hidden;
+}
+
+.fwiendFace img {
+    width: calc( 100% );
+}
+
+#top{
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+#top a{
+    text-decoration: none;
+}
+
+#viewFriends{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    text-align: right;
+}
+
+.centerform {
+    flex-wrap: wrap;
+    flex-direction: column;
+    display:flex;
+    align-content: flex-start;
+}
+
+#userWall{
+    margin-top: 10px;
+    word-wrap:break-word;
+    display:inline-block;
+    overflow: hidden;
+    width: 100%;
+}
+
+#commentInput{
+    width: calc( 100% - 6px );
+    margin: 0;
+    margin-top: 10px;
+    height: 100px;
+}
+
+form{
+    margin-bottom: 20px;
+    text-align: right;
+}
+
+textarea, textarea:focus {
+    outline: none;
+    box-shadow:none !important;
+    border:1px solid #422918;
+}
+
+#footer{
+    font-size:small;
+    width: 100%;
+    bottom: 0px;
+    display: grid;
+    text-align: center;
+}
+
+#footer a {
+    text-decoration: none;
+}
+
+#sMsg {
+    background-repeat: no-repeat;
+    background-image: url(https://myspace.windows93.net/img/sendMailIcon.gif);
+
+}
+
+#block {
+    background-repeat: no-repeat;
+    background-image: url(https://myspace.windows93.net/img/blockuser.gif);
+}
+#report {
+    background-repeat: no-repeat;
+    background-image: url(https://myspace.windows93.net/img/icon_rank_user4.gif);
+}
+#add {
+    background-repeat: no-repeat;
+    background-image: url(https://myspace.windows93.net/img/addFriendIcon.gif);
+}
+
+#mailboxContent{
+    padding: 3px;
+}
+
+.friendRequests{
+    display: inline-grid;
+    width: 43%;
+    background: #fc9;
+    padding: 10px;
+    border: 3px solid #fff;
+    max-width: calc( 25% - 85px );
+    text-align: center;
+}
+
+.allfwieds{
+    width: 100%;
+    margin-bottom: 30px;
+}
+
+.allfwiedsItem{
+    max-width: calc( 25% - 85px );
+    display: inline-grid;
+    background: #fc9;
+    border: 6px solid white;
+    padding: 10px;
+    overflow: hidden;
+    text-align: center;
+}
+
+.allfwiedsItem img{
+
+}
+
+.allfwiedsItem a {
+    text-decoration: none;
+}
+
+.allfwiedsItem button{
+    width: auto;
+}
+
+.allfwiedsItemTop{
+    background: #fc9;
+}
+
+.short{
+    margin-top: -15px;
+}
+
+#header{
+    background: #003399;
+    color: #fff;
+    position: fixed;
+    width: calc( 100% - 15px );
+    height: 22px;
+    padding: 5px;
+    left: 0px;
+    top: 0px;
+    margin-bottom: 40px;
+    border-bottom: 1px solid black;
+    padding-left: 10px;
+    padding-top: 6px;
+    overflow:hidden;
+    z-index: 300;
+}
+
+#header a:not(.logo) {
+    margin-left:10px;
+    color:#fff;
+    font-size: small;
+    text-decoration:none;
+}
+
+a.logo{
+    color:white;
+    text-decoration:none;
+}
+
+#header img {
+    top: 9px;
+    left: 9px;
+    position: absolute;
+}
+
+.inboxList{
+    border-bottom: 1px gray solid;
+    padding: 10px;
+    background: #fc9;
+}
+
+.inboxListContainer{
+    border-top: 1px gray solid;
+    border-left: 1px gray solid;
+    border-right: 1px gray solid;
+}
+
+.inboxMsg{
+    padding: 10px;
+    background: #fc9;
+    margin-top: 20px;
+    border: 1px gray solid;
+}
+
+#mail form{
+    text-align: left;
+}
+
+#mail{
+    padding: 20px;
+}
+
+.url{
+    border: solid 2px #69c;
+    padding: 2px;
+}
+
+.tableLeft{
+    background: #f93;
+    width: 25%;
+    padding: 10px;
+    vertical-align: top;
+    overflow: hidden;
+}
+
+.tableLeft > a > div {
+    overflow: hidden;
+    max-width: 115px;
+    text-align: center;
+}
+
+.tableRight{
+    width: 75%;
+    background: #fc9;
+    padding: 10px;
+    vertical-align: top;
+    overflow-wrap: anywhere;
+}
+
+.tableLeft img{
+    max-width: calc(100%);
+    image-orientation: from-image;
+}
+
+.tableLeft a{
+    text-decoration: none;
+}
+
+.songName{
+    margin-top: 0px;
+    font-size: small;
+}
+
+.player{
+    padding: 4px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    background: lightgray;
+    color: #000;
+    width: calc(100% - 10px );
+    border: 1px solid #999;
+}
+
+audio {
+    /* border: solid 1px #fff; */
+    /* padding: 2px; */
+    margin-bottom: 0px;
+    margin-top: 5px;
+    width: 100%;
+    height: 30px;
+    /* background: #fff; */
+    outline: none;
+    margin-bottom: -3px;
+    /* filter: sepia(0%) saturate(100%) grayscale(0) contrast(100%) invert(100%); */
+}
+
+a.list{
+    color: #000;
+    text-decoration: none;
+}
+a.list:hover{
+    color: #003399;
+    font-weight: bold;
+}
+
+@-moz-document url-prefix() {
+    audio {
+        filter: sepia(0%) saturate(100%) grayscale(0) contrast(100%) invert(100%);
+        margin-bottom: -4px;
+    }
+}
+
+.blinkViolet{
+    animation:blinkingTextViolet 0.3s infinite;
+}
+@keyframes blinkingTextViolet{
+    0%{		color: black;	}
+    49%{	color: violet;	}
+    50%{	color: violet;	}
+    99%{	color:violet;	}
+    100%{	color: black;	}
+}
+
+.blinkRed{
+    animation:blinkingTextRed 0.3s infinite;
+}
+@keyframes blinkingTextRed{
+    0%{		color: black;	}
+    49%{	color: red;	}
+    50%{	color: red;	}
+    99%{	color: red;	}
+    100%{	color: black;	}
+}
+
+.blinkYellow{
+    animation:blinkingTextYellow 0.3s infinite;
+}
+@keyframes blinkingTextYellow{
+    0%{		color: black;	}
+    49%{	color: yellow;	}
+    50%{	color: yellow;	}
+    99%{	color: yellow;	}
+    100%{	color: black;	}
+}
+
+.blinkGreen{
+    animation:blinkingTextGreen 0.3s infinite;
+}
+@keyframes blinkingTextGreen{
+    0%{		color: green;	}
+    49%{	color: #C3FF00;	}
+    50%{	color: #C3FF00;	}
+    99%{	color: #C3FF00;	}
+    100%{	color: green;	}
+}
+
+#imgPreview {
+    z-index: 3000;
+    top: 0px;
+    left: 0px;
+    display: block;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    -webkit-animation-duration: 1s;
+    animation-duration: 0.2s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+    animation-name: tada;
+    background-color: rgb(0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.6);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000);
+    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000)";
+    cursor: zoom-out;
+    display: none;
+}
+
+#imgPreview img {
+    width: auto;
+    height: auto;
+    max-height: calc(100% - 10px );
+    max-width: 100%;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    border: 5px solid #fff;
+    cursor: zoom-out;
+    background: #fff;
+}
+
+#hSub {
+    background: #6699cc;
+    font-size: small;
+    margin: 0px;
+    padding: 6px;
+    padding-left: 10px;
+    padding-top: 4px;
+    position: fixed;
+    left: 0;
+    top: 34px;
+    width: calc(100% - 15px );
+    color: #000;
+    height: 15px;
+    z-index: 300;
+}
+
+#hSub a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.blogs, .blog{
+    margin-bottom: 20px;
+}
+
+.blogs div, .blog div{
+    margin-bottom: 10px;
+}
+
+.blog {
+    background-color: #6699cc;
+    padding: 15px;
+}
+
+.blogCorpus{
+
+}
+
+.blog p {
+    margin: 1em;
+}
+
+.blogCard{
+    width: calc( 25% - 20px );
+}
+
+.blogCard .avatar {
+    width: 100%;
+    margin-right: 0px;
+    image-orientation: from-image;
+}
+
+.blogPost{
+    width: calc( 75% - 20px );
+}
+
+.blogTitle{
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 20px;
+}
+
+@media only screen and (max-width: 768px) {
+    /* For mobile phones: */
+    .topLeft, .topRight{
+        width: auto;
+        float: none;
+    }
+    .extended {
+        margin-top: -18px;
+    }
+
+    .allfwiedsItem, .friendRequests {
+        max-width: calc( 50% - 86px );
+    }
+
+}
+
+@media only screen and (max-width:768px){
+    #header{height:51px}#hSub{top:63px}#hUp{float:left;left:0;font-size:small;position:fixed;top:35px}.sep{display:none}.topLeft{margin-top:30px}
+    .allfwieds{margin-top: 30px;}
+}
+
+#musicPlaylist{
+    background: lightgray;
+    color: #000;
+    padding: 10px;
+    border: 1px solid #999;
+    margin-top: -30px;
+    border-top: none;
+    margin-bottom: 20px;
+}
+
+.playlistElem:nth-child(odd) {
+    background: #ddd;
+}
+
+#musicPlaylist span:hover{
+    color:blue;
+    cursor: pointer;
+}
+
+.tableRight img{
+    max-width: 100%;
+}
+
+.pagination a{
+    color: #003399;
+    text-decoration: none;
+}
+
+.pagination a.active{
+    color: #000;
+    font-weight: bolder;
+}
+
+.fwiendslatestBlogs{
+    height: 20px;
+    max-height: 20px;
+    width: 100%;
+    list-style: disclosure-closed;
+    padding-bottom: 5px;
+}
+
+.blogsAvatar{
+    width:20px;
+    height:20px;
+    background-size: cover;
+    background-position: center center;
+    display: inline-block;
+    margin-left: 5px;
+}
+
+body {
+    font: normal 8pt/normal Verdana, Arial, Helvetica, sans-serif;
+    text-transform: none;
+    text-decoration: none;
+}
+a:link {
+    text-decoration: none;
+    color: #1c48ad;
+}
+
+a:visited {
+    color: #1c48ad;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+a:active {
+    text-decoration: underline;
+}
+
+.avatar{
+    cursor: pointer;
+}
+#sFriend {
+    background-repeat: no-repeat;
+    background-image: url('/images/friendrequest.gif');
+
+}
+
+#sMsg {
+    background-repeat: no-repeat;
+    background-image: url('/images/newmessage.gif');
+
+}
+.mailInfo{
+
+    border: 1px solid #689aca;
+    margin-bottom: 20px;
+    margin-top: 20px;
+
+}
+.boxInfo {
+    border: 1px solid #689aca;
+}
+.boxButton{
+    display: inline-block;
+    width: calc( 57% - 60px );
+    padding-left: 30px;
+    height: 24px;
+    font-size: small;
+    color: #152e71;
+    padding-top: 7px;
+}
+span.notifcation {
+    font: normal 9pt/normal Verdana, Arial, Helvetica, sans-serif;
+    color: #cf002e;
+    font-weight: bold;
+}
+
+span.notifcation2 {
+    font: normal 9pt/normal Verdana, Arial, Helvetica, sans-serif;
+    color: navy;
+    font-weight: bold;
+}
+
+span.contact {
+    font: normal 9pt/normal Verdana, Arial, Helvetica, sans-serif;
+}
+#sMsg, #add, #report, #block {
+    font: normal 9pt/normal Verdana, Arial, Helvetica, sans-serif;
+    color: navy;
+}
+.txt_label4 {
+    background-color: #cce1fc;
+}
+table.userNav td {
+    width: 45%;
+    text-align: -webkit-center;
+    vertical-align: middle;
+    height: 33px;
+    display: table-cell;
+}
+table.userNav {
+    font: normal 9pt/normal Verdana, Arial, Helvetica, sans-serif;
+    border-collapse: separate;
+    white-space: normal;
+    text-align: start;
+    border-spacing: 2px;
+}
+table.userNav a {
+    color: #152e71;
+}
