@@ -24,12 +24,10 @@
   <form method='POST' action='/user/<%= @user.id %>/edit' enctype="multipart/form-data" id="spacefix">
     Full Name (First/Last) <input type="text" name="name" value="<%= @user.name %>"><br>
     Age: <input type="number" name="age" value="<%= @user.age %>"><br>
-    Bio: <input type="text" name="bio" value="<%= @user.bio %>"><br>
+    Bio: <input type="text" name="bio" value="<%= Rack::Utils.escape_html(@user.bio) %>"><br>
     Motto: <input type="text" name="motto" value="<%= @user.motto %>"><br>
     <textarea name="css">
       <%= @custom_css unless nil %>
-      <% if @custom_css.nil? %>"Custom CSS layout code"
-      <% end %>
     </textarea>
 
 

@@ -74,6 +74,9 @@ class UsersController < ApplicationController
   post '/user/:id/edit' do
     @user = User.find(params[:id])
     if logged_in? && @user == current_user
+      # params.each do |key,value|
+      #   params[key.to_sym] = Sanitize.fragment(value, Sanitize::Config::RELAXED)
+      # end
       @user.update(params.except(:css))
       path = "./app/public/profile_css/#{@user.id}_custom_css.css"
       content = Sanitize::CSS.stylesheet(params[:css], Sanitize::Config::RELAXED).gsub(".module", ".topRight, .topLeft").gsub("div.contentTop", "div.extended").gsub(".blurbsModule", ".rightHead").gsub(".content",".boxHead").gsub("div.wrap",".tableLeft, .tableRight")
