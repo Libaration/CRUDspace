@@ -42,7 +42,7 @@ class MessagesController < ApplicationController
 
   get '/user/:id/messages' do
     @user = User.find(params[:id])
-    @messages = @user.messages
+    @messages = @user.messages.reverse[params[:start].to_i...params[:end].to_i]
     if logged_in? && @user == current_user
       erb :'/user/messages/home', layout: :template
     end

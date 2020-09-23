@@ -62,11 +62,36 @@
     position: relative;
     top: -1px;
   }
+
+  div.messageactions {
+    width: 101%;
+    display: flex;
+    flex-direction: row;
+    font-size: 12px;
+    padding-top: 10px;
+    color: #152e71;
+    font-weight: bold;
+  }
+
+  .messagereply{
+    flex: 1;
+    text-align: left;
+  }
+
+  .messagereply form {
+
+    text-align: left;
+
+  }
+  .messagereply:nth-child(2){
+    padding-top: 3px;
+    text-align: right;
+  }
 </style>
 
 <table>
   <tr><th><input type="checkbox" id="selectAll"></th> <th>Date:</th> <th>From:</th><th>Status:</th><th>Subject:</th>
-    <% @messages.reverse.each do |message| %>
+    <% @messages.each do |message| %>
       <% message.read == true ? @td = '<td>' : @td = '<td style="background-color: #cce1fc">' %>
     <tr>
       <%= @td %> <input type="checkbox" name="message_id" value="<%= message.id %>"></td>
@@ -85,3 +110,18 @@
 
 </table>
 
+<div class="messageactions">
+  <div class="messagereply">
+    <form method="GET" action="/user/<%= @user.id %>/messages/">
+      <input type="submit" value="Mark As Read">
+    </form>
+  </div>
+  <div class="messagereply">
+    <% unless params[:start].to_i - 5 < 0 %>
+      <a href="/user/<%=  @user.id  %>/messages?start=<%= params[:start].to_i - 5 %>&end=<%= params[:end].to_i - 5 %>"> << Previous </a>
+    <% end %>
+    <% unless params[:start].to_i + 5 > @messages.count %>
+    <a href="/user/<%=  @user.id  %>/messages?start=<%= params[:end].to_i %>&end=<%= params[:end].to_i + 5 %>">Next >></a>
+    <% end %>
+  </div>
+</div>
