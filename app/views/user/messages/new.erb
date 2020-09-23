@@ -1,0 +1,90 @@
+<style>
+
+  div.messageactions {
+    width: 101%;
+    display: flex;
+    flex-direction: row;
+    font-size: 12px;
+    padding-top: 10px;
+    color: #152e71;
+    font-weight: bold;
+  }
+
+  .messagereply{
+    flex: 1;
+    text-align: left;
+  }
+
+  .messagereply form {
+
+    text-align: left;
+
+  }
+  .messagereply:nth-child(2){
+    padding-top: 3px;
+    text-align: right;
+  }
+  table {
+    border: 1px solid #689aca;
+    border-spacing: 3px;
+    width: 1000px;
+    text-align: left;
+    font: normal 9pt/normal Verdana, Arial, Helvetica, sans-serif;
+  }
+  table, th, td {
+    border: 1px solid #e4e4e9;
+    border-collapse: collapse;
+  }
+  th {
+    padding-right: 10px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    padding-left: 5px;
+    background-color: #e9f1fa;
+    font-size: 14px;
+    width: 80px;
+  }
+  td {
+    padding: 5px;
+  }
+
+
+  td img {
+    height: 125px;
+  }
+  span.relative {
+    position: relative;
+    bottom: 50px;
+    color: #152e71;
+  }
+  table img {
+    /*border: #5383c5 solid 2px;*/
+    border: #09379b solid 2px;
+    /*border-radius: 100%;*/
+  }
+    table textarea, table input {
+      width: 100%;
+    }
+    table textarea {
+      height: 500px;
+      word-wrap:break-word;
+      /*font-size: 15px;*/
+      font: normal 10pt/normal Verdana, Arial, Helvetica, sans-serif;
+    }
+</style>
+<form method="POST" action="/user/<%= @user.id %>/messages?msg_id=<%= @message.id %>">
+<table>
+  <tr><th>To:</th><td><a href="/user/<%= @message.sender.id %>"> <img src="/images/<%= @message.sender.images.first.image %>"> </a><b> <span class="relative"> <%= @message.sender.name %> </span> </b></td></tr>
+  <tr><th>Subject:</th><td> <input type="text" name="subject" value="RE: <%= @message.subject %>"></td></tr>
+  <tr><th>Body:</th><td>
+    <textarea style="resize: none" name="content">&#013;&#013;------------------------------------- Original Message -------------------------------------&#013;From: <a href="/user/<%= @message.sender.id %>"><%= @message.sender.name %></a>&#013;Date: <%= @message.created_at.strftime("%A, %d %b %Y %l:%M %p %Z") %>&#013;&#013;&#013;<%=@message.content.gsub('<br />', "\r\n").strip()%></textarea></td></tr>
+
+</table>
+<div class="messageactions">
+  <div class="messagereply">
+
+      <input type="submit" value="Send">
+  </div>
+</div>
+</form>
+
