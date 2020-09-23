@@ -27,7 +27,9 @@
     Bio: <input type="text" name="bio" value="<%= @user.bio %>"><br>
     Motto: <input type="text" name="motto" value="<%= @user.motto %>"><br>
     <textarea name="css">
-      <%= @custom_css %>
+      <%= @custom_css unless nil %>
+      <% if @custom_css.nil? %>"Custom CSS layout code"
+      <% end %>
     </textarea>
 
 

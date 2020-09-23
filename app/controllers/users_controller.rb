@@ -76,12 +76,18 @@ class UsersController < ApplicationController
     if logged_in? && @user == current_user
       @user.update(params.except(:css))
       path = "./app/public/profile_css/#{@user.id}_custom_css.css"
-      content = Sanitize::CSS.stylesheet(params[:css], Sanitize::Config::RELAXED).gsub(".module", ".topRight, .topLeft").gsub("div.contentTop", "div.extended") + "
-.topRight{
-    float: right;
-    width: calc( 60% - 20px );
-     padding: 0px
-}"
+      content = Sanitize::CSS.stylesheet(params[:css], Sanitize::Config::RELAXED).gsub(".module", ".topRight, .topLeft").gsub("div.contentTop", "div.extended").gsub(".blurbsModule", ".rightHead").gsub(".content",".boxHead").gsub("div.wrap",".tableLeft, .tableRight")
+      content += ".topRight{
+        float: right;
+        width: calc( 60% - 20px );
+        padding: 0px
+      }
+
+      .topLeft{
+        float: left;
+        width: calc( 40% - 20px );
+        padding:0px;
+      }" unless content.blank?
       File.open(path, "w+") do |f|
         f.write(content)
       end
