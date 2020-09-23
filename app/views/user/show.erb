@@ -120,7 +120,7 @@
   <div class="boxInfo box">
     <div class="boxHead"><b>Contacting <span class="uName"><%= @user.name %></span></b></div>
     <span class="contact">
-      <a href="send.php?id=1"><div class="boxButton" id="sMsg">Send Message</div></a>
+      <a href="/user/<%= current_user.id %>/messages/<%= @user.id %>/new"><div class="boxButton" id="sMsg">Send Message</div></a>
     <a href="report.php?id=1"><div class="boxButton" id="report">Report</div></a>
 
     <% if logged_in? && current_user.friends.include?(@user) %>

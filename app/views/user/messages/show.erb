@@ -67,7 +67,7 @@
   <tr><th>From:</th><td><a href="/user/<%= @message.sender.id %>"> <img src="/images/<%= @message.sender.images.first.image %>"> </a><b> <span class="relative"> <%= @message.sender.name %> </span> </b></td></tr>
   <tr><th>Date:</th><td><%= @message.created_at.strftime("%A, %d %b %Y %l:%M %p %Z") %></td></tr>
   <tr><th>Subject:</th><td> <%= @message.subject %></td></tr>
-  <tr><th>Body:</th> <td><%= @message.content %></td></tr>
+  <tr><th></th> <td><%= @message.content %></td></tr>
 
 </table>
 <div class="messageactions">

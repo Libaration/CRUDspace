@@ -21,6 +21,16 @@ class MessagesController < ApplicationController
     @user = User.find(params[:id])
     @message = Message.find(params[:msg_id])
     if logged_in? && @user == current_user && @message.receiver == current_user
+      erb :'user/messages/reply', layout: :template
+    else
+      redirect '/login'
+    end
+  end
+
+  get'/user/:id/messages/:friend_id/new' do
+    @user = User.find(params[:id])
+    @friend = User.find(params[:friend_id])
+    if logged_in? && @user == current_user
       erb :'user/messages/new', layout: :template
     else
       redirect '/login'
@@ -40,11 +50,41 @@ class MessagesController < ApplicationController
     end
   end
 
+  post '/user/:id/messages/:friend_id' do
+    @user = User.find(params[:id])
+    @friend= User.find(params[:friend_id])
+    if logged_in? && @user == current_user
+      params[:content].gsub!(/\r\n/, '<br />')
+      Message.create(params.except(:friend_id, :id)).tap do |new_message|
+        new_message.sender = @user
+        new_message.receiver = @friend
+        new_message.save
+      end
+      redirect "/user/#{@user.id}/messages"
+    else
+      redirect '/login'
+    end
+  end
+
   get '/user/:id/messages' do
     @user = User.find(params[:id])
+    if params[:start].nil? && params[:end].nil?
+      params[:start] = 0
+      params[:end] = 5
+    end
     @messages = @user.messages.reverse[params[:start].to_i...params[:end].to_i]
     if logged_in? && @user == current_user
       erb :'/user/messages/home', layout: :template
+    end
+  end
+
+  patch'/user/:id/messages' do
+    @user = User.find(params[:id])
+    if logged_in? && @user == current_user
+      @user.messages.where("?", params[:id]).update_all(read: true)
+      redirect "/user/#{@user.id}/messages"
+    else
+      redirect '/login'
     end
   end
 

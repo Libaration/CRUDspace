@@ -90,12 +90,13 @@
 </style>
 
 <table>
+  <form method="POST" action="/user/<%= @user.id %>/messages">
   <tr><th><input type="checkbox" id="selectAll"></th> <th>Date:</th> <th>From:</th><th>Status:</th><th>Subject:</th>
     <% @messages.each do |message| %>
       <% message.read == true ? @td = '<td>' : @td = '<td style="background-color: #cce1fc">' %>
     <tr>
-      <%= @td %> <input type="checkbox" name="message_id" value="<%= message.id %>"></td>
-    <%= @td %><%= message.created_at.strftime("%b %e, %Y<Br> %l:%M %p") %></td>
+      <%= @td %> <input type="checkbox" name="message_id[]" value="<%= message.id %>"></td>
+    <%= @td %> <%= message.created_at.strftime("%b %e, %Y<Br> %l:%M %p") %> </td>
     <%= @td %><a href="/user/<%= message.sender.id %>"><img src="/images<%= message.sender.images.first.image %>"></a></td>
     <% if message.replied == true %>
       <%= @td %>Replied
@@ -112,8 +113,10 @@
 
 <div class="messageactions">
   <div class="messagereply">
-    <form method="GET" action="/user/<%= @user.id %>/messages/">
+
+      <input type="hidden" name="_method" value="PATCH">
       <input type="submit" value="Mark As Read">
+      <form><input type="submit" value="Delete Checked"></form>
     </form>
   </div>
   <div class="messagereply">
