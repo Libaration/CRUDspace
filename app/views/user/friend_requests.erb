@@ -9,10 +9,19 @@
     font: normal 8pt/normal Verdana, Arial, Helvetica, sans-serif;
   }
 
+  table#requests {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+    font: normal 8pt/normal Verdana, Arial, Helvetica, sans-serif;
+  }
+
   table {
     border: 1px solid #689aca;
     border-spacing: 3px;
-    border-collapse: collapse;
+    border-collapse: separate;
     width: 800px;
       }
   th, td {
@@ -38,6 +47,10 @@
       text-align: center;
   }
 
+  div.deny form {
+    text-align: center;
+    padding: 5px;
+  }
 </style>
 
 
@@ -56,6 +69,10 @@
             <span style="font-weight: bold"><a href="/user/<%= friend.id %>"><%= friend.name %></a></span> wants to be your friend!<br>
             <input type="submit" value="Approve">
         </form>
+        <div class="deny"><form action="/user/<%= current_user.id %>/deny?friend_id=<%= friend.id %>" method="post">
+          <input type="hidden" name="_method" value="DELETE">
+          <input type="submit" value="Deny">
+        </form></div>
           </td>
         </tr>
       <% end %>

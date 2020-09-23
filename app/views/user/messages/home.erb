@@ -28,18 +28,22 @@
     height: 125px;
     border: #09379b solid 2px;
   }
+
+  table#requestsempty {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: center;
+    width: 100%;
+    font: normal 8pt/normal Verdana, Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    border: 1px solid #689aca;
+    border-spacing: 3px;
   }
-  span.udelete {
-    position: relative;
-    left: 500px;
-    bottom: 20px;
-    padding: 0;
-    margin: 0;
-  }
-  span.relative {
-    position: relative;
-    bottom: 50px;
-  }
+table#requestsempty td:nth-child(n+1) {
+  width: 100%;
+}
 
   table td:nth-child(4) {
     width: 80px;
@@ -86,7 +90,7 @@
     justify-content: right;
   }
 </style>
-
+<% if !@user.messages.empty? %>
 <table>
   <form method="POST" action="/user/<%= @user.id %>/messages">
   <tr><th><input type="checkbox" id="selectAll"></th> <th>Date:</th> <th>From:</th><th>Status:</th><th>Subject:</th>
@@ -131,3 +135,12 @@
     <% end %>
   </div>
 </div>
+  <% else %>
+  <table id="requestsempty">
+    <tr>
+      <div class="boxHead"><b>Messages</b></div>
+    </tr>
+  </table>
+  <h2>You don't have any new Messages at this time.</h2><br>
+  <span style="font-size: 12px">View <a href="/friends">Members</a> to find someone to chat with!</span>
+<% end %>
