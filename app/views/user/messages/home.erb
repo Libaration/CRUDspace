@@ -41,26 +41,36 @@
     bottom: 50px;
   }
 
-  table td:nth-child(3) {
+  table td:nth-child(4) {
     width: 80px;
     max-width: 80px;
   }
 
-  table td:nth-child(2) {
+  table td:nth-child(3) {
     width: 150px;
     max-width: 200px;
   }
-  table td:nth-child(1) {
+  table td:nth-child(2) {
     width: 100px;
+  }
+  table td:nth-child(1) {
+    width: 25px;
+    padding: 5px;
+    margin: 0;
+    vertical-align: center;
+    horiz-align: center;
+    position: relative;
+    top: -1px;
   }
 </style>
 
 <table>
-  <tr><th>Date:</th> <th>From:</th><th>Status:</th><th>Subject:</th>
+  <tr><th><input type="checkbox" id="selectAll"></th> <th>Date:</th> <th>From:</th><th>Status:</th><th>Subject:</th>
     <% @messages.reverse.each do |message| %>
       <% message.read == true ? @td = '<td>' : @td = '<td style="background-color: #cce1fc">' %>
     <tr>
-    <%= @td %><%= message.created_at.strftime("%b %e, %Y<Br> %l:%M %p") %></>
+      <%= @td %> <input type="checkbox" name="message_id" value="<%= message.id %>"></td>
+    <%= @td %><%= message.created_at.strftime("%b %e, %Y<Br> %l:%M %p") %></td>
     <%= @td %><a href="/user/<%= message.sender.id %>"><img src="/images<%= message.sender.images.first.image %>"></a></td>
     <% if message.replied == true %>
       <%= @td %>Replied
@@ -74,3 +84,4 @@
 
 
 </table>
+
