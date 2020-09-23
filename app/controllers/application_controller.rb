@@ -1,6 +1,7 @@
 require './config/environment'
 require "carrierwave"
 require "carrierwave/orm/activerecord"
+require 'sanitize'
 #Configure Carrierwave
 
 class ApplicationController < Sinatra::Base

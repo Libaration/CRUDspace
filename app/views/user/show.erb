@@ -4,6 +4,9 @@
   <meta charset="UTF-8">
   <title>MYSPACE</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <% if Pathname("./app/public/profile_css/#{@user.id}_custom_css.css").exist? %>
+    <link rel="stylesheet" href="/profile_css/<%= @user.id %>_custom_css.css">
+    <% end %>
   <link rel="stylesheet" href="/stylesheets/main.css">
   <style>
     body {

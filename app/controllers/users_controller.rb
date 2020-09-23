@@ -61,6 +61,9 @@ class UsersController < ApplicationController
 
   get '/user/:id/edit' do
     @user = User.find(params[:id])
+    if Pathname("./app/public/profile_css/#{@user.id}_custom_css.css").exist?
+      @custom_css = File.read("./app/public/profile_css/#{@user.id}_custom_css.css")
+    end
     if logged_in? && @user == current_user
       erb :'/user/edit', layout: :template
     else
@@ -71,7 +74,13 @@ class UsersController < ApplicationController
   post '/user/:id/edit' do
     @user = User.find(params[:id])
     if logged_in? && @user == current_user
-      @user.update(params)
+      @user.update(params.except(:css))
+      path = "./app/public/profile_css/#{@user.id}_custom_css.css"
+      content = Sanitize::CSS.stylesheet(params[:css], Sanitize::Config::RELAXED)
+      File.open(path, "w+") do |f|
+        f.write(content)
+      end
+
       redirect "/user/#{@user.id}"
     else
       'You do not have permission to view this page'
