@@ -1,8 +1,7 @@
 body{
     background: #fff;
-    font-family: Arial;
+    font: normal 9pt/normal Verdana, Arial, Helvetica, sans-serif;
     padding-top: 45px;
-    font-size: 15px;
 }
 
 p{
@@ -40,7 +39,6 @@ button{
 .avatar{
     width:200px;
     margin-right: 20px;
-    cursor: zoom-in;
     image-orientation: from-image;
 }
 
@@ -480,7 +478,6 @@ a.list:hover{
     background-color: rgba(0, 0, 0, 0.6);
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000);
     -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000)";
-    cursor: zoom-out;
     display: none;
 }
 
@@ -496,7 +493,6 @@ a.list:hover{
     right: 0;
     margin: auto;
     border: 5px solid #fff;
-    cursor: zoom-out;
     background: #fff;
 }
 
@@ -633,14 +629,10 @@ a.list:hover{
     margin-left: 5px;
 }
 
-body {
-    font: normal 8pt/normal Verdana, Arial, Helvetica, sans-serif;
-    text-transform: none;
-    text-decoration: none;
-}
 a:link {
     text-decoration: none;
     color: #1c48ad;
+
 }
 
 a:visited {
