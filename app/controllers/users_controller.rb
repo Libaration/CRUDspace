@@ -1,10 +1,5 @@
 require './app/controllers/images_uploader'
-before do
-  cache_control :no_cache
-  headers \
-    "Pragma"   => "no-cache",
-    "Expires" => "0"
-end
+
 class UsersController < ApplicationController
 
   get '/user/new' do
@@ -21,7 +16,7 @@ class UsersController < ApplicationController
     #
       @user = User.find(params[:id])
       @profilepic = @user.images.first
-      erb :'user/show'
+      erb :'user/show', :cache => false
   end
 
   post '/user' do
