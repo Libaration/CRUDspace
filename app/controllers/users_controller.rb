@@ -11,11 +11,9 @@ class UsersController < ApplicationController
   end
 
   get '/user/:id' do
-
-    #binding.pry
-    #
       @user = User.find(params[:id])
       @profilepic = @user.images.first
+      @comments = @user.comments
       erb :'user/show', :cache => false
   end
 
