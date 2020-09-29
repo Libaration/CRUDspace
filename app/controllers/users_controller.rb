@@ -13,7 +13,7 @@ class UsersController < ApplicationController
   get '/user/:id' do
       @user = User.find(params[:id])
       @profilepic = @user.images.first
-      @comments = @user.comments
+      @comments = @user.comments.reverse
       erb :'user/show', :cache => false
   end
 
