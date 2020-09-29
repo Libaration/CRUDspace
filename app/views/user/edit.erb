@@ -26,9 +26,7 @@
     Age: <input type="number" name="age" value="<%= @user.age %>"><br>
     Bio: <input type="text" name="bio" value="<%= Rack::Utils.escape_html(@user.bio) %>"><br>
     Motto: <input type="text" name="motto" value="<%= @user.motto %>"><br>
-    <textarea name="css">
-      <%= @custom_css unless nil %>
-    </textarea>
+    <textarea name="css"><%= @custom_css unless nil %></textarea>
 
 
     <button type='submit'> Submit </button>
