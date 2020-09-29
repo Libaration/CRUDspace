@@ -163,7 +163,7 @@
         <% elsif logged_in? %>
         <div id="form">
           <div class="boxHead"><b>Leave a comment</b></div>
-          <form action="/posts/new" method="post">
+          <form action="/user/<%= current_user.id %>/comments/new" method="post">
             <textarea name="comment" id="commentInput"></textarea>
             <input type="submit" value="Send">
           </form>
