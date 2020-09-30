@@ -62,7 +62,7 @@
 
 
 <% if logged_in? && @user == current_user %>
-<div class="upload"><form method='POST' action='/user/<%= current_user.id %>/pictures'>
+<div class="upload"><form method='POST' action='/user/<%= current_user.id %>/pictures' enctype="multipart/form-data" id="spacefix">
   <h1>Upload new photo</h1>
   <input type="text" value="Add a caption for your photo" name="caption"><br>
   <input type='file' name='file' class='form-control'><br>
