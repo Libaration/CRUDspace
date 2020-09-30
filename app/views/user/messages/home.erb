@@ -1,0 +1,146 @@
+<style>
+  table {
+    border: 1px solid #93a4a9;
+    border-spacing: 3px;
+    width: 100%;
+    text-align: left;
+    font: normal 9pt/normal Verdana, Arial, Helvetica, sans-serif;
+  }
+  table, th, td {
+    border-collapse: separate;
+  }
+  th {
+    padding-right: 10px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    padding-left: 5px;
+    background-color: #6a9cc7;
+    color: white;
+
+  }
+  td {
+    padding: 5px;
+    padding-left: 10px;
+    background-color: #e9f1fb;
+  }
+
+  td img {
+    height: 125px;
+    border: #09379b solid 2px;
+  }
+
+  table#requestsempty {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: center;
+    width: 100%;
+    font: normal 8pt/normal Verdana, Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    border: 1px solid #689aca;
+    border-spacing: 3px;
+  }
+table#requestsempty td:nth-child(n+1) {
+  width: 100%;
+}
+
+  table td:nth-child(4) {
+    width: 80px;
+    max-width: 80px;
+  }
+
+  table td:nth-child(3) {
+    width: 150px;
+    max-width: 200px;
+  }
+  table td:nth-child(2) {
+    width: 100px;
+  }
+  table td:nth-child(1) {
+    width: 25px;
+    padding: 5px;
+    margin: 0;
+    vertical-align: center;
+    horiz-align: center;
+    position: relative;
+    top: -1px;
+  }
+
+  div.messageactions {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    font-size: 12px;
+    padding-top: 10px;
+    color: #152e71;
+    font-weight: bold;
+  }
+
+  .messagereply{
+
+    text-align: left;
+  }
+
+
+  .messagereply:nth-child(2){
+    flex: 1;
+    text-align: right;
+    /*margin-left: 770px;*/
+    justify-content: right;
+  }
+</style>
+<% if !@user.messages.empty? %>
+<table>
+  <form method="POST" action="/user/<%= @user.id %>/messages">
+  <tr><th><input type="checkbox" id="selectAll"></th> <th>Date:</th> <th>From:</th><th>Status:</th><th>Subject:</th>
+    <% @messages.each do |message| %>
+      <% message.read == true ? @td = '<td>' : @td = '<td style="background-color: #cce1fc">' %>
+    <tr>
+      <%= @td %> <input type="checkbox" name="message_id[id][]" value="<%= message.id %>"></td>
+    <%= @td %> <%= message.created_at.strftime("%b %e, %Y<Br> %l:%M %p") %> </td>
+    <%= @td %><a href="/user/<%= message.sender.id %>"><img src="/images<%= message.sender.images.first.image %>"></a></td>
+    <% if message.replied == true %>
+      <%= @td %>Replied
+      <% else %>
+      <%= @td %><%= message.read == true ? 'Read' : 'Unread' %>
+    <% end %>
+    </td>
+    <%= @td %><b><a href="/user/<%= @user.id %>/messages/<%= message.id %>"><%= message.subject %> </a></b> </td>
+  </tr>
+  <% end %>
+
+
+</table>
+
+<div class="messageactions">
+  <div class="messagereply">
+
+      <input type="hidden" name="_method" value="PATCH">
+      <input type="submit" value="Mark As Read">
+  </div>
+    <div class="messagereply">
+    <form method="post" action="/user/<%= @user.id %>/messages">
+      <input type="hidden" name="_method" value="DELETE">
+      <input type="submit" value="Delete Checked">
+        </form>
+      </form>
+    </div>
+  <div class="messagereply">
+    <% unless params[:start].to_i - 5 < 0 %>
+      <a href="/user/<%=  @user.id  %>/messages?start=<%= params[:start].to_i - 5 %>&end=<%= params[:end].to_i - 5 %>"> << Previous </a>
+    <% end %>
+    <% unless params[:start].to_i + 5 > @messages.count %>
+    <a href="/user/<%=  @user.id  %>/messages?start=<%= params[:end].to_i %>&end=<%= params[:end].to_i + 5 %>">Next >></a>
+    <% end %>
+  </div>
+</div>
+  <% else %>
+  <table id="requestsempty">
+    <tr>
+      <div class="boxHead"><b>Messages</b></div>
+    </tr>
+  </table>
+  <h2>You don't have any new Messages at this time.</h2><br>
+  <span style="font-size: 12px">View <a href="/friends">Members</a> to find someone to chat with!</span>
+<% end %>

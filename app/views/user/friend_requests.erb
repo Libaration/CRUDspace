@@ -1,4 +1,14 @@
 <style>
+  table#requestsempty {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: center;
+    width: 100%;
+    font: normal 8pt/normal Verdana, Arial, Helvetica, sans-serif;
+  }
+
   table#requests {
     display: flex;
     flex-wrap: wrap;
@@ -37,10 +47,14 @@
       text-align: center;
   }
 
+  div.deny form {
+    text-align: center;
+    padding: 5px;
+  }
 </style>
 
 
-
+<% if !@user.pending_friends.empty? %>
     <table id="requests">
       <tr>
         <th id=topbar>From:</th><th id="topbar">Confirmation:</th>
@@ -55,10 +69,23 @@
             <span style="font-weight: bold"><a href="/user/<%= friend.id %>"><%= friend.name %></a></span> wants to be your friend!<br>
             <input type="submit" value="Approve">
         </form>
+        <div class="deny"><form action="/user/<%= current_user.id %>/deny?friend_id=<%= friend.id %>" method="post">
+          <input type="hidden" name="_method" value="DELETE">
+          <input type="submit" value="Deny">
+        </form></div>
           </td>
         </tr>
       <% end %>
     </table>
+  <% else %>
+  <table id="requestsempty">
+    <tr>
+      <div class="boxHead"><b>Friend Requests</b></div>
+    </tr>
+    <td><h2>You don't have any new Friend Requests at this time.</h2></td>
+    <tr><td><span style="font-size: 12px">View <a href="/friends">Members</a> to find new friends.</span></td></tr>
+  </table>
+<% end %>
 
 
 

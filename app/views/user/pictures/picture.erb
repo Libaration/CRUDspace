@@ -1,42 +1,71 @@
 <style>
-
-  .form-control {
+  table#requests {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
     font: normal 8pt/normal Verdana, Arial, Helvetica, sans-serif;
-    text-transform: none;
-    text-decoration: none;
   }
- table.pictures {
-   font: normal 8pt/normal Verdana, Arial, Helvetica, sans-serif;
-   text-transform: none;
-   text-decoration: none;
-   display: flex;
-   flex-wrap: wrap;
-   justify-content: center;
-   text-align: center;
+
+  table {
+    border: 1px solid #689aca;
+    border-spacing: 3px;
+    border-collapse: separate;
+    width: 800px;
   }
+  th, td {
+    padding: 5px;
+    background-color: #e9f1fa;
+
+  }
+
+  th#topbar {
+    background-color: #689aca;
+    padding: 6px;
+    font-size: 12px;
+    font-weight: bold;
+    color: white;
+  }
+  table img {
+    size: auto;
+  }
+  table td:last-child {
+    width: 1000px;
+  }
+  span.center {
+    text-align: center;
+  }
+
+    div.upload {
+      display: flex;
+      justify-content: left;
+    }
+    form {
+      text-align: left;
+    }
+    input {
+      font: normal 8pt/normal Verdana, Arial, Helvetica, sans-serif;
+      padding-top: 5px;
+      padding-bottom: 5px;
+    }
+
 </style>
 
-<div id="login">
-  <table class="pictures">
-    <tr>
+<table id="requests">
   <% @user.images.each do |image| %>
         <td><a href="/user/<%= @user.id %>/pictures/<%= image.id %>"><img src="/images<%= image.image %>" width="200px"></a><br>
-        <%= image.caption unless nil %></td>
-
-
-
-<% end %>
-      </tr>
-  </table>
+          <span class="center"><%= image.caption unless nil %></td></span>
+        <% end %>
+</table>
   <a href="/user/<%= @user.id %>" class="left">Go Back</a>
-</div>
 
 
 <% if logged_in? && @user == current_user %>
-<form method='POST' action='/user/<%= current_user.id %>/pictures' enctype="multipart/form-data" class="centerform">
+<div class="upload"><form method='POST' action='/user/<%= current_user.id %>/pictures'>
   <h1>Upload new photo</h1>
   <input type="text" value="Add a caption for your photo" name="caption"><br>
   <input type='file' name='file' class='form-control'><br>
   <input type="submit" value="Upload">
-</form>
+</form></div>
 <% end %>

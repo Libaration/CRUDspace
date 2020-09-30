@@ -11,7 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200921151102) do
+ActiveRecord::Schema.define(version: 20200929024227) do
+
+  create_table "comments", force: :cascade do |t|
+    t.string   "content"
+    t.integer  "author_id"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "friendships", force: :cascade do |t|
     t.integer "user_id"
@@ -23,6 +31,17 @@ ActiveRecord::Schema.define(version: 20200921151102) do
     t.string  "image"
     t.string  "caption"
     t.integer "user_id"
+  end
+
+  create_table "messages", force: :cascade do |t|
+    t.string   "content"
+    t.integer  "receiver_id"
+    t.integer  "sender_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "subject"
+    t.boolean  "read",        default: false, null: false
+    t.boolean  "replied",     default: false, null: false
   end
 
   create_table "users", force: :cascade do |t|

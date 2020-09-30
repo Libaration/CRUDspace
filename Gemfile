@@ -11,6 +11,7 @@ gem 'pry'
 gem 'bcrypt'
 gem 'tux'
 gem 'carrierwave'
+gem 'sanitize'
 
 
 group :development do

@@ -24,6 +24,16 @@ class FriendshipsController < ApplicationController
     redirect "/user/#{current_user.id}/friend_requests"
   end
 
+  delete '/user/:id/deny' do
+    @user = User.find(params[:id])
+    @friend = User.find(params[:friend_id])
+    if logged_in? && current_user == @user && current_user.pending_friends.include?(@friend)
+      @user.pending_friends.delete(@friend)
+    else
+      'An error has occurred'
+    end
+    redirect "/user/#{current_user.id}/friend_requests"
+  end
 
   get '/user/:id/remove' do
     redirect '/login' if !logged_in?

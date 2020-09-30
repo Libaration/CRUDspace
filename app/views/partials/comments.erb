@@ -1,0 +1,11 @@
+<% if @comments.empty? %>
+  <tr><td class="tableLeft"><a href="/user/1"><div><b></b></div></a></td><td class="tableRight"><div><b class="date"></b></div><div>
+    <p>No comments.</p></div>
+  </td></tr>
+  <% else %>
+  <% @comments.each do |comment| %>
+    <tr><td class="tableLeft"><a href="/user/1"><div><b><%= comment.author.username %></b></div><img src="/images<%= comment.author.images.first.image %>"></a></td><td class="tableRight"><div><b class="date"><%= comment.created_at.strftime("%m/%e/%Y %l:%M %p") %></b></div><div>
+      <p><%= comment.content %></p></div>
+    </td></tr>
+  <% end %>
+<% end %>
