@@ -92,21 +92,21 @@ table#requestsempty td:nth-child(n+1) {
 </style>
 <% if !@user.messages.empty? %>
 <table>
-  <form method="POST" action="/user/<%= @user.id %>/messages">
+  <form method="POST" action="/users/<%= @user.id %>/messages">
   <tr><th><input type="checkbox" id="selectAll"></th> <th>Date:</th> <th>From:</th><th>Status:</th><th>Subject:</th>
     <% @messages.each do |message| %>
       <% message.read == true ? @td = '<td>' : @td = '<td style="background-color: #cce1fc">' %>
     <tr>
       <%= @td %> <input type="checkbox" name="message_id[id][]" value="<%= message.id %>"></td>
     <%= @td %> <%= message.created_at.strftime("%b %e, %Y<Br> %l:%M %p") %> </td>
-    <%= @td %><a href="/user/<%= message.sender.id %>"><img src="/images<%= message.sender.images.first.image %>"></a></td>
+    <%= @td %><a href="/users/<%= message.sender.id %>"><img src="/images<%= message.sender.images.first.image %>"></a></td>
     <% if message.replied == true %>
       <%= @td %>Replied
       <% else %>
       <%= @td %><%= message.read == true ? 'Read' : 'Unread' %>
     <% end %>
     </td>
-    <%= @td %><b><a href="/user/<%= @user.id %>/messages/<%= message.id %>"><%= message.subject %> </a></b> </td>
+    <%= @td %><b><a href="/users/<%= @user.id %>/messages/<%= message.id %>"><%= message.subject %> </a></b> </td>
   </tr>
   <% end %>
 
@@ -120,7 +120,7 @@ table#requestsempty td:nth-child(n+1) {
       <input type="submit" value="Mark As Read">
   </div>
     <div class="messagereply">
-    <form method="post" action="/user/<%= @user.id %>/messages">
+    <form method="post" action="/users/<%= @user.id %>/messages">
       <input type="hidden" name="_method" value="DELETE">
       <input type="submit" value="Delete Checked">
         </form>
@@ -128,10 +128,10 @@ table#requestsempty td:nth-child(n+1) {
     </div>
   <div class="messagereply">
     <% unless params[:start].to_i - 5 < 0 %>
-      <a href="/user/<%=  @user.id  %>/messages?start=<%= params[:start].to_i - 5 %>&end=<%= params[:end].to_i - 5 %>"> << Previous </a>
+      <a href="/users/<%=  @user.id  %>/messages?start=<%= params[:start].to_i - 5 %>&end=<%= params[:end].to_i - 5 %>"> << Previous </a>
     <% end %>
     <% unless params[:start].to_i + 5 > @messages.count %>
-    <a href="/user/<%=  @user.id  %>/messages?start=<%= params[:end].to_i %>&end=<%= params[:end].to_i + 5 %>">Next >></a>
+    <a href="/users/<%=  @user.id  %>/messages?start=<%= params[:end].to_i %>&end=<%= params[:end].to_i + 5 %>">Next >></a>
     <% end %>
   </div>
 </div>
@@ -142,5 +142,5 @@ table#requestsempty td:nth-child(n+1) {
     </tr>
   </table>
   <h2>You don't have any new Messages at this time.</h2><br>
-  <span style="font-size: 12px">View <a href="/friends">Members</a> to find someone to chat with!</span>
+  <span style="font-size: 12px">View <a href="/users">Members</a> to find someone to chat with!</span>
 <% end %>

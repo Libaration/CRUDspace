@@ -21,7 +21,7 @@
 <div id="login">
 
   <%= @error %></h2><br>
-  <form method='POST' action='/user/<%= @user.id %>/edit' enctype="multipart/form-data" id="spacefix">
+  <form method='POST' action='/users/<%= @user.id %>/edit' enctype="multipart/form-data" id="spacefix">
     Full Name (First/Last) <input type="text" name="name" value="<%= @user.name %>"><br>
     Age: <input type="number" name="age" value="<%= @user.age %>"><br>
     Bio: <input type="text" name="bio" value="<%= Rack::Utils.escape_html(@user.bio) %>"><br>

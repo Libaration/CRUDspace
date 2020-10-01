@@ -68,9 +68,9 @@
       font: normal 10pt/normal Verdana, Arial, Helvetica, sans-serif;
     }
 </style>
-<form method="POST" action="/user/<%= @user.id %>/messages/<%= @friend.id %>">
+<form method="POST" action="/users/<%= @user.id %>/messages/<%= @friend.id %>">
 <table>
-  <tr><th>To:</th><td><a href="/user/<%= @friend.id %>"> <img src="/images/<%= @friend.images.first.image %>"> </a><b> <span class="relative"> <%= @friend.name %> </span> </b></td></tr>
+  <tr><th>To:</th><td><a href="/users/<%= @friend.id %>"> <img src="/images/<%= @friend.images.first.image %>"> </a><b> <span class="relative"> <%= @friend.name %> </span> </b></td></tr>
   <tr><th>Subject:</th><td> <input type="text" name="subject" value=""></td></tr>
   <tr><th>Body:</th><td>
     <textarea style="resize: none" name="content"></textarea></td></tr>

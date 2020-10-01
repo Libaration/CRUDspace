@@ -5,11 +5,11 @@
       <img src="/images<%= @image.image %>" width="500px">
     </tr>
   </table>
-  <a href="/user/<%= @user.id %>/pictures" class="left">Go Back</a>
+  <a href="/users/<%= @user.id %>/pictures" class="left">Go Back</a>
 </div>
 
 <% if logged_in? && @user == current_user %>
-  <form method='POST' action='/user/<%= current_user.id %>/pictures/<%= @image.id %>'>
+  <form method='POST' action='/users/<%= current_user.id %>/pictures/<%= @image.id %>'>
     <input type="text" hidden name="_method" value="DELETE">
     <h1>Options</h1>
     <input type="submit" value="Delete Photo">

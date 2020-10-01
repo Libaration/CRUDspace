@@ -54,15 +54,15 @@
 
 <table id="requests">
   <% @user.images.each do |image| %>
-        <td><a href="/user/<%= @user.id %>/pictures/<%= image.id %>"><img src="/images<%= image.image %>" width="200px"></a><br>
+        <td><a href="/users/<%= @user.id %>/pictures/<%= image.id %>"><img src="/images<%= image.image %>" width="200px"></a><br>
           <span class="center"><%= image.caption unless nil %></td></span>
         <% end %>
 </table>
-  <a href="/user/<%= @user.id %>" class="left">Go Back</a>
+  <a href="/users/<%= @user.id %>" class="left">Go Back</a>
 
 
 <% if logged_in? && @user == current_user %>
-<div class="upload"><form method='POST' action='/user/<%= current_user.id %>/pictures' enctype="multipart/form-data" id="spacefix">
+<div class="upload"><form method='POST' action='/users/<%= current_user.id %>/pictures' enctype="multipart/form-data" id="spacefix">
   <h1>Upload new photo</h1>
   <input type="text" value="Add a caption for your photo" name="caption"><br>
   <input type='file' name='file' class='form-control'><br>

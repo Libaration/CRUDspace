@@ -60,16 +60,16 @@
         <th id=topbar>From:</th><th id="topbar">Confirmation:</th>
       </tr>
       <% @user.pending_friends.each do |friend| %>
-        <form action="/user/<%= current_user.id %>/approve?friend_id=<%= friend.id %>" method="post">
+        <form action="/users/<%= current_user.id %>/approve?friend_id=<%= friend.id %>" method="post">
         <tr>
-          <td><a href="/user/<%= friend.id %>"><img src="/images<%= friend.images.first.image %>"></a>
+          <td><a href="/users/<%= friend.id %>"><img src="/images<%= friend.images.first.image %>"></a>
             <br>
           </td>
           <td class="center">
-            <span style="font-weight: bold"><a href="/user/<%= friend.id %>"><%= friend.name %></a></span> wants to be your friend!<br>
+            <span style="font-weight: bold"><a href="/users/<%= friend.id %>"><%= friend.name %></a></span> wants to be your friend!<br>
             <input type="submit" value="Approve">
         </form>
-        <div class="deny"><form action="/user/<%= current_user.id %>/deny?friend_id=<%= friend.id %>" method="post">
+        <div class="deny"><form action="/users/<%= current_user.id %>/deny?friend_id=<%= friend.id %>" method="post">
           <input type="hidden" name="_method" value="DELETE">
           <input type="submit" value="Deny">
         </form></div>
