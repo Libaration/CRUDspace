@@ -8,6 +8,7 @@
   <% if Pathname("./app/public/profile_css/#{@user.id}_custom_css.css").exist? && !Pathname("./app/public/profile_css/#{@user.id}_custom_css.css").blank? %>
     <link rel="stylesheet" href="/profile_css/<%= @user.id %>_custom_css.css">
     <% end %>
+  <link rel="icon" href="/images/favicon.ico" type="image/x-icon"/>
 </head>
 <body>
 <div id="container">
