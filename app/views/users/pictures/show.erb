@@ -14,7 +14,7 @@
     <h1>Options</h1>
     <input type="submit" value="Delete Photo">
   </form>
-  <form method='POST' action='/user/<%= current_user.id %>/pictures/<%= @image.id %>'>
+  <form method='POST' action='/users/<%= current_user.id %>/pictures/<%= @image.id %>'>
     <input type="text" hidden name="_method" value="PATCH">
     <input type="text" name="caption" value="<%= @image.caption unless nil %>">
     <input type="submit" value="Edit Caption">
