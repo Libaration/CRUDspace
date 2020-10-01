@@ -2,7 +2,7 @@ require './app/controllers/images_uploader'
 
 class UsersController < ApplicationController
 
-  get 'users/new' do
+  get '/users/new' do
     if !logged_in?
       erb :'users/new' , :layout => :template
     else
@@ -10,14 +10,14 @@ class UsersController < ApplicationController
     end
   end
 
-  get 'users/:id' do
+  get '/users/:id' do
       @user = User.find(params[:id])
       @profilepic = @user.images.first
       @comments = @user.comments.reverse
       erb :'users/show', :cache => false
   end
 
-  post 'users' do
+  post '/users' do
     params.except(:bio, :motto).values.each do |value|
       if value.blank?
         @error = 'All values except bio and motto are required'
@@ -59,7 +59,7 @@ class UsersController < ApplicationController
 
   end
 
-  get 'users/:id/edit' do
+  get '/users/:id/edit' do
     @user = User.find(params[:id])
     if Pathname("./app/public/profile_css/#{@user.id}_custom_css.css").exist?
       @custom_css = File.read("./app/public/profile_css/#{@user.id}_custom_css.css")
@@ -71,7 +71,7 @@ class UsersController < ApplicationController
     end
   end
 
-  post 'users/:id/edit' do
+  post '/users/:id/edit' do
     @user = User.find(params[:id])
     if logged_in? && @user == current_user
       # params.each do |key,value|
@@ -95,7 +95,7 @@ class UsersController < ApplicationController
         f.write(content)
       end
 
-      redirect "users/#{@user.id}"
+      redirect "/users/#{@user.id}"
     else
       'You do not have permission to view this page'
     end
