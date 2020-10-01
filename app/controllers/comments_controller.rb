@@ -1,5 +1,5 @@
 class CommentsController < ApplicationController
-  post '/user/:id/comments/new' do
+  post '/users/:id/comments/new' do
     if logged_in?
       @user = User.find(params[:id])
       Comment.create(content: params[:content]).tap do |comment|
@@ -7,7 +7,7 @@ class CommentsController < ApplicationController
         comment.author = current_user
         comment.save
       end
-      redirect "/user/#{@user.id}"
+      redirect "/users/#{@user.id}"
     else
       'You must be logged in to perform this action'
     end

@@ -1,53 +1,53 @@
 class PicturesController < ApplicationController
-  get '/user/:id/pictures' do
+  get '/users/:id/pictures' do
     @user = User.find(params[:id])
-      erb :'/user/pictures/picture', :layout => :template
+      erb :'/users/pictures/picture', :layout => :template
   end
 
-  get '/user/:id/picture/edit' do
+  get '/users/:id/picture/edit' do
     if logged_in? && User.find(params[:id]) == current_user
       @user = current_user
-      erb :'/user/picture', :layout => :template
+      erb :'/users/picture', :layout => :template
     else
-      'either not logged in or current user'
+      'either not logged in or current users'
     end
   end
 
-  get '/user/:id/pictures/:picture_id' do
+  get '/users/:id/pictures/:picture_id' do
     @user = User.find(params[:id])
     @image = Images.find(params[:picture_id])
-    erb :'user/pictures/show', :layout => :template
+    erb :'users/pictures/show', :layout => :template
   end
 
-  delete '/user/:id/pictures/:picture_id' do
+  delete '/users/:id/pictures/:picture_id' do
     @user = User.find(params[:id])
     @image = Images.find(params[:picture_id])
     if logged_in? && @user == current_user
       @image.destroy
-      redirect "/user/#{@user.id}/pictures"
+      redirect "/users/#{@user.id}/pictures"
     else
       'You do not have permission to perform this action'
     end
   end
 
-  post '/user/:id/pictures' do
+  post '/users/:id/pictures' do
     if logged_in? && current_user == User.find(params[:id])
       img = Images.new
       img.image  = params[:file] #carrierwave uploads using params here
       img.user = current_user
       img.caption = params[:caption]
       img.save!
-      redirect "/user/#{current_user.id}/pictures/#{img.id}"
+      redirect "/users/#{current_user.id}/pictures/#{img.id}"
     else
       'You do not have permission to perform this action'
     end
   end
 
-  patch '/user/:id/pictures/:picture_id' do
+  patch '/users/:id/pictures/:picture_id' do
     if logged_in? && current_user == User.find(params[:id])
     img = Images.find(params[:picture_id])
     img.update(caption: params[:caption])
-    redirect "/user/#{current_user.id}/pictures"
+    redirect "/users/#{current_user.id}/pictures"
     end
   end
 

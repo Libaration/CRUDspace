@@ -17,7 +17,7 @@ class ApplicationController < Sinatra::Base
 
   get "/" do
     if logged_in?
-      redirect "/user/#{current_user.id}"
+      redirect "/users/#{current_user.id}"
     else
       redirect "/login"
     end

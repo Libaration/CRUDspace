@@ -1,17 +1,17 @@
 class FriendshipsController < ApplicationController
 
-  get '/user/:id/add' do
+  get '/users/:id/add' do
     redirect '/login' if !logged_in?
     if current_user == User.find(params[:id])
       "You can't add yourself..."
     elsif current_user != User.find(params[:id]) && logged_in? && !current_user.friends.include?(User.find(params[:id]))
       @newfriend = User.find(params[:id])
       @newfriend.pending_friends << current_user unless @newfriend.pending_friends.include?(current_user)
-      redirect "/user/#{@newfriend.id}"
+      redirect "/users/#{@newfriend.id}"
     end
   end
 
-  post '/user/:id/approve' do
+  post '/users/:id/approve' do
     @user = User.find(params[:id])
     @friend = User.find(params[:friend_id])
     if logged_in? && current_user == @user && current_user.pending_friends.include?(@friend)
@@ -21,10 +21,10 @@ class FriendshipsController < ApplicationController
     else
       'An error has occurred'
     end
-    redirect "/user/#{current_user.id}/friend_requests"
+    redirect "/users/#{current_user.id}/friend_requests"
   end
 
-  delete '/user/:id/deny' do
+  delete '/users/:id/deny' do
     @user = User.find(params[:id])
     @friend = User.find(params[:friend_id])
     if logged_in? && current_user == @user && current_user.pending_friends.include?(@friend)
@@ -32,10 +32,10 @@ class FriendshipsController < ApplicationController
     else
       'An error has occurred'
     end
-    redirect "/user/#{current_user.id}/friend_requests"
+    redirect "/users/#{current_user.id}/friend_requests"
   end
 
-  get '/user/:id/remove' do
+  get '/users/:id/remove' do
     redirect '/login' if !logged_in?
     if current_user == User.find(params[:id])
       "You can't add yourself..."
@@ -43,13 +43,13 @@ class FriendshipsController < ApplicationController
       @friend = User.find(params[:id])
       current_user.friends.destroy(@friend)
       @friend.friends.destroy(current_user)
-      redirect "/user/#{@friend.id}"
+      redirect "/users/#{@friend.id}"
     end
   end
 
-  get '/user/:id/friend_requests' do
+  get '/users/:id/friend_requests' do
     @user = User.find(params[:id])
-    erb :'/user/friend_requests', layout: :template
+    erb :'/users/friend_requests', layout: :template
   end
 
 end

@@ -2,22 +2,22 @@ require './app/controllers/images_uploader'
 
 class UsersController < ApplicationController
 
-  get '/user/new' do
+  get 'users/new' do
     if !logged_in?
-      erb :'/user/new' , :layout => :template
+      erb :'users/new' , :layout => :template
     else
-      redirect "/user/#{current_user.id}"
+      redirect "users/#{current_user.id}"
     end
   end
 
-  get '/user/:id' do
+  get 'users/:id' do
       @user = User.find(params[:id])
       @profilepic = @user.images.first
       @comments = @user.comments.reverse
-      erb :'user/show', :cache => false
+      erb :'users/show', :cache => false
   end
 
-  post '/user' do
+  post 'users' do
     params.except(:bio, :motto).values.each do |value|
       if value.blank?
         @error = 'All values except bio and motto are required'
@@ -36,42 +36,42 @@ class UsersController < ApplicationController
         img.user = @user
         img.save!
         session[:user_id] = @user.id
-        redirect to("/user/#{@user.id}")
+        redirect to("users/#{@user.id}")
       end
     end
-    erb :'/user/new', :layout => :template
+    erb :'users/new', :layout => :template
   end
 
   get '/login' do
-    redirect "/user/#{current_user.id}" if logged_in?
-    erb :'/user/login' , :layout => :template
+    redirect "users/#{current_user.id}" if logged_in?
+    erb :'users/login' , :layout => :template
   end
 
   post'/login' do
     if (@user = User.find_by(username: params[:username])) && @user.authenticate(params[:password])
       session[:user_id] = @user.id
-      redirect "/user/#{@user.id}"
+      redirect "users/#{@user.id}"
     else
       @error = 'One of the fields was incorrect'
-      erb :'/user/login', :layout => :template
+      erb :'users/login', :layout => :template
 
     end
 
   end
 
-  get '/user/:id/edit' do
+  get 'users/:id/edit' do
     @user = User.find(params[:id])
     if Pathname("./app/public/profile_css/#{@user.id}_custom_css.css").exist?
       @custom_css = File.read("./app/public/profile_css/#{@user.id}_custom_css.css")
     end
     if logged_in? && @user == current_user
-      erb :'/user/edit', layout: :template
+      erb :'users/edit', layout: :template
     else
       'You do not have permission to view this page'
     end
   end
 
-  post '/user/:id/edit' do
+  post 'users/:id/edit' do
     @user = User.find(params[:id])
     if logged_in? && @user == current_user
       # params.each do |key,value|
@@ -95,7 +95,7 @@ class UsersController < ApplicationController
         f.write(content)
       end
 
-      redirect "/user/#{@user.id}"
+      redirect "users/#{@user.id}"
     else
       'You do not have permission to view this page'
     end
@@ -108,7 +108,7 @@ class UsersController < ApplicationController
 
   get '/friends' do
     @users = User.all
-    erb :'/user/all_users', :layout => :template
+    erb :'users/all_users', :layout => :template
   end
 
   helpers do
