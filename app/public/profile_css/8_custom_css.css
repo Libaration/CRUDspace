@@ -1,0 +1,37 @@
+body {background-image:url(http://www.myspacegens.com/images/layouts/02/9082597639/bg.gif);
+background-attachment:fixed; background-position:top left; background-repeat:repeat; background-color:ffffff;}
+
+div#header, div#googlebar, #topnav {background-color:#660498;}
+#topnav ul {border-right: 1px #660498 solid;}
+#topnav ul li {border-left: 1px #660498 solid;} 
+#topnav ul li a:hover {background-color:#660498; color:#ffffff;}
+div.topRight, .topLeftBody {background-color:#ffffff; color:#660498; font-size:10px; font-family:arial; font-size:10px;font-weight:bold;}
+div.topRight, .topLeft {background-color:#ffffff; border:0px solid #660498; padding:5;}
+
+div.basicInfoModule div.basicInfoDetails h2 {background-color:#FE0661; font-family:arial; color:#ffffff; text-transform:lowercase; font-weight:bold; border:0; padding-left:2px; display: block; letter-spacing:0;}
+
+h3.topRight, .topLeftHead {background-color:#8232AA; font-family:Arial; font-size:10px; letter-spacing:0; color:#ffffff; text-transform:lowercase; font-weight:bold; text-align:left; padding-left:3px; border-bottom:0px solid #af070f; display:block; line-height:9px;}
+
+h4 {background-color:#660498; color:#ffffff; font-family:Arial; font-size:10px; letter-spacing:0; text-transform:lowercase; border:0px solid #af070f; font-weight:bold; display:block; padding-left:4px; line-height: 12px;}
+
+div.detailsModule li strong {background-color:#FE0661; color:#ffffff; font-family:Arial; font-size:10px; letter-spacing:0; text-transform: lowercase; border:0px solid #af070f; font-weight:bold; display:block; float:left; width: 80px; line-height: 12px; margin-right:10px; padding-left:2px;}
+
+div.topRight, .topLeftBody a, a:link, a:active, a:visited {color:#8232AA; font-family:Arial; font-size:10px; letter-spacing:0; text-decoration:none; text-transform:lowercase; font-weight:bold;}
+
+div.topRight, .topLeftBody a:hover, a:hover {color:#660498; font-family:Arial; font-size:10px; letter-spacing:0; text-decoration:none; text-transform:lowercase; font-weight:bold;}
+
+.topRight, .topLeftList .even, .topRight, .topLeftList .even {background-color:#ffffff; color:#8232AA; text-transform:lowercase; border:0;}
+
+strong, b, div.commentsModule p.datePosted, span.count {color:#FE0661; font-size:10px; font-family:Arial; font-weight:bold;}
+ul.profileUserAlbum li {background-color:#8232AA; padding:2px; border:0;}
+.tableLeft, .tableRight {background-color:#ffffff;background-attachment:fixed; background-position:top left; background-repeat:repeat; border:0px solid #8232AA; width:750px;} .topRight{
+        float: right;
+        width: calc( 60% - 20px );
+        padding: 0px
+      }
+
+      .topLeft{
+        float: left;
+        width: calc( 40% - 20px );
+        padding:0px;
+      }
