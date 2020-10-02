@@ -98,7 +98,7 @@
     <div><a style='color:#000;text-decoration:none;' href='<%= @user.url.nil? ? "/users/#{@user.id}" : "/#{@user.url}" %>'>
       <%= @user.url.nil? ? "http://www.myspace.com/users/#{@user.id}" : "http://www.myspace.com/#{@user.url}" %>
     </a>
-      <% if @user == current_user && @user.url.nil? %><br><a href="/users/<%= @user.id %>/url">Pick your myspace URL!</a><% end %>
+      <% if logged_in? && @user == current_user && @user.url.nil? %><br><a href="/users/<%= @user.id %>/url">Pick your MySpace URL!</a><% end %>
     </div>
   </div>
 
