@@ -25,7 +25,7 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/:url' do
-    @user = User.find_by(params)
+    @user = User.find_by(url: params[:url].downcase)
     if @user != nil
       @profilepic = @user.images.first
       @comments = @user.comments.reverse
