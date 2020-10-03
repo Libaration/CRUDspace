@@ -84,7 +84,7 @@ class UsersController < ApplicationController
   end
 
   get '/users/:id/edit' do
-    @user = User.find(params[:id])
+    User.find_by_slug(params[:id]).nil? ? @user = User.find(params[:id]) : @user = User.find_by_slug(params[:id])
     if Pathname("./app/public/profile_css/#{@user.id}_custom_css.css").exist?
       @custom_css = File.read("./app/public/profile_css/#{@user.id}_custom_css.css")
     end
@@ -119,7 +119,11 @@ class UsersController < ApplicationController
         f.write(content)
       end
 
-      redirect "/users/#{@user.id}"
+      if @user.url.nil?
+        redirect "/users/#{@user.id}"
+      elsif !@user.url.nil?
+        redirect "/users/#{@user.url}"
+      end
     else
       'You do not have permission to view this page'
     end
