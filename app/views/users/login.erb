@@ -1,5 +1,22 @@
+<style>
+  body {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  div#login {
+    border: #063797 1px solid;
+    padding: 20px;
+    text-align: center;
+    color: #063797;
+    margin: 20px;
+  }
+    div#login table {
+      font: normal 8pt/normal Verdana, Arial, Helvetica, sans-serif;
+      text-align: center;
+    }
+</style>
 <div id="login">
-  <h2>Member Login</h2><br>
+  <h2>Member Login</h2>
   <h2 class="error"><%= @error %></h2>
   <form action="/login" method="post" name="theForm" id="theForm">
     <table>
