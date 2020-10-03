@@ -16,6 +16,7 @@
     }
     div.main {
       display: flex;
+      justify-content: center;
     }
 </style>
 <div class="main">
@@ -27,7 +28,7 @@
 
 <div id="login">
   <h2>Member Login</h2>
-  <h2 class="error"><%= @error %></h2>
+  <span style="color: red"><%= @error %></span>
   <form action="/login" method="post" name="theForm" id="theForm">
     <table>
       <tr class="email">
@@ -48,5 +49,32 @@
       </tr>
     </table>
   </form>
+  </div>
 </div>
+
+<div id="getstarted">
+  <div>
+    <h3>Get Started On MySpace!</h3>
+    <p>Join for free, and view profiles, connect with others, blog, rank music, and much more!</p>
+    <p class="right">&raquo; <a href="/users/new">Learn More</a></p>
+  </div>
+  <div>
+    <h3>Create Your Profile!</h3>
+    <p>Tell us about yourself, upload your pictures, and start adding friends to your network.</p>
+    <p class="right">&raquo; <a href="/users/new">Start Now</a></p>
+  </div>
+  <div>
+    <h3>Browse Through Profiles!</h3>
+    <p>Read through millions of profiles on MySpace! See pix, read blogs, and more!</p>
+    <p class="right">&raquo; <a href="/users">Browse Now</a></p>
+  </div>
+  <div class="last">
+    <h3>Invite Your Friends!</h3>
+    <p>Invite your friends, and as they invite their friends your network will grow even larger!</p>
+    <p class="right">&raquo; <a href="#">Invite Friends Now</a></p>
+  </div>
+  <div class="clearing"></div>
 </div>
+<div class="clearing"></div>
+</div>
+

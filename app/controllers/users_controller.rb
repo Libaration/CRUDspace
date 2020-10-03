@@ -73,6 +73,7 @@ class UsersController < ApplicationController
   end
 
   post'/login' do
+    @users = User.order(id: :desc).limit(2)
     if (@user = User.find_by(username: params[:username])) && @user.authenticate(params[:password])
       session[:user_id] = @user.id
       if @user.url.nil?
