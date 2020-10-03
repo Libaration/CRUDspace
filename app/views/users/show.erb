@@ -10,15 +10,15 @@
     <% end %>
   <link rel="icon" href="/images/favicon.ico" type="image/x-icon"/>
 </head>
-<style>
-  span.notice a:link {
-    color:red;
-  }
-  span.notice a:visited {
-    color:red;
+<style type="text/css">
+  body {
+    margin-top:0 !important;
+    padding-top:0 !important;
+    /*min-width:800px !important;*/
   }
 </style>
 <body>
+
 <div id="container">
 
 
@@ -55,7 +55,6 @@
       <% end %>
     <a href="#"><div class="boxButton" id="block">Block</div></a>
   </div>
-
 
 
 
@@ -188,6 +187,7 @@
        <%= erb :'/partials/comments' %>
       </table>
     </div>
+  </div>
     <div id="imgPreview"><img src=""></div>
     <div id="footer" class="box">
       <div>
@@ -198,5 +198,6 @@
       </div>
     </div>
   </div>
+
 </body>
 </html>
