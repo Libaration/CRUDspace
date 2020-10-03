@@ -35,7 +35,7 @@ class UsersController < ApplicationController
   end
 
   get '/users/:id' do
-      @user = User.find(params[:id])
+      User.find_by_slug(params[:id]).nil? ? @user = User.find(params[:id]) : @user = User.find_by_slug(params[:id])
       @profilepic = @user.images.first
       @comments = @user.comments.reverse
       erb :'users/show', :cache => false

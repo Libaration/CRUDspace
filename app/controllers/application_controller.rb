@@ -24,17 +24,6 @@ class ApplicationController < Sinatra::Base
     erb :index
   end
 
-  get '/:url' do
-    @user = User.find_by(url: params[:url].downcase)
-    if @user != nil
-      @profilepic = @user.images.first
-      @comments = @user.comments.reverse
-      erb :'users/show', :cache => false
-    else
-      'Profile not found'
-    end
-  end
-
   helpers do
     def logged_in?
       !!session[:user_id]
