@@ -74,7 +74,11 @@ class UsersController < ApplicationController
   post'/login' do
     if (@user = User.find_by(username: params[:username])) && @user.authenticate(params[:password])
       session[:user_id] = @user.id
-      redirect "users/#{@user.id}"
+      if @user.url.nil?
+        redirect "users/#{@user.id}"
+      elsif !@user.url.nil?
+        redirect "users/#{@user.url}"
+      end
     else
       @error = 'One of the fields was incorrect'
       erb :'users/login', :layout => :template
