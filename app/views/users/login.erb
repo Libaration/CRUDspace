@@ -14,7 +14,17 @@
       font: normal 8pt/normal Verdana, Arial, Helvetica, sans-serif;
       text-align: center;
     }
+    div.main {
+      display: flex;
+    }
 </style>
+<div class="main">
+  <div id="new">
+    <h2>Cool New People</h2>
+<%= erb :'/partials/coolnewpeople' %>
+  </div>
+
+
 <div id="login">
   <h2>Member Login</h2>
   <h2 class="error"><%= @error %></h2>

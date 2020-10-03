@@ -67,6 +67,7 @@ class UsersController < ApplicationController
   end
 
   get '/login' do
+    @users = User.order(id: :desc).limit(2)
     redirect "users/#{current_user.id}" if logged_in?
     erb :'users/login' , :layout => :template
   end
