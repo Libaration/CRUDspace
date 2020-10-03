@@ -1,49 +1,133 @@
 <style>
-  div#login {
+  body {
     display: flex;
     flex-wrap: wrap;
-    flex-direction: column;
-    justify-content: center;
-  }
+    flex-direction: row;
 
-    form#spacefix {
-      /*background-color: red;*/
-      text-align: center;
+  }
+  span.required {
+      color: red;
     }
 
+    span.blackText7 {
+      color: black;
+      font: normal 7pt/normal Verdana, Arial, Helvetica, sans-serif;
+    }
+    table {
+  font: normal 9pt/normal Verdana, Arial, Helvetica, sans-serif;
+    }
+
+    div.join textarea {
+      font: normal 8pt/normal Verdana, Arial, Helvetica, sans-serif;
+      resize: none;
+      width: 300px;
+      height: 100px
+    }
+    div.join {
+  display: flex;
+  width: 100%;
+  overflow: hidden;
+    }
+    div.whyjoin {
+      flex: 1;
+      width: 200px;
+      float: right;
+      padding-left: 50px;
+      font-size: 12pt;
+    }
 </style>
-<h2>Signup</h2><br>
-<div id="login">
-  <h2 style="color:red"><%= @error %></h2><br>
-<form method='POST' action='/users' enctype="multipart/form-data" id="spacefix">
-  (Sign in) Username:  <input type="text" name="username"><br>
-  Full Name (First/Last) <input type="text" name="name"><br>
-  Password: <input type="password" name="password"><br>
-  Age: <input type="number" name="age"><br>
-  Bio: <input type="text" name="bio"><br>
-  Motto: <input type="text" name="motto"><br>
 
-  <label for="gender">Gender</label>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="//geodata.solutions/includes/statecity.js"></script><br>
+<div class="join">
+<table width="430" border="0" cellpadding="1" cellspacing="0" bgcolor="6699cc">
+  <tr>
+    <td valign="top"><table width="100%" border="0" cellspacing="0" cellpadding="5">
+      <tr>
+        <td align="left" style="color: white; font-weight: bold; font-size: 10pt;">JOIN
+          MYSPACE HERE!</td>
+      </tr>
+      <tr>
+        <td align="left" valign="top" bgcolor="ffffff">
+          <table width="100%" border="0" cellspacing="0" cellpadding="2">
 
-  <select name="gender" id="gender">
-    <option value="male">Male</option>
-    <option value="female">Female</option>
-    <option value="non-binary">Non-Binary</option>
-  </select><br>
+            <form method='POST' action='/users' enctype="multipart/form-data" id="spacefix">
+              <tr>
+                <span style="color:blue"><%= @error %></span><br>
+              </tr>
+              <tr>
+                <td><span class="required">Username:</span></td>
+                <td><span class="required"><input type="text" name="username" value="" size="40" maxlength="255"></td>
+              </tr>
 
-  <input type="hidden" name="country" id="countryId" value="US"/>
-  <input type="hidden" value="United States" name="country">
-  <select name="state" class="states" id="stateId" name="state">
-    <option value="">Select State</option>
-  </select>
-  <select name="city" class="cities" id="cityId" name="city">
-    <option value="">Select City</option>
-  </select>
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-  <script src="//geodata.solutions/includes/statecity.js"></script><br>
+              <tr>
+                <td><span class="required">Full Name:</span></td>
+                <td><span class="required"><input type="text" name="name" value="" maxlength="255"></td>
+              </tr>
 
+              <tr>
+                <td><span class="required">Password:</span></td>
+                <td><span class="required"><input type="password" name="password" size="10" maxlength="10"><span class="blackText7">&nbsp;&nbsp;(max 10 characters)</span></td>
+              </tr>
 
-  Profile Picture:  <input type='file' name='file' class='form-control'><br>
-  <button type='submit'> Submit </button>
-</form>
+              <tr>
+                <td><span class="required">State:</span></td>
+                <td><span class="required"><input type="hidden" name="country" id="countryId" value="US"/>
+                <input type="hidden" value="United States" name="country">
+                <select name="state" class="states" id="stateId" name="state">
+                <option value="">Select State</option>
+                </select></span></td>
+              </tr>
+
+              <tr>
+                  <td><span class="required">City:</span></td>
+                <td><span class="required"><input type="hidden" name="country" id="countryId" value="US"/>
+                <input type="hidden" value="United States" name="country">
+                  <select name="city" class="cities" id="cityId" name="city">
+                   <option value="">Select City</option>
+                  </select></span></td>
+              </tr>
+
+              <tr>
+                <td><span class="required">Gender:</span></td>
+                <td> <select name="gender" id="gender">
+                  <option value="male">Male</option>
+                  <option value="female">Female</option>
+                  <option value="non-binary">Non-Binary</option>
+                </select></td>
+              </tr>
+
+              <tr>
+                <td><span class="required">Age:</span></td>
+                <td><input type="number" name="age"></td>
+              </tr>
+
+              <tr>
+                <td><span class="required">Profile Picture:</span></td>
+                <td><input type='file' name='file' class='form-control'></td>
+              </tr>
+
+              <tr>
+                <td><span class="required">About Me:</span></td>
+                <td><textarea name="bio">Tell us about yourself here!</textarea></td>
+              </tr>
+
+              <tr>
+                <td><span class="required">Motto:</span></td>
+                <td><input type="text" name="motto"></td>
+              </tr>
+              <tr>
+                <td><input type="image" src="http://web.archive.org/web/20050330083311im_/http://signup.myspace.com/images/signup.gif" border="0" alt="Submit"></td>
+              </tr>
+            </form>
+          </table></td></tr></table></td></tr></table>
+  <div class="whyjoin">
+    <strong>Why Join MySpace?</strong><br>
+    <span style="color: blue">»</span>	Create a Custom Profile<br>
+    <span style="color: blue">»</span>	Upload Pictures<br>
+    <span style="color: blue">»</span>	Send Mail and IM's<br>
+    <span style="color: blue">»</span>	Write Blogs & Comments<br>
+    <span style="color: blue">»</span>	It's <strong>FREE</strong>!<br>
+  </div>
+
 </div>

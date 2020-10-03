@@ -53,7 +53,7 @@ class UsersController < ApplicationController
       @error = 'Username already exists'
     else
       if !params[:username].empty? && User.find_by(username: params[:username]).nil?
-        @user = User.create(params.except(:file))
+        @user = User.create(params.except(:file, :x, :y))
         tomswelcome(@user)
         img = Images.new
         img.image  = params[:file] #carrierwave uploads using params here
