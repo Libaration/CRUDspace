@@ -10,6 +10,30 @@ class UsersController < ApplicationController
     end
   end
 
+  get '/users/:id/url/edit' do
+    @user = User.find_by(params)
+    @error = ""
+    if logged_in? && @user == current_user && @user.url.nil?
+      erb :'users/url/edit' , :layout => :template
+    else
+      "You have already set a custom URL"
+    end
+  end
+
+  patch '/users/:id/url' do
+    @user = User.find(params[:id])
+    if logged_in? && @user == current_user && @user.url.nil?
+      if  params[:url] == params[:urlconfirm] && User.find_by(url: params[:url]).nil? && params[:url].match?(/\A[a-zA-Z'-]*\z/)
+        @user.url = params[:url].downcase
+        @user.save
+        redirect "/#{@user.url}"
+      elsif params[:url] != params[:urlconfirm] || !User.find_by(url: params[:url]).nil? || !params[:url].match?(/\A[a-zA-Z'-]*\z/)
+        @error = "Fields do not match, URL taken, or URL contains invalid characters/spaces"
+        erb :'users/url/edit' , :layout => :template
+      end
+    end
+  end
+
   get '/users/:id' do
       @user = User.find(params[:id])
       @profilepic = @user.images.first

@@ -14,6 +14,9 @@
   span.notice a:link {
     color:red;
   }
+  span.notice a:visited {
+    color:red;
+  }
 </style>
 <body>
 <div id="container">
@@ -103,7 +106,7 @@
     <div><a style='color:#000;text-decoration:none;' href='<%= @user.url.nil? ? "/users/#{@user.id}" : "/#{@user.url}" %>'>
       <%= @user.url.nil? ? "http://www.myspace.com/users/#{@user.id}" : "http://www.myspace.com/#{@user.url}" %>
     </a>
-      <% if logged_in? && @user == current_user && @user.url.nil? %><br><span class="notice"><a href="/users/<%= @user.id %>/url">Pick your MySpace URL!</a></span><% end %>
+      <% if logged_in? && @user == current_user && @user.url.nil? %><br><span class="notice"><a href="/users/<%= @user.id %>/url/edit">Pick your MySpace URL!</a></span><% end %>
     </div>
   </div>
 
