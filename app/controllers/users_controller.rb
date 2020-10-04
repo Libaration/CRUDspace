@@ -53,7 +53,6 @@ class UsersController < ApplicationController
       @error = 'Username already exists'
     else
       if !params[:username].empty? && User.find_by(username: params[:username]).nil? && params[:file][:type].include?("image")
-        binding.pry
         @user = User.create(params.except(:file, :x, :y))
         tomswelcome(@user)
         img = Images.new
