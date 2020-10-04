@@ -120,16 +120,16 @@
 
   <div class="player box">
     <% if !@user.song.nil? %>
-      <div class="songName"><b>Playing: </b> <span class="songTitle"><%= @user.song.profilesong.to_s.gsub("/uploads/", "").gsub("_", " ") %>
+      <div class="songName"><b>Playing: </b> <span class="songTitle"><%= @user.song.profilesong.to_s.gsub("/uploads/", "").gsub("_", " ").gsub(".mp3", "") %>
       </span></div>
       <audio controls autoplay="autoplay">
         <source src="/images<%= @user.song.profilesong %>" type="audio/mpeg" muted>
         Your browser does not support the audio element.
       </audio>
-      <% if @user == current_user %>
-        <span class="notice"><br><a href="/users/<%= @user.url.nil? ? @user.id : @user.url %>/profile_song/new">Edit your profile song</a></span>
       <% end %>
-      <% end %>
+    <% if @user == current_user %>
+      <span class="notice"><br><a href="/users/<%= @user.url.nil? ? @user.id : @user.url %>/profile_song/new">Edit your profile song</a></span>
+    <% end %>
   </div>
 </div>
   <div class="topRight">
