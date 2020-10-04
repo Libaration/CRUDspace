@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20201002013135) do
+ActiveRecord::Schema.define(version: 20201004021702) do
 
   create_table "comments", force: :cascade do |t|
     t.string   "content"
@@ -42,6 +42,12 @@ ActiveRecord::Schema.define(version: 20201002013135) do
     t.string   "subject"
     t.boolean  "read",        default: false, null: false
     t.boolean  "replied",     default: false, null: false
+  end
+
+  create_table "songs", force: :cascade do |t|
+    t.string  "profilesong"
+    t.string  "caption"
+    t.integer "user_id"
   end
 
   create_table "users", force: :cascade do |t|

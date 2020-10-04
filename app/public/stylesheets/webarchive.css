@@ -1,0 +1,275 @@
+/* CSS Document */
+#container {
+    border-top: 10px solid #fff;
+}
+#left {
+    width: 469px;
+    float: left;
+    margin: 0 0 0 10px;
+    display: inline;
+}
+#right {
+    width: 300px;
+    float: right;
+    margin: 0 10px 0 10px;
+    display: inline;
+}
+#main a {
+    font-weight: normal;
+}
+#getstarted {
+    margin: 10px;
+}
+#new {
+    border: 1px solid #fc9;
+    margin: 0 20px 10px 0;
+    width: 210px;
+    float: left;
+}
+#new h2 {
+    background: #fc9;
+    margin: 0;
+    padding: 5px 0 5px 10px;
+    font-size: 8pt;
+}
+#new dl {
+    margin: 5px 5px 0;
+    padding: 0;
+    text-align: center;
+    float: left;
+    width: 90px;
+    display: inline;
+}
+#new dt {
+    margin: 0 0 3px;
+    padding: 0;
+}
+#new dd {
+    margin: 0;
+    padding: 0;
+}
+#new dd a img {
+    border: 0;
+}
+#music {
+    clear: both;
+    width: 460px;
+    margin: 10px 0 0;
+    position: relative;
+}
+#music a.more {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    font-size: 90%;
+}
+#music h2 {
+    background: #b5ccfb;
+    margin: 0;
+    padding: 5px 0 5px 10px;
+    font-size: 8pt;
+}
+#blogs {
+    clear: both;
+    width: 460px;
+    margin: 10px 0 0;
+    position: relative;
+}
+#blogs a.help {
+    position: absolute;
+    top: 6px;
+    right: 5px;
+    font-size: 90%;
+}
+#blogs h2 {
+    background: #b5ccfb;
+    margin: 0;
+    padding: 5px 0 5px 10px;
+    font-size: 8pt;
+}
+#blogs ol {
+    list-style: none;
+    margin: 5px 8px 0;
+    padding: 0;
+}
+#blogs ol li {
+    width: 40%;
+    margin: 0;
+    padding: 0;
+}
+#blogs ol li.listitem5 {
+    margin: -6em 0 0;
+}
+#blogs ol li.listitem5, #blogs ol li.listitem6, #blogs ol li.listitem7, #blogs ol li.listitem8, #blogs ol li.listitem9 {
+    margin-left: 50%;
+}
+#login {
+    text-align: center;
+    border: 1px solid #039;
+    margin: 0 0 10px 0;
+    padding: 5px;
+}
+#login h2 {
+    font-size: 8pt;
+    color: #039;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+#login form {
+    margin: 0;
+    padding: 0;
+}
+#login fieldset {
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+#login legend {
+    display: none;
+}
+#login label {
+    vertical-align: middle;
+}
+#login table {
+    width: 100%;
+    border: 0px;
+    margin: 0;
+    padding: 0;
+}
+#login table td {
+    padding: 3px;
+    border: 0px;
+}
+#login .email td {
+    padding: 1px 3px 2px;
+}
+#login .email .input {
+    padding-left: 1px;
+}
+#login .email input {
+    width: 135px;
+}
+#login .password td {
+    padding: 2px 3px 1px;
+}
+#login .password .input {
+    padding-left: 1px;
+}
+#login .remember label {
+    margin-top: -2px;
+}
+#login .buttons, #login .remember, #login .forgot {
+    text-align: center;
+}
+#login .label {
+    text-align: right;
+    width: 28%;
+}
+#login .input {
+    text-align: left;
+}
+#login .remember input {
+    vertical-align: -10%;
+}
+#login .remember td {
+    padding-bottom: 8px;
+}
+#login .buttons input {
+    margin-right: 12px;
+}
+#login .buttons td {
+    padding: 3px 0 0;
+}
+#login .forgot {
+    vertical-align: top;
+    font-size: 7.6pt;
+}
+#login .forgot td {
+    padding: 0 0 12px;
+}
+#login .forgot td a {
+    margin-top: -2px;
+}
+#advertisement {
+    text-align: center;
+}
+#getstarted {
+    width: 780px;
+    margin: 10px auto;
+}
+#getstarted div {
+    width: 194px;
+    float: left;
+    display: inline;
+    border: 1px solid #003399;
+    border-right: 0;
+    background: #b5ccfb;
+    padding: 5px 0;
+}
+#getstarted div.last {
+    width: 193px;
+    border-right: 1px solid #039;
+}
+#getstarted div.clearing {
+    width: auto;
+    float: none;
+    display: block;
+    border: 0;
+    background: transparent;
+    padding: 0;
+    margin: 0;
+}
+#getstarted h3 {
+    font-size: 10pt;
+    margin: 0 5px;
+    padding: 0;
+    color: #003399;
+}
+#getstarted p {
+    margin: 0 5px;
+    padding: 0;
+}
+#getstarted .last p {
+    margin: 0 0 0 5px;
+}
+#getstarted p.right {
+    color: #c00;
+    text-align: right;
+    margin: 10px 5px 0 0;
+    font-weight: bold;
+}
+#footer p {
+    margin: 0 0 10px 0;
+}
+#footer p img {
+    vertical-align: middle;
+    margin: 0 10px 0 0;
+}
+
+/*\*//*/
+#advert iframe, #advertisement {
+	display: none;
+}
+/**/
+/*
+     FILE ARCHIVED ON 07:13:04 Mar 22, 2005 AND RETRIEVED FROM THE
+     INTERNET ARCHIVE ON 17:50:40 Sep 20, 2020.
+     JAVASCRIPT APPENDED BY WAYBACK MACHINE, COPYRIGHT INTERNET ARCHIVE.
+
+     ALL OTHER CONTENT MAY ALSO BE PROTECTED BY COPYRIGHT (17 U.S.C.
+     SECTION 108(a)(3)).
+*/
+/*
+playback timings (ms):
+  exclusion.robots.policy: 0.338
+  exclusion.robots: 0.356
+  load_resource: 193.783
+  esindex: 0.007
+  captures_list: 296.158
+  CDXLines.iter: 20.278 (3)
+  PetaboxLoader3.resolve: 128.765
+  RedisCDXSource: 45.197
+  PetaboxLoader3.datanode: 219.972 (4)
+  LoadShardBlock: 223.769 (3)
+*/
