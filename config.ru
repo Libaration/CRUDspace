@@ -10,3 +10,4 @@ use FriendshipsController
 use PicturesController
 use MessagesController
 use CommentsController
+use SongsController

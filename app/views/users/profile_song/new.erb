@@ -1,0 +1,58 @@
+<style>
+  body {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+
+  }
+  span.required {
+    color: red;
+  }
+
+  span.blackText7 {
+    color: black;
+    font: normal 7pt/normal Verdana, Arial, Helvetica, sans-serif;
+  }
+  table {
+    font: normal 9pt/normal Verdana, Arial, Helvetica, sans-serif;
+  }
+
+  div.join textarea {
+    font: normal 8pt/normal Verdana, Arial, Helvetica, sans-serif;
+    resize: none;
+    width: 300px;
+    height: 100px
+  }
+
+  div.join select {
+    font: normal 8pt/normal Verdana, Arial, Helvetica, sans-serif;
+  }
+
+  div.join input {
+    font: normal 8pt/normal Verdana, Arial, Helvetica, sans-serif;
+  }
+</style>
+<div class="join">
+  <table width="430" border="0" cellpadding="1" cellspacing="0" bgcolor="6699cc">
+    <tr>
+      <td valign="top"><table width="100%" border="0" cellspacing="0" cellpadding="5">
+        <tr>
+          <td align="left" style="color: white; font-weight: bold; font-size: 10pt;">Music</td>
+        </tr>
+        <tr>
+          <td align="left" valign="top" bgcolor="ffffff">
+            <table width="100%" border="0" cellspacing="0" cellpadding="2">
+
+              <form method='POST' action='/users/<%= @user.url.nil? ? @user.id : @user.url %>/profile_song' enctype="multipart/form-data" id="spacefix">
+                <tr>
+                  <span style="color:blue"><%= @error %></span><br>
+                </tr>
+                <tr>
+                  <td>Profile Song:</td>
+                  <td><input type='file' name='file' class='form-control'></td>
+                </tr>
+                <tr>
+                  <td><input type="submit"></td>
+                </tr>
+              </form>
+            </table></td></tr></table></td></tr></table>
