@@ -127,7 +127,7 @@
         Your browser does not support the audio element.
       </audio>
       <% end %>
-    <% if @user == current_user %>
+    <% if logged_in? && @user == current_user %>
       <span class="notice"><br><a href="/users/<%= @user.url.nil? ? @user.id : @user.url %>/profile_song/new">Edit your profile song</a></span>
     <% end %>
   </div>

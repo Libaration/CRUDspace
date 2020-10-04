@@ -48,6 +48,12 @@
                   <span style="color:blue"><%= @error %></span><br>
                 </tr>
                 <tr>
+                  <% if !@user.song.nil? %>
+                  <td>Current Song:</td>
+                    <td><%= @user.song.profilesong.to_s.gsub("/uploads/", "") %></td>
+                    <% end %>
+                </tr>
+                <tr>
                   <td>Profile Song:</td>
                   <td><input type='file' name='file' class='form-control'></td>
                 </tr>
