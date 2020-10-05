@@ -1,5 +1,7 @@
 class MessagesController < ApplicationController
-
+  before('/users/:id/messages/*') do
+    require_login
+  end
   post'/users/:id/messages' do
     @user = User.find(params[:id])
     @message = Message.find(params[:msg_id])

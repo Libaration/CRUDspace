@@ -1,7 +1,6 @@
 require './app/controllers/images_uploader'
 
 class UsersController < ApplicationController
-
   get '/users/new' do
     if !logged_in?
       erb :'users/new' , :layout => :template
