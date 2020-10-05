@@ -59,7 +59,7 @@
 </style>
 
 <table>
-  <tr><th>From:</th><td><a href="/users/<%= @message.sender.id %>"> <img src="/images/<%= @message.sender.images.first.image %>"> </a><b> <span class="relative"> <%= @message.sender.name %> </span> </b></td></tr>
+  <tr><th>From:</th><td><a href="/users/<%= @message.sender.id_or_slug %>"> <img src="/images/<%= @message.sender.images.first.image %>"> </a><b> <span class="relative"> <%= @message.sender.name %> </span> </b></td></tr>
   <tr><th>Date:</th><td><%= @message.created_at.strftime("%A, %d %b %Y %l:%M %p %Z") %></td></tr>
   <tr><th>Subject:</th><td> <%= @message.subject %></td></tr>
   <tr><th></th> <td><%= @message.content %></td></tr>
@@ -67,12 +67,12 @@
 </table>
 <div class="messageactions">
   <div class="messagereply">
-  <form method="GET" action="/users/<%= @user.id %>/messages/<%= @message.id %>/reply">
+  <form method="GET" action="/users/<%= @user.id_or_slug %>/messages/<%= @message.id %>/reply">
     <input type="submit" value="Reply">
   </form>
   </div>
   <div class="messagereply">
-    <% unless previous_message.nil? %> <a href="/users/<%=  @user.id  %>/messages/<%=  previous_message.id  %>"> << Previous </a><%  end %>
-    <% unless next_message.nil? %> <a href="/users/<%=  @user.id  %>/messages/<%=  next_message.id  %>"> Next >></a><%  end %>
+    <% unless previous_message.nil? %> <a href="/users/<%=  @user.id_or_slug  %>/messages/<%=  previous_message.id  %>"> << Previous </a><%  end %>
+    <% unless next_message.nil? %> <a href="/users/<%=  @user.id_or_slug  %>/messages/<%=  next_message.id  %>"> Next >></a><%  end %>
   </div>
 </div>

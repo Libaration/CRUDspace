@@ -72,12 +72,12 @@
     font: normal 10pt/normal Verdana, Arial, Helvetica, sans-serif;
   }
 </style>
-<form method="POST" action="/users/<%= @user.id %>/messages?msg_id=<%= @message.id %>">
+<form method="POST" action="/users/<%= @user.id_or_slug %>/messages?msg_id=<%= @message.id %>">
   <table>
-    <tr><th>To:</th><td><a href="/users/<%= @message.sender.id %>"> <img src="/images/<%= @message.sender.images.first.image %>"> </a><b> <span class="relative"> <%= @message.sender.name %> </span> </b></td></tr>
+    <tr><th>To:</th><td><a href="/users/<%= @message.sender.id_or_slug %>"> <img src="/images/<%= @message.sender.images.first.image %>"> </a><b> <span class="relative"> <%= @message.sender.name %> </span> </b></td></tr>
     <tr><th>Subject:</th><td> <input type="text" name="subject" value="RE: <%= @message.subject %>"></td></tr>
     <tr><th>Body:</th><td>
-      <textarea style="resize: none" name="content">&#013;&#013;------------------------------------- Original Message -------------------------------------&#013;From: <a href="/user/<%= @message.sender.id %>"><%= @message.sender.name %></a>&#013;Date: <%= @message.created_at.strftime("%A, %d %b %Y %l:%M %p %Z") %>&#013;&#013;&#013;<%=@message.content.gsub('<br />', "\r\n").strip()%></textarea></td></tr>
+      <textarea style="resize: none" name="content">&#013;&#013;------------------------------------- Original Message -------------------------------------&#013;From: <a href="/user/<%= @message.sender.id_or_slug %>"><%= @message.sender.name %></a>&#013;Date: <%= @message.created_at.strftime("%A, %d %b %Y %l:%M %p %Z") %>&#013;&#013;&#013;<%=@message.content.gsub('<br />', "\r\n").strip()%></textarea></td></tr>
 
   </table>
   <div class="messageactions">

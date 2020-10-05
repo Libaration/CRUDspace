@@ -18,7 +18,7 @@ class MessagesController < ApplicationController
         new_message.save
       end
       @message.update(replied: true)
-      redirect "/users/#{@user.id}/messages"
+      redirect "/users/#{@user.id_or_slug}/messages"
     end
   end
 
@@ -28,7 +28,7 @@ class MessagesController < ApplicationController
     if @message.receiver == current_user
       erb :'users/messages/reply', layout: :template
     else
-      redirect 'An unknown error has occured!'
+      'An unknown error has occured!'
     end
   end
 
@@ -58,7 +58,7 @@ class MessagesController < ApplicationController
         new_message.receiver = @friend
         new_message.save
       end
-      redirect "/users/#{@user.id}/messages"
+      redirect "/users/#{@user.id_or_slug}/messages"
   end
 
   get '/users/:id/messages' do
@@ -74,13 +74,13 @@ class MessagesController < ApplicationController
   patch'/users/:id/messages' do
     @user = User.find_by_slug(params[:id])
       @user.messages.where(params[:message_id]).update_all(read: true)
-      redirect "/users/#{@user.id}/messages"
+      redirect "/users/#{@user.id_or_slug}/messages"
   end
 
   delete'/users/:id/messages' do
       @user = User.find_by_slug(params[:id])
       @user.messages.where(params[:message_id]).destroy_all
-      redirect "/users/#{@user.id}/messages"
+      redirect "/users/#{@user.id_or_slug}/messages"
   end
 
   helpers do
