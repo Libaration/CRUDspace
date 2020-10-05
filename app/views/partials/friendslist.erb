@@ -1,3 +1,3 @@
 <% @user.friends.each do |friend| %>
-  <a href="/users/<%= friend.url.nil? ? friend.id : friend.url %>"><div class="fwiendFace"><b><%= friend.name %></b><img src="/images<%= friend.images.first.image %>" width="125"></div></a>
+  <a href="/users/<%= friend.id_or_slug %>"><div class="fwiendFace"><b><%= friend.name %></b><img src="/images<%= friend.images.first.image %>" width="125"></div></a>
 <% end %>

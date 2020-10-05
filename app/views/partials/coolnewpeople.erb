@@ -1,6 +1,6 @@
 <% @users.each do |user| %>
 <dl>
-  <dt><a href="/users/<%= user.url.nil? ? user.id : user.url %>" id="coolNewPersonURLa1"><span id="coolNewPersonName1"><%= user.name %></span></a></dt>
-  <dd><a href="/users/<%= user.url.nil? ? user.id : user.url %>" id="coolNewPersonURLb1"><img width="90" src="/images<%= user.images.first.image %>" id="coolNewPersonImage1" alt=""/></a></dd>
+  <dt><a href="/users/<%= user.id_or_slug %>" id="coolNewPersonURLa1"><span id="coolNewPersonName1"><%= user.name %></span></a></dt>
+  <dd><a href="/users/<%= user.id_or_slug %>" id="coolNewPersonURLb1"><img width="90" src="/images<%= user.images.first.image %>" id="coolNewPersonImage1" alt=""/></a></dd>
 </dl>
 <% end %>

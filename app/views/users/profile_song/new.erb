@@ -43,7 +43,7 @@
           <td align="left" valign="top" bgcolor="ffffff">
             <table width="100%" border="0" cellspacing="0" cellpadding="2">
 
-              <form method='POST' action='/users/<%= @user.url.nil? ? @user.id : @user.url %>/profile_song' enctype="multipart/form-data" id="spacefix">
+              <form method='POST' action='/users/<%= @user.id_or_slug %>/profile_song' enctype="multipart/form-data" id="spacefix">
                 <tr>
                   <span style="color:blue"><%= @error %></span><br>
                 </tr>

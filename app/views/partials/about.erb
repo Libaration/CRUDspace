@@ -3,4 +3,4 @@
     text-align: right;
   }
 </style>
-<%= @user.bio %> <% if logged_in? && @user == current_user %> <br> <a href="/users/<%= @user.url.nil? ? @user.id : @user.url %>/edit"><h4 class="edit">edit</h4></a> <% end %>
+<%= @user.bio %> <% if logged_in? && @user == current_user %> <br> <a href="/users/<%= @user.id_or_slug %>/edit"><h4 class="edit">edit</h4></a> <% end %>
