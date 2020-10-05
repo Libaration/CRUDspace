@@ -51,7 +51,7 @@ class MessagesController < ApplicationController
 
   post '/users/:id/messages/:friend_id' do
     @user = User.find_by_slug(params[:id])
-    @friend= User.find(params[:friend_id])
+    @friend= User.find_by_slug(params[:friend_id])
       params[:content].gsub!(/\r\n/, '<br />')
       Message.create(params.except(:friend_id, :id)).tap do |new_message|
         new_message.sender = @user
