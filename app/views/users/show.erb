@@ -75,12 +75,12 @@
               </td></tr>
               <tr>
                 <td width="45%" align="center" valign="middle" class='txt_label4' height="33">
-                  <a href='/users/<%= current_user.id %>/messages'>Messages</a>
+                  <a href='/users/<%= current_user.id_or_slug %>/messages'>Messages</a>
                 </td>
                 </td>
 
                 <td width="45%" align="center" valign="middle" class='txt_label4' height="33">
-                  <a href='/users/<%= current_user.id %>/friend_requests' class='style11'>Friend Requests</a></a>
+                  <a href='/users/<%= current_user.id_or_slug %>/friend_requests' class='style11'>Friend Requests</a></a>
                 </td>
               </tr>
 
@@ -91,10 +91,10 @@
 
 
       <% if logged_in? && !current_user.pending_friends.empty? %>
-        <a href="/users/<%= current_user.id %>/friend_requests"><div class="boxButton" id="sFriend"><span class="notifcation2">New Friend Requests!</span></div></a><br>
+        <a href="/users/<%= current_user.id_or_slug %>/friend_requests"><div class="boxButton" id="sFriend"><span class="notifcation2">New Friend Requests!</span></div></a><br>
       <% end %>
       <% if logged_in? && !current_user.unread_messages.empty? %>
-        <a href="/users/<%= current_user.id %>/messages"><div class="boxButton" id="sMsg"><span class="notifcation">New Messages!</span></div></a><br>
+        <a href="/users/<%= current_user.id_or_slug %>/messages"><div class="boxButton" id="sMsg"><span class="notifcation">New Messages!</span></div></a><br>
       <% end %>
 
     </div>

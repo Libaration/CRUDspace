@@ -7,6 +7,8 @@ class MessagesController < ApplicationController
     require_login
     user_can_edit?(params[:id])
   end
+
+
   post'/users/:id/messages' do
     @user = User.find_by_slug(params[:id])
     @message = Message.find(params[:msg_id])
