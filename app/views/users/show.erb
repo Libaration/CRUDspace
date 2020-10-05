@@ -156,7 +156,7 @@
 
 
 
-      <div id="viewFriends"><b>View <a href="/users/<%= @user.id %>/friends">All</a> <span class="uName"><%= @user.name %></span>'s Friends</b></div>
+      <div id="viewFriends"><b>View <a href="/users/<%= @user.id_or_slug %>/friends">All</a> <span class="uName"><%= @user.name %></span>'s Friends</b></div>
 
 
 
@@ -170,7 +170,7 @@
         <% elsif logged_in? %>
         <div id="form">
           <div class="boxHead"><b>Leave a comment</b></div>
-          <form action="/users/<%= @user.id %>/comments/new" method="post">
+          <form action="/users/<%= @user.id_or_slug %>/comments/new" method="post">
             <textarea name="content" id="commentInput"></textarea>
             <input type="submit" value="Send">
           </form>

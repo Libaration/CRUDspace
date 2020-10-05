@@ -1,11 +1,11 @@
 class PicturesController < ApplicationController
   get '/users/:id/pictures' do
-    @user = User.find(params[:id])
+    @user = User.find_by_slug(params[:id])
       erb :'/users/pictures/picture', :layout => :template
   end
 
   get '/users/:id/picture/edit' do
-    if logged_in? && User.find(params[:id]) == current_user
+    if logged_in? && User.find_by_slug(params[:id]) == current_user
       @user = current_user
       erb :'/users/picture', :layout => :template
     else
@@ -14,13 +14,13 @@ class PicturesController < ApplicationController
   end
 
   get '/users/:id/pictures/:picture_id' do
-    @user = User.find(params[:id])
+    @user = User.find_by_slug(params[:id])
     @image = Images.find(params[:picture_id])
     erb :'users/pictures/show', :layout => :template
   end
 
   delete '/users/:id/pictures/:picture_id' do
-    @user = User.find(params[:id])
+    @user = User.find_by_slug(params[:id])
     @image = Images.find(params[:picture_id])
     if logged_in? && @user == current_user
       @image.destroy
@@ -31,7 +31,7 @@ class PicturesController < ApplicationController
   end
 
   post '/users/:id/pictures' do
-    if logged_in? && current_user == User.find(params[:id])
+    if logged_in? && current_user == User.find_by_slug(params[:id])
       img = Images.new
       img.image  = params[:file] #carrierwave uploads using params here
       img.user = current_user
@@ -44,7 +44,7 @@ class PicturesController < ApplicationController
   end
 
   patch '/users/:id/pictures/:picture_id' do
-    if logged_in? && current_user == User.find(params[:id])
+    if logged_in? && current_user == User.find_by_slug(params[:id])
     img = Images.find(params[:picture_id])
     img.update(caption: params[:caption])
     redirect "/users/#{current_user.id}/pictures"
