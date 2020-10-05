@@ -36,7 +36,7 @@ class MessagesController < ApplicationController
 
   get'/users/:id/messages/:friend_id/new' do
     @user = User.find_by_slug(params[:id])
-    @friend = User.find(params[:friend_id])
+    @friend = User.find_by_slug(params[:friend_id])
       erb :'users/messages/new', layout: :template
   end
 
