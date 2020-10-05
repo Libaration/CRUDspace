@@ -12,6 +12,15 @@ class User < ActiveRecord::Base
   has_one :song
 
   def self.find_by_slug(slug)
-    User.find_by(url: slug.downcase)
+    User.find_by(url: slug.downcase) || User.find(slug)
   end
+
+  def id_or_slug
+    if self.url == nil
+      self.id
+    else
+      self.url
+    end
+  end
+
 end

@@ -42,6 +42,10 @@ class ApplicationController < Sinatra::Base
         redirect '/login'
       end
     end
+
+    def user_can_edit?(id)
+      redirect '/login' unless current_user == User.find_by_slug(id)
+    end
     
     end
 end

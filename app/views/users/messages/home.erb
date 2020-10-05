@@ -99,14 +99,14 @@ table#requestsempty td:nth-child(n+1) {
     <tr>
       <%= @td %> <input type="checkbox" name="message_id[id][]" value="<%= message.id %>"></td>
     <%= @td %> <%= message.created_at.strftime("%b %e, %Y<Br> %l:%M %p") %> </td>
-    <%= @td %><a href="/users/<%= message.sender.id %>"><img src="/images<%= message.sender.images.first.image %>"></a></td>
+    <%= @td %><a href="/users/<%= message.sender.id_or_slug %>"><img src="/images<%= message.sender.images.first.image %>"></a></td>
     <% if message.replied == true %>
       <%= @td %>Replied
       <% else %>
       <%= @td %><%= message.read == true ? 'Read' : 'Unread' %>
     <% end %>
     </td>
-    <%= @td %><b><a href="/users/<%= @user.id %>/messages/<%= message.id %>"><%= message.subject %> </a></b> </td>
+    <%= @td %><b><a href="/users/<%= @user.id_or_slug %>/messages/<%= message.id %>"><%= message.subject %> </a></b> </td>
   </tr>
   <% end %>
 
