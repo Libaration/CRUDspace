@@ -42,11 +42,12 @@ class MessagesController < ApplicationController
     @user = User.find_by_slug(params[:id])
     @message = Message.find(params[:message_id])
     @messages = @user.messages
-    if @message.receiver == current_user
+      if @message.receiver == current_user
       @message.update(read: true)
       # @message = User.find(params[:id]).messages.where(id: params[:message_id]).first
       erb :'/users/messages/show', layout: :template
-  end
+      end
+    end
 
   post '/users/:id/messages/:friend_id' do
     @user = User.find_by_slug(params[:id])
