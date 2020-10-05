@@ -34,7 +34,7 @@ class UsersController < ApplicationController
   end
 
   get '/users/:id' do
-      User.find_by_slug(params[:id]).nil? ? @user = User.find(params[:id]) : @user = User.find_by_slug(params[:id])
+      @user = User.find_by_slug(params[:id])
       @profilepic = @user.images.first
       @comments = @user.comments.reverse
       erb :'users/show', :cache => false
@@ -67,7 +67,7 @@ class UsersController < ApplicationController
 
   get '/login' do
     @users = User.order(id: :desc).limit(2)
-    redirect "users/#{current_user.id}" if logged_in?
+    redirect "users/#{current_user.id_or_slug}" if logged_in?
     erb :'users/login' , :layout => :template
   end
 
@@ -75,11 +75,7 @@ class UsersController < ApplicationController
     @users = User.order(id: :desc).limit(2)
     if (@user = User.find_by(username: params[:username])) && @user.authenticate(params[:password])
       session[:user_id] = @user.id
-      if @user.url.nil?
-        redirect "users/#{@user.id}"
-      elsif !@user.url.nil?
-        redirect "users/#{@user.url}"
-      end
+      redirect "users/#{@user.id_or_slug}"
     else
       @error = 'One of the fields was incorrect'
       erb :'users/login', :layout => :template
@@ -101,7 +97,7 @@ class UsersController < ApplicationController
   end
 
   post '/users/:id/edit' do
-    @user = User.find(params[:id])
+    @user = User.find_by_slug(params[:id])
     if logged_in? && @user == current_user
       # params.each do |key,value|
       #   params[key.to_sym] = Sanitize.fragment(value, Sanitize::Config::RELAXED)
