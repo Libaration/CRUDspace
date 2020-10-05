@@ -77,8 +77,7 @@
     <tr><th>To:</th><td><a href="/users/<%= @message.sender.id_or_slug %>"> <img src="/images/<%= @message.sender.images.first.image %>"> </a><b> <span class="relative"> <%= @message.sender.name %> </span> </b></td></tr>
     <tr><th>Subject:</th><td> <input type="text" name="subject" value="RE: <%= @message.subject %>"></td></tr>
     <tr><th>Body:</th><td>
-      <textarea style="resize: none" name="content">&#013;&#013;------------------------------------- Original Message -------------------------------------&#013;From: <a href="/user/<%= @message.sender.id_or_slug %>"><%= @message.sender.name %></a>&#013;Date: <%= @message.created_at.strftime("%A, %d %b %Y %l:%M %p %Z") %>&#013;&#013;&#013;<%=@message.content.gsub('<br />', "\r\n").strip()%></textarea></td></tr>
-
+      <textarea style="resize: none" name="content">&#013;&#013;------------------------------------- Original Message -------------------------------------&#013;From: <a href="/users/<%= @message.sender.id_or_slug %>"><%= @message.sender.name %></a>&#013;Date: <%= @message.created_at.strftime("%A, %d %b %Y %l:%M %p %Z") %>&#013;&#013;&#013;<%=@message.content.gsub('<br />', "\r\n").strip()%></textarea></td></tr>
   </table>
   <div class="messageactions">
     <div class="messagereply">
