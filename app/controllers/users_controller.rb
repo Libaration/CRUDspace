@@ -99,13 +99,13 @@ class UsersController < ApplicationController
     end
   end
 
-  post '/users/:id/edit' do
+  patch '/users/:id' do
     @user = User.find_by_slug(params[:id])
     if logged_in? && @user == current_user
       # params.each do |key,value|
       #   params[key.to_sym] = Sanitize.fragment(value, Sanitize::Config::RELAXED)
       # end
-      @user.update(params.except(:css))
+      @user.update(params.except(:css, :_method, :id))
       path = "./app/public/profile_css/#{@user.id}_custom_css.css"
       content = Sanitize::CSS.stylesheet(params[:css], Sanitize::Config::RELAXED).gsub("div.module", ".topLeft, .topRight, #nav, .boxHead, .player.box").gsub("div#googlebar", "#main").gsub("topLeft","tableLeft").gsub("topRight", "tableRight").gsub("div.blurbsModule",".rightHead").gsub("div.wrap", "#main")
       content += ".topRight{

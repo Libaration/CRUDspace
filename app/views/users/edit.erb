@@ -1,37 +1,122 @@
-<% if logged_in? && @user == current_user %>
-
 <style>
-
-  .form-control {
-    font: normal 8pt/normal Verdana, Arial, Helvetica, sans-serif;
-    text-transform: none;
-    text-decoration: none;
-  }
-  table.pictures {
-    font: normal 8pt/normal Verdana, Arial, Helvetica, sans-serif;
-    text-transform: none;
-    text-decoration: none;
+  body {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
-    text-align: center;
+    flex-direction: row;
+
+  }
+  span.required {
+    color: red;
+  }
+
+  span.blackText7 {
+    color: black;
+    font: normal 7pt/normal Verdana, Arial, Helvetica, sans-serif;
+  }
+  table {
+    font: normal 9pt/normal Verdana, Arial, Helvetica, sans-serif;
+  }
+  div.join input[type=number]{
+    width: 50px;
+  }
+
+  div.join input[type=submit]{
+    display: flex;
+    flex-wrap: wrap;
+    background-color: #6a9cc7;
+    border: none;
+    color: white;
+    padding: 16px 32px;
+    text-decoration: none;
+    margin: 4px 2px;
+    cursor: pointer;
+    margin-right: 50px;
+  }
+
+  table td {
+    padding: 3px
+  }
+
+  div.join textarea {
+    font: normal 8pt/normal Verdana, Arial, Helvetica, sans-serif;
+    resize: none;
+    width: 300px;
+    height: 100px
+  }
+
+  div.join select {
+    font: normal 8pt/normal Verdana, Arial, Helvetica, sans-serif;
+  }
+
+  div.join input {
+    font: normal 8pt/normal Verdana, Arial, Helvetica, sans-serif;
+  }
+  div.join {
+    display: flex;
+    width: 100%;
+    overflow: hidden;
+  }
+  div.whyjoin {
+    flex: 1;
+    float: left;
+    margin-right: 60px;
+    font-size: 9pt;
+    background-color: #d6e8fa;
+    padding: 5px;
+    border: #adc7e5 1px solid;
+  }
+
+  div.notice {
+    padding-bottom: 30px;
+    padding-left: 50px;
   }
 </style>
 
-<div id="login">
 
-  <%= @error %></h2><br>
-  <form method='POST' action='/users/<%= @user.id %>/edit' enctype="multipart/form-data" id="spacefix">
-    Full Name (First/Last) <input type="text" name="name" value="<%= @user.name %>"><br>
-    Age: <input type="number" name="age" value="<%= @user.age %>"><br>
-    Bio: <input type="text" name="bio" value="<%= Rack::Utils.escape_html(@user.bio) %>"><br>
-    Motto: <input type="text" name="motto" value="<%= @user.motto %>"><br>
-    <textarea name="css"><%= @custom_css unless nil %></textarea>
+<div class="join">
 
+  <div class="whyjoin">
+    You may enter HTML/DHTML or CSS in any text field.<br> Javascript IS not allowed.<br><br>
+    Do not use HTML/CSS to cover Myspace advertisements.
+  </div>
 
-    <button type='submit'> Submit </button>
-  </form>
+  <table width="430" border="0" cellpadding="1" cellspacing="0" bgcolor="6699cc">
+    <tr>
+      <td valign="top"><table width="100%" border="0" cellspacing="0" cellpadding="5">
+        <tr>
+          <td align="left" style="color: white; font-weight: bold; font-size: 10pt;">Profile Edit</td>
+        </tr>
+        <tr>
+          <td align="left" valign="top" bgcolor="ffffff">
+            <table width="100%" border="0" cellspacing="0" cellpadding="2">
+
+              <form method='POST' action='/users/<%= @user.id_or_slug %>' enctype="multipart/form-data" id="spacefix">
+                <input type="hidden" name="_method" value="PATCH">
+                <tr>
+                  <td><strong>Name: </strong></td>
+                  <td><input type="text" name="name" value="<%= @user.name %>" size="48"></td>
+                </tr>
+                <tr>
+                  <td><strong>Age: </strong></td>
+                  <td><input type="number" name="age" value="<%= @user.age %>"></td>
+                </tr>
+                <tr>
+                  <td><strong>Headline/Motto:</strong></td>
+                  <td><input type="text" name="motto" value="<%= @user.motto %>" size="48"></td>
+                </tr>
+                <tr>
+                  <td><strong>About Me:</strong></td>
+                  <td><textarea name="bio"><%= Rack::Utils.escape_html(@user.bio) %></textarea></td>
+                </tr>
+                <tr>
+                  <td><strong><span style="color: red;">(BETA) </span> Profile CSS: </strong></td>
+                  <td><textarea name="css"><%= @custom_css unless nil %></textarea></td>
+                </tr>
+                <tr>
+                  <td><input type=submit></td>
+                </tr>
+
+              </form>
+            </table></td></tr></table></td></tr></table>
 
 </div>
-
-<% end %>
