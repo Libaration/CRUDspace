@@ -106,7 +106,7 @@ table#requestsempty td:nth-child(n+1) {
       <%= @td %><%= message.read == true ? 'Read' : 'Unread' %>
     <% end %>
     </td>
-    <%= @td %><b><a href="/users/<%= @user.id_or_slug %>/messages/<%= message.id %>"><%= message.subject %> </a></b> </td>
+    <%= @td %><b><a href="/users/<%= @user.id_or_slug %>/messages/<%= message.id %>"><strong><%= message.subject %> </strong></a></b> </td>
   </tr>
   <% end %>
 
