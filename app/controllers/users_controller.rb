@@ -1,6 +1,9 @@
 require './app/controllers/images_uploader'
-
 class UsersController < ApplicationController
+  before('*') do
+    set_last_seen_at if logged_in?
+  end
+
   get '/users/new' do
     if !logged_in?
       erb :'users/new' , :layout => :template

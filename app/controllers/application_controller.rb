@@ -5,7 +5,6 @@ require 'sanitize'
 #Configure Carrierwave
 
 class ApplicationController < Sinatra::Base
-
   configure do
     set :public_folder, 'app/public'
     set :views, 'app/views'
@@ -13,7 +12,6 @@ class ApplicationController < Sinatra::Base
     set :session_secret, "secret"
 
   end
-
 
   get "/" do
     if logged_in?
@@ -42,6 +40,10 @@ class ApplicationController < Sinatra::Base
     def user_can_edit?(id)
       redirect '/login' unless current_user == User.find_by_slug(id)
     end
-    
+
+    def set_last_seen_at
+      current_user.touch(:last_seen_at)
+    end
+
     end
 end

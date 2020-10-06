@@ -11,4 +11,5 @@
 <div id="gender"><%= @user.gender.capitalize %></div>
 <div><span id="age"><%= @user.age %></span> years old</div>
 <div id="country"><%= @user.city %><br><%= @user.state %><br><%= @user.country %></div><br>
-    <% if @user.id == 2 %> <img src="https://myspace.windows93.net/img/online.gif"> <% end %>
+    <% if User.online.include?(@user) %> <img src="https://myspace.windows93.net/img/online.gif">
+  <% end %>
