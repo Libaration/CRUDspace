@@ -43,7 +43,7 @@ class FriendshipsController < ApplicationController
 
   delete '/users/:id/deny' do
     @user = User.find_by_slug(params[:id])
-    @friend = User.find_by!(params[:friend_id])
+    @friend = User.find_by_slug(params[:friend_id])
     if current_user.pending_friends.include?(@friend)
       @user.pending_friends.delete(@friend)
     else
