@@ -1,3 +1,8 @@
+<style>
+  div.fwiendFace img.onlinenow {
+    width: auto;
+  }
+</style>
 <% @users.each do |friend| %>
-  <a href="<%= friend.url.nil? ? "/users/#{friend.id}" : "/users/#{friend.url}" %>"><div class="fwiendFace"><b><%= friend.name %></b><img src="/images<%= friend.images.first.image %>" width="125"></div></a>
+  <a href="<%= friend.id_or_slug %>"><div class="fwiendFace"><b><%= friend.name %></b><img src="/images<%= friend.images.first.image %>" width="125"><% if User.online.include?(friend) %><center><img class="onlinenow" src="https://myspace.windows93.net/img/online.gif"></center><% end %></div></a>
 <% end %>
