@@ -4,7 +4,7 @@
   </td></tr>
   <% else %>
   <% @comments.each do |comment| %>
-    <tr><td class="tableLeft"><a href="/users/<%= comment.author.id_or_slug %>"><div><b><%= comment.author.name %></b></div><img src="/images<%= comment.author.images.first.image %>"></a><% if User.online.include?(comment.author) %> <img src="https://myspace.windows93.net/img/online.gif"><% end %></td><td class="tableRight"><div><b class="date"><%= comment.created_at.strftime("%b %e, %Y %l:%M %p") %></b></div><div>
+    <tr><td class="tableLeft"><a href="/users/<%= comment.author.id_or_slug %>"><div><b><%= comment.author.name %></b></div><img src="/images<%= comment.author.images.first.image %>"></a><% if User.online.include?(comment.author) %> <center><img src="https://myspace.windows93.net/img/online.gif"></center><% end %></td><td class="tableRight"><div><b class="date"><%= comment.created_at.strftime("%b %e, %Y %l:%M %p") %></b></div><div>
       <p><%= comment.content %></p></div>
     </td></tr>
   <% end %>

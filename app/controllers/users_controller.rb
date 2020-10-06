@@ -134,8 +134,11 @@ class UsersController < ApplicationController
   end
 
   get '/logout' do
-    session.clear if logged_in?
-    redirect '/login'
+    if logged_in?
+      current_user.update(last_seen_at: nil)
+      session.clear
+      redirect '/login'
+    end
   end
 
   get '/users' do
