@@ -107,7 +107,7 @@ class UsersController < ApplicationController
       # end
       @user.update(params.except(:css))
       path = "./app/public/profile_css/#{@user.id}_custom_css.css"
-      content = Sanitize::CSS.stylesheet(params[:css], Sanitize::Config::RELAXED).gsub(".module", ".topRight, .topLeft").gsub("div.contentTop", "div.extended").gsub(".blurbsModule", ".rightHead").gsub(".content",".boxHead").gsub("div.wrap",".tableLeft, .tableRight")
+      content = Sanitize::CSS.stylesheet(params[:css], Sanitize::Config::RELAXED).gsub(".module", ".topRight, .topLeft").gsub("div.contentTop", "div.extended").gsub(".blurbsModule", ".rightHead").gsub(".content","").gsub("div.wrap",".tableLeft, .tableRight").gsub("table, tr, td","#main").gsub("div", "#main")
       content += ".topRight{
         float: right;
         width: calc( 60% - 20px );

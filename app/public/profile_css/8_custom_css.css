@@ -1,30 +1,101 @@
-body {background-image:url(http://www.myspacegens.com/images/layouts/02/9082597639/bg.gif);
-background-attachment:fixed; background-position:top left; background-repeat:repeat; background-color:ffffff;}
+.pmp_info{ }
+<style type=text/css>
+.pimp_my_profile { }
+  .pmp_credit { 
+   
+ } 
 
-div#header, div#googlebar, #topnav {background-color:#660498;}
-#topnav ul {border-right: 1px #660498 solid;}
-#topnav ul li {border-left: 1px #660498 solid;} 
-#topnav ul li a:hover {background-color:#660498; color:#ffffff;}
-div.topRight, .topLeftBody {background-color:#ffffff; color:#660498; font-size:10px; font-family:arial; font-size:10px;font-weight:bold;}
-div.topRight, .topLeft {background-color:#ffffff; border:0px solid #660498; padding:5;}
+  .tableLeft, .tableRight { 
+  width:960; 
+ } 
 
-div.basicInfoModule div.basicInfoDetails h2 {background-color:#FE0661; font-family:arial; color:#ffffff; text-transform:lowercase; font-weight:bold; border:0; padding-left:2px; display: block; letter-spacing:0;}
+  #main,#main,.tableLeft, .tableRight  { 
+  background-color:transparent; 
+ } 
 
-h3.topRight, .topLeftHead {background-color:#8232AA; font-family:Arial; font-size:10px; letter-spacing:0; color:#ffffff; text-transform:lowercase; font-weight:bold; text-align:left; padding-left:3px; border-bottom:0px solid #af070f; display:block; line-height:9px;}
+  body  { 
+  background-color:#000000; 
+ background-image:url("http://content.pimp-my-profile.com/i11/6/11/19/f_94ffbcc6cc0b.jpg"); 
+ background-position:Center Center; 
+ background-attachment:fixed; 
+ background-repeat:no-repeat; 
+ border-color:#777777; 
+ border-width:2px; 
+ border-style:Double; 
+  
+  
+  
+  
+  
+  
+  
+ } 
 
-h4 {background-color:#660498; color:#ffffff; font-family:Arial; font-size:10px; letter-spacing:0; text-transform:lowercase; border:0px solid #af070f; font-weight:bold; display:block; padding-left:4px; line-height: 12px;}
+  #main#header, #main#googlebar, #main#topnav, ul.profileUserAlbum li, #main, #main.topRight, .topLeft, #main.extended, #main.rightHead h3, #main.companiesModule li.topRight, .topLeftItem, #main.blogsModule h3, #main.calendarModule h3, #main.friendSpaceModule h3, #main.schoolsModule li.topRight, .topLeftItem, #main.networkingModule li.topRight, .topLeftItem, #main.interestsModule li, ul.profileUserAlbum li, #main.photo, #main.profileHeaderModule, #main.profileDemographics, #mainMid, #main.detailsModule li, #main.commentsModule h3,  #main.commentsModule ul.topRight, .topLeftList li, #main.commentsModule #main.userComment, #main.rightHead, h3.topRight, .topLeftHead span, #main.profileDemographics, ul.profileUserInfo, #main.userComment, li.odd, #main.topRight, .topLeftBody, #main.topRight, .topLeftList, #main.topRight, .topLeftHead, h3.topRight, .topLeftHead, h3.topRight, .topLeftHead span span  { 
+  background-color:transparent; 
+ border:none; 
+ border-width:0 px; 
+ } 
 
-div.detailsModule li strong {background-color:#FE0661; color:#ffffff; font-family:Arial; font-size:10px; letter-spacing:0; text-transform: lowercase; border:0px solid #af070f; font-weight:bold; display:block; float:left; width: 80px; line-height: 12px; margin-right:10px; padding-left:2px;}
+  #main.topRight, .topLeft  { 
+  background-image:url("https://ct.pimp-my-profile.com/tp/000000-70-tp.png"); 
+ background-repeat:repeat; 
+ background-color:transparent; 
+ } 
 
-div.topRight, .topLeftBody a, a:link, a:active, a:visited {color:#8232AA; font-family:Arial; font-size:10px; letter-spacing:0; text-decoration:none; text-transform:lowercase; font-weight:bold;}
+  #main.topRight, .topLeft  { 
+  border-style:Double; 
+ border-width:2px; 
+ border-color:#777777; 
+ } 
 
-div.topRight, .topLeftBody a:hover, a:hover {color:#660498; font-family:Arial; font-size:10px; letter-spacing:0; text-decoration:none; text-transform:lowercase; font-weight:bold;}
+  #main[class~="moduleTop"],
+					#main[class~="moduleTop"] #main,
+					#main[class~="moduleBottom"],
+					#main[class~="moduleBottom"] #main { 
+  background-color:transparent; 
+ background-image:none; 
+ font-size:0px; 
+ } 
 
-.topRight, .topLeftList .even, .topRight, .topLeftList .even {background-color:#ffffff; color:#8232AA; text-transform:lowercase; border:0;}
+  #main[class~="moduleTop"] #main #main,
+					#main[class~="moduleBottom"] #main #main { 
+  background-image:none; 
+ } 
 
-strong, b, div.commentsModule p.datePosted, span.count {color:#FE0661; font-size:10px; font-family:Arial; font-weight:bold;}
-ul.profileUserAlbum li {background-color:#8232AA; padding:2px; border:0;}
-.tableLeft, .tableRight {background-color:#ffffff;background-attachment:fixed; background-position:top left; background-repeat:repeat; border:0px solid #8232AA; width:750px;} .topRight{
+  #main[class~="moduleTop"] #main #main { 
+  height:5px; 
+ border-top:none; 
+ } 
+
+  #main[class~="moduleBottom"] #main #main { 
+  border-bottom:none; 
+ } 
+
+  #main[class~="moduleMid"] { 
+  border-left:none; 
+ } 
+
+  #main[class~="moduleMid1"] { 
+  border-right:none; 
+ } 
+
+  .pmp_topleft { 
+  position:absolute; top: 0px; left: 0px; 
+ } 
+
+  #main.extended { 
+  background-image:url("https://ct.pimp-my-profile.com/i94/3/11/18/f_faff2fc846d7.gif"); 
+ padding-top:20px; 
+ background-repeat:no-repeat; 
+ background-position:top left; 
+ } 
+
+  #main, li, p, #main, #main.topRight, .topLeftBody, #main.commentsModule p.datePosted, span.count { 
+  color:#777777; 
+ } 
+
+ .topRight{
         float: right;
         width: calc( 60% - 20px );
         padding: 0px

@@ -1,7 +1,3 @@
-/* CSS Document */
-#container {
-    border-top: 10px solid #fff;
-}
 #left {
     width: 469px;
     float: left;
@@ -247,9 +243,9 @@
     margin: 0 10px 0 0;
 }
 
-/*\*//*/
+/*\*/!*/
 #advert iframe, #advertisement {
-	display: none;
+    display: none;
 }
 /**/
 /*
