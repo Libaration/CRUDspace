@@ -5,23 +5,22 @@
    
  } 
 
-  .tableLeft, .tableRight { 
-  width:960; 
+  #main { 
+  width:90%; 
  } 
 
-  #main,#main,.tableLeft, .tableRight  { 
+  div,div.content,#main  { 
   background-color:transparent; 
  } 
 
   body  { 
-  background-color:#000000; 
- background-image:url("http://content.pimp-my-profile.com/i11/6/11/19/f_94ffbcc6cc0b.jpg"); 
+  background-image:url("http://content.pimp-my-profile.com/i142/8/6/4/f_a75eaa25adeb.gif"); 
  background-position:Center Center; 
  background-attachment:fixed; 
- background-repeat:no-repeat; 
- border-color:#777777; 
- border-width:2px; 
- border-style:Double; 
+ background-repeat:repeat; 
+ border-color:#FF00FF; 
+ border-width:12px; 
+ border-style:Groove; 
   
   
   
@@ -31,52 +30,52 @@
   
  } 
 
-  #main#header, #main#googlebar, #main#topnav, ul.profileUserAlbum li, #main, #main.topRight, .topLeft, #main.extended, #main.rightHead h3, #main.companiesModule li.topRight, .topLeftItem, #main.blogsModule h3, #main.calendarModule h3, #main.friendSpaceModule h3, #main.schoolsModule li.topRight, .topLeftItem, #main.networkingModule li.topRight, .topLeftItem, #main.interestsModule li, ul.profileUserAlbum li, #main.photo, #main.profileHeaderModule, #main.profileDemographics, #mainMid, #main.detailsModule li, #main.commentsModule h3,  #main.commentsModule ul.topRight, .topLeftList li, #main.commentsModule #main.userComment, #main.rightHead, h3.topRight, .topLeftHead span, #main.profileDemographics, ul.profileUserInfo, #main.userComment, li.odd, #main.topRight, .topLeftBody, #main.topRight, .topLeftList, #main.topRight, .topLeftHead, h3.topRight, .topLeftHead, h3.topRight, .topLeftHead span span  { 
+  div#header, #main, div#topnav, ul.profileUserAlbum li, div.content, .tableLeft, .tableRight, #nav, .boxHead, .player.box, div.contentTop, .rightHead h3, div.companiesModule li.moduleItem, div.blogsModule h3, div.calendarModule h3, div.friendSpaceModule h3, div.schoolsModule li.moduleItem, div.networkingModule li.moduleItem, div.interestsModule li, ul.profileUserAlbum li, div.photo, div.profileHeaderModule, div.profileDemographics, div.contentMid, div.detailsModule li, div.commentsModule h3,  div.commentsModule ul.moduleList li, div.commentsModule div.userComment, .rightHead, h3.moduleHead span, div.profileDemographics, ul.profileUserInfo, div.userComment, li.odd, .tableLeft, .tableRight, #nav, .boxHead, .player.boxBody, .tableLeft, .tableRight, #nav, .boxHead, .player.boxList, .tableLeft, .tableRight, #nav, .boxHead, .player.boxHead, h3.moduleHead, h3.moduleHead span span  { 
   background-color:transparent; 
  border:none; 
  border-width:0 px; 
  } 
 
-  #main.topRight, .topLeft  { 
-  background-image:url("https://ct.pimp-my-profile.com/tp/000000-70-tp.png"); 
- background-repeat:repeat; 
+  .tableLeft, .tableRight, #nav, .boxHead, .player.box  { 
+  background-image:url("http://content.pimp-my-profile.com/i113/8/6/4/f_79fb08fb1bee.gif"); 
+ background-attachment:fixed; 
  background-color:transparent; 
  } 
 
-  #main.topRight, .topLeft  { 
-  border-style:Double; 
- border-width:2px; 
- border-color:#777777; 
+  .tableLeft, .tableRight, #nav, .boxHead, .player.box  { 
+  border-style:Groove; 
+ border-width:6px; 
+ border-color:#FF00FF; 
  } 
 
-  #main[class~="moduleTop"],
-					#main[class~="moduleTop"] #main,
-					#main[class~="moduleBottom"],
-					#main[class~="moduleBottom"] #main { 
+  div[class~="moduleTop"],
+					div[class~="moduleTop"] div,
+					div[class~="moduleBottom"],
+					div[class~="moduleBottom"] div { 
   background-color:transparent; 
  background-image:none; 
  font-size:0px; 
  } 
 
-  #main[class~="moduleTop"] #main #main,
-					#main[class~="moduleBottom"] #main #main { 
+  div[class~="moduleTop"] div div,
+					div[class~="moduleBottom"] div div { 
   background-image:none; 
  } 
 
-  #main[class~="moduleTop"] #main #main { 
+  div[class~="moduleTop"] div div { 
   height:5px; 
  border-top:none; 
  } 
 
-  #main[class~="moduleBottom"] #main #main { 
+  div[class~="moduleBottom"] div div { 
   border-bottom:none; 
  } 
 
-  #main[class~="moduleMid"] { 
+  div[class~="moduleMid"] { 
   border-left:none; 
  } 
 
-  #main[class~="moduleMid1"] { 
+  div[class~="moduleMid1"] { 
   border-right:none; 
  } 
 
@@ -84,15 +83,43 @@
   position:absolute; top: 0px; left: 0px; 
  } 
 
-  #main.extended { 
+  div.contentTop { 
   background-image:url("https://ct.pimp-my-profile.com/i94/3/11/18/f_faff2fc846d7.gif"); 
  padding-top:20px; 
  background-repeat:no-repeat; 
  background-position:top left; 
  } 
 
-  #main, li, p, #main, #main.topRight, .topLeftBody, #main.commentsModule p.datePosted, span.count { 
-  color:#777777; 
+  table, tr, td, li, p, div, .tableLeft, .tableRight, #nav, .boxHead, .player.boxBody, div.commentsModule p.datePosted, span.count { 
+  color:#CCFF22; 
+ } 
+
+   h3.moduleHead, h3.moduleHead span  { 
+  color:#ADFF2F; 
+ } 
+
+   div.blurbAboutMe h4, div.blurbLikeToMeet h4, div.interestsModule li h4, div.detailsModule li strong { 
+  color:#ADFF2F; 
+ } 
+
+  div.basicInfoDetails h2 { 
+  color:#ADFF2F; 
+ } 
+
+  a:active, a:visited, a:link, .tableLeft, .tableRight, #nav, .boxHead, .player.boxBody a:active, .tableLeft, .tableRight, #nav, .boxHead, .player.boxBody a:visited  { 
+  color:#00BFFF; 
+ } 
+
+  a:hover, .tableLeft, .tableRight, #nav, .boxHead, .player.boxBody a:hover  { 
+  color:#FF00FF; 
+ } 
+
+  div.column1 { 
+  background-image:url("http://content.pimp-my-profile.com/i146/8/6/4/bn_3dc1fd15fa.png"); 
+ background-repeat:no-repeat; 
+ background-position:top center; 
+ width:437px; 
+ padding-top:75px; 
  } 
 
  .topRight{
