@@ -3,7 +3,7 @@ require "carrierwave"
 require "carrierwave/orm/activerecord"
 require 'sanitize'
 #Configure Carrierwave
-
+ActiveRecord::Base.raise_in_transactional_callbacks = true
 class ApplicationController < Sinatra::Base
   configure do
     set :public_folder, 'app/public'
