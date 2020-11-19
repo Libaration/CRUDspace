@@ -18,7 +18,6 @@
   </div>
 </div>
 <div id="nav">
-  <p><a class="navbar" href="/">Home</a>|<a class="navbar" href="/users">Browse</a><% if logged_in? %>
-      |<a class="navbar" href="/users/<%= current_user.id_or_slug %>/messages">Mail</a>
+  <p><a class="navbar" href="/">Home</a>|<a class="navbar" href="/users">Browse</a>|<a class="navbar" href="/users/online">Users Online (<%= User.online.count %>)</a><% if logged_in? %>|<a class="navbar" href="/users/<%= current_user.id_or_slug %>/messages">Mail</a>
       <% end %></p>
 </div>

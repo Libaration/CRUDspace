@@ -36,6 +36,11 @@ class UsersController < ApplicationController
     end
   end
 
+  get '/users/online' do
+    @users = User.online
+    erb :'users/online', :layout => :template
+  end
+
   get '/users/:id' do
       @user = User.find_by_slug(params[:id])
       @profilepic = @user.images.first
@@ -75,7 +80,6 @@ class UsersController < ApplicationController
   end
 
   post'/login' do
-    @users = User.order(id: :desc).limit(2)
     if (@user = User.find_by(username: params[:username])) && @user.authenticate(params[:password])
       session[:user_id] = @user.id
       redirect "users/#{@user.id_or_slug}"
@@ -142,7 +146,12 @@ class UsersController < ApplicationController
   end
 
   get '/users' do
-    @users = User.all
+    if params[:search]
+      @users = User.where("name like ?", "%#{params[:search]}%")
+    else
+      @users = User.all
+    end
+
     erb :'users/all_users', :layout => :template
   end
 
