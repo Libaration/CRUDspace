@@ -1,3 +1,17 @@
+# CRUDSpace
+2005 Myspace recreation with Sinatra and Ruby. 
+The recreation is a representation of Myspace how it was originally in the year 2005.
+#### It features a lot of the original websites functionality including
+* User Signup
+* Profile Comments
+* Messages and message notifcation
+* Friend requests and friend request notifcations
+* Custom CSS for user profiles (Old myspace layout site codes work here too! Although a bit buggy sometimes)
+* Profile pictures and user photo albums
+
+## Screenshots
+![userProfile](https://i.gyazo.com/633ac419b9a7680b486fd301efc58902.jpg)
+![friendRequests](https://i.gyazo.com/ffec0ed7a7fe1d18c0f021b836a62dfb.mp4http://)
 
 ## Setup
 
