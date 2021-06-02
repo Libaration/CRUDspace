@@ -11,7 +11,9 @@ The recreation is a representation of Myspace how it was originally in the year 
 
 ## Screenshots
 ![userProfile](https://i.gyazo.com/633ac419b9a7680b486fd301efc58902.jpg)
-![friendRequests](https://i.gyazo.com/ffec0ed7a7fe1d18c0f021b836a62dfb.mp4http://)
+
+https://user-images.githubusercontent.com/11550216/120419217-02ef0f00-c330-11eb-990a-03e2fa082937.mp4
+
 
 ## Setup
 
