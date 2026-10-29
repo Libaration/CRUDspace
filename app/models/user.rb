@@ -10,6 +10,11 @@ class User < ActiveRecord::Base
   has_many :unread_messages, -> {where(read: false)}, class_name: Message, foreign_key: :receiver_id
   has_many :comments
   has_one :song
+  has_many :schools
+  has_many :companies
+  has_many :blog_entries
+  has_many :favorites
+  has_many :favorite_users, through: :favorites, source: :favorite
   scope :online, -> {where("last_seen_at > ?", 10.minutes.ago)}
 
   def self.find_by_slug(slug)

@@ -11,7 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20201006004344) do
+ActiveRecord::Schema.define(version: 20261029150200) do
+
+  create_table "blog_entries", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "subject"
+    t.text     "body"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "comments", force: :cascade do |t|
     t.string   "content"
@@ -19,6 +27,23 @@ ActiveRecord::Schema.define(version: 20201006004344) do
     t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "companies", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "name"
+    t.string   "location"
+    t.string   "start_year"
+    t.string   "end_year"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "favorites", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "favorite_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   create_table "friendships", force: :cascade do |t|
@@ -44,6 +69,21 @@ ActiveRecord::Schema.define(version: 20201006004344) do
     t.boolean  "replied",     default: false, null: false
   end
 
+  create_table "schools", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "name"
+    t.string   "location"
+    t.string   "grad_year"
+    t.string   "student_status"
+    t.string   "degree"
+    t.string   "major"
+    t.string   "clubs"
+    t.string   "start_year"
+    t.string   "end_year"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
   create_table "songs", force: :cascade do |t|
     t.string  "profilesong"
     t.string  "caption"
@@ -63,6 +103,30 @@ ActiveRecord::Schema.define(version: 20201006004344) do
     t.string   "motto"
     t.string   "url"
     t.datetime "last_seen_at"
+    t.text     "who_id_like_to_meet"
+    t.text     "interests_general"
+    t.text     "interests_music"
+    t.text     "interests_movies"
+    t.text     "interests_television"
+    t.text     "interests_books"
+    t.text     "interests_heroes"
+    t.string   "status"
+    t.string   "here_for"
+    t.string   "orientation"
+    t.string   "hometown"
+    t.string   "height"
+    t.string   "body_type"
+    t.string   "ethnicity"
+    t.string   "religion"
+    t.string   "zodiac_sign"
+    t.string   "smoke"
+    t.string   "drink"
+    t.string   "children"
+    t.string   "education"
+    t.string   "income"
+    t.string   "occupation"
+    t.text     "networking"
+    t.datetime "last_login_at"
   end
 
 end

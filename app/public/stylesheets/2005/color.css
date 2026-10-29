@@ -1,0 +1,36 @@
+/* MySpace.com color.css, archived capture of http://www.myspace.com/ (Jun 18, 2005). Kept verbatim. */
+body {
+	color: #000000;
+	background: #e5e5e5;
+}
+#wrapper {
+	/*background: #FFFFFF;*/
+}
+#header {
+	background: #039;
+	color: #FFFFFF;
+}
+#main {
+	background: #fff;
+}
+#advert {
+	background: #FFFFFF;
+}
+#nav {
+	background: #6698CB;
+}
+#nav a, #nav a:link, #nav a:visited {
+	color: #FFFFFF;
+}
+#nav a:hover {
+	color: #040c5c;
+}
+a, a:link, a:visited {
+	color: #003399;
+}
+a:hover {
+	color: #c00;
+}
+#header a, #header a:link, #header a:visited {
+	color: #FFFFFF;
+}
