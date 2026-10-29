@@ -1,71 +1,98 @@
 <style>
-  table#requests {
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: column;
-    align-items: flex-start;
+  table.picbox {
+    width: 100%;
+    margin-bottom: 8px;
+    border: 1px solid #6699cc;
+    border-collapse: separate;
+    border-spacing: 2px;
     text-align: left;
     font: normal 8pt/normal Verdana, Arial, Helvetica, sans-serif;
   }
-
-  table {
-    border: 1px solid #689aca;
-    border-spacing: 3px;
-    border-collapse: separate;
-    width: 100%;
-  }
-  th, td {
-    padding: 5px;
-    background-color: #e9f1fa;
-
-  }
-
-  th#topbar {
-    background-color: #689aca;
-    padding: 6px;
-    font-size: 12px;
-    font-weight: bold;
+  table.picbox th {
+    padding: 4px 6px;
+    background-color: #6699cc;
     color: white;
+    font-weight: bold;
   }
-  table img {
-    size: auto;
+  table.picbox td {
+    padding: 6px;
+    background-color: #e9f1fa;
   }
-  table td:last-child {
-    width: 1000px;
+
+  div.pic {
+    display: inline-block;
+    width: 170px;
+    margin: 4px;
+    vertical-align: top;
+    text-align: center;
   }
-  span.center {
+  div.pic img {
+    display: block;
+    max-width: 160px;
+    max-height: 160px;
+    margin: 0 auto;
+    border: 1px solid #6699cc;
+  }
+  div.pic div.caption {
+    margin-top: 4px;
+    word-wrap: break-word;
+  }
+  div.nopics {
+    padding: 10px;
     text-align: center;
   }
 
-    div.upload {
-      display: flex;
-      justify-content: left;
-    }
-    form {
-      text-align: left;
-    }
-    input {
-      font: normal 8pt/normal Verdana, Arial, Helvetica, sans-serif;
-      padding-top: 5px;
-      padding-bottom: 5px;
-    }
+  div.picnav {
+    margin-bottom: 12px;
+  }
 
+  form.upload {
+    margin: 0;
+    text-align: left;
+  }
+  form.upload div.field {
+    margin: 4px 0;
+  }
+  form.upload label {
+    display: inline-block;
+    width: 55px;
+    font-weight: bold;
+  }
+  form.upload input[type=text] {
+    width: 250px;
+    font: normal 8pt/normal Verdana, Arial, Helvetica, sans-serif;
+  }
+  form.upload input[type=submit] {
+    margin-left: 59px;
+  }
 </style>
 
-<table id="requests">
-  <% @user.images.each do |image| %>
-        <td><a href="/users/<%= @user.id_or_slug %>/pictures/<%= image.id %>"><img src="/images<%= image.image %>" width="200px"></a><br>
-          <span class="center"><%= image.caption unless nil %></td></span>
-        <% end %>
+<table class="picbox">
+  <tr><th><%= @user.name %>'s Pictures</th></tr>
+  <tr><td>
+    <% if @user.images.empty? %>
+      <div class="nopics">There are no pictures yet.</div>
+    <% end %>
+    <% @user.images.each do |image| %>
+      <div class="pic">
+        <a href="/users/<%= @user.id_or_slug %>/pictures/<%= image.id %>"><img src="/images<%= image.image %>"></a>
+        <% unless image.caption.to_s.strip.empty? %><div class="caption"><%= image.caption %></div><% end %>
+      </div>
+    <% end %>
+  </td></tr>
 </table>
-  <a href="/users/<%= @user.id_or_slug %>" class="left">Go Back</a>
+<div class="picnav"><a href="/users/<%= @user.id_or_slug %>">Go Back</a></div>
 
 
 <% if logged_in? && @user == current_user %>
-<div class="upload"><form method='POST' action='/users/<%= current_user.id_or_slug %>/pictures' enctype="multipart/form-data" id="spacefix">
-  <h1>Upload new photo</h1>
-  <input type="text" value="Add a caption for your photo" name="caption"><br>
-  <input type='file' name='file' class='form-control'><br>
-  <input type="submit" value="Upload">
-</form></div>
+<table class="picbox">
+  <tr><th>Upload new photo</th></tr>
+  <tr><td>
+    <form method='POST' action='/users/<%= current_user.id_or_slug %>/pictures' enctype="multipart/form-data" id="spacefix" class="upload">
+      <div class="field"><label for="caption">Caption:</label> <input type="text" placeholder="Add a caption for your photo" name="caption" id="caption"></div>
+      <div class="field"><label for="file">Photo:</label> <input type='file' name='file' class='form-control' id="file"></div>
+      <div class="field"><input type="submit" value="Upload"></div>
+    </form>
+  </td></tr>
+</table>
 <% end %>

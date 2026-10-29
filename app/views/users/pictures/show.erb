@@ -1,22 +1,83 @@
+<style>
+  table.picbox {
+    width: 100%;
+    margin-bottom: 8px;
+    border: 1px solid #6699cc;
+    border-collapse: separate;
+    border-spacing: 2px;
+    text-align: left;
+    font: normal 8pt/normal Verdana, Arial, Helvetica, sans-serif;
+  }
+  table.picbox th {
+    padding: 4px 6px;
+    background-color: #6699cc;
+    color: white;
+    font-weight: bold;
+  }
+  table.picbox td {
+    padding: 6px;
+    background-color: #e9f1fa;
+  }
+  table.picbox td.photo {
+    padding: 10px;
+    text-align: center;
+  }
+  table.picbox td.photo img {
+    display: block;
+    max-width: 500px;
+    max-height: 500px;
+    margin: 0 auto;
+    border: 1px solid #6699cc;
+  }
+  table.picbox td.photo div.caption {
+    margin-top: 6px;
+    font-size: 9pt;
+    word-wrap: break-word;
+  }
 
-<div id="login">
-  <table>
-    <tr>
-      <img src="/images<%= @image.image %>" width="500px">
-    </tr>
-  </table>
-  <a href="/users/<%= @user.id_or_slug %>/pictures" class="left">Go Back</a>
-</div>
+  div.picnav {
+    margin-bottom: 12px;
+  }
+
+  table.options form {
+    margin: 0 0 6px;
+    text-align: left;
+  }
+  table.options form:last-child {
+    margin-bottom: 0;
+  }
+  table.options label {
+    font-weight: bold;
+  }
+  table.options input[type=text] {
+    width: 250px;
+    font: normal 8pt/normal Verdana, Arial, Helvetica, sans-serif;
+  }
+</style>
+
+<table class="picbox">
+  <tr><th><%= @user.name %>'s Pictures</th></tr>
+  <tr><td class="photo">
+    <img src="/images<%= @image.image %>">
+    <% unless @image.caption.to_s.strip.empty? %><div class="caption"><%= @image.caption %></div><% end %>
+  </td></tr>
+</table>
+<div class="picnav"><a href="/users/<%= @user.id_or_slug %>/pictures">Go Back</a></div>
 
 <% if logged_in? && @user == current_user %>
-  <form method='POST' action='/users/<%= current_user.id_or_slug %>/pictures/<%= @image.id %>'>
-    <input type="text" hidden name="_method" value="DELETE">
-    <h1>Options</h1>
-    <input type="submit" value="Delete Photo">
-  </form>
-  <form method='POST' action='/users/<%= current_user.id_or_slug %>/pictures/<%= @image.id %>'>
-    <input type="text" hidden name="_method" value="PATCH">
-    <input type="text" name="caption" value="<%= @image.caption unless nil %>">
-    <input type="submit" value="Edit Caption">
-  </form>
+<table class="picbox options">
+  <tr><th>Options</th></tr>
+  <tr><td>
+    <form method='POST' action='/users/<%= current_user.id_or_slug %>/pictures/<%= @image.id %>'>
+      <input type="text" hidden name="_method" value="DELETE">
+      <input type="submit" value="Delete Photo">
+    </form>
+    <form method='POST' action='/users/<%= current_user.id_or_slug %>/pictures/<%= @image.id %>'>
+      <input type="text" hidden name="_method" value="PATCH">
+      <label for="caption">Caption:</label>
+      <input type="text" name="caption" id="caption" value="<%= @image.caption unless nil %>">
+      <input type="submit" value="Edit Caption">
+    </form>
+  </td></tr>
+</table>
 <% end %>

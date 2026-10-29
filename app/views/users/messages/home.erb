@@ -1,113 +1,98 @@
 <style>
-  table {
-    border: 1px solid #93a4a9;
-    border-spacing: 3px;
+  table.mailbox {
     width: 100%;
-    text-align: left;
-    font: normal 9pt/normal Verdana, Arial, Helvetica, sans-serif;
-  }
-  table, th, td {
+    border: 1px solid #6699cc;
     border-collapse: separate;
-  }
-  th {
-    padding-right: 10px;
-    padding-top: 8px;
-    padding-bottom: 8px;
-    padding-left: 5px;
-    background-color: #6a9cc7;
-    color: white;
-
-  }
-  td {
-    padding: 5px;
-    padding-left: 10px;
-    background-color: #e9f1fb;
-  }
-
-  td img {
-    height: 125px;
-    border: #09379b solid 2px;
-  }
-
-  table#requestsempty {
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: column;
-    align-items: flex-start;
-    text-align: center;
-    width: 100%;
+    border-spacing: 2px;
+    text-align: left;
     font: normal 8pt/normal Verdana, Arial, Helvetica, sans-serif;
-    border-collapse: collapse;
-    border: 1px solid #689aca;
-    border-spacing: 3px;
   }
-table#requestsempty td:nth-child(n+1) {
-  width: 100%;
-}
+  table.mailbox th {
+    padding: 4px 6px;
+    background-color: #6699cc;
+    color: white;
+    font-weight: bold;
+    white-space: nowrap;
+  }
+  table.mailbox td {
+    padding: 5px 6px;
+    background-color: #e9f1fa;
+    vertical-align: middle;
+  }
+  table.mailbox tr.unread td {
+    background-color: #d5e8fb;
+  }
 
-  table td:nth-child(4) {
-    width: 80px;
-    max-width: 80px;
+  table.mailbox .check {
+    width: 16px;
+    padding: 3px;
+    text-align: center;
   }
-
-  table td:nth-child(3) {
-    width: 150px;
-    max-width: 200px;
-  }
-  table td:nth-child(2) {
-    width: 100px;
-  }
-  table td:nth-child(1) {
-    width: 25px;
-    padding: 5px;
+  table.mailbox .check input {
     margin: 0;
-    vertical-align: center;
-    horiz-align: center;
-    position: relative;
-    top: -1px;
+  }
+  table.mailbox .date {
+    width: 85px;
+    white-space: nowrap;
+  }
+  table.mailbox .from {
+    width: 100px;
+    text-align: center;
+  }
+  table.mailbox td.from a.name {
+    font-weight: bold;
+  }
+  table.mailbox td.from img {
+    display: block;
+    max-width: 90px;
+    max-height: 90px;
+    margin: 3px auto 0;
+    border: 1px solid #6699cc;
+  }
+  table.mailbox .status {
+    width: 55px;
+  }
+
+  table.emptybox td {
+    text-align: center;
+    padding: 8px;
+  }
+  table.emptybox td.emptymsg {
+    padding: 15px 8px;
+    font-size: 10pt;
   }
 
   div.messageactions {
-    width: 100%;
     display: flex;
-    flex-direction: row;
-    font-size: 12px;
-    padding-top: 10px;
+    align-items: center;
+    padding-top: 6px;
+    font: bold 8pt/normal Verdana, Arial, Helvetica, sans-serif;
     color: #152e71;
-    font-weight: bold;
   }
-
-  .messagereply{
-
-    text-align: left;
+  div.messageactions .messagereply {
+    margin-right: 4px;
   }
-
-
-  .messagereply:nth-child(2){
+  div.messageactions .messagereply:last-child {
     flex: 1;
+    margin-right: 0;
     text-align: right;
-    /*margin-left: 770px;*/
-    justify-content: right;
   }
 </style>
 <% if !@user.messages.empty? %>
-<table>
+<table class="mailbox">
   <form method="POST" action="/users/<%= @user.id_or_slug %>/messages">
-  <tr><th><input type="checkbox" id="selectAll"></th> <th>Date:</th> <th>From:</th><th>Status:</th><th>Subject:</th>
+  <tr><th class="check"><input type="checkbox" id="selectAll"></th> <th class="date">Date:</th> <th class="from">From:</th><th class="status">Status:</th><th>Subject:</th></tr>
     <% @messages.each do |message| %>
-      <% message.read == true ? @td = '<td>' : @td = '<td style="background-color: #cce1fc">' %>
-    <tr>
-      <%= @td %> <input type="checkbox" name="message_id[id][]" value="<%= message.id %>"></td>
-    <%= @td %> <%= message.created_at.strftime("%b %e, %Y<Br> %l:%M %p") %> </td>
-    <%= @td %><a href="/users/<%= message.sender.id_or_slug %>"><img src="/images<%= message.sender.images.first.image %>"></a></td>
-    <% if message.replied == true %>
-      <%= @td %>Replied
-      <% else %>
-      <%= @td %><%= message.read == true ? 'Read' : 'Unread' %>
-    <% end %>
-    </td>
-    <%= @td %><b><a href="/users/<%= @user.id_or_slug %>/messages/<%= message.id %>"><strong><%= message.subject %> </strong></a></b> </td>
-  </tr>
+    <tr class="<%= message.read == true ? 'read' : 'unread' %>">
+      <td class="check"><input type="checkbox" name="message_id[id][]" value="<%= message.id %>"></td>
+      <td class="date"><%= message.created_at.strftime("%b %e, %Y<br> %l:%M %p") %></td>
+      <td class="from">
+        <a class="name" href="/users/<%= message.sender.id_or_slug %>"><%= message.sender.name %></a>
+        <a href="/users/<%= message.sender.id_or_slug %>"><img src="/images<%= message.sender.images.first.image %>"></a>
+      </td>
+      <td class="status"><%= message.replied == true ? 'Replied' : (message.read == true ? 'Read' : 'Unread') %></td>
+      <td><a href="/users/<%= @user.id_or_slug %>/messages/<%= message.id %>"><b><%= message.subject %></b></a></td>
+    </tr>
   <% end %>
 
 
@@ -136,11 +121,9 @@ table#requestsempty td:nth-child(n+1) {
   </div>
 </div>
   <% else %>
-  <table id="requestsempty">
-    <tr>
-      <div class="boxHead"><b>Messages</b></div>
-    </tr>
+  <table class="mailbox emptybox">
+    <tr><th>Messages</th></tr>
+    <tr><td class="emptymsg"><b>You don't have any new Messages at this time.</b></td></tr>
+    <tr><td>View <a href="/users">Members</a> to find someone to chat with!</td></tr>
   </table>
-  <h2>You don't have any new Messages at this time.</h2><br>
-  <span style="font-size: 12px">View <a href="/users">Members</a> to find someone to chat with!</span>
 <% end %>

@@ -1,3 +1,12 @@
-<% @user.friends.each do |friend| %>
-  <a href="/users/<%= friend.id_or_slug %>"><div class="fwiendFace"><b><%= friend.name %></b><img src="/images<%= friend.images.first.image %>" width="125"></div></a>
-<% end %>
+<table class="fwiendSpace">
+  <% @user.friends.first(8).each_slice(4) do |row| %>
+    <tr>
+      <% row.each do |friend| %>
+        <td><a href="/users/<%= friend.id_or_slug %>"><div class="fwiendFace"><b><%= friend.name %></b><img src="/images<%= friend.images.first.image %>" width="90" height="90"></div></a></td>
+      <% end %>
+      <% (4 - row.size).times do %>
+        <td></td>
+      <% end %>
+    </tr>
+  <% end %>
+</table>

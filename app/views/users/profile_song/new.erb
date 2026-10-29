@@ -1,10 +1,4 @@
 <style>
-  body {
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-
-  }
   span.required {
     color: red;
   }
@@ -31,6 +25,10 @@
   div.join input {
     font: normal 8pt/normal Verdana, Arial, Helvetica, sans-serif;
   }
+  div.join td.error {
+    color: red;
+    font-weight: bold;
+  }
 </style>
 <div class="join">
   <table width="430" border="0" cellpadding="1" cellspacing="0" bgcolor="6699cc">
@@ -44,21 +42,25 @@
             <table width="100%" border="0" cellspacing="0" cellpadding="2">
 
               <form method='POST' action='/users/<%= @user.id_or_slug %>/profile_song' enctype="multipart/form-data" id="spacefix">
+                <% if @error %>
                 <tr>
-                  <span style="color:blue"><%= @error %></span><br>
+                  <td colspan="2" class="error"><%= @error %></td>
                 </tr>
+                <% end %>
+                <% if !@user.song.nil? %>
                 <tr>
-                  <% if !@user.song.nil? %>
                   <td>Current Song:</td>
-                    <td><%= @user.song.profilesong.to_s.gsub("/uploads/", "") %></td>
-                    <% end %>
+                  <td><%= @user.song.profilesong.to_s.gsub("/uploads/", "") %></td>
                 </tr>
+                <% end %>
                 <tr>
                   <td>Profile Song:</td>
                   <td><input type='file' name='file' class='form-control'></td>
                 </tr>
                 <tr>
+                  <td></td>
                   <td><input type="submit"></td>
                 </tr>
               </form>
             </table></td></tr></table></td></tr></table>
+</div>

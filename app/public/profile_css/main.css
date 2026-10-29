@@ -77,8 +77,9 @@ button{
 
 .rightHead{
     background: #fc9;
-    color: #cc6633;
-    padding-left: 4px;
+    color: #ff6600;
+    padding: 3px 4px 4px 6px;
+    font-size: 10pt;
 }
 
 .topLeft{
@@ -118,8 +119,8 @@ h4{
 }
 
 .fwiendCounter{
-    margin-top: 10px;
-    margin-bottom: 20px;
+    margin-top: 8px;
+    margin-bottom: 6px;
 }
 
 .boxButton{
@@ -158,7 +159,7 @@ h4{
 }
 
 #viewFriends{
-    margin-top: 20px;
+    margin-top: 4px;
     margin-bottom: 20px;
     text-align: right;
 }
@@ -171,9 +172,10 @@ h4{
 }
 
 #userWall{
-    margin-top: 10px;
+    margin-top: 4px;
     word-wrap:break-word;
-    display:inline-block;
+    display: table;
+    table-layout: fixed;
     overflow: hidden;
     width: 100%;
 }
@@ -194,18 +196,6 @@ textarea, textarea:focus {
     outline: none;
     box-shadow:none !important;
     border:1px solid #422918;
-}
-
-#footer{
-    font-size:small;
-    width: 100%;
-    bottom: 0px;
-    display: grid;
-    text-align: center;
-}
-
-#footer a {
-    text-decoration: none;
 }
 
 #sMsg {
@@ -294,21 +284,13 @@ textarea, textarea:focus {
 }
 
 #header a:not(.logo) {
-    margin-left:10px;
     color:#fff;
-    font-size: small;
     text-decoration:none;
 }
 
 a.logo{
     color:white;
     text-decoration:none;
-}
-
-#header img {
-    top: 9px;
-    left: 9px;
-    position: absolute;
 }
 
 .inboxList{
@@ -559,27 +541,6 @@ a.list:hover{
     padding-top: 20px;
 }
 
-@media only screen and (max-width: 768px) {
-    /* For mobile phones: */
-    .topLeft, .topRight{
-        width: auto;
-        float: none;
-    }
-    .extended {
-        margin-top: -18px;
-    }
-
-    .allfwiedsItem, .friendRequests {
-        max-width: calc( 50% - 86px );
-    }
-
-}
-
-@media only screen and (max-width:768px){
-    #header{height:51px}#hSub{top:63px}#hUp{float:left;left:0;font-size:small;position:fixed;top:35px}.sep{display:none}.topLeft{margin-top:30px}
-    .allfwieds{margin-top: 30px;}
-}
-
 #musicPlaylist{
     background: lightgray;
     color: #000;
@@ -675,6 +636,7 @@ a:active {
 }
 .boxButton{
     display: inline-block;
+    vertical-align: top;
     width: calc( 57% - 60px );
     padding-left: 30px;
     height: 24px;
@@ -696,6 +658,10 @@ span.notifcation2 {
 
 span.contact {
     font: normal 9pt/normal Verdana, Arial, Helvetica, sans-serif;
+}
+span.contact .boxButton {
+    height: auto;
+    min-height: 24px;
 }
 #sMsg, #add, #report, #block {
     font: normal 9pt/normal Verdana, Arial, Helvetica, sans-serif;
@@ -728,6 +694,8 @@ body {
     text-decoration: none;
     margin: 0;
     padding: 0;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
 }
 
 #container {
@@ -759,8 +727,14 @@ body {
     width: 618px;
 }
 /* End hack */
+#header #advert {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 #header #advert img {
-    vertical-align: 50%;
+    max-width: 100%;
+    max-height: 60px;
     margin: 0;
     padding: 0;
 }
@@ -1128,6 +1102,38 @@ a:hover {
 #footer p img {
     vertical-align: middle;
     margin: 0 10px 0 0;
+}
+/* profile: details next to the photo, Friend Space grid */
+table.short td {
+    vertical-align: top;
+}
+table.fwiendSpace {
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: collapse;
+}
+table.fwiendSpace td {
+    vertical-align: top;
+    text-align: center;
+    padding: 0 0 8px;
+}
+table.fwiendSpace .fwiendFace {
+    display: block;
+    width: auto;
+    max-width: none;
+    padding: 0 3px;
+}
+table.fwiendSpace .fwiendFace b {
+    display: block;
+    margin-bottom: 2px;
+    overflow-wrap: break-word;
+}
+table.fwiendSpace .fwiendFace img {
+    width: 90px;
+    height: 90px;
+    object-fit: cover;
+    object-position: 50% 25%;
+    border: 0;
 }
 /*
      FILE ARCHIVED ON 00:26:12 Jun 18, 2005 AND RETRIEVED FROM THE

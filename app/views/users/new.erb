@@ -1,61 +1,99 @@
 <style>
-  body {
+  #signup {
+    text-align: left;
+  }
+  #signup table {
+    font: normal 9pt/normal Verdana, Arial, Helvetica, sans-serif;
+  }
+  #signup div.notice {
+    padding: 0 0 15px;
+  }
+  #signup div.notice h1 {
+    margin: 0 0 8px;
+    font-size: 20px;
+    font-weight: normal;
+  }
+  #signup div.notice p {
+    margin: 0;
+    font-size: 13px;
+  }
+  #signup div.join {
     display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
+    align-items: flex-start;
+  }
 
+  #signup form {
+    margin: 0;
+    text-align: left;
+  }
+  #signup td.label {
+    width: 95px;
+    white-space: nowrap;
+  }
+  #signup td.label.top {
+    vertical-align: top;
+    padding-top: 5px;
+  }
+  #signup td.error {
+    padding-bottom: 6px;
+    color: red;
+    font-weight: bold;
   }
   span.required {
-      color: red;
-    }
+    color: red;
+  }
+  span.blackText7 {
+    color: black;
+    font: normal 7pt/normal Verdana, Arial, Helvetica, sans-serif;
+  }
 
-    span.blackText7 {
-      color: black;
-      font: normal 7pt/normal Verdana, Arial, Helvetica, sans-serif;
-    }
-    table {
-  font: normal 9pt/normal Verdana, Arial, Helvetica, sans-serif;
-    }
+  #signup div.join input,
+  #signup div.join select,
+  #signup div.join textarea {
+    font: normal 8pt/normal Verdana, Arial, Helvetica, sans-serif;
+  }
+  /* one width for every one-line field */
+  #signup div.join input[type=text],
+  #signup div.join input[type=password],
+  #signup div.join input[type=number],
+  #signup div.join select {
+    width: 200px;
+    height: 18px;
+    box-sizing: border-box;
+  }
+  #signup div.join textarea,
+  #signup div.join textarea:focus {
+    width: 300px;
+    height: 100px;
+    box-sizing: border-box;
+    resize: none;
+    border: 1px solid #767676;
+  }
 
-    div.join textarea {
-      font: normal 8pt/normal Verdana, Arial, Helvetica, sans-serif;
-      resize: none;
-      width: 300px;
-      height: 100px
-    }
-
-    div.join select {
-      font: normal 8pt/normal Verdana, Arial, Helvetica, sans-serif;
-    }
-
-    div.join input {
-      font: normal 8pt/normal Verdana, Arial, Helvetica, sans-serif;
-    }
-    div.join {
-  display: flex;
-  width: 100%;
-  overflow: hidden;
-    }
-    div.whyjoin {
-      flex: 1;
-      width: 200px;
-      float: right;
-      padding-left: 50px;
-      font-size: 12pt;
-    }
-
-    div.notice {
-      padding-bottom: 30px;
-      padding-left: 50px;
-    }
+  #signup div.whyjoin {
+    margin-left: 25px;
+    padding-top: 6px;
+    font-size: 9pt;
+    line-height: 18px;
+  }
+  #signup div.whyjoin strong.title {
+    display: block;
+    font-size: 10pt;
+    margin-bottom: 4px;
+  }
+  #signup div.whyjoin span.arrow {
+    color: #039;
+    font-weight: bold;
+  }
 </style>
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-<script src="//geodata.solutions/includes/statecity.js"></script><br>
+<script src="//geodata.solutions/includes/statecity.js"></script>
+<div id="signup">
 <div class="notice">
-  <span style="font-size: 20px">Join Your Friends on MySpace!</span><br>
-<br>
-  <span style="font-size: 13px">MySpace is FREE, and it only takes a second to join!</span></div>
+  <h1>Join Your Friends on MySpace!</h1>
+  <p>MySpace is FREE, and it only takes a second to join!</p>
+</div>
 <div class="join">
 <table width="430" border="0" cellpadding="1" cellspacing="0" bgcolor="6699cc">
   <tr>
@@ -66,48 +104,49 @@
       </tr>
       <tr>
         <td align="left" valign="top" bgcolor="ffffff">
+          <form method='POST' action='/users' enctype="multipart/form-data" id="spacefix">
           <table width="100%" border="0" cellspacing="0" cellpadding="2">
-
-            <form method='POST' action='/users' enctype="multipart/form-data" id="spacefix">
+              <% unless @error.to_s.empty? %>
               <tr>
-                <span style="color:blue"><%= @error %></span><br>
+                <td colspan="2" class="error"><%= @error %></td>
               </tr>
+              <% end %>
               <tr>
-                <td><span class="required">Username:</span></td>
-                <td><span class="required"><input type="text" name="username" value="" size="40" maxlength="255"></td>
-              </tr>
-
-              <tr>
-                <td><span class="required">Full Name:</span></td>
-                <td><span class="required"><input type="text" name="name" value="" maxlength="255"></td>
+                <td class="label"><span class="required">Username:</span></td>
+                <td><input type="text" name="username" value="" maxlength="255"></td>
               </tr>
 
               <tr>
-                <td><span class="required">Password:</span></td>
-                <td><span class="required"><input type="password" name="password" size="10" maxlength="10"><span class="blackText7">&nbsp;&nbsp;(max 10 characters)</span></td>
+                <td class="label"><span class="required">Full Name:</span></td>
+                <td><input type="text" name="name" value="" maxlength="255"></td>
               </tr>
 
               <tr>
-                <td><span class="required">State:</span></td>
-                <td><span class="required"><input type="hidden" name="country" id="countryId" value="US"/>
+                <td class="label"><span class="required">Password:</span></td>
+                <td><input type="password" name="password" maxlength="10"><span class="blackText7">&nbsp;&nbsp;(max 10 characters)</span></td>
+              </tr>
+
+              <tr>
+                <td class="label"><span class="required">State:</span></td>
+                <td><input type="hidden" name="country" id="countryId" value="US"/>
                 <input type="hidden" value="United States" name="country">
                 <select name="state" class="states" id="stateId" name="state">
                 <option value="">Select State</option>
-                </select></span></td>
+                </select></td>
               </tr>
 
               <tr>
-                  <td><span class="required">City:</span></td>
-                <td><span class="required"><input type="hidden" name="country" id="countryId" value="US"/>
+                <td class="label"><span class="required">City:</span></td>
+                <td><input type="hidden" name="country" id="countryId" value="US"/>
                 <input type="hidden" value="United States" name="country">
                   <select name="city" class="cities" id="cityId" name="city">
                    <option value="">Select City</option>
-                  </select></span></td>
+                  </select></td>
               </tr>
 
               <tr>
-                <td><span class="required">Gender:</span></td>
-                <td> <select name="gender" id="gender">
+                <td class="label"><span class="required">Gender:</span></td>
+                <td><select name="gender" id="gender">
                   <option value="male">Male</option>
                   <option value="female">Female</option>
                   <option value="non-binary">Non-Binary</option>
@@ -115,36 +154,38 @@
               </tr>
 
               <tr>
-                <td><span class="required">Age:</span></td>
+                <td class="label"><span class="required">Age:</span></td>
                 <td><input type="number" name="age"></td>
               </tr>
 
               <tr>
-                <td><span class="required">Profile Picture:</span></td>
+                <td class="label"><span class="required">Profile Picture:</span></td>
                 <td><input type='file' name='file' class='form-control'></td>
               </tr>
 
               <tr>
-                <td><span class="required">About Me:</span></td>
-                <td><textarea name="bio">Tell us about yourself here!</textarea></td>
+                <td class="label top"><span class="required">About Me:</span></td>
+                <td><textarea name="bio" placeholder="Tell us about yourself here!"></textarea></td>
               </tr>
 
               <tr>
-                <td><span class="required">Motto:</span></td>
+                <td class="label"><span class="required">Motto:</span></td>
                 <td><input type="text" name="motto"></td>
               </tr>
               <tr>
+                <td></td>
                 <td><input type="image" src="http://web.archive.org/web/20050330083311im_/http://signup.myspace.com/images/signup.gif" border="0" alt="Submit"></td>
               </tr>
-            </form>
-          </table></td></tr></table></td></tr></table>
+          </table>
+          </form>
+        </td></tr></table></td></tr></table>
   <div class="whyjoin">
-    <strong>Why Join MySpace?</strong><br>
-    <span style="color: blue">»</span>	Create a Custom Profile<br>
-    <span style="color: blue">»</span>	Upload Pictures<br>
-    <span style="color: blue">»</span>	Send Mail and IM's<br>
-    <span style="color: blue">»</span>	Write Blogs & Comments<br>
-    <span style="color: blue">»</span>	It's <strong>FREE</strong>!<br>
+    <strong class="title">Why Join MySpace?</strong>
+    <span class="arrow">&raquo;</span> Create a Custom Profile<br>
+    <span class="arrow">&raquo;</span> Upload Pictures<br>
+    <span class="arrow">&raquo;</span> Send Mail and IM's<br>
+    <span class="arrow">&raquo;</span> Write Blogs &amp; Comments<br>
+    <span class="arrow">&raquo;</span> It's <strong>FREE</strong>!<br>
   </div>
-
+</div>
 </div>
