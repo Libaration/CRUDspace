@@ -1,91 +1,86 @@
 <style>
-  table#requestsempty {
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: column;
-    align-items: flex-start;
-    text-align: center;
+  table.requests {
     width: 100%;
-    font: normal 8pt/normal Verdana, Arial, Helvetica, sans-serif;
-  }
-
-  table#requests {
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: column;
-    align-items: flex-start;
+    border: 1px solid #6699cc;
+    border-collapse: separate;
+    border-spacing: 2px;
     text-align: left;
     font: normal 8pt/normal Verdana, Arial, Helvetica, sans-serif;
   }
-
-  table {
-    border: 1px solid #689aca;
-    border-spacing: 3px;
-    border-collapse: separate;
-    width: 100%;
-      }
-  th, td {
-    padding: 5px;
+  table.requests th {
+    padding: 4px 6px;
+    background-color: #6699cc;
+    color: white;
+    font-weight: bold;
+  }
+  table.requests td {
+    padding: 6px;
     background-color: #e9f1fa;
-
+    vertical-align: middle;
   }
-
-    th#topbar {
-      background-color: #689aca;
-      padding: 6px;
-      font-size: 12px;
-      font-weight: bold;
-      color: white;
-    }
-    table img {
-      height: 150px;
-    }
-  table td:last-child {
-    width: 1000px;
-  }
-  td.center {
-      text-align: center;
-  }
-
-  div.deny form {
+  table.requests .from {
+    width: 110px;
     text-align: center;
-    padding: 5px;
+  }
+  table.requests td.from a.name {
+    font-weight: bold;
+  }
+  table.requests td.from img {
+    display: block;
+    max-width: 90px;
+    max-height: 90px;
+    margin: 3px auto 0;
+    border: 1px solid #6699cc;
+  }
+  table.requests td.confirm div.buttons {
+    margin-top: 8px;
+  }
+  table.requests td.confirm form {
+    display: inline;
+    margin: 0;
+  }
+
+  table.emptybox td {
+    padding: 8px;
+    text-align: center;
+  }
+  table.emptybox td.emptymsg {
+    padding: 15px 8px;
+    font-size: 10pt;
   }
 </style>
 
 
 <% if !@user.pending_friends.empty? %>
-    <table id="requests">
+    <table class="requests">
       <tr>
-        <th id=topbar>From:</th><th id="topbar">Confirmation:</th>
+        <th class="from">From:</th><th>Confirmation:</th>
       </tr>
       <% @user.pending_friends.each do |friend| %>
-        <form action="/users/<%= current_user.id %>/approve?friend_id=<%= friend.id %>" method="post">
         <tr>
-          <td><a href="/users/<%= friend.id %>"><img src="/images<%= friend.images.first.image %>"></a>
-            <br>
+          <td class="from">
+            <a class="name" href="/users/<%= friend.id %>"><%= friend.name %></a>
+            <a href="/users/<%= friend.id %>"><img src="/images<%= friend.images.first.image %>"></a>
           </td>
-          <td class="center">
-            <span style="font-weight: bold"><a href="/users/<%= friend.id %>"><%= friend.name %></a></span> wants to be your friend!<br>
-            <input type="submit" value="Approve">
-        </form>
-        <div class="deny"><form action="/users/<%= current_user.id %>/deny?friend_id=<%= friend.id %>" method="post">
-          <input type="hidden" name="_method" value="DELETE">
-          <input type="submit" value="Deny">
-        </form></div>
+          <td class="confirm">
+            <b><a href="/users/<%= friend.id %>"><%= friend.name %></a></b> wants to be your friend!
+            <div class="buttons">
+              <form action="/users/<%= current_user.id %>/approve?friend_id=<%= friend.id %>" method="post">
+                <input type="submit" value="Approve">
+              </form>
+              <form action="/users/<%= current_user.id %>/deny?friend_id=<%= friend.id %>" method="post">
+                <input type="hidden" name="_method" value="DELETE">
+                <input type="submit" value="Deny">
+              </form>
+            </div>
           </td>
         </tr>
       <% end %>
     </table>
   <% else %>
-  <table id="requestsempty">
-    <tr>
-      <div class="boxHead"><b>Friend Requests</b></div>
-    </tr>
-    <td><h2>You don't have any new Friend Requests at this time.</h2></td>
-    <tr><td><span style="font-size: 12px">View <a href="/friends">Members</a> to find new friends.</span></td></tr>
+  <table class="requests emptybox">
+    <tr><th>Friend Requests</th></tr>
+    <tr><td class="emptymsg"><b>You don't have any new Friend Requests at this time.</b></td></tr>
+    <tr><td>View <a href="/users">Members</a> to find new friends.</td></tr>
   </table>
 <% end %>
-
-
-

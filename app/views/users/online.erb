@@ -1,12 +1,85 @@
 <style>
-  div.fwiendFace img.onlinenow {
-    width: auto;
+  table.userbox {
+    width: 100%;
+    border: 1px solid #6699cc;
+    border-collapse: separate;
+    border-spacing: 2px;
+    text-align: left;
+    font: normal 8pt/normal Verdana, Arial, Helvetica, sans-serif;
+  }
+  table.userbox th {
+    padding: 4px 6px;
+    background-color: #6699cc;
+    color: white;
+    font-weight: bold;
+    font-size: 9pt;
+  }
+  table.userbox td {
+    padding: 6px;
+    background-color: #e9f1fa;
+  }
+
+  form.usersearch {
+    margin: 0;
+    text-align: left;
+  }
+  form.usersearch input[type=text] {
+    width: 200px;
+    font: normal 8pt/normal Verdana, Arial, Helvetica, sans-serif;
+  }
+
+  div.usercell {
+    display: inline-block;
+    width: 142px;
+    margin: 4px 2px;
+    vertical-align: top;
+    text-align: center;
+  }
+  div.usercell div.name {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    height: 2.6em;
+    overflow: hidden;
+    margin-bottom: 3px;
+    font-weight: bold;
+    word-wrap: break-word;
+  }
+  div.usercell div.photo {
+    height: 100px;
+    line-height: 100px;
+  }
+  div.usercell div.photo img {
+    max-width: 100px;
+    max-height: 100px;
+    vertical-align: middle;
+    border: 1px solid #6699cc;
+  }
+  div.usercell div.online {
+    margin-top: 3px;
+  }
+  div.nousers {
+    padding: 10px;
+    text-align: center;
   }
 </style>
-<form action="/users" method="get">
-  <input type="text" name="search">
-  <input type="submit">
-</form>
-<% @users.each do |friend| %>
-  <a href="/users/<%= friend.id_or_slug %>"><div class="fwiendFace"><b><%= friend.name %></b><img src="/images<%= friend.images.first.image %>" width="125"><% if User.online.include?(friend) %><center><img class="onlinenow" src="https://myspace.windows93.net/img/online.gif"></center><% end %></div></a>
-<% end %>
+<table class="userbox">
+  <tr><th>Users Online</th></tr>
+  <tr><td>
+    <form action="/users" method="get" class="usersearch">
+      <label for="search"><b>Search:</b></label>
+      <input type="text" name="search" id="search">
+      <input type="submit" value="Search">
+    </form>
+  </td></tr>
+  <tr><td>
+    <% if @users.empty? %>
+      <div class="nousers">There are no users online right now.</div>
+    <% end %>
+    <% @users.each do |friend| %><div class="usercell">
+      <div class="name"><a href="/users/<%= friend.id_or_slug %>"><%= friend.name %></a></div>
+      <div class="photo"><a href="/users/<%= friend.id_or_slug %>"><img src="/images<%= friend.images.first.image %>"></a></div>
+      <% if User.online.include?(friend) %><div class="online"><img class="onlinenow" src="https://myspace.windows93.net/img/online.gif"></div><% end %>
+    </div><% end %>
+  </td></tr>
+</table>

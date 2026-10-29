@@ -1,60 +1,37 @@
 <style>
-  body {
-    display: flex;
-    flex-wrap: wrap;
-  }
   table#urltable {
-    border: 1px solid #93a4a9;
-    border-spacing: 3px;
     width: 100%;
-    text-align: left;
-    font: normal 9pt/normal Verdana, Arial, Helvetica, sans-serif;
-    justify-content: center;
-    align-content: center;
-    text-align: center;
-  }
-  table, th, td {
+    border: 1px solid #6699cc;
     border-collapse: separate;
+    border-spacing: 2px;
+    text-align: center;
+    font: normal 9pt/normal Verdana, Arial, Helvetica, sans-serif;
   }
-  th {
-    padding-right: 10px;
-    padding-top: 8px;
-    padding-bottom: 8px;
-    padding-left: 5px;
-    background-color: #6a9cc7;
+  table#urltable th {
+    padding: 4px 6px;
+    background-color: #6699cc;
     color: white;
-
+    font-weight: bold;
+    text-align: left;
   }
-  td {
-    padding: 5px;
-    padding-left: 10px;
-    background-color: #e9f1fb;
+  table#urltable td {
+    padding: 10px;
+    background-color: #e9f1fa;
+    line-height: 1.4;
   }
-
-  td img {
-    height: 125px;
-    border: #09379b solid 2px;
-  }
-
-  table#urltable td:nth-child(n+1) {
-    width: 100%;
+  form.urlform {
+    margin: 0;
     text-align: center;
   }
-   form.urlform {
-     text-align: center;
-   }
-  input[type=button], input[type=submit], input[type=reset] {
-    background-color: #6a9cc7;
-    border: none;
-    color: white;
-    padding: 16px 32px;
-    text-decoration: none;
-    margin: 4px 2px;
-    cursor: pointer;
+  form.urlform input[type=text] {
+    font: normal 9pt/normal Verdana, Arial, Helvetica, sans-serif;
+  }
+  span.error {
+    color: red;
   }
 </style>
 <table id="urltable">
-  <tr><th>Pick your MySpace URL</th>
+  <tr><th>Pick your MySpace URL</th></tr>
   <tr><td>
     <strong><span style="color: red;">NOTE:</span> You cannot change your MySpace Name once you pick it, so<br>
       make sure you pick something you're willing to live with!<br><br></strong>
@@ -66,8 +43,8 @@
     http://www.myspace.com/<input type="text" name="url"><br><br>
     <strong>Confirm your MySpace Name/URL:</strong><br>
     http://www.myspace.com/<input type="text" name="urlconfirm"><br><br>
-    <input type="submit"><br><br>
-      <strong><span style="color: red;"><%= @error %></span>
+    <input type="submit">
+    <% unless @error.to_s.empty? %><br><br><strong><span class="error"><%= @error %></span></strong><% end %>
     </form>
   </td></tr>
 </table>

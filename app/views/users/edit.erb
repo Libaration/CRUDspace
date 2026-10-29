@@ -1,10 +1,4 @@
 <style>
-  body {
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-
-  }
   span.required {
     color: red;
   }
@@ -20,19 +14,6 @@
     width: 50px;
   }
 
-  div.join input[type=submit]{
-    display: flex;
-    flex-wrap: wrap;
-    background-color: #6a9cc7;
-    border: none;
-    color: white;
-    padding: 16px 32px;
-    text-decoration: none;
-    margin: 4px 2px;
-    cursor: pointer;
-    margin-right: 50px;
-  }
-
   table td {
     padding: 3px
   }
@@ -41,7 +22,8 @@
     font: normal 8pt/normal Verdana, Arial, Helvetica, sans-serif;
     resize: none;
     width: 300px;
-    height: 100px
+    height: 100px;
+    border: 1px solid #767676;
   }
 
   div.join select {
@@ -53,17 +35,21 @@
   }
   div.join {
     display: flex;
+    align-items: flex-start;
     width: 100%;
-    overflow: hidden;
   }
   div.whyjoin {
+    flex: none;
+    width: 190px;
+    margin-right: 20px;
+    font-size: 8pt;
+    line-height: 1.4;
+    background-color: #d5e8fb;
+    padding: 6px;
+    border: #6699cc 1px solid;
+  }
+  div.join > table {
     flex: 1;
-    float: left;
-    margin-right: 60px;
-    font-size: 9pt;
-    background-color: #d6e8fa;
-    padding: 5px;
-    border: #adc7e5 1px solid;
   }
 
   div.notice {
@@ -113,6 +99,7 @@
                   <td><textarea name="css"><%= @custom_css unless nil %></textarea></td>
                 </tr>
                 <tr>
+                  <td></td>
                   <td><input type=submit></td>
                 </tr>
 
