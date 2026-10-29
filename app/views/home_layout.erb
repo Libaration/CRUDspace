@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>MySpace</title>
+  <link rel="icon" href="/images/favicon.ico" type="image/x-icon"/>
+  <meta name="viewport" content="width=820">
+  <link rel="stylesheet" href="/profile_css/main.css">
+  <link href="/stylesheets/webarchive.css" rel="stylesheet" type="text/css"/>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+  <style>
+    body {
+      font: normal 8pt/normal Verdana, Arial, Helvetica, sans-serif;
+      text-transform: none;
+      text-decoration: none;
+    }
+    a:link {
+      text-decoration: none;
+      color: #1c48ad;
+    }
+
+    a:visited {
+      color: #1c48ad;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    a:active {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body><div id="container">
+
+  <%= erb :'/partials/header' %>
+
+  <div style="padding:20px;">
+
+
+    <div class = "container">
+
+
+<%= yield %>
+
+
+    </div>
+
+
+  </div>
+
+  <%= erb :'/partials/footer' %>
+
+</div></body>
+<script>
+    $("#selectAll").click(function () {
+        $('input:checkbox').not(this).prop('checked', this.checked);
+    });
+</script>
+</html>

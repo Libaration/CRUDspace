@@ -6,7 +6,7 @@ class UsersController < ApplicationController
 
   get '/users/new' do
     if !logged_in?
-      erb :'users/new' , :layout => :template
+      erb :'users/new', :layout => :home_layout
     else
       redirect "users/#{current_user.id}"
     end
@@ -70,13 +70,13 @@ class UsersController < ApplicationController
         redirect to("users/#{@user.id}")
       end
     end
-    erb :'users/new', :layout => :template
+    erb :'users/new', :layout => :home_layout
   end
 
   get '/login' do
     @users = User.order(id: :desc).limit(2)
     redirect "users/#{current_user.id_or_slug}" if logged_in?
-    erb :'users/login' , :layout => :template
+    erb :'users/login', :layout => :home_layout
   end
 
   post'/login' do
@@ -85,7 +85,7 @@ class UsersController < ApplicationController
       redirect "users/#{@user.id_or_slug}"
     else
       @error = 'One of the fields was incorrect'
-      erb :'users/login', :layout => :template
+      erb :'users/login', :layout => :home_layout
 
     end
 
