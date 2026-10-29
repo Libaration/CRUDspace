@@ -1,0 +1,56 @@
+<%# View/Edit All Comments (GET /users/:id/comments). No 2005 capture of this page exists: it reuses the
+    profile's "Friends Comments" table (ffcc99 header, FF9933 author cell, F9D6B4 comment cell). %>
+<% owner = logged_in? && current_user == @user %>
+<table width="760" border="0" cellspacing="0" cellpadding="0" align="center">
+  <tr><td class="text" align="left">
+    <span class="nametext"><%= h @user.name %>'s Comments</span><br><br>
+    <a href="<%= profile_path(@user) %>">Back to <%= h @user.name %>'s Profile</a><br><br>
+    <table bordercolor="ffcc99" height="20" cellspacing="0" cellpadding="0" width="760" bgcolor="ffcc99" border="1">
+      <tr><td width="760" style="word-wrap:break-word"><span class="orangetext15"><%= h @user.name %>'s Friends Comments</span></td></tr>
+    </table>
+    <table bordercolor="000000" cellspacing="3" cellpadding="0" width="760" align="center" bgcolor="ffffff" border="0">
+      <tr>
+        <td>
+          <b>Displaying <span class="redtext"><%= @comments.size %></span> of <span class="redtext"><%= @comments.size %></span> comments (<a href="/users/<%= @user.id_or_slug %>/comments/new">Add Comment</a>)</b>
+        </td>
+      </tr>
+      <% unless @comments.empty? %>
+      <tr>
+        <td bordercolor="ff9933" bgcolor="ffcccc">
+          <table width="100%" border="1" cellspacing="0" cellpadding="3" bordercolor="FFffff" style="table-layout:fixed">
+            <% @comments.each do |comment| %>
+              <% author = comment.author %>
+              <tr>
+                <td align="center" valign="top" width="150" bgcolor="FF9933" style="word-wrap:break-word">
+                  <% if author %>
+                    <a href="<%= profile_path(author) %>"><%= h author.name %></a>
+                    <br><br>
+                    <a href="<%= profile_path(author) %>"><img src="<%= photo_path(author) %>" width="90" border="0" alt=""></a>
+                    <% if online_user_ids.include?(author.id) %><br><img src="/images/2005/onlinenow.gif" border="0" alt="Online Now!"><% end %>
+                  <% end %>
+                  <br><br>
+                </td>
+                <td bgcolor="F9D6B4" align="left" valign="top" style="word-wrap:break-word">
+                  <span class="blacktext10"><%= comment.created_at.strftime('%b %-d, %Y %I:%M %p') %></span><br><br>
+                  <%= comment.content %>
+                  <% if logged_in? && (owner || author == current_user) %>
+                    <br><br>
+                    <form method="post" action="/users/<%= @user.id_or_slug %>/comments/<%= comment.id %>" style="margin:0" onsubmit="return confirm('Are you sure you want to delete this comment?')">
+                      <input type="hidden" name="_method" value="DELETE">
+                      <input type="submit" value="Delete Comment">
+                    </form>
+                  <% end %>
+                </td>
+              </tr>
+            <% end %>
+          </table>
+        </td>
+      </tr>
+      <% end %>
+      <tr>
+        <td align="right"><a href="/users/<%= @user.id_or_slug %>/comments/new">Add Comment</a></td>
+      </tr>
+    </table>
+    <br>
+  </td></tr>
+</table>

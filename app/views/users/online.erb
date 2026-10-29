@@ -1,85 +1,50 @@
-<style>
-  table.userbox {
-    width: 100%;
-    border: 1px solid #6699cc;
-    border-collapse: separate;
-    border-spacing: 2px;
-    text-align: left;
-    font: normal 8pt/normal Verdana, Arial, Helvetica, sans-serif;
-  }
-  table.userbox th {
-    padding: 4px 6px;
-    background-color: #6699cc;
-    color: white;
-    font-weight: bold;
-    font-size: 9pt;
-  }
-  table.userbox td {
-    padding: 6px;
-    background-color: #e9f1fa;
-  }
-
-  form.usersearch {
-    margin: 0;
-    text-align: left;
-  }
-  form.usersearch input[type=text] {
-    width: 200px;
-    font: normal 8pt/normal Verdana, Arial, Helvetica, sans-serif;
-  }
-
-  div.usercell {
-    display: inline-block;
-    width: 142px;
-    margin: 4px 2px;
-    vertical-align: top;
-    text-align: center;
-  }
-  div.usercell div.name {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    height: 2.6em;
-    overflow: hidden;
-    margin-bottom: 3px;
-    font-weight: bold;
-    word-wrap: break-word;
-  }
-  div.usercell div.photo {
-    height: 100px;
-    line-height: 100px;
-  }
-  div.usercell div.photo img {
-    max-width: 100px;
-    max-height: 100px;
-    vertical-align: middle;
-    border: 1px solid #6699cc;
-  }
-  div.usercell div.online {
-    margin-top: 3px;
-  }
-  div.nousers {
-    padding: 10px;
-    text-align: center;
-  }
-</style>
-<table class="userbox">
-  <tr><th>Users Online</th></tr>
+<table width="760" border="0" cellspacing="0" cellpadding="0" align="center">
+  <tr>
+    <td align="left" valign="bottom"><span class="nametext">Users Online</span></td>
+    <td align="right" valign="bottom" class="text"><a href="/users">Browse Users</a></td>
+  </tr>
+  <tr><td colspan="2"><img src="/images/2005/clear.gif" width="1" height="8" border="0"></td></tr>
+</table>
+<table border="1" bordercolor="6699cc" cellspacing="0" cellpadding="0" width="760" align="center">
+  <tr><td class="text" align="left" valign="middle" bgcolor="6699cc" height="15">&nbsp;&nbsp;&nbsp;<span class="whitetext12">Search MySpace</span></td></tr>
   <tr><td>
-    <form action="/users" method="get" class="usersearch">
-      <label for="search"><b>Search:</b></label>
-      <input type="text" name="search" id="search">
-      <input type="submit" value="Search">
-    </form>
+    <table border="0" cellspacing="3" cellpadding="3" width="100%" bgcolor="ffffff">
+      <tr>
+        <td valign="middle" align="left" width="100" bgcolor="b1d0f0"><span class="lightbluetext8"><label for="search">Name:</label></span></td>
+        <td valign="middle" align="left" bgcolor="d5e8fb">
+          <form action="/users" method="get" class="usersearch" style="margin:0">
+            <input type="text" name="search" id="search" size="30" value="<%= Rack::Utils.escape_html(params[:search].to_s) %>">
+            <input type="submit" value="Search">
+          </form>
+        </td>
+      </tr>
+    </table>
   </td></tr>
+</table>
+<br>
+<table border="1" bordercolor="6699cc" cellspacing="0" cellpadding="0" width="760" align="center">
+  <tr><td class="text" align="left" valign="middle" bgcolor="6699cc" height="15">&nbsp;&nbsp;&nbsp;<span class="whitetext12">Online Now</span></td></tr>
   <tr><td>
+    <table border="0" cellspacing="0" cellpadding="5" width="100%" bgcolor="ffffff">
+      <tr>
+        <td colspan="6" align="left" bgcolor="ffffff"><span class="btext">There <%= @users.size == 1 ? 'is' : 'are' %> <span class="redbtext"><%= @users.size %></span> <%= @users.size == 1 ? 'user' : 'users' %> online now.</span></td>
+      </tr>
     <% if @users.empty? %>
-      <div class="nousers">There are no users online right now.</div>
+      <tr><td colspan="6" align="center" valign="middle" bgcolor="d5e8fb" height="50"><span class="blacktext10">There are no users online right now.</span></td></tr>
     <% end %>
-    <% @users.each do |friend| %><div class="usercell">
-      <div class="name"><a href="/users/<%= friend.id_or_slug %>"><%= friend.name %></a></div>
-      <div class="photo"><a href="/users/<%= friend.id_or_slug %>"><img src="/images<%= friend.images.first.image %>"></a></div>
-      <% if User.online.include?(friend) %><div class="online"><img class="onlinenow" src="https://myspace.windows93.net/img/online.gif"></div><% end %>
-    </div><% end %>
+    <% @users.each_slice(6) do |row| %>
+      <tr>
+      <% row.each do |friend| %>
+      <% friend_pic = friend.images.first %>
+        <td align="center" valign="top" width="16%" bgcolor="ffffff" style="word-wrap:break-word">
+          &nbsp;<a href="/users/<%= friend.id_or_slug %>"><%= friend.name %></a>&nbsp;<br>
+          <a href="/users/<%= friend.id_or_slug %>"><img src="<%= friend_pic ? "/images#{friend_pic.image}" : '/images/2005/no_pic.gif' %>" width="90" border="0"></a>
+          <br><img src="/images/2005/onlinenow.gif" width="80" height="20" border="0" alt="Online Now!">
+        </td>
+      <% end %>
+      <% (6 - row.size).times do %><td width="16%" bgcolor="ffffff">&nbsp;</td><% end %>
+      </tr>
+    <% end %>
+    </table>
   </td></tr>
 </table>

@@ -1,0 +1,35 @@
+<%# Profile: "X's Details" box, as in the May 2005 capture. Only filled rows are rendered. %>
+<%
+  body_type = [@user.height, @user.body_type].reject(&:blank?).join(" / ")
+  smoke_drink = [@user.smoke, @user.drink].reject(&:blank?).join("\n\t\t\t\t\t\t\t&nbsp;/&nbsp;\n\t\t\t\t\t\t\t")
+  detail_rows = [
+    ["Status:", @user.status], ["Here for:", @user.here_for], ["Orientation:", @user.orientation],
+    ["Hometown:", @user.hometown], ["Body Type:", body_type], ["Ethnicity:", @user.ethnicity],
+    ["Religion:", @user.religion], ["Sign:", @user.zodiac_sign], ["Smoke / Drink:", smoke_drink],
+    ["Children:", @user.children], ["Education:", @user.education], ["Income:", @user.income],
+    ["Occupation:", @user.occupation]
+  ].reject { |_, value| value.blank? }
+%>
+<% unless detail_rows.empty? %>
+<table bordercolor="6699cc" cellspacing="0" cellpadding="0" width="300" bgcolor="6699cc" border="1">
+	<tr>
+		<td class="text" valign="center" align="left" width="300" bgcolor="6699cc" height="10" wrap style="word-wrap:break-word">
+			&nbsp;&nbsp;&nbsp;<span class="whitetext12"><%= @user.name %>'s Details</span>
+		</td>
+	</tr>
+	<tr valign="top">
+		<td>
+			<table bordercolor="000000" cellspacing="3" cellpadding="3" width="300" align="center" bgcolor="ffffff" border="0">
+				<% detail_rows.each do |label, value| %>
+				<tr>
+					<td valign="top" align="left" width="100" bgcolor="b1d0f0"><span class="lightbluetext8"><%= label %></span></td>
+					<td style="WORD-WRAP: break-word" width="175" bgcolor="d5e8fb">
+							<%= value %>
+					</td>
+				</tr>
+				<% end %>
+			</table>
+		</td>
+	</tr>
+</table><br>
+<% end %>

@@ -13,8 +13,8 @@ class MessagesController < ApplicationController
     @user = User.find_by_slug(params[:id])
     @message = Message.find(params[:msg_id])
     if @message.receiver == current_user
-      params[:content].gsub!(/\r\n/, '<br />')
-      Message.create(params.except(:msg_id, :id)).tap do |new_message|
+      params[:content] = clean_text(params[:content].to_s)
+      Message.create(subject: plain_text(params[:subject]), content: params[:content]).tap do |new_message|
         new_message.sender = @user
         new_message.receiver = @message.sender
         new_message.save
@@ -37,7 +37,21 @@ class MessagesController < ApplicationController
   get'/users/:id/messages/:friend_id/new' do
     @user = User.find_by_slug(params[:id])
     @friend = User.find_by_slug(params[:friend_id])
+    # Prefilled by "Forward to Friend" (GET /users/:id/forward).
+    @prefill_subject = params[:subject]
+    @prefill_content = params[:content]
       erb :'users/messages/new', layout: :template
+  end
+
+  # Forward to Friend: pick one of your friends, then compose a prefilled message.
+  get '/users/:id/forward' do
+    require_login
+    @user = User.find_by_slug(params[:id])
+    @friends = current_user.friends.to_a
+    @forward_subject = "Fwd: #{@user.name}'s Profile"
+    @forward_url = "#{request.base_url}#{profile_path(@user)}"
+    @forward_content = "Check out #{@user.name}'s profile:\n#{@forward_url}"
+    erb :'users/forward', layout: :template
   end
 
   get '/users/:id/messages/:message_id' do
@@ -54,8 +68,8 @@ class MessagesController < ApplicationController
   post '/users/:id/messages/:friend_id' do
     @user = User.find_by_slug(params[:id])
     @friend= User.find_by_slug(params[:friend_id])
-      params[:content].gsub!(/\r\n/, '<br />')
-      Message.create(params.except(:friend_id, :id)).tap do |new_message|
+      params[:content] = clean_text(params[:content].to_s)
+      Message.create(subject: plain_text(params[:subject]), content: params[:content]).tap do |new_message|
         new_message.sender = @user
         new_message.receiver = @friend
         new_message.save

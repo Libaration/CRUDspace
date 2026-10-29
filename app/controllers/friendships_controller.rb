@@ -59,8 +59,20 @@ class FriendshipsController < ApplicationController
       @friend = User.find_by_slug(params[:id])
       current_user.friends.destroy(@friend)
       @friend.friends.destroy(current_user)
-      redirect "/users/#{@friend.id_or_slug}"
+      # Removing from your own "View All Friends" page returns you to that page.
+      if params[:from] == 'friends'
+        redirect "/users/#{current_user.id_or_slug}/friends"
+      else
+        redirect "/users/#{@friend.id_or_slug}"
+      end
     end
+  end
+
+  # View All of X's Friends
+  get '/users/:id/friends' do
+    @user = User.find_by_slug(params[:id])
+    @friends = @user.friends.to_a
+    erb :'/users/friends', layout: :template
   end
 
   get '/users/:id/friend_requests' do

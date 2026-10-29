@@ -1,0 +1,47 @@
+<%# Left column of the blog pages (index, show, new). %>
+<% blog_owner = logged_in? && current_user == @user %>
+<table border="1" bordercolor="6699cc" cellspacing="0" cellpadding="0" width="200">
+  <tr><td width="200" height="15" bgcolor="6699cc" class="text" align="left">&nbsp;&nbsp;&nbsp;<span class="whitetext12"><%= h @user.name %>'s Blog</span></td></tr>
+  <tr><td>
+    <table border="0" cellspacing="3" cellpadding="3" width="100%" bgcolor="ffffff">
+      <tr>
+        <td align="center" valign="top" bgcolor="ffffff" class="text">
+          <a href="<%= profile_path(@user) %>"><img src="<%= photo_path(@user) %>" width="90" border="0" alt=""></a><br>
+          <a href="<%= profile_path(@user) %>"><%= h @user.name %></a><br>
+          <% if @user.gender.present? %><%= h @user.gender.capitalize %><br><% end %>
+          <% if @user.age %><%= @user.age %> years old<br><% end %>
+          <% if @user.city.present? %><%= h @user.city %><% if @user.state.present? %>, <%= h @user.state.upcase %><% end %><br><% end %>
+        </td>
+      </tr>
+      <tr>
+        <td bgcolor="d5e8fb" align="left" class="text">
+          <a href="<%= profile_path(@user) %>">View Profile</a><br>
+          <a href="/users/<%= @user.id_or_slug %>/blog">View All Blog Entries</a><br>
+          <% if blog_owner %>
+            <a href="/users/<%= @user.id_or_slug %>/blog/new">Post New Blog Entry</a><br>
+          <% else %>
+            [<a href="#">Subscribe to this Blog</a>]<br>
+          <% end %>
+        </td>
+      </tr>
+    </table>
+  </td></tr>
+</table>
+<br>
+<% recent = @user.blog_entries.order(created_at: :desc, id: :desc).limit(10).to_a %>
+<% unless recent.empty? %>
+<table border="1" bordercolor="6699cc" cellspacing="0" cellpadding="0" width="200">
+  <tr><td width="200" height="15" bgcolor="6699cc" class="text" align="left">&nbsp;&nbsp;&nbsp;<span class="whitetext12">Recent Entries</span></td></tr>
+  <tr><td>
+    <table border="0" cellspacing="3" cellpadding="3" width="100%" bgcolor="ffffff">
+      <% recent.each do |entry| %>
+        <tr><td bgcolor="d5e8fb" align="left" class="text" style="word-wrap:break-word">
+          <a href="/users/<%= @user.id_or_slug %>/blog/<%= entry.id %>"><%= h entry.subject %></a><br>
+          <span class="blacktext7"><%= entry.created_at.strftime('%m/%d/%Y') %></span>
+        </td></tr>
+      <% end %>
+    </table>
+  </td></tr>
+</table>
+<br>
+<% end %>

@@ -1,6 +1,26 @@
-<style>
-  h4.edit {
-    text-align: right;
-  }
-</style>
-<%= @user.bio %> <% if logged_in? && @user == current_user %> <br> <a href="/users/<%= @user.id_or_slug %>/edit"><h4 class="edit">edit</h4></a> <% end %>
+<%# Profile: "X's Blurbs" (About me / Who I'd like to meet), as in the May 2005 capture. Blurbs are user HTML, rendered raw. %>
+<table bordercolor="ffcc99" cellspacing="0" cellpadding="0" width="435" bgcolor="ffcc99" border="0">
+	<tr>
+		<td class="text" valign="center" align="left" width="300" bgcolor="ffcc99" height="17" wrap style="word-wrap:break-word">&nbsp;&nbsp;&nbsp;<span class="orangetext15"><%= @user.name %>'s Blurbs</span></td>
+	</tr>
+	<tr><td>
+		<table bordercolor="000000" cellspacing="3" cellpadding="3" width="435" align="center" bgcolor="ffffff" border="0">
+			<% unless @user.bio.blank? %>
+			<tr>
+				<td valign="top" align="left" width="435" bgcolor="ffffff" style="word-wrap:break-word">
+					<span class="orangetext15">About me:</span><br>
+					<%= @user.bio %>
+				</td>
+			</tr>
+			<% end %>
+			<% unless @user.who_id_like_to_meet.blank? %>
+			<tr>
+				<td valign="top" align="left" width="435" bgcolor="ffffff" style="word-wrap:break-word">
+					<span class="orangetext15">Who I'd like to meet:</span><br>
+					<%= @user.who_id_like_to_meet %>
+				</td>
+			</tr>
+			<% end %>
+		</table>
+	</td></tr>
+</table><br>

@@ -1,0 +1,28 @@
+<%# Profile: "X's Latest Blog Entry" (5 newest), as in the May 2005 capture.
+    The empty state ("There are no Blog Entries yet.") has no reference. %>
+<% blog_entries = @user.blog_entries.order(created_at: :desc, id: :desc).limit(5).to_a %>
+	<table bordercolor="000000" cellspacing="3" cellpadding="0" width="435" align="center" bgcolor="ffffff" border="0">
+		<tr>
+			<td width="435" style="word-wrap:break-word"><span class="btext"><%= @user.name %>'s Latest Blog Entry</span>[<a href="#">Subscribe to this Blog</a>]<br><br></td>
+		</tr>
+		<% if blog_entries.empty? %>
+			<tr valign="top">
+				<td width="435" style="word-wrap:break-word">
+					There are no Blog Entries yet.
+					<br><br>
+				</td>
+			</tr>
+		<% end %>
+		<% blog_entries.each do |entry| %>
+			<tr valign="top">
+				<td width="435" style="word-wrap:break-word">
+					<%= Rack::Utils.escape_html(entry.subject) %>&nbsp;
+					(<a href="/users/<%= @p_id %>/blog/<%= entry.id %>">view more</a>)
+					<br><br>
+				</td>
+			</tr>
+		<% end %>
+		<tr>
+			<td valign="top" align="left" bgcolor="ffffff" height="25">[<a href="/users/<%= @p_id %>/blog">View All Blog Entries</a>]</td>
+		</tr>
+	</table><br>

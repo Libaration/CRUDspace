@@ -1,0 +1,16 @@
+<%# One blog entry (GET /users/:id/blog/:entry_id). No 2005 capture: same style as the blog list. %>
+<table width="760" border="0" cellspacing="0" cellpadding="0" align="center">
+  <tr>
+    <td colspan="3" align="left" class="text"><a href="/users/<%= @user.id_or_slug %>/blog"><img src="/images/2005/blogLogo.gif" width="146" height="44" border="0" alt="MySpace Blog"></a><br><br></td>
+  </tr>
+  <tr>
+    <td width="200" valign="top" align="left"><%= erb :'users/blog/sidebar' %></td>
+    <td width="25"><img src="/images/2005/clear.gif" width="25" height="1" border="0" alt=""></td>
+    <td width="535" valign="top" align="left">
+      <span class="nametext"><%= h @user.name %>'s Blog</span><br><br>
+      <%= erb :'users/blog/entry', locals: { entry: @entry, full: true } %>
+      [<a href="/users/<%= @user.id_or_slug %>/blog">View All Blog Entries</a>]
+    </td>
+  </tr>
+</table>
+<br>

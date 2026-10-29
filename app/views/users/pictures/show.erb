@@ -1,83 +1,50 @@
-<style>
-  table.picbox {
-    width: 100%;
-    margin-bottom: 8px;
-    border: 1px solid #6699cc;
-    border-collapse: separate;
-    border-spacing: 2px;
-    text-align: left;
-    font: normal 8pt/normal Verdana, Arial, Helvetica, sans-serif;
-  }
-  table.picbox th {
-    padding: 4px 6px;
-    background-color: #6699cc;
-    color: white;
-    font-weight: bold;
-  }
-  table.picbox td {
-    padding: 6px;
-    background-color: #e9f1fa;
-  }
-  table.picbox td.photo {
-    padding: 10px;
-    text-align: center;
-  }
-  table.picbox td.photo img {
-    display: block;
-    max-width: 500px;
-    max-height: 500px;
-    margin: 0 auto;
-    border: 1px solid #6699cc;
-  }
-  table.picbox td.photo div.caption {
-    margin-top: 6px;
-    font-size: 9pt;
-    word-wrap: break-word;
-  }
-
-  div.picnav {
-    margin-bottom: 12px;
-  }
-
-  table.options form {
-    margin: 0 0 6px;
-    text-align: left;
-  }
-  table.options form:last-child {
-    margin-bottom: 0;
-  }
-  table.options label {
-    font-weight: bold;
-  }
-  table.options input[type=text] {
-    width: 250px;
-    font: normal 8pt/normal Verdana, Arial, Helvetica, sans-serif;
-  }
-</style>
-
-<table class="picbox">
-  <tr><th><%= @user.name %>'s Pictures</th></tr>
-  <tr><td class="photo">
-    <img src="/images<%= @image.image %>">
-    <% unless @image.caption.to_s.strip.empty? %><div class="caption"><%= @image.caption %></div><% end %>
+<% pic_index = @user.images.to_a.index(@image) %>
+<table width="760" border="0" cellspacing="0" cellpadding="0" align="center">
+  <tr>
+    <td align="left" valign="bottom"><span class="nametext"><%= @user.name %></span></td>
+    <td align="right" valign="bottom" class="text"><a href="/users/<%= @user.id_or_slug %>/pictures">Back to <%= @user.name %>'s Pictures</a></td>
+  </tr>
+  <tr><td colspan="2"><img src="/images/2005/clear.gif" width="1" height="8" border="0"></td></tr>
+</table>
+<table border="1" bordercolor="6699cc" cellspacing="0" cellpadding="0" width="760" align="center">
+  <tr><td class="text" align="left" valign="middle" bgcolor="6699cc" height="15">&nbsp;&nbsp;&nbsp;<span class="whitetext12"><%= @user.name %>'s Pictures<% if pic_index %> (<%= pic_index + 1 %> of <%= @user.images.size %>)<% end %></span></td></tr>
+  <tr><td>
+    <table border="0" cellspacing="0" cellpadding="10" width="100%" bgcolor="ffffff">
+      <tr>
+        <td align="center" valign="top" bgcolor="ffffff" style="word-wrap:break-word">
+          <img src="/images<%= @image.image %>" border="0" style="max-width:720px">
+          <% unless @image.caption.to_s.strip.empty? %><br><br><span class="blacktext10nb"><%= @image.caption %></span><% end %>
+        </td>
+      </tr>
+    </table>
   </td></tr>
 </table>
-<div class="picnav"><a href="/users/<%= @user.id_or_slug %>/pictures">Go Back</a></div>
-
 <% if logged_in? && @user == current_user %>
-<table class="picbox options">
-  <tr><th>Options</th></tr>
+<br>
+<table border="1" bordercolor="6699cc" cellspacing="0" cellpadding="0" width="760" align="center">
+  <tr><td class="text" align="left" valign="middle" bgcolor="6699cc" height="15">&nbsp;&nbsp;&nbsp;<span class="whitetext12">Photo Options</span></td></tr>
   <tr><td>
-    <form method='POST' action='/users/<%= current_user.id_or_slug %>/pictures/<%= @image.id %>'>
-      <input type="text" hidden name="_method" value="DELETE">
-      <input type="submit" value="Delete Photo">
-    </form>
-    <form method='POST' action='/users/<%= current_user.id_or_slug %>/pictures/<%= @image.id %>'>
-      <input type="text" hidden name="_method" value="PATCH">
-      <label for="caption">Caption:</label>
-      <input type="text" name="caption" id="caption" value="<%= @image.caption unless nil %>">
-      <input type="submit" value="Edit Caption">
-    </form>
+    <table border="0" cellspacing="3" cellpadding="3" width="100%" bgcolor="ffffff">
+      <tr>
+        <td valign="middle" align="left" width="100" bgcolor="b1d0f0"><span class="lightbluetext8">Delete:</span></td>
+        <td valign="middle" align="left" bgcolor="d5e8fb">
+          <form method='POST' action='/users/<%= current_user.id_or_slug %>/pictures/<%= @image.id %>' style="margin:0">
+            <input type="hidden" name="_method" value="DELETE">
+            <input type="submit" value="Delete Photo">
+          </form>
+        </td>
+      </tr>
+      <tr>
+        <td valign="middle" align="left" width="100" bgcolor="b1d0f0"><span class="lightbluetext8"><label for="caption">Caption:</label></span></td>
+        <td valign="middle" align="left" bgcolor="d5e8fb">
+          <form method='POST' action='/users/<%= current_user.id_or_slug %>/pictures/<%= @image.id %>' style="margin:0">
+            <input type="hidden" name="_method" value="PATCH">
+            <input type="text" name="caption" id="caption" size="50" value="<%= Rack::Utils.escape_html(@image.caption.to_s) %>">
+            <input type="submit" value="Edit Caption">
+          </form>
+        </td>
+      </tr>
+    </table>
   </td></tr>
 </table>
 <% end %>

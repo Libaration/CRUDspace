@@ -1,0 +1,41 @@
+<%# Post a new blog entry (GET /users/:id/blog/new; POSTs to /users/:id/blog). No 2005 capture:
+    built in the profile's blue-box style. %>
+<table width="760" border="0" cellspacing="0" cellpadding="0" align="center">
+  <tr>
+    <td colspan="3" align="left" class="text"><a href="/users/<%= @user.id_or_slug %>/blog"><img src="/images/2005/blogLogo.gif" width="146" height="44" border="0" alt="MySpace Blog"></a><br><br></td>
+  </tr>
+  <tr>
+    <td width="200" valign="top" align="left"><%= erb :'users/blog/sidebar' %></td>
+    <td width="25"><img src="/images/2005/clear.gif" width="25" height="1" border="0" alt=""></td>
+    <td width="535" valign="top" align="left">
+      <form method="post" action="/users/<%= @user.id_or_slug %>/blog" style="margin:0">
+      <table border="1" bordercolor="6699cc" cellspacing="0" cellpadding="0" width="535">
+        <tr><td width="535" height="15" bgcolor="6699cc" class="text" align="left">&nbsp;&nbsp;&nbsp;<span class="whitetext12">Post a New Blog Entry</span></td></tr>
+        <tr><td>
+          <table border="0" cellspacing="3" cellpadding="3" width="100%" bgcolor="ffffff">
+            <% if @error %>
+              <tr><td colspan="2" align="left"><span class="redtext8"><b><%= h @error %></b></span></td></tr>
+            <% end %>
+            <tr>
+              <td width="90" valign="top" align="left" bgcolor="b1d0f0"><span class="lightbluetext8">Subject:</span></td>
+              <td bgcolor="d5e8fb" align="left"><input type="text" name="subject" value="<%= h @entry.subject %>" size="50" maxlength="255"></td>
+            </tr>
+            <tr>
+              <td valign="top" align="left" bgcolor="b1d0f0"><span class="lightbluetext8">Body:</span></td>
+              <td bgcolor="d5e8fb" align="left">
+                <textarea name="body" cols="55" rows="14" style="width:410px"><%= h @entry.body %></textarea><br>
+                <span class="blacktext7">You may enter HTML in your blog. Javascript is not allowed.</span>
+              </td>
+            </tr>
+            <tr>
+              <td></td>
+              <td align="left"><input type="submit" value="Post Blog Entry">&nbsp;&nbsp;<a href="/users/<%= @user.id_or_slug %>/blog">Cancel</a></td>
+            </tr>
+          </table>
+        </td></tr>
+      </table>
+      </form>
+    </td>
+  </tr>
+</table>
+<br>

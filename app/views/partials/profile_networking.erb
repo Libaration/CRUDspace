@@ -1,0 +1,18 @@
+<%# Profile: "X's Networking" box, as in the May 2005 capture. One row per line of `networking` ("Category - Skill - Role"). %>
+<% network_lines = @user.networking.to_s.split(/\r?\n/).map(&:strip).reject(&:empty?) %>
+<% unless network_lines.empty? %>
+	<table bordercolor="6699cc" cellspacing="0" cellpadding="0" width="300" border="1">
+		<tr><td class="text" valign="center" align="left" width="300" bgcolor="6699cc" height="10" wrap style="word-wrap:break-word" colspan="2">
+			&nbsp;&nbsp;&nbsp;<span class="whitetext12"><%= @user.name %>'s Networking</span>
+		</td></tr>
+		<% network_lines.each do |line| %>
+		<tr><td>
+			<table bordercolor="000000" cellspacing="3" cellpadding="3" width="300" align="center" border="0">
+					<tr><td bgcolor="b1d0f0" colspan="2">
+						<%= line.split(/\s+-\s+/).map { |part| %(<a href="#">#{part}</a>) }.join(" - \n\t\t\t\t\t\t") %>
+					</td></tr>
+			</table>
+		</td></tr>
+		<% end %>
+	</table><br>
+<% end %>

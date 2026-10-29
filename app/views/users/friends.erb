@@ -1,0 +1,42 @@
+<%# View All of X's Friends (GET /users/:id/friends). No 2005 capture of this page exists: built from
+    the profile's Friend Space markup (orange ffcc99 header, name-over-photo cells) at full page width. %>
+<% owner = logged_in? && current_user == @user %>
+<table width="760" border="0" cellspacing="0" cellpadding="0" align="center">
+  <tr><td class="text" align="left">
+    <span class="nametext"><%= h @user.name %>'s Friends</span><br><br>
+    <a href="<%= profile_path(@user) %>">Back to <%= h @user.name %>'s Profile</a><br><br>
+    <table height="20" cellspacing="0" cellpadding="0" width="760" bgcolor="ffcc99">
+      <tr><td width="760">&nbsp;&nbsp;&nbsp;<span class="orangetext15"><%= h @user.name %>'s Friend Space</span></td></tr>
+    </table>
+    <table cellspacing="0" cellpadding="5" width="760" align="center" border="0">
+      <tr>
+        <td bgcolor="ffffff" width="760"><span class="btext"><%= h @user.name %> has <span class="redbtext"><%= @friends.size %></span> Friends.</span></td>
+      </tr>
+      <tr><td>
+        <% if @friends.empty? %>
+          <%= h @user.name %> doesn't have any friends yet.
+        <% else %>
+        <table width="750" border="0" cellspacing="0" cellpadding="5" align="center">
+          <% @friends.each_slice(6) do |row| %>
+            <tr>
+              <% row.each do |friend| %>
+                <td bgcolor="FFFFFF" align="center" valign="top" width="125" style="word-wrap:break-word">
+                  <a href="<%= profile_path(friend) %>"><%= h friend.name %></a><br>
+                  <a href="<%= profile_path(friend) %>"><img src="<%= photo_path(friend) %>" width="90" border="0" alt=""></a>
+                  <% if online_user_ids.include?(friend.id) %><br><img src="/images/2005/onlinenow.gif" border="0" alt="Online Now!"><% end %>
+                  <% if owner %>
+                    <br><a href="/users/<%= friend.id_or_slug %>/remove?from=friends" class="redlink7" onclick="return confirm(<%= h "Are you sure you want to remove #{friend.name} from your friends?".to_json %>)">Remove</a>
+                  <% end %>
+                  <br><br>
+                </td>
+              <% end %>
+              <% (6 - row.size).times do %><td width="125">&nbsp;</td><% end %>
+            </tr>
+          <% end %>
+        </table>
+        <% end %>
+      </td></tr>
+    </table>
+    <br>
+  </td></tr>
+</table>

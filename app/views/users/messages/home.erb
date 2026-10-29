@@ -1,129 +1,72 @@
-<style>
-  table.mailbox {
-    width: 100%;
-    border: 1px solid #6699cc;
-    border-collapse: separate;
-    border-spacing: 2px;
-    text-align: left;
-    font: normal 8pt/normal Verdana, Arial, Helvetica, sans-serif;
-  }
-  table.mailbox th {
-    padding: 4px 6px;
-    background-color: #6699cc;
-    color: white;
-    font-weight: bold;
-    white-space: nowrap;
-  }
-  table.mailbox td {
-    padding: 5px 6px;
-    background-color: #e9f1fa;
-    vertical-align: middle;
-  }
-  table.mailbox tr.unread td {
-    background-color: #d5e8fb;
-  }
-
-  table.mailbox .check {
-    width: 16px;
-    padding: 3px;
-    text-align: center;
-  }
-  table.mailbox .check input {
-    margin: 0;
-  }
-  table.mailbox .date {
-    width: 85px;
-    white-space: nowrap;
-  }
-  table.mailbox .from {
-    width: 100px;
-    text-align: center;
-  }
-  table.mailbox td.from a.name {
-    font-weight: bold;
-  }
-  table.mailbox td.from img {
-    display: block;
-    max-width: 90px;
-    max-height: 90px;
-    margin: 3px auto 0;
-    border: 1px solid #6699cc;
-  }
-  table.mailbox .status {
-    width: 55px;
-  }
-
-  table.emptybox td {
-    text-align: center;
-    padding: 8px;
-  }
-  table.emptybox td.emptymsg {
-    padding: 15px 8px;
-    font-size: 10pt;
-  }
-
-  div.messageactions {
-    display: flex;
-    align-items: center;
-    padding-top: 6px;
-    font: bold 8pt/normal Verdana, Arial, Helvetica, sans-serif;
-    color: #152e71;
-  }
-  div.messageactions .messagereply {
-    margin-right: 4px;
-  }
-  div.messageactions .messagereply:last-child {
-    flex: 1;
-    margin-right: 0;
-    text-align: right;
-  }
-</style>
+<% @messages ||= [] %>
+<table width="760" border="0" cellspacing="0" cellpadding="0" align="center">
+  <tr>
+    <td align="left" valign="bottom"><span class="nametext">Mail Center</span></td>
+    <td align="right" valign="bottom" class="text"><b>Inbox</b> | <a href="/users/<%= @user.id_or_slug %>/friend_requests">Friend Requests</a></td>
+  </tr>
+  <tr><td colspan="2"><img src="/images/2005/clear.gif" width="1" height="8" border="0"></td></tr>
+</table>
 <% if !@user.messages.empty? %>
-<table class="mailbox">
+<table border="1" bordercolor="6699cc" cellspacing="0" cellpadding="0" width="760" align="center">
+  <tr><td class="text" align="left" valign="middle" bgcolor="6699cc" height="15">&nbsp;&nbsp;&nbsp;<span class="whitetext12">Inbox</span></td></tr>
+  <tr><td>
+<table class="mailbox" border="0" cellspacing="3" cellpadding="3" width="100%" bgcolor="ffffff">
   <form method="POST" action="/users/<%= @user.id_or_slug %>/messages">
-  <tr><th class="check"><input type="checkbox" id="selectAll"></th> <th class="date">Date:</th> <th class="from">From:</th><th class="status">Status:</th><th>Subject:</th></tr>
+  <tr>
+    <td width="20" align="center" valign="middle" bgcolor="b1d0f0"><input type="checkbox" id="selectAll"></td>
+    <td width="110" align="left" valign="middle" bgcolor="b1d0f0"><span class="lightbluetext8">Date:</span></td>
+    <td width="120" align="center" valign="middle" bgcolor="b1d0f0"><span class="lightbluetext8">From:</span></td>
+    <td width="70" align="left" valign="middle" bgcolor="b1d0f0"><span class="lightbluetext8">Status:</span></td>
+    <td align="left" valign="middle" bgcolor="b1d0f0"><span class="lightbluetext8">Subject:</span></td>
+  </tr>
     <% @messages.each do |message| %>
-    <tr class="<%= message.read == true ? 'read' : 'unread' %>">
-      <td class="check"><input type="checkbox" name="message_id[id][]" value="<%= message.id %>"></td>
-      <td class="date"><%= message.created_at.strftime("%b %e, %Y<br> %l:%M %p") %></td>
-      <td class="from">
-        <a class="name" href="/users/<%= message.sender.id_or_slug %>"><%= message.sender.name %></a>
-        <a href="/users/<%= message.sender.id_or_slug %>"><img src="/images<%= message.sender.images.first.image %>"></a>
+    <% sender_pic = message.sender.images.first %>
+    <tr>
+      <td align="center" valign="middle" bgcolor="d5e8fb"><input type="checkbox" name="message_id[id][]" value="<%= message.id %>"></td>
+      <td align="left" valign="middle" bgcolor="d5e8fb" nowrap><%= message.created_at.strftime("%b %d, %Y<br>%I:%M %p") %></td>
+      <td align="center" valign="middle" bgcolor="d5e8fb" style="word-wrap:break-word">
+        <a href="/users/<%= message.sender.id_or_slug %>"><%= message.sender.name %></a><br>
+        <a href="/users/<%= message.sender.id_or_slug %>"><img src="<%= sender_pic ? "/images#{sender_pic.image}" : '/images/2005/no_pic.gif' %>" width="90" border="0"></a>
       </td>
-      <td class="status"><%= message.replied == true ? 'Replied' : (message.read == true ? 'Read' : 'Unread') %></td>
-      <td><a href="/users/<%= @user.id_or_slug %>/messages/<%= message.id %>"><b><%= message.subject %></b></a></td>
+      <td align="left" valign="middle" bgcolor="d5e8fb"><% if message.replied == true %>Replied<% elsif message.read == true %>Read<% else %><span class="rbtext">Unread</span><% end %></td>
+      <td align="left" valign="middle" bgcolor="d5e8fb" style="word-wrap:break-word"><a <%= message.read == true ? 'class="readmail" ' : '' %>href="/users/<%= @user.id_or_slug %>/messages/<%= message.id %>"><%= message.subject %></a></td>
     </tr>
   <% end %>
-
-
 </table>
-
-<div class="messageactions">
-  <div class="messagereply">
+  </td></tr>
+</table>
+<table width="760" border="0" cellspacing="0" cellpadding="0" align="center">
+  <tr>
+    <td align="left" valign="middle" height="34">
 
       <input type="hidden" name="_method" value="PATCH">
       <input type="submit" value="Mark As Read">
-  </div>
-    <div class="messagereply">
+
     <form method="post" action="/users/<%= @user.id_or_slug %>/messages">
       <input type="hidden" name="_method" value="DELETE">
       <input type="submit" value="Delete Checked">
         </form>
       </form>
-    </div>
-  <div class="messagereply">
+    </td>
+    <td align="right" valign="middle" class="text">
     <% unless params[:start].to_i - 5 < 0 %>
-      <a href="/users/<%=  @user.id_or_slug  %>/messages?start=<%= params[:start].to_i - 5 %>&end=<%= params[:end].to_i - 5 %>"> << Previous </a>
+      <a href="/users/<%=  @user.id_or_slug  %>/messages?start=<%= params[:start].to_i - 5 %>&end=<%= params[:end].to_i - 5 %>">&lt;&lt; Previous</a>
     <% end %>
     <% unless params[:start].to_i + 5 > @messages.count %>
-    <a href="/users/<%=  @user.id_or_slug  %>/messages?start=<%= params[:end].to_i %>&end=<%= params[:end].to_i + 5 %>">Next >></a>
+      <% unless params[:start].to_i - 5 < 0 %> | <% end %>
+      <a href="/users/<%=  @user.id_or_slug  %>/messages?start=<%= params[:end].to_i %>&end=<%= params[:end].to_i + 5 %>">Next &gt;&gt;</a>
     <% end %>
-  </div>
-</div>
+    </td>
+  </tr>
+</table>
   <% else %>
-  <table class="mailbox emptybox">
-    <tr><th>Messages</th></tr>
-    <tr><td class="emptymsg"><b>You don't have any new Messages at this time.</b></td></tr>
-    <tr><td>View <a href="/users">Members</a> to find someone to chat with!</td></tr>
-  </table>
+<table border="1" bordercolor="6699cc" cellspacing="0" cellpadding="0" width="760" align="center">
+  <tr><td class="text" align="left" valign="middle" bgcolor="6699cc" height="15">&nbsp;&nbsp;&nbsp;<span class="whitetext12">Inbox</span></td></tr>
+  <tr><td>
+    <table border="0" cellspacing="3" cellpadding="3" width="100%" bgcolor="ffffff">
+      <tr><td align="center" valign="middle" bgcolor="d5e8fb" height="50"><span class="blacktext10">You don't have any new Messages at this time.</span></td></tr>
+      <tr><td align="center" valign="middle" bgcolor="ffffff">View <a href="/users">Members</a> to find someone to chat with!</td></tr>
+    </table>
+  </td></tr>
+</table>
 <% end %>

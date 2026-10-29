@@ -1,50 +1,40 @@
-<style>
-  table#urltable {
-    width: 100%;
-    border: 1px solid #6699cc;
-    border-collapse: separate;
-    border-spacing: 2px;
-    text-align: center;
-    font: normal 9pt/normal Verdana, Arial, Helvetica, sans-serif;
-  }
-  table#urltable th {
-    padding: 4px 6px;
-    background-color: #6699cc;
-    color: white;
-    font-weight: bold;
-    text-align: left;
-  }
-  table#urltable td {
-    padding: 10px;
-    background-color: #e9f1fa;
-    line-height: 1.4;
-  }
-  form.urlform {
-    margin: 0;
-    text-align: center;
-  }
-  form.urlform input[type=text] {
-    font: normal 9pt/normal Verdana, Arial, Helvetica, sans-serif;
-  }
-  span.error {
-    color: red;
-  }
-</style>
-<table id="urltable">
-  <tr><th>Pick your MySpace URL</th></tr>
+<table width="760" border="0" cellspacing="0" cellpadding="0" align="center">
+  <tr>
+    <td align="left" valign="bottom"><span class="nametext"><%= current_user.name %></span></td>
+    <td align="right" valign="bottom" class="text"><a href="/users/<%= current_user.id_or_slug %>">Back to <%= current_user.name %>'s Profile</a></td>
+  </tr>
+  <tr><td colspan="2"><img src="/images/2005/clear.gif" width="1" height="8" border="0"></td></tr>
+</table>
+<table border="1" bordercolor="6699cc" cellspacing="0" cellpadding="0" width="760" align="center">
+  <tr><td class="text" align="left" valign="middle" bgcolor="6699cc" height="15">&nbsp;&nbsp;&nbsp;<span class="whitetext12">Pick your MySpace URL</span></td></tr>
   <tr><td>
-    <strong><span style="color: red;">NOTE:</span> You cannot change your MySpace Name once you pick it, so<br>
-      make sure you pick something you're willing to live with!<br><br></strong>
-    After you enter your MySpace Name, we'll tell you about the Real Name<br>
-    feature.<br><br>
-    <form class="urlform" action="/users/<%= current_user.id %>/url" method="POST">
+    <form class="urlform" action="/users/<%= current_user.id %>/url" method="POST" style="margin:0">
       <input type="hidden" name="_method" value="PATCH">
-    <strong>Pick your MySpace Name/URL:</strong><br>
-    http://www.myspace.com/<input type="text" name="url"><br><br>
-    <strong>Confirm your MySpace Name/URL:</strong><br>
-    http://www.myspace.com/<input type="text" name="urlconfirm"><br><br>
-    <input type="submit">
-    <% unless @error.to_s.empty? %><br><br><strong><span class="error"><%= @error %></span></strong><% end %>
+    <table border="0" cellspacing="3" cellpadding="3" width="100%" bgcolor="ffffff">
+      <tr>
+        <td colspan="2" align="left" valign="top" bgcolor="ffffff">
+          <span class="redtext8"><b>NOTE:</b></span> <b>You cannot change your MySpace Name once you pick it, so make sure you pick something you're willing to live with!</b><br><br>
+          After you enter your MySpace Name, we'll tell you about the Real Name feature.
+        </td>
+      </tr>
+      <% unless @error.to_s.empty? %>
+      <tr>
+        <td colspan="2" align="left" valign="top" bgcolor="ffffff"><span class="redtext8"><b><%= @error %></b></span></td>
+      </tr>
+      <% end %>
+      <tr>
+        <td valign="middle" align="left" width="200" bgcolor="b1d0f0"><span class="lightbluetext8">Pick your MySpace Name/URL:</span></td>
+        <td valign="middle" align="left" bgcolor="d5e8fb">http://www.myspace.com/<input type="text" name="url" size="30"></td>
+      </tr>
+      <tr>
+        <td valign="middle" align="left" width="200" bgcolor="b1d0f0"><span class="lightbluetext8">Confirm your MySpace Name/URL:</span></td>
+        <td valign="middle" align="left" bgcolor="d5e8fb">http://www.myspace.com/<input type="text" name="urlconfirm" size="30"></td>
+      </tr>
+      <tr>
+        <td valign="top" align="left" width="200" bgcolor="ffffff">&nbsp;</td>
+        <td valign="top" align="left" bgcolor="ffffff"><input type="submit"></td>
+      </tr>
+    </table>
     </form>
   </td></tr>
 </table>

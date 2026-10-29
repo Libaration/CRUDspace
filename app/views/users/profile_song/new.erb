@@ -1,66 +1,38 @@
-<style>
-  span.required {
-    color: red;
-  }
-
-  span.blackText7 {
-    color: black;
-    font: normal 7pt/normal Verdana, Arial, Helvetica, sans-serif;
-  }
-  table {
-    font: normal 9pt/normal Verdana, Arial, Helvetica, sans-serif;
-  }
-
-  div.join textarea {
-    font: normal 8pt/normal Verdana, Arial, Helvetica, sans-serif;
-    resize: none;
-    width: 300px;
-    height: 100px
-  }
-
-  div.join select {
-    font: normal 8pt/normal Verdana, Arial, Helvetica, sans-serif;
-  }
-
-  div.join input {
-    font: normal 8pt/normal Verdana, Arial, Helvetica, sans-serif;
-  }
-  div.join td.error {
-    color: red;
-    font-weight: bold;
-  }
-</style>
-<div class="join">
-  <table width="430" border="0" cellpadding="1" cellspacing="0" bgcolor="6699cc">
-    <tr>
-      <td valign="top"><table width="100%" border="0" cellspacing="0" cellpadding="5">
-        <tr>
-          <td align="left" style="color: white; font-weight: bold; font-size: 10pt;">Music</td>
-        </tr>
-        <tr>
-          <td align="left" valign="top" bgcolor="ffffff">
-            <table width="100%" border="0" cellspacing="0" cellpadding="2">
-
-              <form method='POST' action='/users/<%= @user.id_or_slug %>/profile_song' enctype="multipart/form-data" id="spacefix">
-                <% if @error %>
-                <tr>
-                  <td colspan="2" class="error"><%= @error %></td>
-                </tr>
-                <% end %>
-                <% if !@user.song.nil? %>
-                <tr>
-                  <td>Current Song:</td>
-                  <td><%= @user.song.profilesong.to_s.gsub("/uploads/", "") %></td>
-                </tr>
-                <% end %>
-                <tr>
-                  <td>Profile Song:</td>
-                  <td><input type='file' name='file' class='form-control'></td>
-                </tr>
-                <tr>
-                  <td></td>
-                  <td><input type="submit"></td>
-                </tr>
-              </form>
-            </table></td></tr></table></td></tr></table>
-</div>
+<table width="760" border="0" cellspacing="0" cellpadding="0" align="center">
+  <tr>
+    <td align="left" valign="bottom"><span class="nametext"><%= @user.name %></span></td>
+    <td align="right" valign="bottom" class="text"><a href="/users/<%= @user.id_or_slug %>">Back to <%= @user.name %>'s Profile</a></td>
+  </tr>
+  <tr><td colspan="2"><img src="/images/2005/clear.gif" width="1" height="8" border="0"></td></tr>
+</table>
+<table border="1" bordercolor="6699cc" cellspacing="0" cellpadding="0" width="760" align="center">
+  <tr><td class="text" align="left" valign="middle" bgcolor="6699cc" height="15">&nbsp;&nbsp;&nbsp;<span class="whitetext12">Profile Song</span></td></tr>
+  <tr><td>
+    <form method='POST' action='/users/<%= @user.id_or_slug %>/profile_song' enctype="multipart/form-data" id="spacefix" style="margin:0">
+    <table border="0" cellspacing="3" cellpadding="3" width="100%" bgcolor="ffffff">
+      <tr>
+        <td colspan="2" align="left" valign="top" bgcolor="ffffff">Upload an MP3 to play on your profile.</td>
+      </tr>
+      <% if @error %>
+      <tr>
+        <td colspan="2" align="left" valign="top" bgcolor="ffffff"><span class="redtext8"><b><%= @error %></b></span></td>
+      </tr>
+      <% end %>
+      <% if !@user.song.nil? %>
+      <tr>
+        <td valign="top" align="left" width="100" bgcolor="b1d0f0"><span class="lightbluetext8">Current Song:</span></td>
+        <td valign="top" align="left" bgcolor="d5e8fb" style="word-wrap:break-word"><%= @user.song.profilesong.to_s.gsub("/uploads/", "") %></td>
+      </tr>
+      <% end %>
+      <tr>
+        <td valign="middle" align="left" width="100" bgcolor="b1d0f0"><span class="lightbluetext8">Profile Song:</span></td>
+        <td valign="middle" align="left" bgcolor="d5e8fb"><input type='file' name='file' class='form-control'></td>
+      </tr>
+      <tr>
+        <td valign="top" align="left" width="100" bgcolor="ffffff">&nbsp;</td>
+        <td valign="top" align="left" bgcolor="ffffff"><input type="submit"></td>
+      </tr>
+    </table>
+    </form>
+  </td></tr>
+</table>

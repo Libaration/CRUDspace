@@ -1,0 +1,33 @@
+<%# Profile: "X's Schools" box, as in the May 2005 capture. The empty SchoolSearch form is kept on purpose:
+    in quirks mode it adds the same 1em gap above the box that the capture has. %>
+<% schools = @user.schools.to_a %>
+<% unless schools.empty? %>
+<form action="/users" method="get" name="SchoolSearch"></form>
+
+	<table bordercolor="6699cc" cellspacing="0" cellpadding="0" width="300" border="1">
+		<tr>
+			<td class="text" valign="center" align="left" width="300" bgcolor="6699cc" height="10" wrap style="word-wrap:break-word">
+				&nbsp;&nbsp;&nbsp;<span class="whitetext12"><%= @user.name %>'s Schools</span>
+			</td>
+		</tr>
+		<tr><td>
+			<table bordercolor="000000" cellspacing="3" cellpadding="3" width="300" align="center" border="0">
+				<% schools.each do |school| %>
+					<tr>
+						<td valign="top" align="left" width="240" bgcolor="b1d0f0">
+							<a href="#"><%= school.name %></a><br>
+							<% unless school.location.blank? %><%= school.location %><br><% end %>
+							<% unless school.grad_year.blank? %>Grad Year: <a href="#"><%= school.grad_year %></a><br><% end %>
+							<% unless school.student_status.blank? %>Student Status: <%= school.student_status %><br><% end %>
+							<% unless school.degree.blank? %>Degree: <%= school.degree %><br><% end %>
+							<% unless school.major.blank? %>Major: <%= school.major %><br><% end %>
+							<% unless school.clubs.blank? %>Clubs: <%= school.clubs %><br><% end %>
+						</td>
+						<td valign="top" align="middle" width="60" bgcolor="d5e8fb"><% if !school.start_year.blank? %>From <%= school.start_year %> to <%= school.end_year.blank? ? "Present" : school.end_year %><% elsif !school.end_year.blank? %><%= school.end_year %><% end %></td>
+					</tr>
+				<% end %>
+			</table>
+		</td></tr>
+	</table>
+	<br>
+<% end %>

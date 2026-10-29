@@ -1,0 +1,39 @@
+<%# The logged-in user's favorites (GET /favorites). No 2005 capture of this page exists: built from
+    the profile's Friend Space markup (orange ffcc99 header, name-over-photo cells). %>
+<table width="760" border="0" cellspacing="0" cellpadding="0" align="center">
+  <tr><td class="text" align="left">
+    <span class="nametext">My Favorites</span><br><br>
+    <a href="/home">Back to My Home</a><br><br>
+    <table height="20" cellspacing="0" cellpadding="0" width="760" bgcolor="ffcc99">
+      <tr><td width="760">&nbsp;&nbsp;&nbsp;<span class="orangetext15"><%= h @user.name %>'s Favorites</span></td></tr>
+    </table>
+    <table cellspacing="0" cellpadding="5" width="760" align="center" border="0">
+      <tr>
+        <td bgcolor="ffffff" width="760"><span class="btext">You have <span class="redbtext"><%= @favorites.size %></span> Favorites.</span></td>
+      </tr>
+      <tr><td>
+        <% if @favorites.empty? %>
+          You haven't added anyone to your favorites yet. Click "Add to Favorites" on someone's profile to add them here.
+        <% else %>
+        <table width="750" border="0" cellspacing="0" cellpadding="5" align="center">
+          <% @favorites.each_slice(6) do |row| %>
+            <tr>
+              <% row.each do |fav| %>
+                <td bgcolor="FFFFFF" align="center" valign="top" width="125" style="word-wrap:break-word">
+                  <a href="<%= profile_path(fav) %>"><%= h fav.name %></a><br>
+                  <a href="<%= profile_path(fav) %>"><img src="<%= photo_path(fav) %>" width="90" border="0" alt=""></a>
+                  <% if online_user_ids.include?(fav.id) %><br><img src="/images/2005/onlinenow.gif" border="0" alt="Online Now!"><% end %>
+                  <br><a href="/users/<%= fav.id_or_slug %>/unfavorite" class="redlink7">Remove</a>
+                  <br><br>
+                </td>
+              <% end %>
+              <% (6 - row.size).times do %><td width="125">&nbsp;</td><% end %>
+            </tr>
+          <% end %>
+        </table>
+        <% end %>
+      </td></tr>
+    </table>
+    <br>
+  </td></tr>
+</table>

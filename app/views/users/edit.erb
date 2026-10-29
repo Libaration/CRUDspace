@@ -1,109 +1,313 @@
+<%# Edit Profile (GET /users/:id/edit; PATCH /users/:id). No 2005 capture of this page exists: built in
+    the profile's visual language (blue 6699cc boxes with b1d0f0 label / d5e8fb value cells). %>
+<% me = @user %>
+<% my_id = me.id_or_slug %>
+<% here_for = me.here_for.to_s.split(',').map(&:strip) %>
 <style>
-  span.required {
-    color: red;
-  }
-
-  span.blackText7 {
-    color: black;
-    font: normal 7pt/normal Verdana, Arial, Helvetica, sans-serif;
-  }
-  table {
-    font: normal 9pt/normal Verdana, Arial, Helvetica, sans-serif;
-  }
-  div.join input[type=number]{
-    width: 50px;
-  }
-
-  table td {
-    padding: 3px
-  }
-
-  div.join textarea {
-    font: normal 8pt/normal Verdana, Arial, Helvetica, sans-serif;
-    resize: none;
-    width: 300px;
-    height: 100px;
-    border: 1px solid #767676;
-  }
-
-  div.join select {
-    font: normal 8pt/normal Verdana, Arial, Helvetica, sans-serif;
-  }
-
-  div.join input {
-    font: normal 8pt/normal Verdana, Arial, Helvetica, sans-serif;
-  }
-  div.join {
-    display: flex;
-    align-items: flex-start;
-    width: 100%;
-  }
-  div.whyjoin {
-    flex: none;
-    width: 190px;
-    margin-right: 20px;
-    font-size: 8pt;
-    line-height: 1.4;
-    background-color: #d5e8fb;
-    padding: 6px;
-    border: #6699cc 1px solid;
-  }
-  div.join > table {
-    flex: 1;
-  }
-
-  div.notice {
-    padding-bottom: 30px;
-    padding-left: 50px;
-  }
+  table.editProfile textarea { font-family: verdana, arial, sans-serif, helvetica; font-size: 8pt; width: 520px; }
+  table.editProfile input[type=text], table.editProfile input[type=number], table.editProfile select { font-family: verdana, arial, sans-serif, helvetica; font-size: 8pt; }
 </style>
+<table class="editProfile" width="760" border="0" cellspacing="0" cellpadding="0" align="center">
+  <tr><td class="text" align="left">
+    <span class="nametext">Edit Profile</span>&nbsp;&nbsp;&nbsp;[<a href="<%= profile_path(me) %>">View My Profile</a>] [<a href="/home">Home</a>]<br><br>
+    <b>Jump to:</b>
+    <a href="#basic">Basic Info</a> |
+    <a href="#interests">Interests &amp; Personality</a> |
+    <a href="#details">Background &amp; Lifestyle</a> |
+    <a href="#networking">Networking</a> |
+    <a href="#css">Profile CSS</a> |
+    <a href="#schools">Schools</a> |
+    <a href="#companies">Companies</a>
+    <br><br>
+    <table bordercolor="000000" cellspacing="0" cellpadding="5" width="760" border="1">
+      <tr><td align="center"><span class="btext">You may enter HTML/DHTML or CSS in any text field. Javascript is not allowed.<br>Do not use HTML/CSS to cover MySpace advertisements.</span></td></tr>
+    </table>
+    <br>
 
+    <form method="POST" action="/users/<%= my_id %>" id="spacefix" style="margin:0">
+    <input type="hidden" name="_method" value="PATCH">
+    <input type="hidden" name="here_for_sent" value="1">
 
-<div class="join">
+    <a name="basic" id="basic"></a>
+    <table border="1" bordercolor="6699cc" cellspacing="0" cellpadding="0" width="760">
+      <tr><td width="760" height="15" bgcolor="6699cc" class="text" align="left">&nbsp;&nbsp;&nbsp;<span class="whitetext12">Basic Info</span></td></tr>
+      <tr><td>
+        <table border="0" cellspacing="3" cellpadding="3" width="100%" bgcolor="ffffff">
+          <tr>
+            <td width="160" valign="top" align="left" bgcolor="b1d0f0"><span class="lightbluetext8">Name:</span></td>
+            <td bgcolor="d5e8fb" align="left"><input type="text" name="name" value="<%= h me.name %>" size="48" maxlength="255"></td>
+          </tr>
+          <tr>
+            <td valign="top" align="left" bgcolor="b1d0f0"><span class="lightbluetext8">Age:</span></td>
+            <td bgcolor="d5e8fb" align="left"><input type="number" name="age" value="<%= me.age %>" min="13" max="120" style="width:50px"></td>
+          </tr>
+          <tr>
+            <td valign="top" align="left" bgcolor="b1d0f0"><span class="lightbluetext8">Gender:</span></td>
+            <td bgcolor="d5e8fb" align="left"><%= profile_select('gender', me.gender, nil) %></td>
+          </tr>
+          <tr>
+            <td valign="top" align="left" bgcolor="b1d0f0"><span class="lightbluetext8">City:</span></td>
+            <td bgcolor="d5e8fb" align="left"><input type="text" name="city" value="<%= h me.city %>" size="30" maxlength="255"></td>
+          </tr>
+          <tr>
+            <td valign="top" align="left" bgcolor="b1d0f0"><span class="lightbluetext8">State:</span></td>
+            <td bgcolor="d5e8fb" align="left"><input type="text" name="state" value="<%= h me.state %>" size="30" maxlength="255"></td>
+          </tr>
+          <tr>
+            <td valign="top" align="left" bgcolor="b1d0f0"><span class="lightbluetext8">Country:</span></td>
+            <td bgcolor="d5e8fb" align="left"><input type="text" name="country" value="<%= h me.country %>" size="30" maxlength="255"></td>
+          </tr>
+          <tr>
+            <td valign="top" align="left" bgcolor="b1d0f0"><span class="lightbluetext8">Headline:</span></td>
+            <td bgcolor="d5e8fb" align="left"><input type="text" name="motto" value="<%= h me.motto %>" size="48" maxlength="255"></td>
+          </tr>
+        </table>
+      </td></tr>
+    </table>
+    <br>
 
-  <div class="whyjoin">
-    You may enter HTML/DHTML or CSS in any text field.<br> Javascript IS not allowed.<br><br>
-    Do not use HTML/CSS to cover Myspace advertisements.
-  </div>
+    <a name="interests" id="interests"></a>
+    <table border="1" bordercolor="6699cc" cellspacing="0" cellpadding="0" width="760">
+      <tr><td width="760" height="15" bgcolor="6699cc" class="text" align="left">&nbsp;&nbsp;&nbsp;<span class="whitetext12">Interests &amp; Personality</span></td></tr>
+      <tr><td>
+        <table border="0" cellspacing="3" cellpadding="3" width="100%" bgcolor="ffffff">
+          <% [['bio', 'About Me', 8], ['who_id_like_to_meet', "Who I'd Like to Meet", 5],
+              ['interests_general', 'General', 4], ['interests_music', 'Music', 6], ['interests_movies', 'Movies', 4],
+              ['interests_television', 'Television', 4], ['interests_books', 'Books', 4], ['interests_heroes', 'Heroes', 4]].each do |field, label, rows| %>
+            <tr>
+              <td width="160" valign="top" align="left" bgcolor="b1d0f0"><span class="lightbluetext8"><%= label %>:</span></td>
+              <td bgcolor="d5e8fb" align="left"><textarea name="<%= field %>" rows="<%= rows %>" cols="70"><%= h me.send(field) %></textarea></td>
+            </tr>
+          <% end %>
+        </table>
+      </td></tr>
+    </table>
+    <br>
 
-  <table width="430" border="0" cellpadding="1" cellspacing="0" bgcolor="6699cc">
-    <tr>
-      <td valign="top"><table width="100%" border="0" cellspacing="0" cellpadding="5">
-        <tr>
-          <td align="left" style="color: white; font-weight: bold; font-size: 10pt;">Profile Edit</td>
-        </tr>
-        <tr>
-          <td align="left" valign="top" bgcolor="ffffff">
-            <table width="100%" border="0" cellspacing="0" cellpadding="2">
+    <a name="details" id="details"></a>
+    <table border="1" bordercolor="6699cc" cellspacing="0" cellpadding="0" width="760">
+      <tr><td width="760" height="15" bgcolor="6699cc" class="text" align="left">&nbsp;&nbsp;&nbsp;<span class="whitetext12">Background &amp; Lifestyle</span></td></tr>
+      <tr><td>
+        <table border="0" cellspacing="3" cellpadding="3" width="100%" bgcolor="ffffff">
+          <tr>
+            <td width="160" valign="top" align="left" bgcolor="b1d0f0"><span class="lightbluetext8">Status:</span></td>
+            <td bgcolor="d5e8fb" align="left"><%= profile_select('status', me.status) %></td>
+          </tr>
+          <tr>
+            <td valign="top" align="left" bgcolor="b1d0f0"><span class="lightbluetext8">Here for:</span></td>
+            <td bgcolor="d5e8fb" align="left">
+              <% (UsersController::PROFILE_CHOICES['here_for'] | here_for).each do |choice| %>
+                <label><input type="checkbox" name="here_for[]" value="<%= h choice %>"<%= ' checked' if here_for.include?(choice) %>><%= h choice %></label>&nbsp;&nbsp;
+              <% end %>
+            </td>
+          </tr>
+          <tr>
+            <td valign="top" align="left" bgcolor="b1d0f0"><span class="lightbluetext8">Orientation:</span></td>
+            <td bgcolor="d5e8fb" align="left"><%= profile_select('orientation', me.orientation) %></td>
+          </tr>
+          <tr>
+            <td valign="top" align="left" bgcolor="b1d0f0"><span class="lightbluetext8">Hometown:</span></td>
+            <td bgcolor="d5e8fb" align="left"><input type="text" name="hometown" value="<%= h me.hometown %>" size="30" maxlength="255"></td>
+          </tr>
+          <tr>
+            <td valign="top" align="left" bgcolor="b1d0f0"><span class="lightbluetext8">Height:</span></td>
+            <td bgcolor="d5e8fb" align="left"><%= profile_select('height', me.height) %></td>
+          </tr>
+          <tr>
+            <td valign="top" align="left" bgcolor="b1d0f0"><span class="lightbluetext8">Body Type:</span></td>
+            <td bgcolor="d5e8fb" align="left"><%= profile_select('body_type', me.body_type) %></td>
+          </tr>
+          <tr>
+            <td valign="top" align="left" bgcolor="b1d0f0"><span class="lightbluetext8">Ethnicity:</span></td>
+            <td bgcolor="d5e8fb" align="left"><%= profile_select('ethnicity', me.ethnicity) %></td>
+          </tr>
+          <tr>
+            <td valign="top" align="left" bgcolor="b1d0f0"><span class="lightbluetext8">Religion:</span></td>
+            <td bgcolor="d5e8fb" align="left"><%= profile_select('religion', me.religion) %></td>
+          </tr>
+          <tr>
+            <td valign="top" align="left" bgcolor="b1d0f0"><span class="lightbluetext8">Zodiac Sign:</span></td>
+            <td bgcolor="d5e8fb" align="left"><%= profile_select('zodiac_sign', me.zodiac_sign) %></td>
+          </tr>
+          <tr>
+            <td valign="top" align="left" bgcolor="b1d0f0"><span class="lightbluetext8">Smoke / Drink:</span></td>
+            <td bgcolor="d5e8fb" align="left">Smoke: <%= profile_select('smoke', me.smoke) %>&nbsp;&nbsp; Drink: <%= profile_select('drink', me.drink) %></td>
+          </tr>
+          <tr>
+            <td valign="top" align="left" bgcolor="b1d0f0"><span class="lightbluetext8">Children:</span></td>
+            <td bgcolor="d5e8fb" align="left"><%= profile_select('children', me.children) %></td>
+          </tr>
+          <tr>
+            <td valign="top" align="left" bgcolor="b1d0f0"><span class="lightbluetext8">Education:</span></td>
+            <td bgcolor="d5e8fb" align="left"><%= profile_select('education', me.education) %></td>
+          </tr>
+          <tr>
+            <td valign="top" align="left" bgcolor="b1d0f0"><span class="lightbluetext8">Income:</span></td>
+            <td bgcolor="d5e8fb" align="left"><%= profile_select('income', me.income) %></td>
+          </tr>
+          <tr>
+            <td valign="top" align="left" bgcolor="b1d0f0"><span class="lightbluetext8">Occupation:</span></td>
+            <td bgcolor="d5e8fb" align="left"><input type="text" name="occupation" value="<%= h me.occupation %>" size="30" maxlength="255"></td>
+          </tr>
+        </table>
+      </td></tr>
+    </table>
+    <br>
 
-              <form method='POST' action='/users/<%= @user.id_or_slug %>' enctype="multipart/form-data" id="spacefix">
-                <input type="hidden" name="_method" value="PATCH">
-                <tr>
-                  <td><strong>Name: </strong></td>
-                  <td><input type="text" name="name" value="<%= @user.name %>" size="48"></td>
-                </tr>
-                <tr>
-                  <td><strong>Age: </strong></td>
-                  <td><input type="number" name="age" value="<%= @user.age %>"></td>
-                </tr>
-                <tr>
-                  <td><strong>Headline/Motto:</strong></td>
-                  <td><input type="text" name="motto" value="<%= @user.motto %>" size="48"></td>
-                </tr>
-                <tr>
-                  <td><strong>About Me:</strong></td>
-                  <td><textarea name="bio"><%= Rack::Utils.escape_html(@user.bio) %></textarea></td>
-                </tr>
-                <tr>
-                  <td><strong><span style="color: red;">(BETA) </span> Profile CSS: </strong></td>
-                  <td><textarea name="css"><%= @custom_css unless nil %></textarea></td>
-                </tr>
-                <tr>
-                  <td></td>
-                  <td><input type=submit></td>
-                </tr>
+    <a name="networking" id="networking"></a>
+    <table border="1" bordercolor="6699cc" cellspacing="0" cellpadding="0" width="760">
+      <tr><td width="760" height="15" bgcolor="6699cc" class="text" align="left">&nbsp;&nbsp;&nbsp;<span class="whitetext12">Networking</span></td></tr>
+      <tr><td>
+        <table border="0" cellspacing="3" cellpadding="3" width="100%" bgcolor="ffffff">
+          <tr>
+            <td width="160" valign="top" align="left" bgcolor="b1d0f0"><span class="lightbluetext8">Networking:</span></td>
+            <td bgcolor="d5e8fb" align="left">
+              <textarea name="networking" rows="4" cols="70"><%= h me.networking %></textarea><br>
+              <span class="blacktext7">One per line: Category - Skill - Role (for example: Publishing - Writer - Non-fiction)</span>
+            </td>
+          </tr>
+        </table>
+      </td></tr>
+    </table>
+    <br>
 
-              </form>
-            </table></td></tr></table></td></tr></table>
+    <a name="css" id="css"></a>
+    <table border="1" bordercolor="6699cc" cellspacing="0" cellpadding="0" width="760">
+      <tr><td width="760" height="15" bgcolor="6699cc" class="text" align="left">&nbsp;&nbsp;&nbsp;<span class="whitetext12">Profile CSS</span></td></tr>
+      <tr><td>
+        <table border="0" cellspacing="3" cellpadding="3" width="100%" bgcolor="ffffff">
+          <tr>
+            <td width="160" valign="top" align="left" bgcolor="b1d0f0"><span class="lightbluetext8">Profile CSS:</span></td>
+            <td bgcolor="d5e8fb" align="left">
+              <textarea name="css" rows="8" cols="70"><%= h @custom_css %></textarea><br>
+              <span class="blacktext7">Applied to your profile page. 2005 layout codes work as-is (your profile uses MySpace's own markup and classes).</span>
+            </td>
+          </tr>
+        </table>
+      </td></tr>
+    </table>
+    <br>
+    <div align="center"><input type="submit" value="Save All Changes"></div>
+    </form>
+    <br>
 
-</div>
+    <a name="schools" id="schools"></a>
+    <table border="1" bordercolor="6699cc" cellspacing="0" cellpadding="0" width="760">
+      <tr><td width="760" height="15" bgcolor="6699cc" class="text" align="left">&nbsp;&nbsp;&nbsp;<span class="whitetext12">Schools</span></td></tr>
+      <tr><td>
+        <table border="0" cellspacing="3" cellpadding="3" width="100%" bgcolor="ffffff">
+          <% if @schools.empty? %>
+            <tr><td colspan="2" align="left">You haven't added any schools.</td></tr>
+          <% end %>
+          <% @schools.each do |school| %>
+            <tr>
+              <td valign="top" align="left" bgcolor="b1d0f0" style="word-wrap:break-word">
+                <b><%= school.name %></b><br>
+                <% if school.location.present? %><%= school.location %><br><% end %>
+                <% if school.grad_year.present? %>Grad Year: <%= school.grad_year %><br><% end %>
+                <% if school.student_status.present? %>Student Status: <%= school.student_status %><br><% end %>
+                <% if school.degree.present? %>Degree: <%= school.degree %><br><% end %>
+                <% if school.major.present? %>Major: <%= school.major %><br><% end %>
+                <% if school.clubs.present? %>Clubs: <%= school.clubs %><br><% end %>
+              </td>
+              <td width="160" valign="top" align="center" bgcolor="d5e8fb">
+                <% if school.start_year.present? || school.end_year.present? %>From <%= school.start_year %> to <%= school.end_year %><br><br><% end %>
+                <form method="POST" action="/users/<%= my_id %>/schools/<%= school.id %>" style="margin:0" onsubmit="return confirm('Remove this school?')">
+                  <input type="hidden" name="_method" value="DELETE">
+                  <input type="submit" value="Remove">
+                </form>
+              </td>
+            </tr>
+          <% end %>
+        </table>
+        <form method="POST" action="/users/<%= my_id %>/schools" style="margin:0">
+        <table border="0" cellspacing="3" cellpadding="3" width="100%" bgcolor="ffffff">
+          <tr><td colspan="2" align="left"><span class="btext">Add a School</span></td></tr>
+          <tr>
+            <td width="160" valign="top" align="left" bgcolor="b1d0f0"><span class="lightbluetext8">School Name:</span></td>
+            <td bgcolor="d5e8fb" align="left"><input type="text" name="name" size="48" maxlength="255"></td>
+          </tr>
+          <tr>
+            <td valign="top" align="left" bgcolor="b1d0f0"><span class="lightbluetext8">City, State:</span></td>
+            <td bgcolor="d5e8fb" align="left"><input type="text" name="location" size="48" maxlength="255"></td>
+          </tr>
+          <tr>
+            <td valign="top" align="left" bgcolor="b1d0f0"><span class="lightbluetext8">Student Status:</span></td>
+            <td bgcolor="d5e8fb" align="left"><%= profile_select('student_status', nil, '--') %></td>
+          </tr>
+          <tr>
+            <td valign="top" align="left" bgcolor="b1d0f0"><span class="lightbluetext8">Degree:</span></td>
+            <td bgcolor="d5e8fb" align="left"><%= profile_select('degree', nil, '--') %></td>
+          </tr>
+          <tr>
+            <td valign="top" align="left" bgcolor="b1d0f0"><span class="lightbluetext8">Major:</span></td>
+            <td bgcolor="d5e8fb" align="left"><input type="text" name="major" size="30" maxlength="255"></td>
+          </tr>
+          <tr>
+            <td valign="top" align="left" bgcolor="b1d0f0"><span class="lightbluetext8">Clubs:</span></td>
+            <td bgcolor="d5e8fb" align="left"><input type="text" name="clubs" size="48" maxlength="255"></td>
+          </tr>
+          <tr>
+            <td valign="top" align="left" bgcolor="b1d0f0"><span class="lightbluetext8">Years:</span></td>
+            <td bgcolor="d5e8fb" align="left">From <input type="text" name="start_year" size="4" maxlength="4"> to <input type="text" name="end_year" size="4" maxlength="4">&nbsp;&nbsp; Grad Year: <input type="text" name="grad_year" size="4" maxlength="4"></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td align="left"><input type="submit" value="Add School"></td>
+          </tr>
+        </table>
+        </form>
+      </td></tr>
+    </table>
+    <br>
+
+    <a name="companies" id="companies"></a>
+    <table border="1" bordercolor="6699cc" cellspacing="0" cellpadding="0" width="760">
+      <tr><td width="760" height="15" bgcolor="6699cc" class="text" align="left">&nbsp;&nbsp;&nbsp;<span class="whitetext12">Companies</span></td></tr>
+      <tr><td>
+        <table border="0" cellspacing="3" cellpadding="3" width="100%" bgcolor="ffffff">
+          <% if @companies.empty? %>
+            <tr><td colspan="2" align="left">You haven't added any companies.</td></tr>
+          <% end %>
+          <% @companies.each do |company| %>
+            <tr>
+              <td valign="top" align="left" bgcolor="b1d0f0" style="word-wrap:break-word">
+                <b><%= company.name %></b><br>
+                <% if company.location.present? %><%= company.location %><br><% end %>
+              </td>
+              <td width="160" valign="top" align="center" bgcolor="d5e8fb">
+                <%= [company.start_year, company.end_year].reject(&:blank?).join(' to ') %><br><br>
+                <form method="POST" action="/users/<%= my_id %>/companies/<%= company.id %>" style="margin:0" onsubmit="return confirm('Remove this company?')">
+                  <input type="hidden" name="_method" value="DELETE">
+                  <input type="submit" value="Remove">
+                </form>
+              </td>
+            </tr>
+          <% end %>
+        </table>
+        <form method="POST" action="/users/<%= my_id %>/companies" style="margin:0">
+        <table border="0" cellspacing="3" cellpadding="3" width="100%" bgcolor="ffffff">
+          <tr><td colspan="2" align="left"><span class="btext">Add a Company</span></td></tr>
+          <tr>
+            <td width="160" valign="top" align="left" bgcolor="b1d0f0"><span class="lightbluetext8">Company Name:</span></td>
+            <td bgcolor="d5e8fb" align="left"><input type="text" name="name" size="48" maxlength="255"></td>
+          </tr>
+          <tr>
+            <td valign="top" align="left" bgcolor="b1d0f0"><span class="lightbluetext8">City, State, Country:</span></td>
+            <td bgcolor="d5e8fb" align="left"><input type="text" name="location" size="48" maxlength="255"></td>
+          </tr>
+          <tr>
+            <td valign="top" align="left" bgcolor="b1d0f0"><span class="lightbluetext8">Years:</span></td>
+            <td bgcolor="d5e8fb" align="left">From <input type="text" name="start_year" size="4" maxlength="4"> to <input type="text" name="end_year" size="4" maxlength="4"></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td align="left"><input type="submit" value="Add Company"></td>
+          </tr>
+        </table>
+        </form>
+      </td></tr>
+    </table>
+    <br>
+  </td></tr>
+</table>

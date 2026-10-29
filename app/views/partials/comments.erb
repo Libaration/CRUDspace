@@ -1,11 +1,60 @@
-<% if @comments.empty? %>
-  <tr><td class="tableLeft"><a href="/users/1"><div><b></b></div></a></td><td class="tableRight"><div><b class="date"></b></div><div>
-    <p>No comments.</p></div>
-  </td></tr>
-  <% else %>
-  <% @comments.each do |comment| %>
-    <tr><td class="tableLeft"><a href="/users/<%= comment.author.id_or_slug %>"><div><b><%= comment.author.name %></b></div><img src="/images<%= comment.author.images.first.image %>"></a><% if User.online.include?(comment.author) %> <center><img src="https://myspace.windows93.net/img/online.gif"></center><% end %></td><td class="tableRight"><div><b class="date"><%= comment.created_at.strftime("%b %e, %Y %l:%M %p") %></b></div><div>
-      <p><%= comment.content %></p></div>
-    </td></tr>
-  <% end %>
-<% end %>
+<%# Profile: "X's Friends Comments" (50 newest), as in the May 2005 capture. Comment HTML is rendered raw, like MySpace did. %>
+<% comment_total = @user.comments.count %>
+<% shown_comments = @user.comments.includes(:author).order(created_at: :desc, id: :desc).limit(50).to_a %>
+	<table bordercolor="000000" cellspacing="0" cellpadding="0" width="435" border="0">
+		<tr><td class="text" align="left" width="435" bgcolor="ffffff" height="20">
+			<table bordercolor="ffcc99" height="20" cellspacing="0" cellpadding="0" width="441" bgcolor="ffcc99" border="1">
+				<tr><td width="441" style="word-wrap:break-word"><span class="orangetext15"><%= @user.name %>'s Friends Comments</span></td></tr>
+			</table>
+			<table bordercolor="000000" cellspacing="3" cellpadding="0" width="435" align="center" bgcolor="ffffff" border="0">
+
+					<tr>
+						<td>
+
+								<b>Displaying <span class="redtext"><%= shown_comments.size %></span> of <span class="redtext"><%= comment_total %></span> comments (<a href="/users/<%= @p_id %>/comments">View/Edit All Comments</a>)
+
+						</b></td>
+					</tr>
+					<% unless shown_comments.empty? %>
+					<tr>
+						<td bordercolor="ff9933" bgcolor="ffcccc">
+							<table width="100%" border="1" cellspacing="0" cellpadding="3" bordercolor="FFffff" class="profileComments">
+								<% shown_comments.each do |comment| %>
+								<% author = comment.author %>
+										<tr>
+											<td align="center" valign="top" width="150" bgcolor="FF9933" style="word-wrap:break-word">
+												<% if author %>
+												<a href="/users/<%= author.id_or_slug %>"><%= author.name %></a>
+													<br><br>
+												<a href="/users/<%= author.id_or_slug %>">
+
+														<img src="<%= @p_photo.(author) %>" border="0" class="profileThumb">
+
+												</a>
+												<% end %>
+
+													<div style="width:80px;height:20px;"><% if author && @p_online.(author) %><img src="/images/2005/onlinenow.gif" border="0" alt="Online Now!"><% end %></div><br><br>
+
+											</td>
+											<td bgcolor="F9D6B4" align="left" valign="top" width="260" style="word-wrap:break-word"><span class="blacktext10">
+
+													<%= comment.created_at.strftime("%b %-d, %Y %I:%M %p") %>
+
+												</span><br><br><%= comment.content.to_s =~ /<br/i ? comment.content : comment.content.to_s.gsub(/\r?\n/, "<br>\n") %>
+											</td>
+										</tr>
+								<% end %>
+							</table>
+						</td>
+					</tr>
+					<% end %>
+
+
+					<tr>
+						<td align="right"><a href="/users/<%= @p_id %>/comments/new">Add Comment</a></td>
+					</tr>
+
+			</table>
+		</td>
+	</tr>
+	</table>

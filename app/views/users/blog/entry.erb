@@ -1,0 +1,22 @@
+<%# One blog entry; locals: entry, full (true on the entry's own page). %>
+<table width="535" border="0" cellspacing="0" cellpadding="0">
+  <tr><td class="text" align="left"><span class="blacktext10"><%= entry.created_at.strftime('%A, %B %d, %Y') %></span></td></tr>
+  <tr><td><img src="/images/2005/clear.gif" width="1" height="5" border="0" alt=""></td></tr>
+  <tr><td>
+    <table border="1" bordercolor="6699cc" cellspacing="0" cellpadding="0" width="535">
+      <tr><td width="535" height="15" bgcolor="6699cc" class="text" align="left" style="word-wrap:break-word">&nbsp;&nbsp;&nbsp;<span class="whitetext12"><%= h entry.subject %></span></td></tr>
+      <tr><td>
+        <table border="0" cellspacing="3" cellpadding="3" width="100%" bgcolor="ffffff" style="table-layout:fixed">
+          <% if entry.body.present? %>
+            <tr><td bgcolor="ffffff" align="left" valign="top" class="text" style="word-wrap:break-word"><%= entry.body %></td></tr>
+          <% end %>
+          <tr><td bgcolor="d5e8fb" align="right" class="text">
+            Posted by <a href="<%= profile_path(@user) %>"><%= h @user.name %></a> at <%= entry.created_at.strftime('%I:%M %p') %>
+            <% unless full %> | <a href="/users/<%= @user.id_or_slug %>/blog/<%= entry.id %>">view more</a><% end %>
+          </td></tr>
+        </table>
+      </td></tr>
+    </table>
+  </td></tr>
+</table>
+<br>

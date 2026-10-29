@@ -1,0 +1,47 @@
+<%# Profile: "Contacting X" box with the 8 icon buttons, as in the May 2005 capture. %>
+<table class="contactTable" border="1" cellspacing="0" cellpadding="0" width="300" bordercolor="6699CC">
+	<tr><td width="300" height="15" bgcolor="6699CC" class="text" align="left" style="word-wrap:break-word">&nbsp;&nbsp;&nbsp;<span class="whitetext12">Contacting <%= @user.name %></span></td></tr>
+	<tr><td>
+		<table border="0" cellspacing="0" cellpadding="0" width="300" bordercolor="000000">
+			<tr><td><img src="/images/2005/clear.gif" width="1" height="5" border="0"></td></tr>
+
+			<tr>
+				<td width="120" height="5" nowrap bgcolor="ffffff" align="center" class="text">
+
+						<a href="<%= @p_me ? "/users/#{@p_me.id_or_slug}/messages/#{@p_id}/new" : "/login" %>"><img src="/images/2005/sendMailIcon.gif" border="0" align="middle" alt="Send Message"></a>
+
+				</td>
+				<td width="15" height="5" bgcolor="ffffff"><img src="/images/2005/clear.gif" width="15" height="8" border="0"></td>
+				<td width="150" nowrap height="5" bgcolor="ffffff" align="center" class="text" valign="top">
+					<a href="/users/<%= @p_id %>/forward"><img src="/images/2005/forwardMailIcon.gif" border="0" align="middle" alt="Forward to Friend"></a>
+				</td>
+			</tr>
+			<tr><td colspan="3"><img src="/images/2005/clear.gif" width="1" height="2" border="0"></td></tr>
+
+			<tr>
+				<td width="130" nowrap height="5" bgcolor="ffffff" align="center" class="text" valign="top">
+					<a href="/users/<%= @p_id %>/add"><img src="/images/2005/addFriendIcon.gif" border="0" align="middle" alt="Add to Friends"></a>
+				</td>
+				<td width="15" height="5" bgcolor="ffffff"><img src="/images/2005/clear.gif" width="15" height="1" border="0"></td>
+				<td width="150" nowrap height="2" bgcolor="ffffff" align="center" class="text" valign="middle"><a href="/users/<%= @p_id %>/favorite"><img src="/images/2005/addFavoritesIcon.gif" border="0" align="middle" alt="Add to Favorites"></a></td>
+			</tr>
+			<tr><td colspan="3"><img src="/images/2005/clear.gif" width="1" height="2" border="0"></td></tr>
+
+			<tr>
+				<td width="130" nowrap height="5" bgcolor="ffffff" align="center" class="text" valign="top"><a href="#"><img src="/images/2005/messagefriend.gif" border="0" align="middle" alt="Instant Message"></a></td>
+				<td width="15" height="5" bgcolor="ffffff"><img src="/images/2005/clear.gif" width="15" height="8" border="0"></td>
+				<td width="150" nowrap height="5" bgcolor="ffffff" align="center" class="text" valign="top"><a href="#"><img src="/images/2005/blockuser.gif" border="0" align="middle" alt="Block User"></a></td>
+			</tr>
+
+			<tr>
+				<td width="130" nowrap height="5" bgcolor="ffffff" align="center" class="text" valign="top">
+					<a href="#"><img src="/images/2005/icon_add_to_group.gif" border="0" align="middle" alt="Add to Group"></a>
+				</td>
+				<td width="15" height="5" bgcolor="ffffff"><img src="/images/2005/clear.gif" width="15" height="1" border="0"></td>
+				<td width="150" nowrap height="2" bgcolor="ffffff" align="center" class="text" valign="middle"><a href="#"><img src="/images/2005/icon_rank_user4.gif" border="0" align="middle" alt="Rank User"></a></td>
+			</tr>
+			<tr><td><img src="/images/2005/clear.gif" width="1" height="5" border="0"></td></tr>
+		</table>
+	</td>
+	</tr>
+</table><br>

@@ -1,86 +1,53 @@
-<style>
-  table.requests {
-    width: 100%;
-    border: 1px solid #6699cc;
-    border-collapse: separate;
-    border-spacing: 2px;
-    text-align: left;
-    font: normal 8pt/normal Verdana, Arial, Helvetica, sans-serif;
-  }
-  table.requests th {
-    padding: 4px 6px;
-    background-color: #6699cc;
-    color: white;
-    font-weight: bold;
-  }
-  table.requests td {
-    padding: 6px;
-    background-color: #e9f1fa;
-    vertical-align: middle;
-  }
-  table.requests .from {
-    width: 110px;
-    text-align: center;
-  }
-  table.requests td.from a.name {
-    font-weight: bold;
-  }
-  table.requests td.from img {
-    display: block;
-    max-width: 90px;
-    max-height: 90px;
-    margin: 3px auto 0;
-    border: 1px solid #6699cc;
-  }
-  table.requests td.confirm div.buttons {
-    margin-top: 8px;
-  }
-  table.requests td.confirm form {
-    display: inline;
-    margin: 0;
-  }
-
-  table.emptybox td {
-    padding: 8px;
-    text-align: center;
-  }
-  table.emptybox td.emptymsg {
-    padding: 15px 8px;
-    font-size: 10pt;
-  }
-</style>
-
-
+<table width="760" border="0" cellspacing="0" cellpadding="0" align="center">
+  <tr>
+    <td align="left" valign="bottom"><span class="nametext">Mail Center</span></td>
+    <td align="right" valign="bottom" class="text"><a href="/users/<%= @user.id_or_slug %>/messages">Inbox</a> | <b>Friend Requests</b></td>
+  </tr>
+  <tr><td colspan="2"><img src="/images/2005/clear.gif" width="1" height="8" border="0"></td></tr>
+</table>
+<table border="1" bordercolor="6699cc" cellspacing="0" cellpadding="0" width="760" align="center">
+  <tr><td class="text" align="left" valign="middle" bgcolor="6699cc" height="15">&nbsp;&nbsp;&nbsp;<span class="whitetext12">Friend Requests</span></td></tr>
+  <tr><td>
 <% if !@user.pending_friends.empty? %>
-    <table class="requests">
+    <table border="0" cellspacing="3" cellpadding="3" width="100%" bgcolor="ffffff">
       <tr>
-        <th class="from">From:</th><th>Confirmation:</th>
+        <td width="120" align="center" valign="middle" bgcolor="b1d0f0"><span class="lightbluetext8">From:</span></td>
+        <td align="left" valign="middle" bgcolor="b1d0f0"><span class="lightbluetext8">Confirmation:</span></td>
       </tr>
       <% @user.pending_friends.each do |friend| %>
+      <% friend_pic = friend.images.first %>
         <tr>
-          <td class="from">
-            <a class="name" href="/users/<%= friend.id %>"><%= friend.name %></a>
-            <a href="/users/<%= friend.id %>"><img src="/images<%= friend.images.first.image %>"></a>
+          <td align="center" valign="middle" bgcolor="d5e8fb" style="word-wrap:break-word">
+            <a href="/users/<%= friend.id %>"><%= friend.name %></a><br>
+            <a href="/users/<%= friend.id %>"><img src="<%= friend_pic ? "/images#{friend_pic.image}" : '/images/2005/no_pic.gif' %>" width="90" border="0"></a>
           </td>
-          <td class="confirm">
-            <b><a href="/users/<%= friend.id %>"><%= friend.name %></a></b> wants to be your friend!
-            <div class="buttons">
-              <form action="/users/<%= current_user.id %>/approve?friend_id=<%= friend.id %>" method="post">
+          <td align="left" valign="middle" bgcolor="d5e8fb">
+            <a href="/users/<%= friend.id %>"><%= friend.name %></a> wants to be your friend!<br><br>
+            <table border="0" cellspacing="0" cellpadding="0">
+              <tr>
+                <td>
+              <form action="/users/<%= current_user.id %>/approve?friend_id=<%= friend.id %>" method="post" style="margin:0">
                 <input type="submit" value="Approve">
               </form>
-              <form action="/users/<%= current_user.id %>/deny?friend_id=<%= friend.id %>" method="post">
+                </td>
+                <td><img src="/images/2005/clear.gif" width="6" height="1" border="0"></td>
+                <td>
+              <form action="/users/<%= current_user.id %>/deny?friend_id=<%= friend.id %>" method="post" style="margin:0">
                 <input type="hidden" name="_method" value="DELETE">
                 <input type="submit" value="Deny">
               </form>
-            </div>
+                </td>
+              </tr>
+            </table>
           </td>
         </tr>
       <% end %>
     </table>
-  <% else %>
-  <table class="requests emptybox">
-    <tr><th>Friend Requests</th></tr>
-    <tr><td class="emptymsg"><b>You don't have any new Friend Requests at this time.</b></td></tr>
-    <tr><td>View <a href="/users">Members</a> to find new friends.</td></tr>
-  </table>
+<% else %>
+    <table border="0" cellspacing="3" cellpadding="3" width="100%" bgcolor="ffffff">
+      <tr><td align="center" valign="middle" bgcolor="d5e8fb" height="50"><span class="blacktext10">You don't have any new Friend Requests at this time.</span></td></tr>
+      <tr><td align="center" valign="middle" bgcolor="ffffff">View <a href="/users">Members</a> to find new friends.</td></tr>
+    </table>
 <% end %>
+  </td></tr>
+</table>

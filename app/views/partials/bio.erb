@@ -1,15 +1,38 @@
-<table class="short">
-  <tr>
-    <td>
-      <a href="/users/<%= @user.id_or_slug %>/pictures"><img src="/images<%= @profilepic.image %>" class="avatar" id="avatar"></a>
-      <br>View My: <a href="/users/<%= @user.id_or_slug %>/pictures"><strong>Pics | Videos</strong></a>
+<%# Profile: name, photo and basic details (left column top), as in the May 2005 capture. Locals come from users/show.erb. %>
+<table border="0" cellspacing="0" cellpadding="0" width="300" height="100">
+	<tr>
+		<td width="300" bgcolor="FFFFFF" class="text" colspan="3" align="left" valign="bottom" style="word-wrap:break-word"><span class="nametext"><%= @user.name %></span></td>
+	</tr>
+	<tr><td><table cellpadding="0" cellspacing="0" width="300" align="center">
+		<tr>
+			<td width="75" height="75" bgcolor="ffffff" class="text">
 
-    </td>
-    <td class="shortRight">
+					<a href="/users/<%= @p_id %>/pictures"><img src="<%= @p_photo.(@user) %>" border="0" class="profilePhoto"></a>
 
-<div>"<span id="credo"><%= @user.motto %></span>"</div><br>
-<div id="gender"><%= @user.gender.capitalize %></div>
-<div><span id="age"><%= @user.age %></span> years old</div><br>
-<div id="country"><%= @user.city %>,<br><%= @user.state.upcase %><br><%= @user.country %></div><br>
-    <% if User.online.include?(@user) %> <img src="https://myspace.windows93.net/img/online.gif">
-  <% end %>
+			</td>
+			<td width="15" height="75" bgcolor="ffffff" class="text"><img src="/images/2005/clear.gif" width="15" height="8" border="0" alt=""></td>
+			<td width="193" height="75" bgcolor="ffffff" class="text">
+				<% unless @user.motto.blank? %>
+					"<%= @user.motto %>"
+				<% end %>
+				<br><br>
+				<%= @user.gender.to_s.capitalize %><br> <%= @user.age %> years old<br><br>
+				<% unless @user.city.blank? %>
+					<%= @user.city %>,
+				<% end %>
+					<%= @user.state.to_s.upcase %>
+
+				<br>
+				<%= @user.country %>
+				<br>
+
+					<div style="width:80px;height:20px;"><% if @p_online.(@user) %><img src="/images/2005/onlinenow.gif" border="0" alt="Online Now!"><% end %></div>
+
+				<% if @user.last_login_at %><br><br>Last Login: <%= @user.last_login_at.strftime("%m/%d/%Y") %><br><% end %>
+			</td>
+		</tr>
+		<tr align="center" valign="middle">
+			<td><a href="/users/<%= @p_id %>/pictures">View more pics</a> </td>
+		</tr>
+	</table></td></tr>
+</table><br>

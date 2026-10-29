@@ -1,0 +1,40 @@
+<%# Add Comment (GET /users/:id/comments/new; POSTs to /users/:id/comments/new). No 2005 capture of
+    this page exists: built in the profile's blue-box style. %>
+<table width="760" border="0" cellspacing="0" cellpadding="0" align="center">
+  <tr><td class="text" align="center">
+    <table border="1" bordercolor="6699cc" cellspacing="0" cellpadding="0" width="500">
+      <tr><td width="500" height="15" bgcolor="6699cc" class="text" align="left">&nbsp;&nbsp;&nbsp;<span class="whitetext12">Add Comment to <%= h @user.name %>'s Profile</span></td></tr>
+      <tr><td>
+        <form method="post" action="/users/<%= @user.id_or_slug %>/comments/new" style="margin:0">
+        <table border="0" cellspacing="3" cellpadding="3" width="100%" bgcolor="ffffff">
+          <% if @error %>
+            <tr><td colspan="2" align="left"><span class="redtext8"><b><%= h @error %></b></span></td></tr>
+          <% end %>
+          <tr>
+            <td width="110" valign="top" align="left" bgcolor="b1d0f0"><span class="lightbluetext8">Comment on:</span></td>
+            <td bgcolor="d5e8fb" align="left" valign="top">
+              <a href="<%= profile_path(@user) %>"><img src="<%= photo_path(@user) %>" width="90" border="0" align="left" hspace="0" alt=""></a>
+              <div style="margin-left:100px">
+                <a href="<%= profile_path(@user) %>"><%= h @user.name %></a><br><br>
+                <% if @user.motto.present? %>"<%= h @user.motto %>"<br><br><% end %>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td valign="top" align="left" bgcolor="b1d0f0"><span class="lightbluetext8">Comment:</span></td>
+            <td bgcolor="d5e8fb" align="left">
+              <textarea name="content" cols="45" rows="8" style="width:360px"><%= h params[:content] %></textarea><br>
+              <span class="blacktext7">HTML is allowed. Javascript is not.</span>
+            </td>
+          </tr>
+          <tr>
+            <td></td>
+            <td align="left"><input type="submit" value="Post Comment">&nbsp;&nbsp;<a href="<%= profile_path(@user) %>">Cancel</a></td>
+          </tr>
+        </table>
+        </form>
+      </td></tr>
+    </table>
+    <br>
+  </td></tr>
+</table>

@@ -1,12 +1,35 @@
-<table class="fwiendSpace">
-  <% @user.friends.first(8).each_slice(4) do |row| %>
-    <tr>
-      <% row.each do |friend| %>
-        <td><a href="/users/<%= friend.id_or_slug %>"><div class="fwiendFace"><b><%= friend.name %></b><img src="/images<%= friend.images.first.image %>" width="90" height="90"></div></a></td>
-      <% end %>
-      <% (4 - row.size).times do %>
-        <td></td>
-      <% end %>
-    </tr>
-  <% end %>
-</table>
+<%# Profile: "X's Friend Space" (top 8, 4 per row), as in the May 2005 capture. %>
+<% top_friends = @user.friends.limit(8).to_a %>
+	<table bordercolor="000000" cellspacing="0" cellpadding="0" width="435" border="0">
+		<tr><td class="text" align="left" width="435" bgcolor="ffffff" height="20">
+			<table height="20" cellspacing="0" cellpadding="0" width="435" bgcolor="ffcc99">
+				<tr>
+					<td width="435" style="word-wrap:break-word">&nbsp;&nbsp;&nbsp;<span class="orangetext15"><%= @user.name %>'s Friend Space</span></td>
+				</tr>
+			</table>
+			<table cellspacing="0" cellpadding="5" width="435" align="center" border="0">
+				<tr>
+					<td bgcolor="ffffff" colspan="4" width="435" style="word-wrap:break-word"><span class="btext"><%= @user.name %> has <span class="redbtext"><%= @user.friends.count %></span> Friends.</span></td>
+				</tr>
+				<tr><td>
+					<table width="435" border="0" cellspacing="0" cellpadding="5" align="center">
+						<% top_friends.each_slice(4) do |row| %>
+						<tr>
+							<% row.each do |friend| %>
+							<td bgcolor="FFFFFF" align="center" valign="top" width="1">
+								<table border="0" cellspacing="0" align="center">
+									<tr><td bgcolor="FFFFFF" align="center" valign="top" width="107" style="word-wrap:break-word">&nbsp;<a href="/users/<%= friend.id_or_slug %>"><%= friend.name %></a>&nbsp;</td></tr>
+									<tr><td bgcolor="FFFFFF" align="center" valign="top" width="25%"><a href="/users/<%= friend.id_or_slug %>"><img src="<%= @p_photo.(friend) %>" class="profileThumb"></a></td></tr>
+								</table>
+							</td>
+							<% end %>
+						</tr>
+						<% end %>
+					</table>
+				</td></tr>
+				<tr valign="center" align="right">
+					<td bgcolor="FFFFFF" colspan="4"><a href="/users/<%= @p_id %>/friends" class="redlink">View All of <%= @user.name %>'s Friends</a><br><br></td>
+				</tr>
+			</table>
+		</td></tr>
+	</table><br>

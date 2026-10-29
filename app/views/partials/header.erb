@@ -1,23 +1,64 @@
-<style>
+<%# Profile-frame chrome (top bar, leaderboard band, nav), transcribed from the May 15 2005 www.myspace.com/tom capture.
+    Used by users/show.erb and template.erb. Expects quirks mode + /stylesheets/2005/myspace.css. %>
+<% chrome_me = logged_in? ? current_user : nil %>
+<% chrome_home = chrome_me ? "/home" : "/login" %>
+<div align="center">
 
-</style>
-<div id="wrapper">
-<div id="main">
-<div id="header">
-  <h1 class="hide">MySpace.com</h1>
-  <span class="left"> <a href="/">MySpace.com</a> | <a href="/">Home</a></span> <span class="right"><a href="http://web.archive.org/web/20050618002553/http://viewmorepics.myspace.com/misc/faq.html">Help</a> | <% if !logged_in? %>
-  <a href="/users/new">SignUp</a>
-    <% else %>
-   <a href="/logout">Logout</a>
-  <% end %>
-</span>
+	<table width="800" border="0" align="center" cellpadding="5" cellspacing="0" bgcolor="003399">
+		<form action="/users" method="get">
+		<tr>
+			<td>&nbsp;<a class="navbar" href="/"><font color="FFFFFF">MySpace.com</font></a>&nbsp;<font color="FFFFFF">|</font>&nbsp;<a class="navbar" href="<%= chrome_home %>"><font color="FFFFFF">Home</font></a></td>
+			<td align="left"><font color="FFFFFF">The Web <input type="radio" name="searchtype" value="web" checked> MySpace <input type="radio" name="searchtype" value="myspace"> <input style="font-family: Verdana, Geneva, Arial, Helvetica, sans-serif; font-size: 10px;" name="search" type="text" size="25" maxlength="75">&nbsp;&nbsp;&nbsp;<input type="submit" value="Search" style="font-family: Verdana, Geneva, Arial, Helvetica, sans-serif; font-size: 10px; background-color:E0FFFF;"></font></td>
+			<% if chrome_me %>
+			<td align="right"><a class="man" href="#"><font color="FFFFFF">Help</font></a> <font color="FFFFFF" size="1">|</font>&nbsp;<a class="man" href="/logout"><font color="FFFFFF">SignOut</font></a>&nbsp;</td>
+			<% else %>
+			<td align="right"><a class="man" href="#"><font color="FFFFFF">Help</font></a> <font color="FFFFFF" size="1">|</font>&nbsp;<a class="man" href="/users/new"><font color="FFFFFF">SignUp</font></a>&nbsp;</td>
+			<% end %>
+		</tr>
+		</form>
+	</table>
 
-
-  <div id="advert"> <img src="http://web.archive.org/web/20050618002553im_/http://x.myspace.com/images/blog/blogLogo.gif" alt="MySpace"/>
-
-  </div>
+	<table width="800" border="0" align="center" cellspacing="0" cellpadding="0">
+		<tr>
+			<td height="96" align="center" valign="top" bgcolor="003399">
+			<img src="/images/ads/leaderboard_728x90.png" width="728" height="90" border="0" alt="Advertisement"></td>
+		</tr>
+	</table>
 </div>
-<div id="nav">
-  <p><a class="navbar" href="/">Home</a>|<a class="navbar" href="/users">Browse</a>|<a class="navbar" href="/users/online">Users Online (<%= User.online.count %>)</a><% if logged_in? %>|<a class="navbar" href="/users/<%= current_user.id_or_slug %>/messages">Mail</a>
-      <% end %></p>
-</div>
+
+
+<div align="center"><div align="center">
+
+<table border="0" cellspacing="0" cellpadding="0" width="800">
+	<tr>
+		<td width="800" height="26" bgcolor="6698CB">
+			<table width="800" height="26" border="0" cellspacing="0" cellpadding="0">
+				<tr valign="middle">
+					<td align="center"><font face="Arial, Helvetica, sans-serif" color="#000000">
+					<a class="navbar" href="<%= chrome_home %>">Home</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+					<a class="navbar" href="/users">Browse</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+					<a class="navbar" href="/users">Search</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+					<a class="navbar" href="#">Invite</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+					<a class="navbar" href="#">Rank</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+					<a class="navbar" href="<%= chrome_me ? "/users/#{chrome_me.id_or_slug}/messages" : "/login" %>">Mail</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+					<a class="navbar" href="<%= chrome_me ? "/users/#{chrome_me.id_or_slug}/blog" : "/login" %>">Blog</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+					<a class="navbar" href="<%= chrome_me ? "/favorites" : "/login" %>">Favorites</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+					<a class="navbar" href="#">Forum</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+					<a class="navbar" href="#">Groups</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+					<a class="navbar" href="#">Events</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+
+					<a class="navbar" href="#">Games</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+					<a class="navbar" href="#">Music</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+					<a class="navbar" href="#">Classifieds</a>
+
+						&nbsp;
+
+					</font>
+					</td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+</table>
+
+</div></div>

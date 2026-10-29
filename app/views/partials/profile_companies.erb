@@ -1,0 +1,25 @@
+<%# Profile: "X's Companies" box, as in the May 2005 capture. %>
+<% companies = @user.companies.to_a %>
+<% unless companies.empty? %>
+	<table bordercolor="6699cc" cellspacing="0" cellpadding="0" width="300" border="1">
+		<tr>
+			<td class="text" valign="center" align="left" width="300" bgcolor="6699cc" height="10" wrap style="word-wrap:break-word">
+				&nbsp;&nbsp;&nbsp;<span class="whitetext12"><%= @user.name %>'s Companies</span>
+			</td>
+		</tr>
+		<tr><td>
+			<table bordercolor="6699cc" cellspacing="3" cellpadding="3" width="300" align="center" border="0">
+				<% companies.each do |company| %>
+				<tr>
+					<td valign="top" align="left" width="240" bgcolor="b1d0f0">
+						<%= company.name %><br>
+						<% unless company.location.blank? %><%= company.location %><br><% end %>
+						<br>
+					</td>
+					<td valign="top" align="middle" width="60" bgcolor="d5e8fb"><%= company.start_year %><% unless company.end_year.blank? %> to <%= company.end_year %><% end %></td>
+				</tr>
+				<% end %>
+			</table>
+		</td></tr>
+	</table><br>
+<% end %>

@@ -1,0 +1,22 @@
+<%# Profile song player. No 2005 reference: built in the capture's blue-box style (300px, 6699cc header, d5e8fb cell). %>
+<% song_src = "/images#{@user.song.profilesong}" %>
+<% song_title = @user.song.profilesong.to_s.split("/").last.to_s.sub(/\.mp3\z/i, "").tr("_", " ") %>
+<table bordercolor="6699cc" cellspacing="0" cellpadding="0" width="300" bgcolor="6699cc" border="1">
+	<tr>
+		<td class="text" valign="center" align="left" width="300" bgcolor="6699cc" height="10" style="word-wrap:break-word">
+			&nbsp;&nbsp;&nbsp;<span class="whitetext12"><%= @user.name %>'s Profile Song</span>
+		</td>
+	</tr>
+	<tr valign="top">
+		<td>
+			<table bordercolor="000000" cellspacing="3" cellpadding="3" width="300" align="center" bgcolor="ffffff" border="0">
+				<tr>
+					<td align="center" width="300" bgcolor="d5e8fb" style="word-wrap:break-word">
+						<span class="lightbluetext8"><%= Rack::Utils.escape_html(song_title) %></span><br>
+						<audio controls autoplay style="width:280px;height:24px;margin-top:3px;"><source src="<%= song_src %>" type="audio/mpeg"></audio>
+					</td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+</table><br>

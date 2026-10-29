@@ -1,97 +1,54 @@
-<style>
-  table.picbox {
-    width: 100%;
-    margin-bottom: 8px;
-    border: 1px solid #6699cc;
-    border-collapse: separate;
-    border-spacing: 2px;
-    text-align: left;
-    font: normal 8pt/normal Verdana, Arial, Helvetica, sans-serif;
-  }
-  table.picbox th {
-    padding: 4px 6px;
-    background-color: #6699cc;
-    color: white;
-    font-weight: bold;
-  }
-  table.picbox td {
-    padding: 6px;
-    background-color: #e9f1fa;
-  }
-
-  div.pic {
-    display: inline-block;
-    width: 170px;
-    margin: 4px;
-    vertical-align: top;
-    text-align: center;
-  }
-  div.pic img {
-    display: block;
-    max-width: 160px;
-    max-height: 160px;
-    margin: 0 auto;
-    border: 1px solid #6699cc;
-  }
-  div.pic div.caption {
-    margin-top: 4px;
-    word-wrap: break-word;
-  }
-  div.nopics {
-    padding: 10px;
-    text-align: center;
-  }
-
-  div.picnav {
-    margin-bottom: 12px;
-  }
-
-  form.upload {
-    margin: 0;
-    text-align: left;
-  }
-  form.upload div.field {
-    margin: 4px 0;
-  }
-  form.upload label {
-    display: inline-block;
-    width: 55px;
-    font-weight: bold;
-  }
-  form.upload input[type=text] {
-    width: 250px;
-    font: normal 8pt/normal Verdana, Arial, Helvetica, sans-serif;
-  }
-  form.upload input[type=submit] {
-    margin-left: 59px;
-  }
-</style>
-
-<table class="picbox">
-  <tr><th><%= @user.name %>'s Pictures</th></tr>
+<table width="760" border="0" cellspacing="0" cellpadding="0" align="center">
+  <tr>
+    <td align="left" valign="bottom"><span class="nametext"><%= @user.name %></span></td>
+    <td align="right" valign="bottom" class="text"><a href="/users/<%= @user.id_or_slug %>">Back to <%= @user.name %>'s Profile</a></td>
+  </tr>
+  <tr><td colspan="2"><img src="/images/2005/clear.gif" width="1" height="8" border="0"></td></tr>
+</table>
+<table border="1" bordercolor="6699cc" cellspacing="0" cellpadding="0" width="760" align="center">
+  <tr><td class="text" align="left" valign="middle" bgcolor="6699cc" height="15">&nbsp;&nbsp;&nbsp;<span class="whitetext12"><%= @user.name %>'s Pictures</span></td></tr>
   <tr><td>
+    <table border="0" cellspacing="0" cellpadding="5" width="100%" bgcolor="ffffff">
+      <tr>
+        <td colspan="4" align="left" bgcolor="ffffff"><span class="btext"><%= @user.name %> has <span class="redbtext"><%= @user.images.size %></span> <%= @user.images.size == 1 ? 'Picture' : 'Pictures' %>.</span></td>
+      </tr>
     <% if @user.images.empty? %>
-      <div class="nopics">There are no pictures yet.</div>
+      <tr><td colspan="4" align="center" valign="middle" bgcolor="d5e8fb" height="50"><span class="blacktext10">There are no pictures yet.</span></td></tr>
     <% end %>
-    <% @user.images.each do |image| %>
-      <div class="pic">
-        <a href="/users/<%= @user.id_or_slug %>/pictures/<%= image.id %>"><img src="/images<%= image.image %>"></a>
-        <% unless image.caption.to_s.strip.empty? %><div class="caption"><%= image.caption %></div><% end %>
-      </div>
+    <% @user.images.each_slice(4) do |row| %>
+      <tr>
+      <% row.each do |image| %>
+        <td align="center" valign="top" width="25%" bgcolor="ffffff" style="word-wrap:break-word">
+          <a href="/users/<%= @user.id_or_slug %>/pictures/<%= image.id %>"><img src="/images<%= image.image %>" width="170" border="0"></a>
+          <% unless image.caption.to_s.strip.empty? %><br><%= image.caption %><% end %>
+        </td>
+      <% end %>
+      <% (4 - row.size).times do %><td width="25%" bgcolor="ffffff">&nbsp;</td><% end %>
+      </tr>
     <% end %>
+    </table>
   </td></tr>
 </table>
-<div class="picnav"><a href="/users/<%= @user.id_or_slug %>">Go Back</a></div>
-
-
 <% if logged_in? && @user == current_user %>
-<table class="picbox">
-  <tr><th>Upload new photo</th></tr>
+<br>
+<table border="1" bordercolor="6699cc" cellspacing="0" cellpadding="0" width="760" align="center">
+  <tr><td class="text" align="left" valign="middle" bgcolor="6699cc" height="15">&nbsp;&nbsp;&nbsp;<span class="whitetext12">Upload a New Photo</span></td></tr>
   <tr><td>
-    <form method='POST' action='/users/<%= current_user.id_or_slug %>/pictures' enctype="multipart/form-data" id="spacefix" class="upload">
-      <div class="field"><label for="caption">Caption:</label> <input type="text" placeholder="Add a caption for your photo" name="caption" id="caption"></div>
-      <div class="field"><label for="file">Photo:</label> <input type='file' name='file' class='form-control' id="file"></div>
-      <div class="field"><input type="submit" value="Upload"></div>
+    <form method='POST' action='/users/<%= current_user.id_or_slug %>/pictures' enctype="multipart/form-data" id="spacefix" class="upload" style="margin:0">
+    <table border="0" cellspacing="3" cellpadding="3" width="100%" bgcolor="ffffff">
+      <tr>
+        <td valign="middle" align="left" width="100" bgcolor="b1d0f0"><span class="lightbluetext8">Caption:</span></td>
+        <td valign="middle" align="left" bgcolor="d5e8fb"><input type="text" placeholder="Add a caption for your photo" name="caption" id="caption" size="50"></td>
+      </tr>
+      <tr>
+        <td valign="middle" align="left" width="100" bgcolor="b1d0f0"><span class="lightbluetext8">Photo:</span></td>
+        <td valign="middle" align="left" bgcolor="d5e8fb"><input type='file' name='file' class='form-control' id="file"></td>
+      </tr>
+      <tr>
+        <td valign="top" align="left" width="100" bgcolor="ffffff">&nbsp;</td>
+        <td valign="top" align="left" bgcolor="ffffff"><input type="submit" value="Upload"></td>
+      </tr>
+    </table>
     </form>
   </td></tr>
 </table>

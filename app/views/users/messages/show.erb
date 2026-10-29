@@ -1,79 +1,48 @@
-<style>
-  table.mailbox {
-    width: 100%;
-    border: 1px solid #6699cc;
-    border-collapse: separate;
-    border-spacing: 2px;
-    text-align: left;
-    font: normal 8pt/normal Verdana, Arial, Helvetica, sans-serif;
-  }
-  table.mailbox th {
-    padding: 4px 6px;
-    background-color: #6699cc;
-    color: white;
-    font-weight: bold;
-  }
-  table.mailbox th.label {
-    width: 70px;
-    padding: 5px 6px;
-    background-color: #d5e8fb;
-    color: black;
-    vertical-align: top;
-  }
-  table.mailbox td {
-    padding: 5px 6px;
-    background-color: #e9f1fa;
-    vertical-align: top;
-  }
-  table.mailbox td.sender a.name {
-    font-weight: bold;
-  }
-  table.mailbox td.sender img {
-    display: block;
-    max-width: 90px;
-    max-height: 90px;
-    margin-top: 3px;
-    border: 1px solid #6699cc;
-  }
-  table.mailbox td.body {
-    height: 60px;
-    font-size: 9pt;
-    line-height: 1.4;
-  }
-
-  div.messageactions {
-    display: flex;
-    align-items: center;
-    padding-top: 6px;
-    font: bold 8pt/normal Verdana, Arial, Helvetica, sans-serif;
-    color: #152e71;
-  }
-  div.messageactions form {
-    margin: 0;
-    text-align: left;
-  }
-  div.messageactions .messagereply:last-child {
-    flex: 1;
-    text-align: right;
-  }
-</style>
-
-<table class="mailbox">
-  <tr><th colspan="2">Read Mail</th></tr>
-  <tr><th class="label">From:</th><td class="sender"><a class="name" href="/users/<%= @message.sender.id_or_slug %>"><%= @message.sender.name %></a><a href="/users/<%= @message.sender.id_or_slug %>"><img src="/images/<%= @message.sender.images.first.image %>"></a></td></tr>
-  <tr><th class="label">Date:</th><td><%= @message.created_at.strftime("%A, %d %b %Y %l:%M %p %Z") %></td></tr>
-  <tr><th class="label">Subject:</th><td><%= @message.subject %></td></tr>
-  <tr><th class="label">Body:</th><td class="body"><%= @message.content %></td></tr>
-
+<% sender_pic = @message.sender.images.first %>
+<table width="760" border="0" cellspacing="0" cellpadding="0" align="center">
+  <tr>
+    <td align="left" valign="bottom"><span class="nametext">Mail Center</span></td>
+    <td align="right" valign="bottom" class="text"><a href="/users/<%= @user.id_or_slug %>/messages">Inbox</a> | <a href="/users/<%= @user.id_or_slug %>/friend_requests">Friend Requests</a></td>
+  </tr>
+  <tr><td colspan="2"><img src="/images/2005/clear.gif" width="1" height="8" border="0"></td></tr>
 </table>
-<div class="messageactions">
-  <div class="messagereply">
-  <form method="GET" action="/users/<%= @user.id_or_slug %>/messages/<%= @message.id %>/reply">
-    <input type="submit" value="Reply">
-  </form>
-  </div>
-  <div class="messagereply">
-    <% unless previous_message.nil? %> <a href="/users/<%=  @user.id_or_slug  %>/messages/<%=  previous_message.id  %>"> << Previous </a><%  end %>
-    <% unless next_message.nil? %> <a href="/users/<%=  @user.id_or_slug  %>/messages/<%=  next_message.id  %>"> Next >></a><%  end %>
-  </div>
-</div>
+<table border="1" bordercolor="6699cc" cellspacing="0" cellpadding="0" width="760" align="center">
+  <tr><td class="text" align="left" valign="middle" bgcolor="6699cc" height="15">&nbsp;&nbsp;&nbsp;<span class="whitetext12">Read Mail</span></td></tr>
+  <tr><td>
+    <table border="0" cellspacing="3" cellpadding="3" width="100%" bgcolor="ffffff">
+      <tr>
+        <td valign="top" align="left" width="100" bgcolor="b1d0f0"><span class="lightbluetext8">From:</span></td>
+        <td valign="top" align="left" bgcolor="d5e8fb" style="word-wrap:break-word">
+          <a href="/users/<%= @message.sender.id_or_slug %>"><%= @message.sender.name %></a><br>
+          <a href="/users/<%= @message.sender.id_or_slug %>"><img src="<%= sender_pic ? "/images#{sender_pic.image}" : '/images/2005/no_pic.gif' %>" width="90" border="0"></a>
+        </td>
+      </tr>
+      <tr>
+        <td valign="top" align="left" width="100" bgcolor="b1d0f0"><span class="lightbluetext8">Date:</span></td>
+        <td valign="top" align="left" bgcolor="d5e8fb"><%= @message.created_at.strftime("%b %d, %Y %I:%M %p") %></td>
+      </tr>
+      <tr>
+        <td valign="top" align="left" width="100" bgcolor="b1d0f0"><span class="lightbluetext8">Subject:</span></td>
+        <td valign="top" align="left" bgcolor="d5e8fb" style="word-wrap:break-word"><b><%= @message.subject %></b></td>
+      </tr>
+      <tr>
+        <td valign="top" align="left" width="100" bgcolor="b1d0f0"><span class="lightbluetext8">Body:</span></td>
+        <td valign="top" align="left" bgcolor="d5e8fb" height="120" style="word-wrap:break-word"><%= @message.content %></td>
+      </tr>
+    </table>
+  </td></tr>
+</table>
+<table width="760" border="0" cellspacing="0" cellpadding="0" align="center">
+  <tr>
+    <td align="left" valign="middle" height="34">
+      <form method="GET" action="/users/<%= @user.id_or_slug %>/messages/<%= @message.id %>/reply" style="margin:0">
+        <input type="submit" value="Reply">
+      </form>
+    </td>
+    <td align="right" valign="middle" class="text">
+      <% unless previous_message.nil? %><a href="/users/<%=  @user.id_or_slug  %>/messages/<%=  previous_message.id  %>">&lt;&lt; Previous</a><% end %>
+      <% if !previous_message.nil? && !next_message.nil? %> | <% end %>
+      <% unless next_message.nil? %><a href="/users/<%=  @user.id_or_slug  %>/messages/<%=  next_message.id  %>">Next &gt;&gt;</a><% end %>
+    </td>
+  </tr>
+</table>

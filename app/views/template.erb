@@ -1,62 +1,38 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>MySpace</title>
-  <link rel="icon" href="/images/favicon.ico" type="image/x-icon"/>
-  <meta name="viewport" content="width=820">
-  <link rel="stylesheet" href="/profile_css/main.css">
-  <link href="/stylesheets/webarchive.css" rel="stylesheet" type="text/css"/>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-  <style>
-    body {
-      font: normal 8pt/normal Verdana, Arial, Helvetica, sans-serif;
-      text-transform: none;
-      text-decoration: none;
-    }
-    a:link {
-      text-decoration: none;
-      color: #1c48ad;
-    }
+<%# Layout for every inner page: the 2005 profile-frame chrome (no doctype: quirks mode, like the capture),
+    an 800px white body (content area 760px between 20px gutters) and the profile footer. %><html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>MySpace.com</title>
+<meta name="viewport" content="width=820">
+<link rel="icon" href="/images/favicon.ico" type="image/x-icon">
+<link rel="STYLESHEET" type="text/css" href="/stylesheets/2005/myspace.css">
+</head><body bgcolor="e5e5e5" alink="4e607b" link="4e607b" vlink="4e607b" bottommargin="0" leftmargin="0" rightmargin="0" topmargin="0">
 
-    a:visited {
-      color: #1c48ad;
-      text-decoration: none;
-    }
+<%= erb :'partials/header' %>
 
-    a:hover {
-      text-decoration: underline;
-    }
-
-    a:active {
-      text-decoration: underline;
-    }
-  </style>
-</head>
-<body><div id="container">
-
-  <%= erb :'/partials/header' %>
-
-  <div style="padding:20px;">
-
-
-    <div class = "container">
-
+	<table width="800" border="0" cellspacing="0" cellpadding="0" align="center">
+		<tr>
+			<td width="20" bgcolor="FFFFFF"><img src="/images/2005/clear.gif" width="20" height="2" border="0"></td>
+			<td width="760" align="left" valign="top" bgcolor="FFFFFF" class="text"><br>
 
 <%= yield %>
 
+			<br><br></td>
+			<td width="20" bgcolor="FFFFFF"><img src="/images/2005/clear.gif" width="20" height="2" border="0"></td>
+		</tr>
+	</table>
 
-    </div>
+	<img src="/images/2005/clear.gif" width="1" height="1">
 
+<%= erb :'partials/footer' %>
 
-  </div>
-
-  <%= erb :'/partials/footer' %>
-
-</div></body>
-<script>
-    $("#selectAll").click(function () {
-        $('input:checkbox').not(this).prop('checked', this.checked);
-    });
+<script type="text/javascript">
+	// Mail "select all" checkbox (was jQuery; kept dependency-free).
+	(function () {
+		var all = document.getElementById("selectAll");
+		if (!all) return;
+		all.onclick = function () {
+			var boxes = document.querySelectorAll('input[type="checkbox"]');
+			for (var i = 0; i < boxes.length; i++) if (boxes[i] !== all) boxes[i].checked = all.checked;
+		};
+	})();
 </script>
-</html>
+</body></html>

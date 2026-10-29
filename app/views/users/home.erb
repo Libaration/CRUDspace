@@ -1,0 +1,161 @@
+<%# Logged-in home (GET /home). No 2005 capture of this page exists: built in the 2005 profile's
+    visual language (blue 6699cc boxes, b1d0f0/d5e8fb label/value cells, orange ffcc99 headers). %>
+<% me = @user %>
+<% my_id = me.id_or_slug %>
+<% my_url = "#{request.base_url}#{profile_path(me)}" %>
+<style>
+  table.homeNotify td { height: 29px; }
+  a.homeNotify { display: block; padding-left: 30px; line-height: 29px; background-repeat: no-repeat; background-position: 0 0;
+    font-family: verdana, arial, sans-serif, helvetica; font-size: 9pt; font-weight: bold; color: #cc0000; }
+  a.homeNotify:link, a.homeNotify:visited { color: #cc0000; }
+</style>
+<table width="760" border="0" cellspacing="0" cellpadding="0" align="center">
+  <tr>
+    <td width="300" valign="top" align="left">
+      <table border="0" cellspacing="0" cellpadding="0" width="300">
+        <tr>
+          <td width="300" bgcolor="ffffff" class="text" colspan="3" align="left" valign="bottom" style="word-wrap:break-word"><span class="nametext">Hello, <%= h me.name %>!</span><br><br></td>
+        </tr>
+        <tr>
+          <td width="90" valign="top" bgcolor="ffffff" class="text"><a href="<%= profile_path(me) %>"><img src="<%= photo_path(me) %>" width="90" border="0" alt="<%= h me.name %>"></a></td>
+          <td width="15" bgcolor="ffffff"><img src="/images/2005/clear.gif" width="15" height="8" border="0" alt=""></td>
+          <td width="195" valign="top" bgcolor="ffffff" class="text">
+            View My:<br>
+            <a href="<%= profile_path(me) %>">Profile</a> | <a href="/users/<%= my_id %>/pictures">Pics</a> | <a href="/users/<%= my_id %>/blog">Blog</a><br><br>
+            Edit My:<br>
+            <a href="/users/<%= my_id %>/edit">Profile</a> | <a href="/users/<%= my_id %>/profile_song/new">Song</a> | <a href="/users/<%= my_id %>/pictures">Pics</a><br><br>
+            Last Login: <%= (me.last_login_at || Time.now).strftime('%m/%d/%Y') %>
+          </td>
+        </tr>
+      </table>
+      <br>
+      <% if @unread_count > 0 || @pending_count > 0 %>
+        <table class="homeNotify" border="0" cellspacing="0" cellpadding="0" width="300">
+          <% if @unread_count > 0 %>
+            <tr><td><a class="homeNotify" style="background-image:url(/images/newmessage.gif)" href="/users/<%= my_id %>/messages">New Messages!</a></td></tr>
+          <% end %>
+          <% if @pending_count > 0 %>
+            <tr><td><a class="homeNotify" style="background-image:url(/images/friendrequest.gif)" href="/users/<%= my_id %>/friend_requests">New Friend Requests!</a></td></tr>
+          <% end %>
+        </table>
+        <br>
+      <% end %>
+      <table border="1" bordercolor="6699cc" cellspacing="0" cellpadding="0" width="300">
+        <tr><td width="300" height="15" bgcolor="6699cc" class="text" align="left">&nbsp;&nbsp;&nbsp;<span class="whitetext12">My Mail</span></td></tr>
+        <tr><td>
+          <table border="0" cellspacing="3" cellpadding="3" width="100%" bgcolor="ffffff">
+            <tr>
+              <td width="100" valign="top" align="left" bgcolor="b1d0f0"><span class="lightbluetext8">Mail:</span></td>
+              <td width="175" bgcolor="d5e8fb"><a href="/users/<%= my_id %>/messages">Inbox</a><% if @unread_count > 0 %> (<span class="redtext8"><%= @unread_count %> new</span>)<% end %></td>
+            </tr>
+            <tr>
+              <td valign="top" align="left" bgcolor="b1d0f0"><span class="lightbluetext8">Requests:</span></td>
+              <td bgcolor="d5e8fb"><a href="/users/<%= my_id %>/friend_requests">Friend Requests</a><% if @pending_count > 0 %> (<span class="redtext8"><%= @pending_count %> new</span>)<% end %></td>
+            </tr>
+          </table>
+        </td></tr>
+      </table>
+      <br>
+      <table border="1" bordercolor="6699cc" cellspacing="0" cellpadding="0" width="300">
+        <tr><td width="300" height="15" bgcolor="6699cc" class="text" align="left">&nbsp;&nbsp;&nbsp;<span class="whitetext12">My Profile</span></td></tr>
+        <tr><td>
+          <table border="0" cellspacing="3" cellpadding="3" width="100%" bgcolor="ffffff">
+            <tr>
+              <td width="100" valign="top" align="left" bgcolor="b1d0f0"><span class="lightbluetext8">Profile:</span></td>
+              <td width="175" bgcolor="d5e8fb"><a href="<%= profile_path(me) %>">View My Profile</a><br><a href="/users/<%= my_id %>/edit">Edit Profile</a></td>
+            </tr>
+            <% if me.url.nil? %>
+            <tr>
+              <td valign="top" align="left" bgcolor="b1d0f0"><span class="lightbluetext8">URL:</span></td>
+              <td bgcolor="d5e8fb"><a href="/users/<%= me.id %>/url/edit" class="redlink">Pick your MySpace URL!</a></td>
+            </tr>
+            <% end %>
+            <tr>
+              <td valign="top" align="left" bgcolor="b1d0f0"><span class="lightbluetext8">Song:</span></td>
+              <td bgcolor="d5e8fb"><a href="/users/<%= my_id %>/profile_song/new">Edit Profile Song</a></td>
+            </tr>
+            <tr>
+              <td valign="top" align="left" bgcolor="b1d0f0"><span class="lightbluetext8">Pictures:</span></td>
+              <td bgcolor="d5e8fb"><a href="/users/<%= my_id %>/pictures">View/Upload Pics</a></td>
+            </tr>
+            <tr>
+              <td valign="top" align="left" bgcolor="b1d0f0"><span class="lightbluetext8">Blog:</span></td>
+              <td bgcolor="d5e8fb"><a href="/users/<%= my_id %>/blog">My Blog</a><br><a href="/users/<%= my_id %>/blog/new">Post New Blog Entry</a></td>
+            </tr>
+            <tr>
+              <td valign="top" align="left" bgcolor="b1d0f0"><span class="lightbluetext8">Friends:</span></td>
+              <td bgcolor="d5e8fb"><a href="/users/<%= my_id %>/friends">View All My Friends</a></td>
+            </tr>
+            <tr>
+              <td valign="top" align="left" bgcolor="b1d0f0"><span class="lightbluetext8">Favorites:</span></td>
+              <td bgcolor="d5e8fb"><a href="/favorites">My Favorites</a> (<%= @favorites_count %>)</td>
+            </tr>
+          </table>
+        </td></tr>
+      </table>
+      <br>
+    </td>
+    <td width="25" valign="top"><img src="/images/2005/clear.gif" width="25" height="1" border="0" alt=""></td>
+    <td width="435" valign="top" align="left">
+      <table bordercolor="000000" height="75" cellspacing="0" cellpadding="5" width="435" border="1">
+        <tr><td valign="middle" align="center" width="435" style="word-wrap:break-word">
+          <span class="btext">My MySpace URL:</span><br>
+          <a href="<%= profile_path(me) %>"><%= h my_url %></a>
+          <% if me.url.nil? %><br><br><a href="/users/<%= me.id %>/url/edit" class="redlink">Pick your MySpace URL!</a><% end %>
+        </td></tr>
+      </table>
+      <br>
+      <table bordercolor="000000" cellspacing="3" cellpadding="0" width="435" align="center" bgcolor="ffffff" border="0">
+        <tr>
+          <td width="435" style="word-wrap:break-word"><span class="btext">My Latest Blog Entries</span> [<a href="/users/<%= my_id %>/blog/new">Post New Entry</a>]<br><br></td>
+        </tr>
+        <% if @blog_entries.empty? %>
+          <tr valign="top"><td width="435">You haven't written any blog entries yet.<br><br></td></tr>
+        <% end %>
+        <% @blog_entries.each do |entry| %>
+          <tr valign="top">
+            <td width="435" style="word-wrap:break-word">
+              <%= h entry.subject %>&nbsp;
+              (<a href="/users/<%= my_id %>/blog/<%= entry.id %>">view more</a>)
+              <br><br>
+            </td>
+          </tr>
+        <% end %>
+        <tr>
+          <td valign="top" align="left" bgcolor="ffffff" height="25">[<a href="/users/<%= my_id %>/blog">View All Blog Entries</a>]</td>
+        </tr>
+      </table>
+      <br>
+      <table bordercolor="000000" cellspacing="0" cellpadding="0" width="435" border="0">
+        <tr><td class="text" align="left" width="435" bgcolor="ffffff" height="20">
+          <table height="20" cellspacing="0" cellpadding="0" width="435" bgcolor="ffcc99">
+            <tr><td width="435" style="word-wrap:break-word">&nbsp;&nbsp;&nbsp;<span class="orangetext15">My Friend Space</span></td></tr>
+          </table>
+          <table cellspacing="0" cellpadding="5" width="435" align="center" border="0">
+            <tr>
+              <td bgcolor="ffffff" colspan="4" width="435"><span class="btext">You have <span class="redbtext"><%= @friends.size %></span> Friends.</span></td>
+            </tr>
+            <tr><td>
+              <table width="100%" border="0" cellspacing="0" cellpadding="5" align="center">
+                <% @friends.first(8).each_slice(4) do |row| %>
+                  <tr>
+                    <% row.each do |friend| %>
+                      <td bgcolor="FFFFFF" align="center" valign="top" width="25%">
+                        <a href="<%= profile_path(friend) %>"><%= h friend.name %></a><br>
+                        <a href="<%= profile_path(friend) %>"><img src="<%= photo_path(friend) %>" width="90" border="0" alt=""></a>
+                      </td>
+                    <% end %>
+                    <% (4 - row.size).times do %><td width="25%">&nbsp;</td><% end %>
+                  </tr>
+                <% end %>
+              </table>
+            </td></tr>
+            <tr valign="middle" align="right">
+              <td bgcolor="FFFFFF" colspan="4"><a href="/users/<%= my_id %>/friends" class="redlink">View All of My Friends</a><br><br></td>
+            </tr>
+          </table>
+        </td></tr>
+      </table>
+    </td>
+  </tr>
+</table>

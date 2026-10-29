@@ -1,0 +1,25 @@
+<%# Profile: "X's Interests" box, as in the May 2005 capture. Only filled rows are rendered. %>
+<% interest_rows = [["General", :interests_general], ["Music", :interests_music], ["Movies", :interests_movies], ["Television", :interests_television], ["Books", :interests_books], ["Heroes", :interests_heroes]].reject { |_, field| @user[field].blank? } %>
+<% unless interest_rows.empty? %>
+	<table bordercolor="6699cc" cellspacing="0" cellpadding="0" width="300" bgcolor="6699cc" border="1">
+		<tr>
+			<td class="text" valign="center" align="left" width="300" bgcolor="6699cc" height="10" wrap style="word-wrap:break-word">
+				&nbsp;&nbsp;&nbsp;<span class="whitetext12"><%= @user.name %>'s Interests</span>
+			</td>
+		</tr>
+		<tr valign="top">
+			<td>
+				<table bordercolor="000000" cellspacing="3" cellpadding="3" width="300" align="center" bgcolor="ffffff" border="0">
+					<% interest_rows.each do |label, field| %>
+						<tr>
+							<td valign="top" align="left" width="100" bgcolor="b1d0f0">
+								<span class="lightbluetext8"><%= label %></span>
+							</td>
+							<td id="Profile<%= label %>" style="WORD-WRAP: break-word" width="175" bgcolor="d5e8fb"><%= @user[field] %></td>
+						</tr>
+					<% end %>
+				</table>
+			</td>
+		</tr>
+	</table><br>
+<% end %>

@@ -1,68 +1,39 @@
-<style>
-  table.mailbox {
-    width: 100%;
-    border: 1px solid #6699cc;
-    border-collapse: separate;
-    border-spacing: 2px;
-    text-align: left;
-    font: normal 8pt/normal Verdana, Arial, Helvetica, sans-serif;
-  }
-  table.mailbox th {
-    padding: 4px 6px;
-    background-color: #6699cc;
-    color: white;
-    font-weight: bold;
-  }
-  table.mailbox th.label {
-    width: 70px;
-    padding: 5px 6px;
-    background-color: #d5e8fb;
-    color: black;
-    vertical-align: top;
-  }
-  table.mailbox td {
-    padding: 5px 6px;
-    background-color: #e9f1fa;
-    vertical-align: top;
-  }
-  table.mailbox td.sender a.name {
-    font-weight: bold;
-  }
-  table.mailbox td.sender img {
-    display: block;
-    max-width: 90px;
-    max-height: 90px;
-    margin-top: 3px;
-    border: 1px solid #6699cc;
-  }
-  table.mailbox input[type=text], table.mailbox textarea {
-    box-sizing: border-box;
-    width: 100%;
-    font: normal 9pt/normal Verdana, Arial, Helvetica, sans-serif;
-  }
-  table.mailbox textarea {
-    height: auto;
-    border: 1px solid #767676;
-    word-wrap: break-word;
-  }
-
-  div.messageactions {
-    padding-top: 6px;
-    text-align: left;
-  }
-</style>
-<form method="POST" action="/users/<%= @user.id_or_slug %>/messages?msg_id=<%= @message.id %>">
-  <table class="mailbox">
-    <tr><th colspan="2">Reply to Mail</th></tr>
-    <tr><th class="label">To:</th><td class="sender"><a class="name" href="/users/<%= @message.sender.id_or_slug %>"><%= @message.sender.name %></a><a href="/users/<%= @message.sender.id_or_slug %>"><img src="/images/<%= @message.sender.images.first.image %>"></a></td></tr>
-    <tr><th class="label">Subject:</th><td><input type="text" name="subject" value="RE: <%= @message.subject %>"></td></tr>
-    <tr><th class="label">Body:</th><td>
-      <textarea style="resize: none" name="content" rows="15">&#013;&#013;------------------------------------- Original Message -------------------------------------&#013;From: <%= @message.sender.name %>&#013;Date: <%= @message.created_at.strftime("%A, %d %b %Y %l:%M %p %Z") %>&#013;&#013;&#013;<%=@message.content.gsub('<br />', "\r\n").strip()%></textarea></td></tr>
-  </table>
-  <div class="messageactions">
-    <div class="messagereply">
-
+<% sender_pic = @message.sender.images.first %>
+<table width="760" border="0" cellspacing="0" cellpadding="0" align="center">
+  <tr>
+    <td align="left" valign="bottom"><span class="nametext">Mail Center</span></td>
+    <td align="right" valign="bottom" class="text"><a href="/users/<%= @user.id_or_slug %>/messages">Inbox</a> | <a href="/users/<%= @user.id_or_slug %>/friend_requests">Friend Requests</a></td>
+  </tr>
+  <tr><td colspan="2"><img src="/images/2005/clear.gif" width="1" height="8" border="0"></td></tr>
+</table>
+<form method="POST" action="/users/<%= @user.id_or_slug %>/messages?msg_id=<%= @message.id %>" style="margin:0">
+<table border="1" bordercolor="6699cc" cellspacing="0" cellpadding="0" width="760" align="center">
+  <tr><td class="text" align="left" valign="middle" bgcolor="6699cc" height="15">&nbsp;&nbsp;&nbsp;<span class="whitetext12">Reply to Mail</span></td></tr>
+  <tr><td>
+    <table border="0" cellspacing="3" cellpadding="3" width="100%" bgcolor="ffffff">
+      <tr>
+        <td valign="top" align="left" width="100" bgcolor="b1d0f0"><span class="lightbluetext8">To:</span></td>
+        <td valign="top" align="left" bgcolor="d5e8fb" style="word-wrap:break-word">
+          <a href="/users/<%= @message.sender.id_or_slug %>"><%= @message.sender.name %></a><br>
+          <a href="/users/<%= @message.sender.id_or_slug %>"><img src="<%= sender_pic ? "/images#{sender_pic.image}" : '/images/2005/no_pic.gif' %>" width="90" border="0"></a>
+        </td>
+      </tr>
+      <tr>
+        <td valign="middle" align="left" width="100" bgcolor="b1d0f0"><span class="lightbluetext8">Subject:</span></td>
+        <td valign="middle" align="left" bgcolor="d5e8fb"><input type="text" name="subject" size="60" value="RE: <%= @message.subject %>"></td>
+      </tr>
+      <tr>
+        <td valign="top" align="left" width="100" bgcolor="b1d0f0"><span class="lightbluetext8">Body:</span></td>
+        <td valign="top" align="left" bgcolor="d5e8fb"><textarea style="resize: none" name="content" rows="15" cols="90">&#013;&#013;------------------------------------- Original Message -------------------------------------&#013;From: <%= @message.sender.name %>&#013;Date: <%= @message.created_at.strftime("%A, %d %b %Y %l:%M %p %Z") %>&#013;&#013;&#013;<%=@message.content.gsub('<br />', "\r\n").strip()%></textarea></td>
+      </tr>
+    </table>
+  </td></tr>
+</table>
+<table width="760" border="0" cellspacing="0" cellpadding="0" align="center">
+  <tr>
+    <td align="left" valign="middle" height="34">
       <input type="submit" value="Send">
-    </div>
-  </div>
+    </td>
+  </tr>
+</table>
 </form>

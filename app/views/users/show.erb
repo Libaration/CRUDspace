@@ -1,209 +1,84 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>MySpace</title>
-  <meta name="viewport" content="width=820">
-  <% if Pathname("./app/public/profile_css/#{@user.id}_custom_css.css").exist? && !Pathname("./app/public/profile_css/#{@user.id}_custom_css.css").blank? %>
-    <link rel="stylesheet" href="/profile_css/main.css">
-    <link rel="stylesheet" href="/profile_css/<%= @user.id %>_custom_css.css">
-    <% else %>
-    <link rel="stylesheet" href="/profile_css/main.css">
-  <% end %>
-  <link rel="icon" href="/images/favicon.ico" type="image/x-icon"/>
-</head>
+<%
+  # Profile page, rebuilt 1:1 from the May 15 2005 capture of www.myspace.com/tom (no doctype: quirks mode, like 2005).
+  # Shared state for the profile partials:
+  @p_id = @user.id_or_slug
+  @p_me = logged_in? ? current_user : nil
+  p_online_ids = User.online.pluck(:id)
+  @p_online = ->(u) { p_online_ids.include?(u.id) }
+  @p_photo = ->(u) { img = u.images.first; img && img.image.url ? "/images#{img.image.url}" : "/images/2005/no_pic.gif" }
+  p_custom_css = File.join(settings.public_folder, "profile_css", "#{@user.id}_custom_css.css")
+%><html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>www.myspace.com/<%= @user.url.blank? ? "users/#{@user.id}" : @user.url %></title>
+<meta name="keywords" content="friends networking sharing photos finding friends blogs journals blogging journaling bands music rate pics join groups forums classifieds online social networking">
+<meta name="description" content="Find old friends and meet new friends as you network, share photos, create blogs, and more at MySpace.com">
+<meta name="viewport" content="width=820">
+<link rel="icon" href="/images/favicon.ico" type="image/x-icon">
+<link rel="STYLESHEET" type="text/css" href="/stylesheets/2005/myspace.css">
 <style type="text/css">
-  body {
-    margin-top:0 !important;
-    padding-top:0 !important;
-    /*min-width:800px !important;*/
-  }
-    span.notice {
-      color:red;
-    }
-    span.fwiendCount {
-      color: #c90813;
-      font-size: 10pt;
-    }
-    div#viewFriends {
-      color: #c90813;
-    }
-    div#viewFriends a {
-      color: #c90813;
-    }
-    div.commentCounter {
-      margin: 6px 0 4px;
-    }
-    span.commentCount {
-      color: #c90813;
-    }
-    textarea#commentInput {
-      resize: none;
-      font: normal 8pt/normal Verdana, Arial, Helvetica, sans-serif;
-    }
-    .avatar {
-      width: 170px;
-    }
-    #about {
-      overflow-wrap: break-word;
-    }
+	/* IE's word-wrap:break-word also let table cells shrink around long words; emulate it so long text can't widen the page. */
+	td[style*="word-wrap" i] { overflow-wrap: anywhere !important; }
+	/* 2005 served a 170px-wide "medium" profile photo and 90px-wide "small" thumbnails. */
+	img.profilePhoto { max-width: 170px; }
+	img.profileThumb { max-width: 90px; }
+	table.profileComments td[width="260"] img { max-width: 100%; }
 </style>
-<body>
-
-<div id="container">
-
-
-  <%= erb :'partials/header' %>
-
-  <div class="topLeft">
-  <div><h2 class="uName" id="name"><%= @user.name %></h2></div>
-
-  <%= erb :'/partials/bio' %>
-  </td>
-  </tr>
-  </table>
-  <div class="boxInfo box">
-    <div class="boxHead"><b>Contacting <span class="uName"><%= @user.name %></span></b></div>
-    <span class="contact">
-      <% if logged_in? %>
-        <a href="/users/<%= current_user.id_or_slug %>/messages/<%= @user.id_or_slug %>/new"><div class="boxButton" id="sMsg">Send Message</div></a>
-      <% else %>
-        <a href="/login"><div class="boxButton" id="sMsg">Send Message</div></a>
-      <% end %>
-      <a href="#"><div class="boxButton" id="report">Report</div></a>
-      <% if !logged_in? %>
-        <a href="/login"><div class="boxButton" id="add">Add to friends</div></a>
-      <% elsif logged_in? && current_user.friends.include?(@user) %>
-        <a href="/users/<%= @user.id %>/remove"><div class="boxButton" id="add">Remove Friend</div></a>
-      <% elsif @user.pending_friends.include?(current_user) %>
-        <a href="/users/<%= @user.id %>"><div class="boxButton" id="add">Pending Friend Request</div></a>
-      <% elsif current_user.pending_friends.include?(@user) %>
-        <a href="/users/<%= current_user.id_or_slug %>/friend_requests"><div class="boxButton" id="add">Accept Friend Request</div></a>
-      <% else %>
-        <a href="/users/<%= @user.id_or_slug %>/add"><div class="boxButton" id="add">Add to friends</div></a>
-      <% end %>
-      <a href="#"><div class="boxButton" id="block">Block</div></a>
-    </span>
-  </div>
-
-
-
-
-    <% if logged_in? && current_user == @user %>
-    <div class="mailInfo box">
-      <div class="boxHead"><b>My Mail</b></div>
-
-
-      <table class="userNav">
-        <tr>
-          <td colspan="5">
-            <table cellspacing="3" cellpadding="3" width="100%">
-              </td></tr>
-              <tr>
-                <td width="45%" align="center" valign="middle" class='txt_label4' height="33">
-                  <a href='/users/<%= current_user.id_or_slug %>/messages'>Messages</a>
-                </td>
-                </td>
-
-                <td width="45%" align="center" valign="middle" class='txt_label4' height="33">
-                  <a href='/users/<%= current_user.id_or_slug %>/friend_requests' class='style11'>Friend Requests</a></a>
-                </td>
-              </tr>
-
-              </tr>
-              </td></tr>
-            </table>
-            </table>
-
-
-      <% if logged_in? && !current_user.pending_friends.empty? %>
-        <a href="/users/<%= current_user.id_or_slug %>/friend_requests"><div class="boxButton" id="sFriend"><span class="notifcation2">New Friend Requests!</span></div></a><br>
-      <% end %>
-      <% if logged_in? && !current_user.unread_messages.empty? %>
-        <a href="/users/<%= current_user.id_or_slug %>/messages"><div class="boxButton" id="sMsg"><span class="notifcation">New Messages!</span></div></a><br>
-      <% end %>
-
-    </div>
+<% if File.size?(p_custom_css) %>
+<link rel="stylesheet" type="text/css" href="/profile_css/<%= @user.id %>_custom_css.css">
 <% end %>
+</head><body bgcolor="e5e5e5" alink="4e607b" link="4e607b" vlink="4e607b" bottommargin="0" leftmargin="0" rightmargin="0" topmargin="0">
 
+<%= erb :'partials/header' %>
 
+	<table width="800" border="0" cellspacing="0" cellpadding="0" align="center">
+		<tr>
+			<td width="20" bgcolor="FFFFFF"><img src="/images/2005/clear.gif" width="15" height="2" border="0"></td>
+			<td width="780" align="center" bgcolor="FFFFFF">
+				<table cellspacing="0" cellpadding="0" border="0">
+					<tr>
+						<td width="275" height="33" align="center" valign="top" bgcolor="FFFFFF"><br>
 
+<%= erb :'partials/bio' %>
 
+<%= erb :'partials/profile_contact' %>
 
-  <div class="url box">
-    <div><b>MySpace URL:</b></div>
-    <div><a style='color:#000;text-decoration:none;' href='<%= @user.url.nil? ? "/users/#{@user.id}" : "/#{@user.url}" %>'>
-      <%= @user.url.nil? ? "http://www.myspace.com/users/#{@user.id}" : "http://www.myspace.com/#{@user.url}" %>
-    </a>
-      <% if logged_in? && @user == current_user && @user.url.nil? %><br><span class="notice"><a href="/users/<%= @user.id %>/url/edit">Pick your MySpace URL!</a></span><% end %>
-    </div>
-  </div>
+<% if @user.song %><%= erb :'partials/profile_song' %><% end %>
 
+<%= erb :'partials/profile_interests' %>
 
+<%= erb :'partials/profile_details' %>
 
+<%= erb :'partials/profile_schools' %>
 
+<%= erb :'partials/profile_networking' %>
 
+<%= erb :'partials/profile_companies' %>
 
-  <% if !@user.song.nil? || (logged_in? && @user == current_user) %>
-  <div class="player box">
-    <% if !@user.song.nil? %>
-      <div class="songName"><b>Playing: </b> <span class="songTitle"><%= @user.song.profilesong.to_s.gsub("/uploads/", "").gsub("_", " ").gsub(".mp3", "") %>
-      </span></div>
-      <audio controls autoplay="autoplay">
-        <source src="/images<%= @user.song.profilesong %>" type="audio/mpeg" muted>
-        Your browser does not support the audio element.
-      </audio>
-    <% end %>
-    <% if logged_in? && @user == current_user %>
-      <span class="notice"><% if !@user.song.nil? %><br><% end %><a href="/users/<%= @user.id_or_slug %>/profile_song/new">Edit your profile song</a></span>
-    <% end %>
-  </div>
-  <% end %>
-</div>
-  <div class="topRight">
+						</td>
+						<td width="15" align="center" valign="top" bgcolor="White"><img height="1" src="/images/2005/clear.gif" width="20" border="0"></td>
+						<td width="435" align="center" valign="top" bgcolor="White" class="text">
+						<br>
 
-    <% if logged_in? && current_user == @user %>
-      <div class="extended box"><h3><span class="uName">Your Profile</span></h3></div>
-    <% else %>
-      <div class="extended box"><h3><span class="uName"><%= @user.name %></span> is in your extended network</h3></div>
-    <% end %>
+<table bordercolor="000000" height="75" cellspacing="0" cellpadding="0" width="435" border="1">
+	<tr><td valign="center" align="middle" width="435" style="word-wrap:break-word"><span class="blacktext12"><%= @user.name %> is in your extended network<br></span></td></tr>
+</table><br>
 
+<%= erb :'partials/profile_blog' %>
 
-    <div class="box blurbs">
-      <div class="rightHead"><b><span class="uName"><%= @user.name %></span>'s Blurbs</b></div>
-      <h4>About me:</h4>
-      <div id="about"><p><%= erb :'/partials/about' %></p></div>
-    </div>
-    <div class="box fwiends">
-      <div class="rightHead"><b><span class="uName"><%= @user.name %></span>'s Friend Space</b></div>
-      <div class="fwiendCounter"><b><span class="uName"><%= @user.name %></span> has <span class="fwiendCount"><%= @user.friends.count %></span> friends.</b></div>
-      <div id="top">
-        <%= erb :'partials/friendslist' %>
-      </div>
-      <div id="viewFriends"><b>View <a href="/users/<%= @user.id_or_slug %>/friends">All</a> of <span class="uName"><%= @user.name %></span>'s Friends</b></div>
-    </div>
-    <div class="box comments">
-      <% if !logged_in? %>
-        <div style='margin-bottom:20px;'>Please <a href='/login'>login</a> to leave a comment. </div>
-      <% elsif logged_in? %>
-        <div id="form">
-          <div class="rightHead"><b>Leave a comment</b></div>
-          <form action="/users/<%= @user.id_or_slug %>/comments/new" method="post">
-            <textarea name="content" id="commentInput"></textarea>
-            <input type="submit" value="Send">
-          </form>
-        </div>
-      <% end %>
-      <div class="rightHead"><b><span class="uName"><%= @user.name %></span>'s Friends Comments</b></div>
-      <div class="commentCounter"><b>Displaying <span class="commentCount"><%= @comments.size %></span> of <span class="commentCount"><%= @comments.size %></span> comments</b></div>
-      <table id="userWall">
-       <%= erb :'/partials/comments' %>
-      </table>
-    </div>
-  </div>
-    <div id="imgPreview"><img src=""></div>
-    <%= erb :'partials/footer' %>
-  </div>
+<%= erb :'partials/about' %>
 
-</body>
-</html>
+<%= erb :'partials/friendslist' %>
+
+<%= erb :'partials/comments' %>
+
+						</td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+	</table>
+
+	<img src="/images/2005/clear.gif" width="1" height="1">
+
+<%= erb :'partials/footer' %>
+
+</body></html>

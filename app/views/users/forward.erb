@@ -1,0 +1,53 @@
+<%# Forward to Friend (GET /users/:id/forward). No 2005 capture of this page exists: built in the
+    profile's blue-box / Friend Space style. Each friend opens the compose page prefilled. %>
+<% me = current_user %>
+<table width="760" border="0" cellspacing="0" cellpadding="0" align="center">
+  <tr><td class="text" align="left">
+    <span class="nametext">Forward <%= h @user.name %>'s Profile to a Friend</span><br><br>
+    <table border="1" bordercolor="6699cc" cellspacing="0" cellpadding="0" width="760">
+      <tr><td width="760" height="15" bgcolor="6699cc" class="text" align="left">&nbsp;&nbsp;&nbsp;<span class="whitetext12">Profile to Forward</span></td></tr>
+      <tr><td>
+        <table border="0" cellspacing="3" cellpadding="3" width="100%" bgcolor="ffffff">
+          <tr>
+            <td width="100" valign="top" align="center" bgcolor="b1d0f0"><a href="<%= profile_path(@user) %>"><img src="<%= photo_path(@user) %>" width="90" border="0" alt=""></a></td>
+            <td bgcolor="d5e8fb" valign="top" align="left">
+              <a href="<%= profile_path(@user) %>"><%= h @user.name %></a><br><br>
+              <% if @user.motto.present? %>"<%= h @user.motto %>"<br><br><% end %>
+              <a href="<%= profile_path(@user) %>"><%= h @forward_url %></a>
+            </td>
+          </tr>
+        </table>
+      </td></tr>
+    </table>
+    <br>
+    <table height="20" cellspacing="0" cellpadding="0" width="760" bgcolor="ffcc99">
+      <tr><td width="760">&nbsp;&nbsp;&nbsp;<span class="orangetext15">Choose a Friend to Forward To</span></td></tr>
+    </table>
+    <table cellspacing="0" cellpadding="5" width="760" align="center" border="0">
+      <tr><td>
+        <% if @friends.empty? %>
+          You don't have any friends to forward this profile to yet.
+        <% else %>
+        <table width="750" border="0" cellspacing="0" cellpadding="5" align="center">
+          <% @friends.each_slice(6) do |row| %>
+            <tr>
+              <% row.each do |friend| %>
+                <% compose = "/users/#{me.id_or_slug}/messages/#{friend.id_or_slug}/new?" + Rack::Utils.build_query(subject: @forward_subject, content: @forward_content) %>
+                <td bgcolor="FFFFFF" align="center" valign="top" width="125" style="word-wrap:break-word">
+                  <a href="<%= h compose %>"><%= h friend.name %></a><br>
+                  <a href="<%= h compose %>"><img src="<%= photo_path(friend) %>" width="90" border="0" alt=""></a><br>
+                  <a href="<%= h compose %>" class="redlink7">Forward to <%= h friend.name %></a>
+                  <br><br>
+                </td>
+              <% end %>
+              <% (6 - row.size).times do %><td width="125">&nbsp;</td><% end %>
+            </tr>
+          <% end %>
+        </table>
+        <% end %>
+      </td></tr>
+      <tr><td align="right"><a href="<%= profile_path(@user) %>">Cancel</a></td></tr>
+    </table>
+    <br>
+  </td></tr>
+</table>
