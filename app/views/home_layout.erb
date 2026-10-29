@@ -1,62 +1,65 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<%# Logged-out homepage frame (login page + signup), transcribed from the Jun 18 2005 www.myspace.com
+    capture: #wrapper > #header + #nav + #main + #footer, styled by the verbatim 2005 layout.css,
+    color.css and frontpage.css (standards mode, like the capture). %>
+<% home_me = logged_in? ? current_user : nil %>
+<% home_home = home_me ? "/home" : "/login" %>
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-  <meta charset="UTF-8">
-  <title>MySpace</title>
-  <link rel="icon" href="/images/favicon.ico" type="image/x-icon"/>
-  <meta name="viewport" content="width=820">
-  <link rel="stylesheet" href="/profile_css/main.css">
-  <link href="/stylesheets/webarchive.css" rel="stylesheet" type="text/css"/>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-  <style>
-    body {
-      font: normal 8pt/normal Verdana, Arial, Helvetica, sans-serif;
-      text-transform: none;
-      text-decoration: none;
-    }
-    a:link {
-      text-decoration: none;
-      color: #1c48ad;
-    }
-
-    a:visited {
-      color: #1c48ad;
-      text-decoration: none;
-    }
-
-    a:hover {
-      text-decoration: underline;
-    }
-
-    a:active {
-      text-decoration: underline;
-    }
-  </style>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=820" />
+<title><%= @title || "Myspace.com" %></title>
+<link rel="icon" href="/images/favicon.ico" type="image/x-icon" />
+<link href="/stylesheets/2005/layout.css" rel="stylesheet" type="text/css" />
+<link href="/stylesheets/2005/color.css" rel="stylesheet" type="text/css" />
+<link href="/stylesheets/2005/frontpage.css" rel="stylesheet" type="text/css" />
+<style type="text/css">
+	/* The capture's header banner was an ad iframe (baseline-aligned); ours is an <img>, so keep it
+	   out of layout.css's "#header #advert img { vertical-align: 50% }" meant for the logo. */
+	#header #advert img.banner { vertical-align: baseline; }
+	/* wrong-password message inside the Member Login box */
+	#login p.error { margin: 4px 0 2px; padding: 0; color: #f00; font-weight: bold; }
+</style>
 </head>
-<body><div id="container">
-
-  <%= erb :'/partials/header' %>
-
-  <div style="padding:20px;">
+<body id="home">
 
 
-    <div class = "container">
-
-
+<div id="wrapper">
+	<div id="header">
+		<h1 class="hide">MySpace.com</h1>
+		<span class="left"> <a href="<%= home_home %>">MySpace.com</a> | <a href="<%= home_home %>">Home</a></span> <span class="right"><a href="#">Help</a> | <% if home_me %><a href="/logout">SignOut</a><% else %><a href="/users/new">SignUp</a><% end %></span>
+		<form action="/users" method="get" id="form1">
+			<fieldset>
+			<legend>Search MySpace.com</legend>
+			<label for="radiobutton1">The Web</label>
+			<input name="searchtype" type="radio" id="radiobutton1" value="Web" checked="checked" />
+			<label for="radiobutton2">MySpace</label>
+			<input name="searchtype" type="radio" value="MySpace" id="radiobutton2" />
+			<input name="search" type="text" size="25" alt="Enter your search here" />
+			<input type="submit" class="buttom" value="Search" />
+			</fieldset>
+		</form>
+		<div id="advert"> <img src="/images/2005/blogLogo.gif" alt="MySpace" />
+			<a href="#"><img class="banner" src="/images/ads/banner_468x60.png" width="468" height="60" alt="Advertisement" /></a>
+		</div>
+		<a href="#main" class="hide">Skip Navigation</a> </div>
+		<div id="nav">
+			<p><a class="navbar" href="<%= home_home %>">Home</a>|<a class="navbar" href="/users">Browse</a>|<a class="navbar" href="/users">Search</a>|<a class="navbar" href="#">Invite</a>|<a class="navbar" href="<%= home_me ? "/users/#{home_me.id_or_slug}/messages" : "/login" %>">Mail</a>|<a class="navbar" href="<%= home_me ? "/users/#{home_me.id_or_slug}/blog" : "/login" %>">Blog</a>|<a class="navbar" href="<%= home_me ? "/favorites" : "/login" %>">Favorites</a>|<a class="navbar" href="#">Forum</a>|<a class="navbar" href="#">Groups</a>|<a class="navbar" href="#">Events</a>|<a class="navbar" href="#">Games</a>|<a class="navbar" href="#">Music</a>|<a class="navbar" href="#">Classifieds</a>|<% if home_me %><a class="navbar" href="/logout">SignOut</a><% else %><a class="navbar" href="/users/new">SignUp</a><% end %></p>
+		</div>
+		<div id="main">
 <%= yield %>
+		</div>
+		<div id="footer">
+			<p><a href="#"><img src="/images/2005/truste.gif" border="0" alt="Reviewd by TRUSTe" /></a>MySpace is a licensee of the TRUSTe Privacy Program</p>
 
+	<p class="nav"><a href="#">About</a>|<a href="#">FAQ</a>|<a href="#">Terms</a>|<a href="#">Privacy</a>|
+      <a class="text" href="#"> Safety Tips
+      </a>|<a href="#">
+      Contact MySpace </a>|<a href="#">Promote</a>|<a href="#">Advertise</a>|<a href="#">MySpace
+      Shop</a></p>
+			<p class="end"><a href="<%= home_home %>">&copy;2003 MySpace.com All Rights Reserved.</a></p>
+		</div>
+	</div>
 
-    </div>
-
-
-  </div>
-
-  <%= erb :'/partials/footer' %>
-
-</div></body>
-<script>
-    $("#selectAll").click(function () {
-        $('input:checkbox').not(this).prop('checked', this.checked);
-    });
-</script>
+</body>
 </html>

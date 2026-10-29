@@ -1,191 +1,147 @@
-<style>
-  #signup {
-    text-align: left;
-  }
-  #signup table {
-    font: normal 9pt/normal Verdana, Arial, Helvetica, sans-serif;
-  }
-  #signup div.notice {
-    padding: 0 0 15px;
-  }
-  #signup div.notice h1 {
-    margin: 0 0 8px;
-    font-size: 20px;
-    font-weight: normal;
-  }
-  #signup div.notice p {
-    margin: 0;
-    font-size: 13px;
-  }
-  #signup div.join {
-    display: flex;
-    align-items: flex-start;
-  }
-
-  #signup form {
-    margin: 0;
-    text-align: left;
-  }
-  #signup td.label {
-    width: 95px;
-    white-space: nowrap;
-  }
-  #signup td.label.top {
-    vertical-align: top;
-    padding-top: 5px;
-  }
-  #signup td.error {
-    padding-bottom: 6px;
-    color: red;
-    font-weight: bold;
-  }
-  span.required {
-    color: red;
-  }
-  span.blackText7 {
-    color: black;
-    font: normal 7pt/normal Verdana, Arial, Helvetica, sans-serif;
-  }
-
-  #signup div.join input,
-  #signup div.join select,
-  #signup div.join textarea {
-    font: normal 8pt/normal Verdana, Arial, Helvetica, sans-serif;
-  }
-  /* one width for every one-line field */
-  #signup div.join input[type=text],
-  #signup div.join input[type=password],
-  #signup div.join input[type=number],
-  #signup div.join select {
-    width: 200px;
-    height: 18px;
-    box-sizing: border-box;
-  }
-  #signup div.join textarea,
-  #signup div.join textarea:focus {
-    width: 300px;
-    height: 100px;
-    box-sizing: border-box;
-    resize: none;
-    border: 1px solid #767676;
-  }
-
-  #signup div.whyjoin {
-    margin-left: 25px;
-    padding-top: 6px;
-    font-size: 9pt;
-    line-height: 18px;
-  }
-  #signup div.whyjoin strong.title {
-    display: block;
-    font-size: 10pt;
-    margin-bottom: 4px;
-  }
-  #signup div.whyjoin span.arrow {
-    color: #039;
-    font-weight: bold;
-  }
+<%# Signup (GET /users/new, failed POST /users), inside home_layout.erb. No capture of the 2005 join
+    form survives, so this is built in the 2005 visual language (myspace.css-style 6699cc boxes,
+    b1d0f0/d5e8fb label/value cells, red required labels). Field names, hidden inputs and the
+    state/city select ids/classes are what UsersController#create and statecity.js rely on. %>
+<style type="text/css">
+	#signup { padding: 10px; }
+	#signup table { font: normal 8pt/normal Verdana, Arial, Helvetica, sans-serif; }
+	#signup form { margin: 0; padding: 0; }
+	#signup p { margin: 0 0 10px; }
+	#signup .whitetext12 { font-size: 9pt; color: #fff; font-weight: bold; }
+	#signup .orangetext15 { font-size: 9pt; color: #f60; font-weight: bold; }
+	#signup .lightbluetext8 { font-size: 8pt; color: #369; font-weight: bold; }
+	#signup .redtext8b { font-size: 8pt; color: #c00; font-weight: bold; }
+	#signup .redtext { font-size: 10pt; color: #c00; }
+	#signup .blacktext7 { font-size: 7pt; color: #000; }
+	#signup .blacktext12 { font-size: 12pt; color: #000; font-weight: bold; }
+	#signup .bluearrow { color: #039; font-weight: bold; }
+	#signup .redarrow { color: #c00; font-weight: bold; }
+	#signup input, #signup select, #signup textarea { font: normal 8pt Verdana, Arial, Helvetica, sans-serif; }
+	#signup .field input.wide, #signup .field select { width: 190px; }
+	#signup .field textarea { width: 260px; }
 </style>
-
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script src="//geodata.solutions/includes/statecity.js"></script>
 <div id="signup">
-<div class="notice">
-  <h1>Join Your Friends on MySpace!</h1>
-  <p>MySpace is FREE, and it only takes a second to join!</p>
-</div>
-<div class="join">
-<table width="430" border="0" cellpadding="1" cellspacing="0" bgcolor="6699cc">
-  <tr>
-    <td valign="top"><table width="100%" border="0" cellspacing="0" cellpadding="5">
-      <tr>
-        <td align="left" style="color: white; font-weight: bold; font-size: 10pt;">JOIN
-          MYSPACE HERE!</td>
-      </tr>
-      <tr>
-        <td align="left" valign="top" bgcolor="ffffff">
-          <form method='POST' action='/users' enctype="multipart/form-data" id="spacefix">
-          <table width="100%" border="0" cellspacing="0" cellpadding="2">
-              <% unless @error.to_s.empty? %>
-              <tr>
-                <td colspan="2" class="error"><%= @error %></td>
-              </tr>
-              <% end %>
-              <tr>
-                <td class="label"><span class="required">Username:</span></td>
-                <td><input type="text" name="username" value="" maxlength="255"></td>
-              </tr>
+<table width="780" border="0" cellspacing="0" cellpadding="0">
+	<tr>
+		<td width="440" valign="top">
 
-              <tr>
-                <td class="label"><span class="required">Full Name:</span></td>
-                <td><input type="text" name="name" value="" maxlength="255"></td>
-              </tr>
+			<p><span class="blacktext12">Join MySpace Here!</span><br />
+			Join for free, and view profiles, connect with others, blog, rank music, and much more!</p>
 
-              <tr>
-                <td class="label"><span class="required">Password:</span></td>
-                <td><input type="password" name="password" maxlength="10"><span class="blackText7">&nbsp;&nbsp;(max 10 characters)</span></td>
-              </tr>
+			<table width="440" border="1" bordercolor="6699cc" cellspacing="0" cellpadding="0">
+				<tr>
+					<td bgcolor="6699cc" height="22">&nbsp;&nbsp;&nbsp;<span class="whitetext12">Member Sign Up</span></td>
+				</tr>
+				<tr>
+					<td>
+					<form method="POST" action="/users" enctype="multipart/form-data" id="spacefix">
+					<table width="100%" border="0" cellspacing="3" cellpadding="3">
+						<% unless @error.to_s.empty? %>
+						<tr>
+							<td colspan="2"><span class="redtext"><b><%= @error %></b></span></td>
+						</tr>
+						<% end %>
+						<tr>
+							<td width="110" align="right" bgcolor="b1d0f0"><span class="redtext8b">Username:</span></td>
+							<td bgcolor="d5e8fb" class="field"><input class="wide" type="text" name="username" value="" maxlength="255" /></td>
+						</tr>
+						<tr>
+							<td align="right" bgcolor="b1d0f0"><span class="redtext8b">Full Name:</span></td>
+							<td bgcolor="d5e8fb" class="field"><input class="wide" type="text" name="name" value="" maxlength="255" /></td>
+						</tr>
+						<tr>
+							<td align="right" bgcolor="b1d0f0"><span class="redtext8b">Password:</span></td>
+							<td bgcolor="d5e8fb" class="field"><input type="password" name="password" maxlength="10" size="15" /><span class="blacktext7">&nbsp;&nbsp;(max 10 characters)</span></td>
+						</tr>
+						<tr>
+							<td align="right" bgcolor="b1d0f0"><span class="redtext8b">State:</span></td>
+							<td bgcolor="d5e8fb" class="field"><input type="hidden" name="country" id="countryId" value="US" />
+							<input type="hidden" value="United States" name="country" />
+							<select name="state" class="states" id="stateId">
+								<option value="">Select State</option>
+							</select></td>
+						</tr>
+						<tr>
+							<td align="right" bgcolor="b1d0f0"><span class="redtext8b">City:</span></td>
+							<td bgcolor="d5e8fb" class="field"><input type="hidden" name="country" id="countryId" value="US" />
+							<input type="hidden" value="United States" name="country" />
+							<select name="city" class="cities" id="cityId">
+								<option value="">Select City</option>
+							</select></td>
+						</tr>
+						<tr>
+							<td align="right" bgcolor="b1d0f0"><span class="redtext8b">Gender:</span></td>
+							<td bgcolor="d5e8fb"><select name="gender" id="gender">
+								<option value="male">Male</option>
+								<option value="female">Female</option>
+								<option value="non-binary">Non-Binary</option>
+							</select></td>
+						</tr>
+						<tr>
+							<td align="right" bgcolor="b1d0f0"><span class="redtext8b">Age:</span></td>
+							<td bgcolor="d5e8fb"><input type="number" name="age" style="width: 50px;" /></td>
+						</tr>
+						<tr>
+							<td align="right" bgcolor="b1d0f0"><span class="redtext8b">Profile Picture:</span></td>
+							<td bgcolor="d5e8fb"><input type="file" name="file" class="form-control" /></td>
+						</tr>
+						<tr>
+							<td align="right" valign="top" bgcolor="b1d0f0"><span class="lightbluetext8">About Me:</span></td>
+							<td bgcolor="d5e8fb" class="field"><textarea name="bio" rows="5" cols="30" placeholder="Tell us about yourself here!"></textarea></td>
+						</tr>
+						<tr>
+							<td align="right" bgcolor="b1d0f0"><span class="lightbluetext8">Motto:</span></td>
+							<td bgcolor="d5e8fb" class="field"><input class="wide" type="text" name="motto" /></td>
+						</tr>
+						<tr>
+							<td colspan="2" align="center"><span class="blacktext7">Fields in <span class="redtext8b">red</span> are required. By clicking Sign Up, you agree to the MySpace <a href="#">Terms of Service</a>.</span></td>
+						</tr>
+						<tr>
+							<td colspan="2" align="center"><input type="image" src="/images/2005/button_signup_main.gif" border="0" alt="Sign Up" /></td>
+						</tr>
+					</table>
+					</form>
+					</td>
+				</tr>
+			</table>
 
-              <tr>
-                <td class="label"><span class="required">State:</span></td>
-                <td><input type="hidden" name="country" id="countryId" value="US"/>
-                <input type="hidden" value="United States" name="country">
-                <select name="state" class="states" id="stateId" name="state">
-                <option value="">Select State</option>
-                </select></td>
-              </tr>
+		</td>
+		<td width="20">&nbsp;</td>
+		<td width="320" valign="top">
 
-              <tr>
-                <td class="label"><span class="required">City:</span></td>
-                <td><input type="hidden" name="country" id="countryId" value="US"/>
-                <input type="hidden" value="United States" name="country">
-                  <select name="city" class="cities" id="cityId" name="city">
-                   <option value="">Select City</option>
-                  </select></td>
-              </tr>
+			<table width="320" border="1" bordercolor="ffcc99" cellspacing="0" cellpadding="0">
+				<tr>
+					<td bgcolor="ffcc99" height="22">&nbsp;&nbsp;&nbsp;<span class="orangetext15">Why Join MySpace?</span></td>
+				</tr>
+				<tr>
+					<td>
+					<table width="100%" border="0" cellspacing="3" cellpadding="3">
+						<tr><td valign="top" class="redarrow">&raquo;</td><td>Create a Private Community on MySpace and share photos, journals and interests with your growing network of mutual friends!</td></tr>
+						<tr><td valign="top" class="redarrow">&raquo;</td><td>Create a custom profile, upload pictures, and write blogs and comments.</td></tr>
+						<tr><td valign="top" class="redarrow">&raquo;</td><td>Send mail and instant messages to your friends.</td></tr>
+						<tr><td valign="top" class="redarrow">&raquo;</td><td>See who knows who, or how you are connected.</td></tr>
+						<tr><td valign="top" class="redarrow">&raquo;</td><td>It's <b>FREE</b>, and it only takes a second to join!</td></tr>
+					</table>
+					</td>
+				</tr>
+			</table>
+			<br />
+			<table width="320" border="1" bordercolor="6699cc" cellspacing="0" cellpadding="0">
+				<tr>
+					<td bgcolor="6699cc" height="22">&nbsp;&nbsp;&nbsp;<span class="whitetext12">Already a Member?</span></td>
+				</tr>
+				<tr>
+					<td>
+					<table width="100%" border="0" cellspacing="3" cellpadding="3">
+						<tr><td>If you already have a MySpace account, <span class="bluearrow">&raquo;</span> <a href="/login">Login here</a></td></tr>
+					</table>
+					</td>
+				</tr>
+			</table>
 
-              <tr>
-                <td class="label"><span class="required">Gender:</span></td>
-                <td><select name="gender" id="gender">
-                  <option value="male">Male</option>
-                  <option value="female">Female</option>
-                  <option value="non-binary">Non-Binary</option>
-                </select></td>
-              </tr>
-
-              <tr>
-                <td class="label"><span class="required">Age:</span></td>
-                <td><input type="number" name="age"></td>
-              </tr>
-
-              <tr>
-                <td class="label"><span class="required">Profile Picture:</span></td>
-                <td><input type='file' name='file' class='form-control'></td>
-              </tr>
-
-              <tr>
-                <td class="label top"><span class="required">About Me:</span></td>
-                <td><textarea name="bio" placeholder="Tell us about yourself here!"></textarea></td>
-              </tr>
-
-              <tr>
-                <td class="label"><span class="required">Motto:</span></td>
-                <td><input type="text" name="motto"></td>
-              </tr>
-              <tr>
-                <td></td>
-                <td><input type="image" src="http://web.archive.org/web/20050330083311im_/http://signup.myspace.com/images/signup.gif" border="0" alt="Submit"></td>
-              </tr>
-          </table>
-          </form>
-        </td></tr></table></td></tr></table>
-  <div class="whyjoin">
-    <strong class="title">Why Join MySpace?</strong>
-    <span class="arrow">&raquo;</span> Create a Custom Profile<br>
-    <span class="arrow">&raquo;</span> Upload Pictures<br>
-    <span class="arrow">&raquo;</span> Send Mail and IM's<br>
-    <span class="arrow">&raquo;</span> Write Blogs &amp; Comments<br>
-    <span class="arrow">&raquo;</span> It's <strong>FREE</strong>!<br>
-  </div>
-</div>
+		</td>
+	</tr>
+</table>
 </div>
