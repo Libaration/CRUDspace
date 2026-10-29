@@ -1,82 +1,227 @@
+<%# POST /login (wrong password) re-renders this view without setting @users %>
+<% @users ||= User.order(id: :desc).limit(2) %>
 <style>
-  body {
-    display: flex;
-    flex-wrap: wrap;
+  /* 2005 homepage: Cool New People on the left, Member Login (300px) on the right,
+     Get Started strip below, all inside the 760px content column. */
+  #home {
+    text-align: left;
   }
-  div#login {
-    border: #063797 1px solid;
-    padding: 20px;
+  #home input {
+    font: normal 8pt/normal Verdana, Arial, Helvetica, sans-serif;
+  }
+
+  #home #new {
+    float: left;
+    width: 210px;
+    margin: 0 0 10px 0;
+    border: 1px solid #fc9;
+  }
+  #home #new h2 {
+    background: #fc9;
+    margin: 0;
+    padding: 5px 0 5px 10px;
+    font-size: 8pt;
+  }
+  #home #new dl {
+    float: left;
+    display: inline;
+    width: 90px;
+    margin: 5px 0 6px 10px;
+    padding: 0;
     text-align: center;
-    color: #063797;
-    margin: 20px;
   }
-    div#login table {
-      font: normal 8pt/normal Verdana, Arial, Helvetica, sans-serif;
-      text-align: center;
-    }
-    div.main {
-      display: flex;
-      justify-content: center;
-    }
-    input {
-      font: normal 8pt/normal Verdana, Arial, Helvetica, sans-serif;
-    }
+  /* names get a fixed two-line slot, bottom-aligned, so the photos line up */
+  #home #new dt {
+    display: table-cell;
+    vertical-align: bottom;
+    width: 90px;
+    height: 26px;
+    margin: 0;
+    padding: 0 0 3px;
+    line-height: 13px;
+  }
+  #home #new dt span {
+    display: block;
+    max-height: 26px;
+    overflow: hidden;
+    word-wrap: break-word;
+  }
+  #home #new dd {
+    margin: 0;
+    padding: 0;
+  }
+  #home #new dd img {
+    display: block;
+    width: 90px;
+    height: 90px;
+    object-fit: cover;
+    object-position: top;
+    border: 0;
+    image-rendering: auto;
+  }
+
+  #home #login {
+    float: right;
+    width: 300px;
+    box-sizing: border-box;
+    margin: 0 0 10px 0;
+    padding: 5px;
+    border: 1px solid #039;
+    color: #000;
+    text-align: center;
+  }
+  #home #login h2 {
+    margin: 0;
+    padding: 0;
+    font-size: 8pt;
+    color: #039;
+    text-align: center;
+  }
+  #home #login p.error {
+    margin: 4px 0 0;
+    color: red;
+    font-weight: bold;
+  }
+  #home #login form {
+    margin: 0;
+    padding: 0;
+    text-align: left;
+  }
+  #home #login table {
+    width: 100%;
+    margin: 4px 0 0;
+    border: 0;
+    font: normal 8pt/normal Verdana, Arial, Helvetica, sans-serif;
+  }
+  #home #login td {
+    padding: 2px 3px;
+    border: 0;
+  }
+  #home #login .label {
+    width: 33%;
+    text-align: right;
+  }
+  #home #login .input {
+    padding-left: 1px;
+    text-align: left;
+  }
+  #home #login .input input {
+    width: 135px;
+  }
+  #home #login .buttons td,
+  #home #login .forgot td {
+    text-align: center;
+  }
+  #home #login .buttons td {
+    padding: 5px 0 0;
+  }
+  #home #login .buttons input {
+    margin-right: 12px;
+    vertical-align: middle;
+  }
+  #home #login .buttons img {
+    vertical-align: middle;
+  }
+  #home #login .forgot td {
+    padding: 4px 0 2px;
+    font-size: 7.6pt;
+  }
+
+  #home .clearing {
+    clear: both;
+    height: 0;
+    overflow: hidden;
+  }
+  #home #getstarted {
+    display: table;
+    table-layout: fixed;
+    border-collapse: separate;
+    border-spacing: 0;
+    width: 100%;
+    margin: 0;
+  }
+  #home #getstarted div {
+    display: table-cell;
+    float: none;
+    width: auto;
+    vertical-align: top;
+    border: 1px solid #039;
+    border-right: 0;
+    background: #b5ccfb;
+    padding: 5px 0;
+  }
+  #home #getstarted div.last {
+    border-right: 1px solid #039;
+  }
+  #home #getstarted h3 {
+    margin: 0 5px;
+    padding: 0;
+    font-size: 10pt;
+    color: #039;
+  }
+  #home #getstarted p {
+    margin: 0 5px;
+    padding: 0;
+  }
+  #home #getstarted p.right {
+    margin: 10px 5px 0 0;
+    color: #c00;
+    font-weight: bold;
+    text-align: right;
+  }
 </style>
-<div class="main">
+<div id="home">
   <div id="new">
     <h2>Cool New People</h2>
 <%= erb :'/partials/coolnewpeople' %>
   </div>
 
-
-<div id="login">
-  <h2>Member Login</h2>
-  <span style="color: red"><%= @error %></span>
-  <form action="/login" method="post" name="theForm" id="theForm">
-    <table>
-      <tr class="email">
-        <td class="label"><label for="username">Username: </label></td>
-        <td class="input"><input type="text" name="username" id="username"/></td>
-      </tr>
-      <tr class="password">
-        <td class="label"><label for="password">Password:</label></td>
-        <td class="input"><input name="password" type="password" id="password"/></td>
-      </tr>
-      <tr class="buttons">
-        <td colspan="2"><input name="Submit22" type="image" value="LOGIN" src="https://web.archive.org/web/20050321102632im_/http://www.myspace.com/images/button_login_main.gif" alt="Login"/>
-
-          <a href="/users/new"><img src="https://web.archive.org/web/20050321102632im_/http://www.myspace.com/images/button_signup_main.gif" alt="SIGN UP NOW!" name="singup" border="0" id="singup"/></a></td>
-      </tr>
-      <tr class="forgot">
-        <td colspan="2"><a href="https://web.archive.org/web/20050321102632/http://www.myspace.com/index.cfm?fuseaction=user.retrievepassword">Forgot your password?</a></td>
-      </tr>
-    </table>
-  </form>
-  </div>
-</div>
-
-<div id="getstarted">
-  <div>
-    <h3>Get Started On MySpace!</h3>
-    <p>Join for free, and view profiles, connect with others, blog, rank music, and much more!</p>
-    <p class="right">&raquo; <a href="/users/new">Learn More</a></p>
-  </div>
-  <div>
-    <h3>Create Your Profile!</h3>
-    <p>Tell us about yourself, upload your pictures, and start adding friends to your network.</p>
-    <p class="right">&raquo; <a href="/users/new">Start Now</a></p>
-  </div>
-  <div>
-    <h3>Browse Through Profiles!</h3>
-    <p>Read through millions of profiles on MySpace! See pix, read blogs, and more!</p>
-    <p class="right">&raquo; <a href="/users">Browse Now</a></p>
-  </div>
-  <div class="last">
-    <h3>Invite Your Friends!</h3>
-    <p>Invite your friends, and as they invite their friends your network will grow even larger!</p>
-    <p class="right">&raquo; <a href="#">Invite Friends Now</a></p>
+  <div id="login">
+    <h2>Member Login</h2>
+    <% unless @error.to_s.empty? %>
+    <p class="error"><%= @error %></p>
+    <% end %>
+    <form action="/login" method="post" name="theForm" id="theForm">
+      <table cellspacing="0">
+        <tr class="email">
+          <td class="label"><label for="username">Username:</label></td>
+          <td class="input"><input type="text" name="username" id="username"/></td>
+        </tr>
+        <tr class="password">
+          <td class="label"><label for="password">Password:</label></td>
+          <td class="input"><input name="password" type="password" id="password"/></td>
+        </tr>
+        <tr class="buttons">
+          <td colspan="2"><input name="Submit22" type="image" value="LOGIN" src="https://web.archive.org/web/20050321102632im_/http://www.myspace.com/images/button_login_main.gif" alt="Login"/><a href="/users/new"><img src="https://web.archive.org/web/20050321102632im_/http://www.myspace.com/images/button_signup_main.gif" alt="SIGN UP NOW!" name="singup" border="0" id="singup"/></a></td>
+        </tr>
+        <tr class="forgot">
+          <td colspan="2"><a href="https://web.archive.org/web/20050321102632/http://www.myspace.com/index.cfm?fuseaction=user.retrievepassword">Forgot your password?</a></td>
+        </tr>
+      </table>
+    </form>
   </div>
   <div class="clearing"></div>
-</div>
-<div class="clearing"></div>
 
+  <div id="getstarted">
+    <div>
+      <h3>Get Started On MySpace!</h3>
+      <p>Join for free, and view profiles, connect with others, blog, rank music, and much more!</p>
+      <p class="right">&raquo; <a href="/users/new">Learn More</a></p>
+    </div>
+    <div>
+      <h3>Create Your Profile!</h3>
+      <p>Tell us about yourself, upload your pictures, and start adding friends to your network.</p>
+      <p class="right">&raquo; <a href="/users/new">Start Now</a></p>
+    </div>
+    <div>
+      <h3>Browse Through Profiles!</h3>
+      <p>Read through millions of profiles on MySpace! See pix, read blogs, and more!</p>
+      <p class="right">&raquo; <a href="/users">Browse Now</a></p>
+    </div>
+    <div class="last">
+      <h3>Invite Your Friends!</h3>
+      <p>Invite your friends, and as they invite their friends your network will grow even larger!</p>
+      <p class="right">&raquo; <a href="#">Invite Friends Now</a></p>
+    </div>
+  </div>
+</div>
