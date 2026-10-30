@@ -3,16 +3,38 @@
 The recreation is a representation of Myspace how it was originally in the year 2005.
 #### It features a lot of the original websites functionality including
 * User Signup
+* Profiles with the original 2005 sections: Interests, Details, Schools, Companies, Blurbs, Friend Space and Friends Comments
 * Profile Comments
 * Messages and message notifcation
 * Friend requests and friend request notifcations
-* Custom CSS for user profiles (Old myspace layout site codes work here too! Although a bit buggy sometimes)
+* Blogs, Favorites and Forward to Friend
+* Custom profile URLs (e.g. /tom)
+* Custom CSS for user profiles (Old myspace layout site codes work here too!)
 * Profile pictures and user photo albums
 
 ## Screenshots
-![userProfile](https://i.gyazo.com/633ac419b9a7680b486fd301efc58902.jpg)
+The homepage and profile are rebuilt from archived 2005 captures of myspace.com, using the original stylesheets.
+Screenshots use demo data: apart from Tom, the users are fictional, and so are the advertisers.
 
-https://user-images.githubusercontent.com/11550216/120419217-02ef0f00-c330-11eb-990a-03e2fa082937.mp4
+#### Homepage
+![Homepage](docs/screenshots/homepage.png)
+
+#### Profile
+![Tom's profile](docs/screenshots/profile-tom.png)
+
+#### Custom profile layout
+Profiles accept old MySpace layout codes in Edit Profile.
+
+![Profile with a custom layout](docs/screenshots/profile-custom-layout.png)
+
+#### Home
+![Logged-in home page](docs/screenshots/home.png)
+
+#### Mail
+![Mail inbox](docs/screenshots/mail.png)
+
+#### Browse
+![Browse users](docs/screenshots/browse.png)
 
 
 ## Setup
@@ -32,8 +54,9 @@ Make a local copy of this project and move into the directory. This project requ
   $ rake db:migrate
   $ rake db:seed
 ```  
-This will seed "Tom" into the database with his profile picture being the one located
-at /public/images/tom.jpeg.<br>
+This will seed "Tom" into the database with his profile from the archived May 2005 capture of
+myspace.com/tom, and his profile picture being the one located at /app/public/images/tom2005.jpg.
+The seed is safe to run again on an existing database.<br>
 It's important Tom is seeded because he will send a default greeting and friend request
 to every user who signs up. To change the greeting or user who does the greeting
 Find the #tomswelcome helper method in users_controller.rb
