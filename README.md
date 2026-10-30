@@ -14,9 +14,9 @@ The recreation is a representation of Myspace how it was originally in the year 
 
 ## Screenshots
 The homepage and profile are rebuilt from archived 2005 captures of myspace.com, using the original stylesheets.
-Screenshots use demo data: apart from Tom, the users are fictional, with AI-generated faces from
-[thispersondoesnotexist.com](https://thispersondoesnotexist.com). The advertisers are made up, and
-the profile songs are just titles, with no audio uploaded.
+Screenshots use demo data: apart from Tom, the users are fictional, with AI-generated photos
+(made in ComfyUI with Qwen). The advertisers are made up, and the profile songs are just titles,
+with no audio uploaded.
 
 #### Homepage
 ![Homepage](docs/screenshots/homepage.png)
